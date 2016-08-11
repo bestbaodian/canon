@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="_token" content="{{ csrf_token() }}"/>
     <title>
         面试试题_面试宝典网
     </title>
@@ -200,12 +201,20 @@
 <script>
     $(document).on("click",".leixing",function(){
         var leixing=$(this).attr('value');
-        $.post('s',{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            url:"s",
+            type:"post"
+        });
+        $.ajax({
+          data:{
             leixing:leixing
-        },function(data){
-
+          },
+          success:function(data){
             $("#list").html(data)
-
+          }
         })
     })
 
@@ -214,11 +223,20 @@
         $(this).parent().attr("class","course-nav-item on");
 
         var leixing=$(this).attr('value');
-        $.post('sou',{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            url:"sou",
+            type:"post"
+        });
+        $.ajax({
+          data:{
             leixing:leixing
-        },function(data){
-            //alert(data)
-            $("#zhuanye").html(data)
+          },
+          success:function(data){
+            $("#zhuanye").html(data);
+          }
         })
     })
 
@@ -227,11 +245,21 @@
         $(this).parent().attr("class","course-nav-item on");
         var zhuanye=$(this).attr('value');
         var lei=$("#lei").children(".on").children().attr('value');
-        $.post('zhuanye',{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            url:"zhuanye",
+            type:"post"
+        });
+        $.ajax({
+          data:{
             zhuan:zhuanye,
             lei:lei
-        },function(data){
-            $("#list").html(data)
+          },
+          success:function(data){
+              $("#list").html(data);
+          }
         })
     })
 
@@ -240,12 +268,21 @@
         $(this).parent().attr('class','course-nav-item on');
        var lei=$(this).attr('value');
        var zhuan=$("#zhuanye").children(".on").children().attr('value');
-       $.post('zhuanye',{
+       $.ajaxSetup({
+           headers: {
+               'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+           },
+           url:"zhuanye",
+           type:"post"
+       });
+       $.ajax({
+         data:{
            zhuan:zhuan,
            lei:lei
-       },function(data){
-          // alert(data)
-           $("#list").html(data)
+         },
+         success:function(data){
+             $("#list").html(data);
+         }
        })
     })
 </script>
