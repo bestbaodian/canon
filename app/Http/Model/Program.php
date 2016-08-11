@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
+/*
+*招聘模块
+*/
 class program extends Model
 {
-	//招聘模块
    public function program()
    {
    	 $all = DB::table('position')->where("p_up_id",0)->get();

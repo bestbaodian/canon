@@ -96,7 +96,7 @@ data-id="134">阿里巴巴</a>
 <ul class="content-item-box clearfix">
 @foreach($exam as $key=>$value)
 <li>
-<a href="college_exam?id={{$value['s_id']}}">
+<a href="{{URL('college_exam?id=')}}<?php echo $value['s_id'];?>">
 <div class="content-item-brief">
 <h1>{{$value['s_logo']}}</h1>
 <div class="web-logoimg">
