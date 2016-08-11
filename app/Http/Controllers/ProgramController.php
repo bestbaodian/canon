@@ -2,28 +2,20 @@
 /*
  *招聘信息控制器
  *梁坤
+ *马天天
  */
 namespace App\Http\Controllers;
 use DB;
+use App\Http\Model\program;
 class ProgramController extends Controller
 {
 	/*
 	 *招聘信息显示
 	 */
     public function program(){
-        $all = DB::table('position')->where("p_up_id",0)->get();
-        foreach ($all as $key => $value) {
-            $two = DB::table('position')->where("p_up_id",$value['p_id'])->get();
-            
-            foreach ($two as $k => $v) {
-             $three = DB::table('position')->where("p_up_id",$v['p_id'])->get();
-             $two[$k]['three']=$three;
-            }
-            $all[$key]['two']=$two;
-        }
-        //print_r($all);die;
-    	$data=DB::table('recruit')->orderBy('r_id','desc')->paginate(10);
-        //print_r($data);die;
+        $model=new program();
+        $all = $model->program();
+        $data = $model->recruit1();
         return view('program/program',['all'=>$all,'data'=>$data]);
     }
    /*
@@ -45,7 +37,3 @@ class ProgramController extends Controller
     	$data = DB::table('recruit')->where('r_id',"$id")->first();
     	return view('program/etc_sel',['arr'=>$data]);
     }
-
-
-
-}
