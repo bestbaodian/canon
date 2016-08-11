@@ -213,11 +213,11 @@
         {{--<form class="valid-form" id="js-signup-form" autocomplete="off" action='reg' method='post' onsubmit="return sub()">--}}
         <p class="error"></p>
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-        <input type="text" name="user_name" id="username" data-validate="email" autocomplete="off" class="ipt ipt-email" placeholder="请输入名称 4-16位字母或数字或中文非空" required="required" onblur="checkname();"><font color="red"><p class="tips" id="name_sp"></p></font>
-        <input type="password" name="user_pwd"  class="ipt ipt-pwd js-pass-pwd" placeholder="6-16位密码，区分大小写，不能用空格" id="pwd"  style="background-image:url('');
+        <input  type="text" name="user_name" id="username" data-validate="email" autocomplete="off" class="ipt ipt-email" placeholder="请输入名称 4-16位字母或数字或中文非空" required="required" onblur="checkname();"><font color="red"><p class="tips" id="name_sp"></p></font>
+        <input  type="password" name="user_pwd"  class="ipt ipt-pwd js-pass-pwd" placeholder="6-16位密码，区分大小写，不能用空格" id="pwd"  style="background-image:url('');
    background-position:right bottom"><p class="tips" id="sp_pwd"><font color="red"></font></p>
-        <input type="text" name="user_email" id="email" data-validate="nick" class="ipt ipt-nick" placeholder="邮箱格式:@ . com" id="email" onblur="checkemail();"><font color="red"><p class="tips" id="email_sp"></p></font>
-        <input type="text" name="user_phone" data-validate="nick" class="ipt ipt-nick" placeholder="手机号为11位 " id="phone" onblur="checkphone();"><font color="red"><p class="tips" id="phone_sp"></p></font>
+        <input  type="text" name="user_email" id="email" data-validate="nick" class="ipt ipt-nick" placeholder="邮箱格式:@ . com" id="email" onblur="checkemail();"><font color="red"><p class="tips" id="email_sp"></p></font>
+        <input  type="text" name="user_phone" data-validate="nick" class="ipt ipt-nick" placeholder="手机号为11位 " id="phone" onblur="checkphone();"><font color="red"><p class="tips" id="phone_sp"></p></font>
         <input type="submit"  class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
 
         <ul class="third-parties">
