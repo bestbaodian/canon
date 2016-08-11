@@ -1,10 +1,4 @@
 @section('sidebar')
-<?php
-session_start();
-if(!isset($_SESSION)){
-session_start(); 
-}
-?>
 <meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" type="text/css" href="../static/css/ui2.css?2013032917">
 <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
@@ -25,7 +19,7 @@ session_start();
                             </ul>
         </div>
         <div id="login-area">
-            <ul    <?php if(empty($_SESSION['username'])){ ?> class="header-unlogin clearfix" <?php }else{ ?> class="clearfix logined" <?php }?>>
+            <ul    <?php if(empty(Session::get('username'))){ ?> class="header-unlogin clearfix" <?php }else{ ?> class="clearfix logined" <?php }?>>
                 <li class="header-app">
                     <a href="/mobile/app">
                         <span class="icon-appdownload"></span>
