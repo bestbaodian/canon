@@ -40,27 +40,16 @@ class ArticleController extends Controller
 
 
     public function publish(){
-        //echo 123456;die;
         $at_type=DB::table('ar_type')->get();
-	    $a_lei=DB::table('a_lei')->get();
-        return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
+        $a_lei=DB::table('a_lei')->get();
+       return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
     }
     
     //写文章
-    public function add()
-    {
-        $a_title=Request::input('a_title');
+    public function add(){
+        $a_title = Request::input('a_title');
         $a_type=Request::input('a_type');
-        $a_con=Request::input('a_con');
-
-
-
-    public function add(Request $request){
-        $request = $request->all();
-        //print_r
-        $a_title=$request['a_title'];
-        $a_type=$request['a_type'];
-        $a_con=$request['a_con'];
+        $a_con = Request::input('a_con');
         $a_addtime=date("Y-m-d H:i:s");
         $file = Request::file('a_logo');
         $array=Request::input('tag');

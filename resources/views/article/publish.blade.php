@@ -205,14 +205,7 @@
 
         })
     })
-
-<<<<<<< HEAD
 </script>
 </body>
 </html>
 @endsection
-=======
-</body>
-@endsection
-</html>
->>>>>>> 65ff048d51fe2be46d73feda9744e24d41b59bb3
