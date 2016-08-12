@@ -78,7 +78,7 @@ class LoginController extends Controller
         if($check=="true"){
             return redirect('index');
         }else{
-            print_r($check);
+            return $check;
         }
     }
     /*

@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="set_btn user-card-box">
-                    <a target="_self" href="/u/3071208/courses" action-type="my_menu" class="user-card-item" id="header-avator">
+                    <a target="_self" href="/user/setprofile" action-type="my_menu" class="user-card-item" id="header-avator">
                         <img width="40" height="40" src="/images/unknow-40.png">
                         <i style="display: none;" class="myspace_remind"></i>
                         <span style="display: none;">动态提醒</span>
@@ -65,8 +65,8 @@
                     <div class="g-user-card">
                         <div class="card-inner">
                             <div class="card-top">
-                                <a href="/u/3071208/courses"><img class="l" alt="凤颖" src="/images/unknow-160.png"></a>
-                                <a href="/u/3071208/courses"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
+                                <a href="/user/setprofile"><img class="l" alt="{{ Session::get('username') }}" src="/images/unknow-160.png"></a>
+                                <a href="/user/setprofile"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
                                 <p class="meta">
 					<a href="/u/3071208/experience">经验<b id="js-user-mp">550</b></a>
 					<a href="/u/3071208/credit">积分<b id="js-user-credit">0</b></a></p>
@@ -209,7 +209,8 @@
         <li class="sina"> <a href="#"><em>&nbsp;</em> 微博登录</a> </li>--}}
     </ul>
     <p><a href="index">已有账号,直接登录</p></a><br/>
-    <form class="signup-form clearfix" method="post" action="reg" onsubmit="return zhu()">
+    <span id="check_reg"></span>
+    <form class="signup-form clearfix">
         {{--<form class="valid-form" id="js-signup-form" autocomplete="off" action='reg' method='post' onsubmit="return sub()">--}}
         <p class="error"></p>
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
@@ -218,8 +219,7 @@
    background-position:right bottom"><p class="tips" id="sp_pwd"><font color="red"></font></p>
         <input  type="text" name="user_email" id="email" data-validate="nick" class="ipt ipt-nick" placeholder="邮箱格式:@ . com" id="email" onblur="checkemail();"><font color="red"><p class="tips" id="email_sp"></p></font>
         <input  type="text" name="user_phone" data-validate="nick" class="ipt ipt-nick" placeholder="手机号为11位 " id="phone" onblur="checkphone();"><font color="red"><p class="tips" id="phone_sp"></p></font>
-        <input type="submit"  class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
-
+        <input type="button" id="butt" class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
         <ul class="third-parties">
             <li>
                 <p data-url="">新浪微博帐号</p>
@@ -236,215 +236,5 @@
         </ul>
     </form>
 </div>
-<script>
-
-    var flag=false;
-    $('#username').blur(function(){
-        // alert(123);
-        var username=$(this).val();
-        if(username=='') {
-            $('#name_sp').html('用户名非空');
-            //alert(123);
-            flag=true;
-            return flag;
-        }else{
-            $('#name_sp').html('');
-            // alert(456);
-            return flag;
-        }
-    })
-    var emailflag=false;
-    $('#email').blur(function(){
-        var email=$("#email").val();
-        var reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if(reg.test(email)){
-            // alert(123)
-            $("#email_sp").html('')
-            emailflag=true;
-            return emailflag;
-        }else{
-            // alert(456)
-            // alert(456)
-            $("#email_sp").html('格式错误')
-            return emailflag;
-        }
-    })
-    var phoneflag=false;
-    $("#phone").blur(function(){
-        var phone=$("#phone").val();
-        var reg = /^1\d{10}$/;
-        if(reg.test(phone)){
-            $("#phone_sp").html('')
-            phoneflag=true;
-            return phoneflag;
-        }else{
-            $("#phone_sp").html('格式错误');
-            return phoneflag;
-        }
-    })
-    function show(){
-        if(this.aa.password.type='password'){
-            box.innerHTML = "<input type='text' name='password'  value="+this.aa.password.value+">";
-            box3.innerHTML = "<a href='javascript:void(0)' onclick='hid();'>隐藏密码</a>";
-        }
-    }
-    function hid(){
-        if(this.aa.password.type='text'){
-            box.innerHTML = "<input type='password' name='password'  value="+this.aa.password.value+">";
-            box3.innerHTML = "<a href='javascript:void(0)' onclick='show();'>显示密码</a>";
-        }
-    }
-    $("#u_name").blur(function() {
-        var u_name = $("#u_name").val();
-        var token  = $("#token").val()
-        var reg = /^1\d{10}$/;
-        var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if (reg.test(u_name)) {
-            // alert(u_name)
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-                url:"name",
-                type:"post"
-            });
-            $.ajax({
-                data:{
-                    u_name: u_name
-                },success:function(data){
-                if (data == 1) {
-                    $("#sp_name").html('<font color="#5ff137">√</font>')
-                } else if (data == 2) {
-                    $("#sp_name").html('<font color="#f00">×</font>')
-                }
-                }
-            })
-        } else if (email_reg.test(u_name)) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-                url:"email",
-                type:"post"
-            });
-            $.ajax({
-                data:{
-                    u_name: u_name
-                },success:function(data){
-                    if (data == 1) {
-                        $("#sp_name").html('<font color="#5ff137">√</font>')
-                    } else if (data == 2) {
-                        $("#sp_name").html('<font color="#f00">×</font>')
-                    }
-                }
-            })
-        } else {
-            $("#sp_name").html('格式错误')
-        }
-    })
-    $("#password").blur(function() {
-        var u_name = $("#u_name").val()
-        var u_pwd = $("#password").val()
-        var reg = /^1\d{10}$/;
-        var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if (reg.test(u_name)) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-                url:"name_pwd",
-                type:"post"
-            });
-            $.ajax({
-                async : false,
-                data:{
-                    u_name: u_name,
-                    u_pwd: u_pwd
-                },success:function(data){
-                    if (data == 3) {
-                        $("#sp_pwd").html('<font color="#5ff137">√</font>')
-                    } else if (data == 4) {
-                        $("#sp_pwd").html('<font color="#f00">×</font>')
-                    }
-                }
-            })
-        } else if (email_reg.test(u_name)) {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-                url:"email_pwd",
-                type:"post"
-            });
-            $.ajax({
-                async : false,
-                data:{
-                    u_name: u_name,
-                    u_pwd: u_pwd
-                },success:function(data){
-                    if (data == 3) {
-                        $("#sp_pwd").html('<font color="#5ff137">√</font>')
-                    } else if (data == 4) {
-                        $("#sp_pwd").html('<font color="#f00">×</font>')
-                    }
-                }
-            })
-        }
-    })
-    $("#sub").click(function(){
-        var sp_name=$("#sp_name").html();
-        var sp_pwd=$("#sp_pwd").html();
-        var u_name=$("#u_name").val();
-        var u_pwd=$("#password").val();
-        if(sp_name=='<font color="#5ff137">√</font>' && sp_pwd=='<font color="#5ff137">√</font>'){
-            var reg = /^1\d{10}$/;
-            var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-            if (reg.test(u_name)) {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    },
-                    url:"name_deng",
-                    type:"post"
-                });
-                $.ajax({
-                    data:{
-                        u_name:u_name,
-                        u_pwd:u_pwd
-                    },success:function(data){
-                        if (data == 5) {
-                            location.href='index';
-                        } else if (data == 6) {
-                            alert('登陆失败');location.href='login';
-                        }
-                    }
-                })
-            }else if(email_reg.test(u_name)){
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    },
-                    url:"email_deng",
-                    type:"post"
-                });
-                $.ajax({
-                    data:{
-                        u_name:u_name,
-                        u_pwd:u_pwd
-                    },success:function(data){
-                        if (data == 5) {
-                            location.href='index';
-                        } else if (data == 6) {
-                            alert('登陆失败');location.href='login';
-                        }
-                    }
-                })
-            }
-
-
-        }else{
-            alert("条件不成立");
-        }
-    })
-</script>
+<script src="../static/js/my.js"></script>
 
