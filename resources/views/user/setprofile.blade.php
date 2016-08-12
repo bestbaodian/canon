@@ -187,9 +187,6 @@
     </a>
     <a class="elevator-top" href="javascript:;" style="display:none" id="backTop"></a>
 </div>
-
-
-
 <!--script-->
 <script src="/js/ssologin.js"></script>
 <script type="text/javascript" src="/js/sea.js"></script>

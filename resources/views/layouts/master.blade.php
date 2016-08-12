@@ -14,9 +14,8 @@
                 <li><a href="program"  target="_self">招聘</a></li>
                 <li><a href="article"  target="_self">方法</a></li>
                 <li><a href="company"  target="_self">简历</a></li>
-		<li><a href="wenda" target="_self">答疑</a></li>
-        <!--         <li><a href="/wiki"  target="_self">WIKI</a></li> -->
-                            </ul>
+		        <li><a href="wenda" target="_self">答疑</a></li>
+            </ul>
         </div>
         <div id="login-area">
             <ul    <?php if(empty(Session::get('username'))){ ?> class="header-unlogin clearfix" <?php }else{ ?> class="clearfix logined" <?php }?>>
@@ -30,9 +29,7 @@
                         <img src="/images/erweima.png">
                     </div>
                 </li>
-                
 		    <?php
-
                 if(empty(Session::get('username'))){
                         ?>
                 <li class="header-signin">
