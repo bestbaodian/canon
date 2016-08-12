@@ -45,7 +45,6 @@ class ArticleController extends Controller
 	    $a_lei=DB::table('a_lei')->get();
         return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
     }
-<<<<<<< HEAD
     
     //写文章
     public function add()
@@ -53,7 +52,7 @@ class ArticleController extends Controller
         $a_title=Request::input('a_title');
         $a_type=Request::input('a_type');
         $a_con=Request::input('a_con');
-=======
+
 
 
     public function add(Request $request){
@@ -62,7 +61,6 @@ class ArticleController extends Controller
         $a_title=$request['a_title'];
         $a_type=$request['a_type'];
         $a_con=$request['a_con'];
->>>>>>> 65ff048d51fe2be46d73feda9744e24d41b59bb3
         $a_addtime=date("Y-m-d H:i:s");
         $file = Request::file('a_logo');
         $array=Request::input('tag');
@@ -76,12 +74,6 @@ class ArticleController extends Controller
             }
     }
 
-<<<<<<< HEAD
-    
-    
-=======
-
->>>>>>> 65ff048d51fe2be46d73feda9744e24d41b59bb3
     public function zan(){
         $a_id=$_POST['zan'];
         if(!isset($_SESSION)){
