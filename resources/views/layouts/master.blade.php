@@ -413,7 +413,7 @@
                         u_pwd:u_pwd
                     },success:function(data){
                         if (data == 5) {
-                            alert('登陆成功');location.href='index';
+                            location.href='index';
                         } else if (data == 6) {
                             alert('登陆失败');location.href='login';
                         }
@@ -433,7 +433,7 @@
                         u_pwd:u_pwd
                     },success:function(data){
                         if (data == 5) {
-                            alert('登陆成功');location.href='index';
+                            location.href='index';
                         } else if (data == 6) {
                             alert('登陆失败');location.href='login';
                         }
