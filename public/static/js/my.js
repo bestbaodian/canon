@@ -225,9 +225,10 @@ $(function(){
                 },success:function(data){
                     if(data == "true"){
                         location.href="index"
+                    }else{
+                        var dataObj=eval("("+data+")")
+                        $("#check_reg").html(dataObj.translation).show(1).delay(2000).hide(1)
                     }
-                    var dataObj=eval("("+data+")")
-                    $("#check_reg").html(dataObj.translation).show(1).delay(2000).hide(1)
                 }
             })
         }
