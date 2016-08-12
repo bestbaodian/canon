@@ -75,7 +75,7 @@ class LoginController extends Controller
     }
     public function reg(Request $request){
         $data = $request->all();
-        $login = new Logines();
+        $login = new Login();
         $check = $login ->reg($data);
         if($check=="true"){
             return "true";
@@ -83,6 +83,7 @@ class LoginController extends Controller
             return $check;
         }
     }
+
     /*
      * 用户退出
      */

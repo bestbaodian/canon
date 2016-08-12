@@ -206,7 +206,6 @@ $(function(){
         var user_phone = $("input[name=user_phone]").val();
         var reg = /^1\d{10}$/;
         var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-
         if (reg.test(user_phone) && email_reg.test(user_email))
         {
             $.ajaxSetup({
