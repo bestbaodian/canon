@@ -199,39 +199,6 @@ $(function(){
         }
     })
     //验证注册
-    $("#phone").blur(function(){
-        var name = $("input[name=user_name]").val();
-        var user_pwd = $("input[name=user_pwd]").val();
-        var user_email = $("input[name=user_email]").val();
-        var user_phone = $("input[name=user_phone]").val();
-        var reg = /^1\d{10}$/;
-        var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if (reg.test(user_phone) && email_reg.test(user_email))
-        {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-                url:"reg",
-                type:"post"
-            })
-            $.ajax({
-                data:{
-                    user_name:name,
-                    user_pwd:user_pwd,
-                    user_email:user_email,
-                    user_phone:user_phone
-                },success:function(data){
-                    var dataObj=eval("("+data+")");
-                    $("#check_reg").html(dataObj['translation']).delay(2000).hide(1)
-                }
-            })
-        }
-        else
-        {
-            alert('手机号,邮箱必须填写');
-        }
-    });
     $("#butt").click(function(){
         var name = $("input[name=user_name]").val();
         var user_pwd = $("input[name=user_pwd]").val();
@@ -256,8 +223,11 @@ $(function(){
                     user_email:user_email,
                     user_phone:user_phone
                 },success:function(data){
+                    if(data == "true"){
+                        location.href="index"
+                    }
                     var dataObj=eval("("+data+")")
-                    $("#check_reg").html(dataObj.translation).delay(2000).hide(1)
+                    $("#check_reg").html(dataObj.translation).show(1).delay(2000).hide(1)
                 }
             })
         }

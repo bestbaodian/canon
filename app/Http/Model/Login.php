@@ -17,7 +17,7 @@ class Login extends Model
     {
         //设置自动验证
         $validator = Validator::make($data, [
-            'user_name' => 'required|between:6,32|unique:users',
+            'user_name' => 'required|between:4,32|unique:users',
             'user_pwd' => 'required|between:6,16',
             'user_email'=>'required|unique:users',
             'user_phone'=>'required|unique:users'
