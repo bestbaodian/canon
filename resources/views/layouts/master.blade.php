@@ -211,7 +211,6 @@
    background-position:right bottom"><p class="tips" id="sp_pwd"><font color="red"></font></p>
         <input  type="text" name="user_email" id="email" data-validate="nick" class="ipt ipt-nick" placeholder="邮箱格式:@ . com" id="email" onblur="checkemail();"><font color="red"><p class="tips" id="email_sp"></p></font>
         <input  type="text" name="user_phone" data-validate="nick" class="ipt ipt-nick" placeholder="手机号为11位 " id="phone" onblur="checkphone();"><font color="red"><p class="tips" id="phone_sp"></p></font>
-<<<<<<< HEAD
         <input type="submit"  class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
     </form>
 </div>
@@ -426,7 +425,7 @@
         }
     })
 </script>
-=======
+
         <input type="button" id="butt" class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
         <ul class="third-parties">
             <li>
@@ -445,5 +444,3 @@
     </form>
 </div>
 <script src="../static/js/my.js"></script>
-
->>>>>>> b620db423d6562437e559d9b20c9362aac09673a
