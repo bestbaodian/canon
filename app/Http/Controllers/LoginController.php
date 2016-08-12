@@ -66,7 +66,6 @@ class LoginController extends Controller
         $data  = $request->all();
         $login = new Login();
         $login ->email_deng($data);
-
     }
     //注册
     public function register(){
