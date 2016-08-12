@@ -24,7 +24,6 @@ class ProgramController extends Controller
     public function position(){
         $p_name=$_GET['p_name'];
         $arr = DB::table('recruit')->where('position_name',"$p_name")->get();
-        
         return view('program/position',['data'=>$arr]);
     }
 

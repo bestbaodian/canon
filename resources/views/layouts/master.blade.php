@@ -4,17 +4,17 @@
 <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
 <div id="header">
     <div class="page-container" id="nav">
-        <a href="http://www.mbaodian.com/" target="_self"><img src="/images/login.png" style="float: left; padding-top:6px;"><a href="index" target="_self" class="hide-text"></a>
+        <a href="/" target="_self"><img src="/images/login.png" style="float: left; padding-top:6px;"><a href="index" target="_self" class="hide-text"></a>
         <div class="g-menu-mini l">
             <a href="#" class="menu-ctrl">
                 <i class="icon-menu"></i>
             </a>
             <ul class="nav-item l">
-                <li><a href="shiti"  target="_self">试题</a></li>
-                <li><a href="program"  target="_self">招聘</a></li>
-                <li><a href="article"  target="_self">方法</a></li>
-                <li><a href="company"  target="_self">简历</a></li>
-		<li><a href="wenda" target="_self">答疑</a></li>
+                <li><a href="{{URL('shiti')}}"  target="_self">试题</a></li>
+                <li><a href="{{URL('program')}}"  target="_self">招聘</a></li>
+                <li><a href="{{URL('article')}}"  target="_self">方法</a></li>
+                <li><a href="{{URL('company')}}"  target="_self">简历</a></li>
+		<li><a href="{{URL('wenda')}}" target="_self">答疑</a></li>
         <!--         <li><a href="/wiki"  target="_self">WIKI</a></li> -->
                             </ul>
         </div>

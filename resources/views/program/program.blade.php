@@ -15,7 +15,10 @@
     <link rel="stylesheet" type="text/css" href="css/main.html_aio_2ff5795.css">
     <link rel="stylesheet" type="text/css" href="css/widgets_cd857e8.css">
     <link rel="stylesheet" type="text/css" href="css/main.html_aio_2_d6c0dcf.css">
-<script src="css/jquery.validate.min_343f475.js" class="lazyload" charset="utf-8"></script><link href="css/loginpop_8eb0b34.css" rel="stylesheet" class="lazyload" charset="utf-8"><script src="js/lagou_5427c0e.js" class="lazyload" charset="utf-8"></script><script src="js/c.js" type="text/javascript"></script>
+<!-- <script src="css/jquery.validate.min_343f475.js" class="lazyload" charset="utf-8"></script> -->
+<!-- <link href="css/loginpop_8eb0b34.css" rel="stylesheet" class="lazyload" charset="utf-8"> -->
+{{--<script src="js/lagou_5427c0e.js" class="lazyload" charset="utf-8"></script>--}}
+{{--<script src="js/c.js" type="text/javascript"></script>--}}
 
 
 
