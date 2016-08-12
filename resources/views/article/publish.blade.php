@@ -131,7 +131,7 @@
 
 </div>
 
-@endsection
+
 <div id="J_GotoTop" class="elevator">
     <a class="elevator-weixin" href="javascript:;">
         <div class="elevator-weixin-box">
@@ -167,4 +167,6 @@
     })
 </script>
 
-</body></html>
+</body>
+@endsection
+</html>

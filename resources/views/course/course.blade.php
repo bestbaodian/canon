@@ -100,7 +100,7 @@
                     </span>
                     <span class="tool-item tool-pager">
                                                 <span class="pager-num">
-                            <b class="pager-cur">1</b>/<em class="pager-total">26</em>
+                            <b class="pager-cur">2</b>/<em class="pager-total">26</em>
                         </span>
                                                 <a href="javascript:void(0)" class="pager-action pager-prev hide-text disabled">上一页</a>
 
@@ -139,7 +139,6 @@
                                         echo  "/images/logo/传媒.jpg";
                                     }?>">
                                 </div>
-
                                 <h5>
                                     <span><a href="xiang?id=<?php echo $v['c_id']?>" target="_self"><?php echo $v['c_name']?></a></span>
                                 </h5>
@@ -147,7 +146,6 @@
                                     <p class="text-ellipsis">类型:<?php echo $v['c_type']?></p>
                                     <p class="text-ellipsis">专业:<?php echo $v['c_direction']?></p>
                                     <span class="l ">更新完毕</span>
-
                 <span class="l ml20">
                                 <?php  echo $v['c_num']?>
                                 人学习</span>
@@ -159,28 +157,36 @@
                             </a>
                         </li>
                     <?php } ?>
-
                     </ul>
                 </div>
-
             </div>
-
-                    <style>
+<style>
 			.pager{
 			    position:absolute;
 			    left:400px;
 			    bottom:-20px;
 			}
-                        .pager li{
-                            float:left;
-                            margin-left:100px;
-			    font-size:xx-large;
-                        }
-                    </style>
-             <?php echo $shi->render(); ?>
-        </div>
+      .pager li{
+          float:left;
+          margin-left:100px;
+          font-size:xx-large;
+      }
+      page{
+        list-style: none;
+        float: left;
+        margin-left: 25px;
+        border: 2px solid red;
+        position: absolute;
+        margin-left: 250px;
+      }
+</style>
+          <ul>
+            <li class="page">
+                  <?php echo $shi->links(); ?>
+            </li>
+          </ul>
+          </div>
     </div>
-
 </div>
 
 

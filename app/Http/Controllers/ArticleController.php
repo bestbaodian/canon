@@ -22,7 +22,7 @@ class ArticleController extends Controller
             $username=Session::get('username');
         }
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-        $u_id=$articlemodel->get_usersid($username);     
+        $u_id=$articlemodel->get_usersid($username);
         $u_id=$u_id['user_id'];
         //echo $u_id;die;
         //print_r($article);die;
@@ -36,16 +36,17 @@ class ArticleController extends Controller
         }
         return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
-    
-    
+
+
     public function publish(){
+        //echo 123456;die;
         $at_type=DB::table('ar_type')->get();
 	//print_r($at_type);die;
         $a_lei=DB::table('a_lei')->get();
         return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
     }
-    
-    
+
+
     public function add(Request $request){
         $request = $request->all();
         //print_r
@@ -60,8 +61,8 @@ class ArticleController extends Controller
             echo "<script>alert('提交失败');location.href='publish';</script>";
         }
     }
-    
-    
+
+
     public function zan(){
         $a_id=$_POST['zan'];
         if(!isset($_SESSION)){
@@ -92,8 +93,8 @@ class ArticleController extends Controller
         //print_r($zan);die;
         return json_encode($zan);
     }
-    
-    
+
+
     public function type(){
         $type=$_POST['type'];
         if($type=='0'){
@@ -125,7 +126,7 @@ class ArticleController extends Controller
        //print_r($aping);die;
         return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
     }
-    
+
     public function wping(){
         if(!isset($_SESSION)){
             session_start();

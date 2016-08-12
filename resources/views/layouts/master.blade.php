@@ -30,7 +30,7 @@
                         <img src="/images/erweima.png">
                     </div>
                 </li>
-                
+
 		    <?php
 
                 if(empty(Session::get('username'))){
@@ -44,7 +44,7 @@
                     <?php
                     }else{
                         ?>
- 
+
                 <li class="remind_warp">
                     <i class="msg_remind" style="display: none;"></i>
                     <a href="/sms/messagesone" target="_blank"><i class="icon-notifi"></i></a>
@@ -70,7 +70,7 @@
                                 <p class="meta">
 					<a href="/u/3071208/experience">经验<b id="js-user-mp">550</b></a>
 					<a href="/u/3071208/credit">积分<b id="js-user-credit">0</b></a></p>
-                    
+
                                 <a class="icon-set setup" href="/user/setprofile"></a>
                             </div>
                             <!--
@@ -97,7 +97,7 @@
                         <i class="card-arr"></i>
                     </div>
                 </li>
- 
+
                     <?php
                     }
                 ?>
@@ -182,23 +182,15 @@
         <input type="hidden" name="return-url" value="">
         <div class="clearfix"></div>
         <label class="remember">
-            <input name="remember" type="checkbox" checked/>
-            下次自动登录 </label>
+            <input name="remember" type="checkbox" checked/>下次自动登录 </label>
+            <script src="http://open.51094.com/user/myscript/157ad5fc7ec2e3.html"></script>
+            <ul>
+                <li class="login">
+                <span id="hzy_fast_login"></span>
+                </li>
+            </ul>
         <a class="forgot">忘记密码？</a>
-        <ul class="third-parties">
-            <li>
-                <p data-url="">新浪微博帐号</p>
-            </li>
-            <li>
-                <p data-url="">腾讯微博帐号</p>
-            </li>
-            <li>
-                <p data-url="">豆瓣帐号</p>
-            </li>
-            <li>
-                <p data-url=""></p>
-            </li>
-        </ul>
+
     </form>
 </div>
 
@@ -219,21 +211,6 @@
         <input  type="text" name="user_email" id="email" data-validate="nick" class="ipt ipt-nick" placeholder="邮箱格式:@ . com" id="email" onblur="checkemail();"><font color="red"><p class="tips" id="email_sp"></p></font>
         <input  type="text" name="user_phone" data-validate="nick" class="ipt ipt-nick" placeholder="手机号为11位 " id="phone" onblur="checkphone();"><font color="red"><p class="tips" id="phone_sp"></p></font>
         <input type="submit"  class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
-
-        <ul class="third-parties">
-            <li>
-                <p data-url="">新浪微博帐号</p>
-            </li>
-            <li>
-                <p data-url="">腾讯微博帐号</p>
-            </li>
-            <li>
-                <p data-url="">豆瓣帐号</p>
-            </li>
-            <li>
-                <p data-url=""></p>
-            </li>
-        </ul>
     </form>
 </div>
 <script>
@@ -447,4 +424,3 @@
         }
     })
 </script>
-

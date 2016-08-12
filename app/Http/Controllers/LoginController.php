@@ -9,7 +9,9 @@ use Session;
 use Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Model\Login;
+use App\Http\Model\Logines;
 use DB;
+
 
 class LoginController extends Controller
 {
@@ -73,7 +75,7 @@ class LoginController extends Controller
     }
     public function reg(Request $request){
         $data = $request->all();
-        $login = new Login();
+        $login = new Logines();
         $check = $login ->reg($data);
         if($check=="true"){
             return redirect('index');
@@ -85,6 +87,17 @@ class LoginController extends Controller
     public function out(){
         Session::forget("username");
         echo "<script>alert('退出成功');location.href='index'</script>";
+    }
+
+    /*
+    * 第三方登陆
+    */
+    public function qq_login(){
+        $logins=new Logines();
+        $code = $_GET['code'];
+        $data=$logins->me($code);
+        Session::put('username',$data['name']);
+        return redirect('index');
     }
 
 
