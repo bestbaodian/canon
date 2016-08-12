@@ -32,11 +32,6 @@ seajs.config({
 	    'Module-layer' : '/static/lib/layer/1.6.0/layer.min.js',
         'placeholder': '/static/component/base/placeholder/placeholder.js'
 	},
-	map: [
-
-		[ /^(.*\.(?:css|js|tpl))(.*)$/i, '$1?'+seajsTimestamp ]
-	],
-
 	// 路径配置
 	paths: {
 		'lib': '/static/lib',

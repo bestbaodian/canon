@@ -23,7 +23,7 @@ class ArticleController extends Controller
             $username=Session::get('username');
         }
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-        $u_id=$articlemodel->get_usersid($username);     
+        $u_id=$articlemodel->get_usersid($username);
         $u_id=$u_id['user_id'];
         //echo $u_id;die;
         //print_r($article);die;
@@ -37,13 +37,15 @@ class ArticleController extends Controller
         }
         return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
-    
-    
+
+
     public function publish(){
+        //echo 123456;die;
         $at_type=DB::table('ar_type')->get();
 	    $a_lei=DB::table('a_lei')->get();
         return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
     }
+<<<<<<< HEAD
     
     //写文章
     public function add()
@@ -51,6 +53,16 @@ class ArticleController extends Controller
         $a_title=Request::input('a_title');
         $a_type=Request::input('a_type');
         $a_con=Request::input('a_con');
+=======
+
+
+    public function add(Request $request){
+        $request = $request->all();
+        //print_r
+        $a_title=$request['a_title'];
+        $a_type=$request['a_type'];
+        $a_con=$request['a_con'];
+>>>>>>> 65ff048d51fe2be46d73feda9744e24d41b59bb3
         $a_addtime=date("Y-m-d H:i:s");
         $file = Request::file('a_logo');
         $array=Request::input('tag');
@@ -64,8 +76,12 @@ class ArticleController extends Controller
             }
     }
 
+<<<<<<< HEAD
     
     
+=======
+
+>>>>>>> 65ff048d51fe2be46d73feda9744e24d41b59bb3
     public function zan(){
         $a_id=$_POST['zan'];
         if(!isset($_SESSION)){
@@ -96,8 +112,8 @@ class ArticleController extends Controller
         //print_r($zan);die;
         return json_encode($zan);
     }
-    
-    
+
+
     public function type(){
         $type=$_POST['type'];
         if($type=='0'){
@@ -129,7 +145,7 @@ class ArticleController extends Controller
        //print_r($aping);die;
         return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
     }
-    
+
     public function wping(){
         if(!isset($_SESSION)){
             session_start();

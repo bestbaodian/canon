@@ -1,53 +1,55 @@
 <?php
-use Illuminate\Pagination\LengthAwarePaginator;
+//use Illuminate\Pagination\LengthAwarePaginator;
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
+use App\Http\Model\Wenda;
+use Session;
 
+/**
+ * Class WendaController
+ * @package App\Http\Controllers
+ */
 class WendaController extends Controller
 {
     public function wenda(){
-        //echo "123";die;
-        $pro=DB::table('t_tw')
-        ->join('direction', function ($join) {
-            $join->on('direction.d_id', '=', 't_tw.d_id');
-        })
-        ->join('users', function ($join) {
-            $join->on('users.user_id', '=', 't_tw.user_id');
-        })
-        ->simplePaginate(5);
-        //print_r($pro);die;
+        //实例化问答model层
+        $mwenda=new Wenda();
+        $pro=$mwenda->get_t_tw();
         return view('wenda/wenda',['pro'=>$pro]);
     }
 
 
     public function save(){
+        //实例化问答model层
+        $mwenda=new Wenda();
         if(!isset($_SESSION)){
             session_start();
         }
         header('Content-Type: text/html; charset=utf-8');
-       // $username = $_SESSION['username'];
-    
-        if(empty($_SESSION['username'])){
+        $username=Session::get("username");
+        if(empty($username)){
             echo "<script>alert('请先登录'),location.href='index'</script>";die;
         }else{
-            $pro=DB::table('direction')->get();
-        
+            //$pro=DB::table('direction')->get();
+            $pro=$mwenda->get_direction();
         //显示各个学院
         return view('wenda/save',['pro'=>$pro]);
         }
         
     }
 //提交提问功能
-    public function tiwen(){
-        $t_title=$_POST["t_title"];
-        $t_content=$_POST["aa"];
-        $pro=$_POST['pro'];
+    public function tiwen(Request $request){
+        $request = $request->all();
+        $t_title=$request["t_title"];
+        $t_content=$request["aa"];
+        $pro=$request['pro'];
         if(!isset($_SESSION)){
             session_start();
         }
-        $u_id=$_SESSION['u_id'];
+        //$u_id=$_SESSION['u_id'];
         //var_dump($t_content);die;
+        $u_id=Session::get("u_id");
         $arr1=DB::insert("INSERT INTO t_tw(t_title,t_content,user_id,d_id) values('$t_title','$t_content','$u_id','$pro')");
          if($arr1){
             exit('1');

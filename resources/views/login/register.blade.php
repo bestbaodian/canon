@@ -2,7 +2,7 @@
 <!-- saved from url=(0045)http://www.imooc.com/user/newsignup/from_url/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>慕课网-注册</title>
+    <title>错误信息</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta property="qc:admins" content="77103107776157736375">
