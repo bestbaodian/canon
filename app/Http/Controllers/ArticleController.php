@@ -2,36 +2,38 @@
 
 namespace App\Http\Controllers;
 use DB;
+use Session;
+use Illuminate\Http\Request;
+use App\Http\Model\Article;
 class ArticleController extends Controller
 {
     public function article(){
-        $at_type=DB::table('ar_type')->get();
-        $article=DB::select("select * from article left join ar_type on article.a_id=ar_type.at_id order by a_id desc");
-        if(!isset($_SESSION)){
-            session_start();
-        }
-        if(empty($_SESSION['username'])){
+        //实例化Article
+        $articlemodel=new Article;
+
+        //调用数据
+        $at_type=$articlemodel->getar_type();
+
+        $article=$articlemodel->select_article();
+        $ses = Session::get('username');
+        if(empty($ses)){
             $username=0;
         }else{
-            $username=$_SESSION['username'];
+            $username=Session::get('username');
         }
-        $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
+        //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
+        $u_id=$articlemodel->get_usersid($username);     
         $u_id=$u_id['user_id'];
         //echo $u_id;die;
         //print_r($article);die;
         foreach($article as $key=>$val){
-            $arr=DB::table('article_zan')->where(["u_id"=>0,"article_id"=>$val['a_id']])->first();
+            $arr=$articlemodel->get_article_zan($val);
             if($arr){
                 $article[$key]['zan']="1";
             }else{
                 $article[$key]['zan']="0";
             }
-
         }
-        //print_r($article);die;
-
-
-        //print_r($arr);die;
         return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
     
@@ -44,10 +46,12 @@ class ArticleController extends Controller
     }
     
     
-    public function add(){
-        $a_title=$_POST['a_title'];
-        $a_type=$_POST['a_type'];
-        $a_con=$_POST['a_con'];
+    public function add(Request $request){
+        $request = $request->all();
+        //print_r
+        $a_title=$request['a_title'];
+        $a_type=$request['a_type'];
+        $a_con=$request['a_con'];
         $a_addtime=date("Y-m-d H:i:s");
         $re=DB::insert("insert into article(a_title,a_type,a_con,a_addtime) values('$a_title','$a_type','$a_con','$a_addtime')");
         if($re){

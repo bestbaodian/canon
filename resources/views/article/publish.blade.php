@@ -12,7 +12,7 @@
 <meta name="keywords" content="面试宝典，面试宝典官网，MOOC，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程">
 <meta name="description" content="面试宝典网（MBAODIAN）是学习编程最简单的免费平台。慕课网提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。">
 
-<script src="js/ppush.js"></script><script src="js/prt.js" async="" type="text/javascript"></script><script type="text/javascript">
+<script src="js/ppush.js"></script><script src="../js/prt.js" async="" type="text/javascript"></script><script type="text/javascript">
 
     var OP_CONFIG={"module":"article","page":"publish","userInfo":{"uid":"3116765","nickname":"qq_\u672c\u5bab\u672a\u6b7b\u4f11\u60f3\u7eb3\u59be_03116765","head":"http:\/\/img.mukewang.com\/user\/56f9e5ab0001e7b101000100-80-80.jpg","usertype":"1","roleid":0}};
     var isLogin = 1;
@@ -28,7 +28,6 @@
 @extends('layouts.master')
 @section('sidebar')
     @parent
-
 
 <script>
     var isLogin=1
@@ -49,10 +48,7 @@
                 <label for="" class="form-label l"><span>&nbsp;</span>封面</label>
                 <div class="form-ipt-wrap">
                     <div class="face-upload clearfix">
-
                                 <input type="file" name="a_logo">
-
-
                        </div>
                     <div id="js-face-reault" class="face-result">
                     </div>
