@@ -57,7 +57,7 @@
                     </a>
                 </li>
                 <li class="set_btn user-card-box">
-                    <a target="_self" href="/u/3071208/courses" action-type="my_menu" class="user-card-item" id="header-avator">
+                    <a target="_self" href="/user/setprofile" action-type="my_menu" class="user-card-item" id="header-avator">
                         <img width="40" height="40" src="/images/unknow-40.png">
                         <i style="display: none;" class="myspace_remind"></i>
                         <span style="display: none;">动态提醒</span>
@@ -65,8 +65,8 @@
                     <div class="g-user-card">
                         <div class="card-inner">
                             <div class="card-top">
-                                <a href="/u/3071208/courses"><img class="l" alt="凤颖" src="/images/unknow-160.png"></a>
-                                <a href="/u/3071208/courses"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
+                                <a href="/user/setprofile"><img class="l" alt="{{ Session::get('username') }}" src="/images/unknow-160.png"></a>
+                                <a href="/user/setprofile"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
                                 <p class="meta">
 					<a href="/u/3071208/experience">经验<b id="js-user-mp">550</b></a>
 					<a href="/u/3071208/credit">积分<b id="js-user-credit">0</b></a></p>
@@ -201,7 +201,8 @@
         <li class="sina"> <a href="#"><em>&nbsp;</em> 微博登录</a> </li>--}}
     </ul>
     <p><a href="index">已有账号,直接登录</p></a><br/>
-    <form class="signup-form clearfix" method="post" action="reg" onsubmit="return zhu()">
+    <span id="check_reg"></span>
+    <form class="signup-form clearfix">
         {{--<form class="valid-form" id="js-signup-form" autocomplete="off" action='reg' method='post' onsubmit="return sub()">--}}
         <p class="error"></p>
         <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
@@ -210,6 +211,7 @@
    background-position:right bottom"><p class="tips" id="sp_pwd"><font color="red"></font></p>
         <input  type="text" name="user_email" id="email" data-validate="nick" class="ipt ipt-nick" placeholder="邮箱格式:@ . com" id="email" onblur="checkemail();"><font color="red"><p class="tips" id="email_sp"></p></font>
         <input  type="text" name="user_phone" data-validate="nick" class="ipt ipt-nick" placeholder="手机号为11位 " id="phone" onblur="checkphone();"><font color="red"><p class="tips" id="phone_sp"></p></font>
+<<<<<<< HEAD
         <input type="submit"  class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
     </form>
 </div>
@@ -424,3 +426,24 @@
         }
     })
 </script>
+=======
+        <input type="button" id="butt" class="button-blue reg" value="注册" data-category="UserAccount" data-action="regist">
+        <ul class="third-parties">
+            <li>
+                <p data-url="">新浪微博帐号</p>
+            </li>
+            <li>
+                <p data-url="">腾讯微博帐号</p>
+            </li>
+            <li>
+                <p data-url="">豆瓣帐号</p>
+            </li>
+            <li>
+                <p data-url=""></p>
+            </li>
+        </ul>
+    </form>
+</div>
+<script src="../static/js/my.js"></script>
+
+>>>>>>> b620db423d6562437e559d9b20c9362aac09673a

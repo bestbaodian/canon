@@ -1,12 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Model\User;
+use Illuminate\Http\Request;
+use Session;
 
 class UserController extends Controller
 {
     //个人资料
     public function setprofile(){
-        return view('user/setprofile');
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        return view('user/setprofile',['user'=>$user]);
     }
     //头像设置
     public function setavator(){

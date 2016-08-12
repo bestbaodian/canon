@@ -1806,7 +1806,7 @@ fieldset[disabled] .btn {
 @font-face {
   font-family: 'icomoon';
   src: url('../fonts/icomoon.eot?d841nx');
-  src: url('../fonts/icomoon.eot?d841nx#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?d841nx') format('truetype'), url('../fonts/icomoon.woff?d841nx') format('woff'), url('../fonts/icomoon.svg?d841nx#icomoon') format('svg');
+  src: url('../fonts/icomoon.eot?d841nx#iefix') format('embedded-opentype'), url('../fonts/icomoon.woff?d841nx') format('woff'), url('../fonts/icomoon.svg?d841nx#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }

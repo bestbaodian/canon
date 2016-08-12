@@ -78,7 +78,9 @@ class LoginController extends Controller
         $login = new Logines();
         $check = $login ->reg($data);
         if($check=="true"){
-            return redirect('index');
+            return "true";
+        }else{
+            return $check;
         }
     }
     /*
