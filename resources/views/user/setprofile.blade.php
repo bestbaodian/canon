@@ -93,15 +93,20 @@
                 <select id="province-select1" class='input' hidefocus="true">
                     <option  value="0">选择省份</option>
                     @foreach($first as $key=>$val)
-                        <option  value="{{ $val['region_id'] }}">{{ $val['region_name'] }}</option>
+                        <?php
+                        if($val['region_id']==$city[0]['region_id']){?>
+                            <option selected="selected" value="{{ $val['region_id'] }}">{{ $val['region_name'] }}</option>
+                        <?php }else{?>
+                            <option  value="{{ $val['region_id'] }}">{{ $val['region_name'] }}</option>
+                        <?php }?>
                     @endforeach
                         <option value="100">其他</option>
                 </select>
                 <select class='input' id="city-select1" hidefocus="true" >
-                    <option value="0">选择城市</option>
+                    <option value="{{$city[1]['region_id']}}">{{$city[1]['region_name']}}</option>
                 </select>
                 <select class='input mr0' id="area-select" hidefocus="true">
-                    <option value="0">选择区县</option>
+                    <option value="{{$city[2]['region_id']}}">{{$city[2]['region_name']}}</option>
                 </select>
                 <p class="rlf-tip-wrap"></p>
             </div>

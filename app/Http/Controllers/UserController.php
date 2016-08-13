@@ -11,13 +11,17 @@ class UserController extends Controller
     public function setprofile(){
         $username = Session::get("username");
         $User  =new  User();
+
         $user  =$User->setprofile($username);
         //查询职业
         $career=$User->get_career();
+
         //地区
         $district=$User->get_region();
-        //print_r($user);die;
-        return view('user/setprofile',['user'=>$user,'career'=>$career,'first'=>$district]);
+
+        //查询用户库中的城市
+        $city = $User -> city();
+        return view('user/setprofile',['user'=>$user,'career'=>$career,'first'=>$district,'city'=>$city]);
     }
 
 
@@ -38,7 +42,7 @@ class UserController extends Controller
         $arr=$request->all();
         $pro=new User();
         $msg=$pro->re_profile($arr);
-        var_dump($msg);
+        return $msg;
     }
 
 
