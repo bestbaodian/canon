@@ -94,11 +94,24 @@ var isLogin=1
             <div class="small-share l">
                 <ul class="share-wrap">
                     <li class="weichat-posi">
-                        <div class="bdsharebuttonbox weichat-style">
+                        <!-- <div class="bdsharebuttonbox weichat-style">
                             <a href="#" class="bds_weixin icon-nav icon-share-weichat" data-cmd="weixin" title="分享到微信"></a>
                             <a href="#" class="bds_tsina icon-nav icon-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
                             <a href="#" class="bds_qzone icon-nav icon-share-qq" data-cmd="qzone" title="分享到QQ空间"></a>
-                        </div>
+                        </div> -->
+                    <div class="bshare-custom">
+                    <a title="分享到QQ空间" class="bshare-qzone"></a>
+                    <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+                    <a title="分享到人人网" class="bshare-renren"></a>
+                    <a title="分享到腾讯微博" class="bshare-qqmb"></a>
+                    <a title="分享到网易微博" class="bshare-neteasemb"></a>
+                    <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
+                    <span class="BSHARE_COUNT bshare-share-count">0</span>
+                    </div>
+                    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+
+                       
+
                     </li>
                 </ul>
             </div>
@@ -272,7 +285,7 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}&lt;/styl
 <script src="/js/ssologin.js"></script>
 <script type="text/javascript" src="/js/sea.js"></script>
 <script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
-<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
+
 
 <!--script-->
 <script src="/js/jquery-1.9.1.min.js"></script>

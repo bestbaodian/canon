@@ -15,8 +15,6 @@
     <script type="text/javascript">
 
 
-        eval(function(p,a,c,k,e,r){e=function(c){return c.toString(36)};if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'[235-9a-dfg]'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('!3(){5 6=a;5 7=3(t){9(typeof b=="undefined"){c d}5 2=f b();try{2.open("GET","/index/ajaxscsts?s="+t,true);2.onreadystatechange=3(){9(2.readyState==4&&2.status==200){9(t&&2.responseText==1)window.location.reload()}};2.send()}catch(e){c d}};5 8=f Image();8.onload=3(){clearTimeout(6);6=a;7(0)};8.onerror=3(){7(1)};6=setTimeout(3(){7(1)},3000);8.src=\'http://g.mukewang.com/g/img/common/logo.png\'}()',[],17,'||xhr|function||var|timer|cdnpost|imgobj|if|null|XMLHttpRequest|return|false||new|static'.split('|'),0,{}))
-
         var OP_CONFIG={"module":"article","page":"index"};
         var isLogin = 0;
         var is_choice = "";
@@ -63,7 +61,7 @@
                 <input type="hidden" id="a_id" value="<?php echo $v['a_id']?>">
                 <div class="">
                     <h3 class="item-title">
-                        <a href="fangfa?id=<?php echo $v['a_id']?>" target="_blank" class="title-detail"><?php echo $v['a_title']?></a>
+                        <a href="{{URL('fangfa?id=')}}<?php echo $v['a_id']?>" target="_blank" class="title-detail"><?php echo $v['a_title']?></a>
                     </h3>
                     <p class="item-bd"><?php echo $v['a_con']?></p>
                     <div class="item-btm clearfix">
@@ -251,7 +249,6 @@
 <script src="js/ssologin.js"></script>
 <script type="text/javascript" src="js/sea.js"></script>
 <script type="text/javascript" src="js/sea_config.js"></script>
-<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
 <div style="display: none">
     <script src="js/jquery-1.9.1.min.js"></script>
