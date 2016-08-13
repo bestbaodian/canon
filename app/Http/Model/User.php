@@ -62,9 +62,7 @@ class User extends Model
                                     user_city     = '$user_city',
                                     user_area     = '$user_area' where user_name = '$username'";
         $msg = DB::select($sql);
-        if($msg){
-            Session::put('username',$user_name);
-        }
+        Session::put('username',$user_name);
         return $msg;
     }
 }
