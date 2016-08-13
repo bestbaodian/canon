@@ -34,6 +34,10 @@ Route::get('user/setverifyemail', 'UserController@setverifyemail');
 Route::get('user/setresetpwd', 'UserController@setresetpwd');
 Route::get('user/setbindsns', 'UserController@setbindsns');
 
+
+//修改用户个人中心
+Route::post('user/upd_profile', 'UserController@updprofile');
+
 //个人中心
 Route::get('sms/messages', 'SmsController@messages');
 Route::get('sms/messagesone', 'SmsController@messagesone');

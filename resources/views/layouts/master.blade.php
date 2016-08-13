@@ -1,7 +1,6 @@
 @section('sidebar')
 <meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" type="text/css" href="../static/css/ui2.css?2013032917">
-<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
 <div id="header">
     <div class="page-container" id="nav">
         <a href="/" target="_self"><img src="/images/login.png" style="float: left; padding-top:6px;"><a href="index" target="_self" class="hide-text"></a>
@@ -10,13 +9,12 @@
                 <i class="icon-menu"></i>
             </a>
             <ul class="nav-item l">
-                <li><a href="{{URL('shiti')}}"  target="_self">试题</a></li>
-                <li><a href="{{URL('program')}}"  target="_self">招聘</a></li>
-                <li><a href="{{URL('article')}}"  target="_self">方法</a></li>
-                <li><a href="{{URL('company')}}"  target="_self">简历</a></li>
-		<li><a href="{{URL('wenda')}}" target="_self">答疑</a></li>
-        <!--         <li><a href="/wiki"  target="_self">WIKI</a></li> -->
-                            </ul>
+                <li><a href="shiti"  target="_self">试题</a></li>
+                <li><a href="program"  target="_self">招聘</a></li>
+                <li><a href="article"  target="_self">方法</a></li>
+                <li><a href="company"  target="_self">简历</a></li>
+		        <li><a href="wenda" target="_self">答疑</a></li>
+            </ul>
         </div>
         <div id="login-area">
             <ul    <?php if(empty(Session::get('username'))){ ?> class="header-unlogin clearfix" <?php }else{ ?> class="clearfix logined" <?php }?>>
@@ -30,9 +28,7 @@
                         <img src="/images/erweima.png">
                     </div>
                 </li>
-
 		    <?php
-
                 if(empty(Session::get('username'))){
                         ?>
                 <li class="header-signin">
@@ -158,8 +154,7 @@
         </div>
     </div>
 </div>
-<!-- <script src="/static/js/landing-min.js?2013032917"></script> -->
-
+<script src="/static/js/landing-min.js?2013032917"></script>
 <div style="text-align:center;clear:both"></div>
 <div class="modal in" id="login-modal"> <a class="close" data-dismiss="modal">×</a>
     <h1>登录</h1>
@@ -193,7 +188,6 @@
 
     </form>
 </div>
-
 <div class="modal in" id="signup-modal" > <a class="close" data-dismiss="modal">×</a>
     <h1>注册</h1>
     <ul class="login-bind-tp">
@@ -229,3 +223,4 @@
     </form>
 </div>
 <script src="../static/js/my.js"></script>
+
