@@ -198,7 +198,6 @@
         </ul>
     </form>
 </div>
-
 <div class="modal in" id="signup-modal" > <a class="close" data-dismiss="modal">×</a>
     <h1>注册</h1>
     <ul class="login-bind-tp">
@@ -234,4 +233,6 @@
     </form>
 </div>
 <script src="../static/js/my.js"></script>
+
+
 
