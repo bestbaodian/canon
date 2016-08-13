@@ -158,7 +158,7 @@
         </div>
     </div>
 </div>
-<script src="/static/js/landing-min.js?2013032917"></script>
+<!-- <script src="/static/js/landing-min.js?2013032917"></script> -->
 
 <div style="text-align:center;clear:both"></div>
 <div class="modal in" id="login-modal"> <a class="close" data-dismiss="modal">×</a>

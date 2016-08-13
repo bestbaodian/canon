@@ -2,7 +2,7 @@ define(function(require, exports, module){
 	require('common');
 	//require('/static/lib/layer/1.6.0/layer.min.js');
 	require("/static/lib/ueditor/ueditor.parse.js");
-	require("/static/page/wenda/index.js");
+	//require("/static/page/wenda/index.js");
 	require('/static/lib/layer/1.6.0/layer.min.js');
 	require('/static/lib/layer/1.6.0/skin/layer.css');
  	var	cutil=require("/static/page/wenda/detail-common");
