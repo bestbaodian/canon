@@ -14,15 +14,23 @@
 
 <script src="js/ppush.js"></script><script src="../js/prt.js" async="" type="text/javascript"></script><script type="text/javascript">
 
-    var OP_CONFIG={"module":"article","page":"publish","userInfo":{"uid":"3116765","nickname":"qq_\u672c\u5bab\u672a\u6b7b\u4f11\u60f3\u7eb3\u59be_03116765","head":"http:\/\/img.mukewang.com\/user\/56f9e5ab0001e7b101000100-80-80.jpg","usertype":"1","roleid":0}};
-    var isLogin = 1;
-    var is_choice = "";
-    var seajsTimestamp="v=201603311624";
-    var ownName="3165819322@qq.com"
-    var old_label = null;
+    // var OP_CONFIG={"module":"article","page":"publish","userInfo":{"uid":"3116765","nickname":"qq_\u672c\u5bab\u672a\u6b7b\u4f11\u60f3\u7eb3\u59be_03116765","head":"http:\/\/img.mukewang.com\/user\/56f9e5ab0001e7b101000100-80-80.jpg","usertype":"1","roleid":0}};
+    // var isLogin = 1;
+    // var is_choice = "";
+    // var //seajsTimestamp="v=201603311624";
+    // var ownName="3165819322@qq.com";
+    // var old_label = null;
 </script>
 <link rel="stylesheet" href="css/pa.css" type="text/css">
-<script src="js/pjquery.js" async="" charset="utf-8"></script><script src="js/pseajs-text.js" async="" charset="utf-8"></script><script src="js/pcommon.js" async="" charset="utf-8"></script><script src="js/pstring.js" async="" charset="utf-8"></script><script src="js/psuggest.js" async="" charset="utf-8"></script><script src="js/pstore.js" async="" charset="utf-8"></script><script src="js/pjson.js" async="" charset="utf-8"></script><script src="js/pim.js" async="" charset="utf-8"></script><script src="js/ppublish.js" async="" charset="utf-8"></script><script src="js/psocket.js" async="" charset="utf-8"></script><script src="js/pmodal.js" async="" charset="utf-8"></script><script src="js/pwebuploader.js" async="" charset="utf-8"></script><link href="css/pwebuploader.css" rel="stylesheet" charset="utf-8"><script src="js/pMarkdown_004.js" async="" charset="utf-8"></script><link href="css/peditor.css" rel="stylesheet" charset="utf-8"><script src="js/pprettify.js" async="" charset="utf-8"></script><link href="css/prettify.css" rel="stylesheet" charset="utf-8"></head>
+<script src="js/pjquery.js" async="" charset="utf-8"></script>
+<!-- <script src="js/pseajs-text.js" async="" charset="utf-8"></script> -->
+<script src="js/pstring.js" async="" charset="utf-8"></script>
+<script src="js/psocket.js" async="" charset="utf-8"></script>
+<script src="js/pmodal.js" async="" charset="utf-8"></script>
+<script src="js/pwebuploader.js" async="" charset="utf-8"></script>
+<link href="css/pwebuploader.css" rel="stylesheet" charset="utf-8">
+<!-- <script src="js/pMarkdown_004.js" async="" charset="utf-8"></script> -->
+<link href="css/peditor.css" rel="stylesheet" charset="utf-8"><script src="js/pprettify.js" async="" charset="utf-8"></script><link href="css/prettify.css" rel="stylesheet" charset="utf-8"></head>
 <body>
 
 @extends('layouts.master')
@@ -153,9 +161,14 @@
 <!--script-->
 <script src="js/pssologin.js"></script>
 <script type="text/javascript" src="js/psea.js"></script>
+<<<<<<< HEAD
 <script type="text/javascript" src="js/psea_config.js"></script>
 
 <script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
+=======
+
+<!--<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>-->
+>>>>>>> ed42fb11ba000268bd35ccc1f8b872357a706c14
 
 <div style="display: none">
 <script src="js/jquery-1.9.1.min.js"></script>

@@ -8,25 +8,26 @@ use Request;
 use App\Http\Model\Article;
 class ArticleController extends Controller
 {
+    //方法页面
     public function article(){
         //实例化Article
         $articlemodel=new Article;
-
-        //调用数据
+        //查询ar_type表
         $at_type=$articlemodel->getar_type();
-
         $article=$articlemodel->select_article();
-        $ses = Session::get('username');
+       $ses = Session::get('username');
         if(empty($ses)){
             $username=0;
         }else{
             $username=Session::get('username');
         }
+
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
         $u_id=$articlemodel->get_usersid($username);
+
+       $u_id=$articlemodel->get_usersid($username);
+
         $u_id=$u_id['user_id'];
-        //echo $u_id;die;
-        //print_r($article);die;
         foreach($article as $key=>$val){
             $arr=$articlemodel->get_article_zan($val);
             if($arr){
@@ -109,22 +110,17 @@ class ArticleController extends Controller
 
 
     public function wxiang(){
-        if(!isset($_SESSION)){
-            session_start();
-        }
-        if(empty($_SESSION['username'])){
+        if(empty(Session::get('usernname'))){
             $username=0;
         }else{
-            $username=$_SESSION['username'];
+            $username=Session::get('usernname');
         }
-        $id=$_GET['id'];
+        $id=Request::input('id');
         $arr=DB::table("article")
             ->join("ar_type","article.a_type","=","ar_type.at_id")
             ->where("article.a_id",$id)->get();
-        //var_dump($arr);exit();
-        $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
-       //print_r($aping);die;
-        return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
+       $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
+       return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
     }
 
     public function wping(){
