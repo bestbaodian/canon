@@ -56,7 +56,8 @@ Route::get('save', 'WendaController@save');
 Route::post('tiwen', 'WendaController@tiwen');
 //点击标题后进入的详情页面
 Route::get('detail', 'WendaController@detail');
-//评论
+//提问之后进行显示出来
+
 Route::post('hui', 'WendaController@hui');
 //点赞
 Route::get('zid', 'WendaController@zid');

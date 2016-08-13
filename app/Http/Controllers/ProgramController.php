@@ -1,7 +1,7 @@
 <?php
 /*
  *招聘信息控制器
- *梁坤
+ *
  *马天天
  */
 namespace App\Http\Controllers;

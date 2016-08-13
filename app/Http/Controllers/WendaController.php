@@ -23,16 +23,15 @@ class WendaController extends Controller
     public function save(){
         //实例化问答model层
         $mwenda=new Wenda();
-        if(!isset($_SESSION)){
-            session_start();
-        }
         header('Content-Type: text/html; charset=utf-8');
         $username=Session::get("username");
+        //echo $username;die;
         if(empty($username)){
             echo "<script>alert('请先登录'),location.href='index'</script>";die;
         }else{
             //$pro=DB::table('direction')->get();
             $pro=$mwenda->get_direction();
+            //print_r($pro);die;
         //显示各个学院
         return view('wenda/save',['pro'=>$pro]);
         }
@@ -41,8 +40,8 @@ class WendaController extends Controller
 //提交提问功能
     public function tiwen(Request $request){
         $request = $request->all();
-        $t_title=$request["t_title"];
-        $t_content=$request["aa"];
+        $t_title=$request["title"];
+        $t_content=$request["content"];
         $pro=$request['pro'];
         if(!isset($_SESSION)){
             session_start();
@@ -58,6 +57,7 @@ class WendaController extends Controller
          } 
     }
     public function detail(Request $request){
+        echo 123456;die;
         $id=$request->input("id");
         //$id = $_GET['id'];
         $arr=DB::select("select * from t_tw where t_id='$id'");
