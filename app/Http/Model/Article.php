@@ -28,4 +28,23 @@ class Article extends Model{
         $a_lei=DB::table('a_lei')->get();
         return $a_lei;
     }
+    //写文章
+    public function add($a_title,$a_type,$a_con,$a_addtime,$file,$a_lei)
+    {
+        $allowed_extensions = ["png", "jpg", "gif","JPG"];
+        if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions)) 
+        {
+            return ['error' => 'You may only storage png, jpg or gif.'];
+        }
+        $destinationPath = 'storage/uploads/';
+        $extension = $file->getClientOriginalExtension();
+        $fileName = str_random(10).'.'.$extension;
+        //print_r($fileName);die;
+        if($file->move($destinationPath, $fileName))
+        {
+           $a_logo = $destinationPath.$fileName;
+           $res=DB::insert("insert into article(a_title,a_type,a_con,a_addtime,a_logo,a_lei) values('$a_title','$a_type','$a_con','$a_addtime','$a_logo','$a_lei')");
+            return $res;
+        }
+    }
 }

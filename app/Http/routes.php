@@ -23,6 +23,8 @@ Route::post('name_pwd','LoginController@name_pwd');
 Route::post('email_pwd','LoginController@email_pwd');
 Route::post('name_deng', 'LoginController@name_deng');
 Route::post('email_deng','LoginController@email_deng');
+//第三方登陆--qq登陆
+Route::get('qq_login', 'LoginController@qq_login');
 
 //个人中心
 Route::get('user/setprofile', 'UserController@setprofile');
@@ -31,6 +33,10 @@ Route::get('user/setphone', 'UserController@setphone');
 Route::get('user/setverifyemail', 'UserController@setverifyemail');
 Route::get('user/setresetpwd', 'UserController@setresetpwd');
 Route::get('user/setbindsns', 'UserController@setbindsns');
+
+
+//修改用户个人中心
+Route::post('user/upd_profile', 'UserController@updprofile');
 
 //个人中心
 Route::get('sms/messages', 'SmsController@messages');
