@@ -1,7 +1,4 @@
-<?
-//include 'open.config.php';
-//define( 'APPID', '157ad5fcphp7ec2e3');
-//define( 'TOKEN', '06b6eca9fb5a289a994c5c4bd292d8a5');
+<?php
 namespace App\Http\Model;
 use Illuminate\Database\Eloquent\Model;
 class Logines extends Model{

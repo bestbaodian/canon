@@ -57,7 +57,7 @@ var is_choice = "";
                     <script src="ckeditor/ckeditor.js"></script>
 
                  <body>
-                    <textarea name="t_content" row="5" col="6"></textarea>
+                    <textarea name="t_content" row="5" col="6">123456</textarea>
                 </body>
                 </div>
                 <div class="mbottom">

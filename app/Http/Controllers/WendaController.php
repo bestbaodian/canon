@@ -23,16 +23,15 @@ class WendaController extends Controller
     public function save(){
         //实例化问答model层
         $mwenda=new Wenda();
-        if(!isset($_SESSION)){
-            session_start();
-        }
         header('Content-Type: text/html; charset=utf-8');
         $username=Session::get("username");
+        //echo $username;die;
         if(empty($username)){
             echo "<script>alert('请先登录'),location.href='index'</script>";die;
         }else{
             //$pro=DB::table('direction')->get();
             $pro=$mwenda->get_direction();
+            //print_r($pro);die;
         //显示各个学院
         return view('wenda/save',['pro'=>$pro]);
         }
