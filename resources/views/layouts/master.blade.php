@@ -86,7 +86,7 @@
                             </div>
                             <div class="card-sets clearfix">
                                 <a class="l mr30" target="_blank" href="/wenda/save">发问题</a>
-                                <a class="l" target="_blank" href="/article/publish">写文章</a>
+                                <a class="l" target="_blank" href="publish">写文章</a>
                                 <a class="r" href="/out?referer=http://www.mbaodian.com/">退出</a>
                             </div>
                         </div>
