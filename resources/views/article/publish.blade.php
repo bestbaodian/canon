@@ -161,8 +161,12 @@
 <!--script-->
 <script src="js/pssologin.js"></script>
 <script type="text/javascript" src="js/psea.js"></script>
+<script type="text/javascript" src="js/psea_config.js"></script>
+
+<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
 <!--<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>-->
+
 
 <div style="display: none">
 <script src="js/jquery-1.9.1.min.js"></script>

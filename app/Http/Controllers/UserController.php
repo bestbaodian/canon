@@ -12,24 +12,60 @@ class UserController extends Controller
         $username = Session::get("username");
         $User  =new  User();
         $user  =$User->setprofile($username);
-        return view('user/setprofile',['user'=>$user]);
+        //查询职业
+        $career=$User->get_career();
+        //地区
+        $district=$User->get_region();
+        //print_r($user);die;
+        return view('user/setprofile',['user'=>$user,'career'=>$career,'first'=>$district]);
     }
+
+
+    //获取省信息
+    public function getprovince(Request $request){
+        $region_id=$request['id'];
+        //根据parent_id查对应省份
+        $region=new User();
+        $provinces=$region->get_province($region_id);
+        //print_r($provinces);die
+        $data=json_encode($provinces);
+        return $data;
+    }
+
+
+    //修改个人资料
+    public function updprofile(Request $request){
+        $arr=$request->all();
+        $pro=new User();
+        $msg=$pro->re_profile($arr);
+        var_dump($msg);
+    }
+
+
     //头像设置
     public function setavator(){
         return view('user/setavator');
     }
+
+
     //手机设置
     public function setphone(){
         return view('user/setphone');
     }
+
+
     //邮箱验证
     public function setverifyemail(){
         return view('user/setverifyemail');
     }
+
+
     //修改密码
     public function setresetpwd(){
         return view('user/setresetpwd');
     }
+
+
     //绑定账号
     public function setbindsns(){
         return view('user/setbindsns');

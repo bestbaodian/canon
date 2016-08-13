@@ -21,7 +21,12 @@ class ArticleController extends Controller
         }else{
             $username=Session::get('username');
         }
+
+        //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
+        $u_id=$articlemodel->get_usersid($username);
+
        $u_id=$articlemodel->get_usersid($username);
+
         $u_id=$u_id['user_id'];
         foreach($article as $key=>$val){
             $arr=$articlemodel->get_article_zan($val);
