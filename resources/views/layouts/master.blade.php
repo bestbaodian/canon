@@ -1,7 +1,6 @@
 @section('sidebar')
 <meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" type="text/css" href="../static/css/ui2.css?2013032917">
-<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
 <div id="header">
     <div class="page-container" id="nav">
         <a href="/" target="_self"><img src="/images/login.png" style="float: left; padding-top:6px;"><a href="index" target="_self" class="hide-text"></a>
@@ -156,7 +155,6 @@
     </div>
 </div>
 <script src="/static/js/landing-min.js?2013032917"></script>
-
 <div style="text-align:center;clear:both"></div>
 <div class="modal in" id="login-modal"> <a class="close" data-dismiss="modal">×</a>
     <h1>登录</h1>
