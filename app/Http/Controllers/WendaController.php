@@ -40,8 +40,8 @@ class WendaController extends Controller
 //提交提问功能
     public function tiwen(Request $request){
         $request = $request->all();
-        $t_title=$request["t_title"];
-        $t_content=$request["aa"];
+        $t_title=$request["title"];
+        $t_content=$request["content"];
         $pro=$request['pro'];
         if(!isset($_SESSION)){
             session_start();
@@ -57,6 +57,7 @@ class WendaController extends Controller
          } 
     }
     public function detail(Request $request){
+        echo 123456;die;
         $id=$request->input("id");
         //$id = $_GET['id'];
         $arr=DB::select("select * from t_tw where t_id='$id'");

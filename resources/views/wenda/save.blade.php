@@ -69,10 +69,8 @@ var is_choice = "";
 
 
                  <script src="js/jquery-1.9.1.js"></script>
-                    <script src="../images/ckeditor/ckeditor.js"></script>
-
                  <body>
-                    &nbsp;&nbsp;<textarea name="t_content" id="t_content" row="5" col="6"></textarea>
+                    &nbsp;&nbsp;<textarea id="t_content" name="t_content" row="5" col="6"></textarea>
                 </body>
                 </div>
                 <div class="mbottom">
@@ -100,15 +98,36 @@ var is_choice = "";
         </div>
         <div class="saveques-bottom">
 <!--          <a href="javascript:void(0)" id="ques-submit-btn" class="btn btn-red link-btn publishbtn" >发布提问</a>-->
-                <a href="javascript:void(0)" id="ques-submit-btn" class="btn btn-red link-btn publishbtn" >发布提问</a>
+                <a href="javascript:void(0)" id="ques-submit-btn" class="aaaa" >发布提问</a>
           <p class="global-errortip js-global-error"></p>
         </div>
         <script>
             $(function(){
-                $(document).on('click',"#ques-submit-btn",function(){
+                $(document).on('click',".aaaa",function(){
                     var title=$("#t_title").val();
                     var content=$("#t_content").val();
-                    alert(content);die;
+                    var pro=$("#pro").val();
+                    if(pro==0){
+                        alert('所属学院不能为空');die;
+                      }
+                         $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                                },
+                                url:"tiwen",
+                                type:"post"
+                            });
+                                   $.ajax({
+                                    data:{
+                                      title:title,
+                                      content:content,
+                                      pro:pro
+                                    },
+                                    success:function(data){
+                                      //$("#list").html(data)
+                                      alert(data);
+                                    }
+                                  })
                 })
             })
         </script>
@@ -177,31 +196,29 @@ var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
 </script>
 </div>
 <div class="edui-imooc" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;" id="edui_fixedlayer"><div style="display: none;" id="edui43" class="edui-popup  edui-bubble edui-imooc" onmousedown="return false;"> <div id="edui43_body" class="edui-popup-body edui-imooc"> <iframe class="edui-imooc" style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" src="../images/detail_files/a_002.htm" width="100%" frameborder="0" height="100%"></iframe> <div class="edui-shadow edui-imooc"></div> <div id="edui43_content" class="edui-popup-content edui-imooc">  </div> </div></div></div><div style="position: absolute; left: 0px; top: -9999px; width: 1px; height: 1px; z-index: 999999999;" class="global-zeroclipboard-container" id="global-zeroclipboard-html-bridge"><object id="global-zeroclipboard-flash-bridge" name="global-zeroclipboard-flash-bridge" type="application/x-shockwave-flash" data="../save_files/ZeroClipboard.swf" width="100%" height="100%"><param name="allowScriptAccess" value="sameDomain"><param name="allowNetworking" value="all"><param name="menu" value="false"><param name="wmode" value="transparent"><param name="flashvars" value="trustedOrigins=www.imooc.com%2C%2F%2Fwww.imooc.com%2Chttp%3A%2F%2Fwww.imooc.com"></object></div></body></html>
-<script>
-    var t_content=CKEDITOR.replace("t_content");
-    
-    $("#ques-submit-btn").click(function(){
-        var t_title=$("#t_title").val();
-        var pro=$("#pro").val();
-        if(pro==0){
-          alert('方向不能为空')
-        }else{
-          aa = t_content.getData();
-        $.post('/tiwen',{
-            t_title:t_title,aa:aa,pro:pro},
-            function(data){
-               if(data=='1'){
-
-                 location.href='/canon/public/wenda'
-               }else{
-
-               }
-            }
-
-     
-        ) }
-    })
-</script>
+<style>
+    #t_content{
+        //background-color: #f00;
+        height:150px;
+        width:800px;
+        box-shadow: 10px 10px 5px #888888;  
+        border:2px solid;  
+        border-radius:25px;  
+        //background: url(5.jpg); 
+        margin-left: 35px;
+        font-family:"华文行楷"
+            
+    }
+    .aaaa{
+        background-color: #4CAF50; /* Green */  
+        border: none;  
+        color: white;  
+        padding: 15px 32px;  
+        text-align: center;  
+        text-decoration: none;  
+        display: inline-block;  
+    }
+</style>
 @endsection
 
 
