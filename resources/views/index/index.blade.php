@@ -87,77 +87,14 @@
 <!--试题结束 -->
 
 <!--招聘开始 -->
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title hide-text">招聘</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['s_id']?>" target="_blank">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="http://123.56.249.121/android/web/<?php echo $v['s_img']?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>公司:<?php echo $v['company_name']?></p>
-            <span class="l ">
-                              <?php echo $v['addtime']?>
-                          </span>
-            <span class="r">
-              课程时长：29分
-            </span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2><?php echo $v['s_logo']?></h2>
-                        <span class="l "><?php echo substr($v['addtime'],'0','10')?></span>
-                        <span class="r"><?php echo $v['click']?>人学习</span>
-                    </div>
-                </a>
-            </li>
-                <?php } ?>
 
-        </ul>
-    </div>
-</div>
 <!--招聘结束 -->
 
 <!--面试方法开始 -->
 
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title hide-text">面试方法</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['s_id']?>" target="_blank">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="http://123.56.249.121/android/web/<?php echo $v['s_img']?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>公司:<?php echo $v['company_name']?></p>
-            <span class="l ">
-                              <?php echo $v['addtime']?>
-                          </span>
-            <span class="r">
-              课程时长：29分
-            </span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2><?php echo $v['s_logo']?></h2>
-                        <span class="l "><?php echo substr($v['addtime'],'0','10')?></span>
-                        <span class="r"><?php echo $v['click']?>人学习</span>
-                    </div>
-                </a>
-            </li>
-                <?php } ?>
-
-        </ul>
-    </div>
-</div>
 <!--面试方法结束 -->
 
 <!--简历开始 -->
-
-
 <div class="icourse">
     <div class="incourse-wrap idx-width">
         <h2 class="icourse-title hide-text">简历</h2>
@@ -226,12 +163,7 @@
     </div>
 </div>
 <!--答疑结束 -->
-        <h2 class="mobile-title hide-text">手机宝典，随时随地学习！</h2>
-        <div class="mobile-entry">
-            <a href="http://www.imooc.com/mobile/app" target="_blank"><!-- Android版 -->手机版</a>
-            <a href="http://www.imooc.com/mobile/app?curr=ipad" target="_blank"><!-- IOS版 -->iPad版</a>
-            <span id="js-mobile-trigger" class="mobile-trigger"></span>
-        </div>
+       
 <!--script-->
 <SCRIPT src="../js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
 <!--图片异步加载-->
