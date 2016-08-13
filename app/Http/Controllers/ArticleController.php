@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use DB;
 use Session;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Request;
 use App\Http\Model\Article;
 class ArticleController extends Controller
 {
@@ -22,7 +23,7 @@ class ArticleController extends Controller
             $username=Session::get('username');
         }
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-        $u_id=$articlemodel->get_usersid($username);     
+        $u_id=$articlemodel->get_usersid($username);
         $u_id=$u_id['user_id'];
         //echo $u_id;die;
         //print_r($article);die;
@@ -36,32 +37,32 @@ class ArticleController extends Controller
         }
         return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
-    
-    
+
+
     public function publish(){
         $at_type=DB::table('ar_type')->get();
-	//print_r($at_type);die;
         $a_lei=DB::table('a_lei')->get();
-        return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
+       return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
     }
     
-    
-    public function add(Request $request){
-        $request = $request->all();
-        //print_r
-        $a_title=$request['a_title'];
-        $a_type=$request['a_type'];
-        $a_con=$request['a_con'];
+    //写文章
+    public function add(){
+        $a_title = Request::input('a_title');
+        $a_type=Request::input('a_type');
+        $a_con = Request::input('a_con');
         $a_addtime=date("Y-m-d H:i:s");
-        $re=DB::insert("insert into article(a_title,a_type,a_con,a_addtime) values('$a_title','$a_type','$a_con','$a_addtime')");
-        if($re){
-            echo "<script>alert('提交成功');location.href='article';</script>";
-        }else{
-            echo "<script>alert('提交失败');location.href='publish';</script>";
-        }
+        $file = Request::file('a_logo');
+        $array=Request::input('tag');
+        $a_lei=implode(',', $array);
+        $model=new article();
+        $re=$model->add($a_title,$a_type,$a_con,$a_addtime,$file,$a_lei);  
+        if($re==1){
+              echo "<script>alert('提交成功');location.href='article';</script>";
+            }else{
+                echo "<script>alert('提交失败');location.href='publish';</script>";
+            }
     }
-    
-    
+
     public function zan(){
         $a_id=$_POST['zan'];
         if(!isset($_SESSION)){
@@ -92,8 +93,8 @@ class ArticleController extends Controller
         //print_r($zan);die;
         return json_encode($zan);
     }
-    
-    
+
+
     public function type(){
         $type=$_POST['type'];
         if($type=='0'){
@@ -125,7 +126,7 @@ class ArticleController extends Controller
        //print_r($aping);die;
         return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
     }
-    
+
     public function wping(){
         if(!isset($_SESSION)){
             session_start();
@@ -149,4 +150,5 @@ class ArticleController extends Controller
         return json_encode($aping);
         //return view('article/aping',['aping'=>$aping]);
     }
+
 }

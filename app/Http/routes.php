@@ -23,6 +23,8 @@ Route::post('name_pwd','LoginController@name_pwd');
 Route::post('email_pwd','LoginController@email_pwd');
 Route::post('name_deng', 'LoginController@name_deng');
 Route::post('email_deng','LoginController@email_deng');
+//第三方登陆--qq登陆
+Route::get('qq_login', 'LoginController@qq_login');
 
 //个人中心
 Route::get('user/setprofile', 'UserController@setprofile');

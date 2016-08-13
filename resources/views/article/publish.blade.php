@@ -33,7 +33,7 @@
     var isLogin=1
 </script>
 <div class="opus-wrap clearfix">
-<form action="add" method="post" enctype="multipart/form-data">
+<form action="{{URL('add')}}" method="post" enctype="multipart/form-data">
     <div class="article-left l">
         <h1 class="article-title">发布文章</h1>
         <div class="article-form">
@@ -93,14 +93,15 @@
                     <p class="tip">您最多可以从以下选择3个标签哟！</p>
                     <div class="tag-box clearfix">
                     <?php foreach($a_lei as $k=>$v){?>
-                        <span tag-id="12" name="al_name" id="al_name" value="<?php echo $v['al_name']?>"><?php echo $v['al_name']?></span>
+                        <span tag-id="12" name="al_name" gid="<?=$v['al_id']?>" id="al_name" value="<?php echo $v['al_name']?>"><?php echo $v['al_name']?></span>
                     <?php } ?>
                     </div>
-                </div><!--tag-selector-wrap end-->
-            </div><!--tag-selector end-->
+                </div>
+            </div>
             <div class="form-group form-bottom">
                 <label for="" class="form-label l"></label>
                 <div class="form-ipt-wrap">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                     <input type="submit" class="btn btn-green" value="提交"><span class="submit-tip js-submit-tip"></span>        <p id="js-msg" class="form-ipt-error"></p>
                 </div>
             </div>
@@ -131,7 +132,7 @@
 
 </div>
 
-@endsection
+
 <div id="J_GotoTop" class="elevator">
     <a class="elevator-weixin" href="javascript:;">
         <div class="elevator-weixin-box">
@@ -145,8 +146,6 @@
     <a class="elevator-top" href="javascript:;" style="display:none" id="backTop"></a>
 </div>
 
-
-
 <script src="js/pMarkdown.js"></script>
 <script src="js/pMarkdown_002.js"></script>
 <script src="js/pMarkdown_003.js"></script>
@@ -155,16 +154,58 @@
 <script src="js/pssologin.js"></script>
 <script type="text/javascript" src="js/psea.js"></script>
 <script type="text/javascript" src="js/psea_config.js"></script>
+
 <script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
 <div style="display: none">
 <script src="js/jquery-1.9.1.min.js"></script>
 <script>
-    $(document).on("click","#al_name",function(){
-        var a=$(this).attr("value")
-        $("#biao").append(a)
+    $(function(){
+        $('#art-title').click(function(){
+            //alert(222);
+            $(this).css('border','#fff 0 solid')
+        })
+        $('#art-cat').click(function(){
+            $(this).css('border','#fff 0 solid')
+        })
+        $('#wmd-input-js-mk').click(function(){
+            $(this).css('border','#fff 0 solid')
+        })
+        $("#al_name").live("click",function(){
+            var num=$('#biao').children('span').length
+            if(num<3){
+                $(this).attr('id','al_names').css('cursor','pointer').appendTo('#biao')
+                var id=$(this).attr('gid');
+                $('#biao').append('<input type="hidden" name="tag[]" value="'+id+'"/>')
+            }else{
+                alert('您最多可以选择3个标签哟！')
+            }
+        })
+        $("#al_names").live("click",function(){
+            var id=$(this).attr('gid');
+    // $(':hidden[value='+id+']').remove();
+            $(this).attr('id','al_name').appendTo('.tag-box')
+        })
+        $('form').submit(function(e){
+            var title=$('#art-title').val()
+            var cat=$('#art-cat').val()
+            var content=$('#wmd-input-js-mk').val()
+            if(title==''||cat==0||content==''){
+                if(title==''){
+                    $('#art-title').css('border','#f00 3px solid')
+                }
+                if(cat==0){
+                    $('#art-cat').css('border','#f00 3px solid')
+                }
+                if(content==''){
+                    $('#wmd-input-js-mk').css('border','#f00 3px solid')
+                }
+                e.preventDefault()
+            }
 
+        })
     })
 </script>
-
-</body></html>
+</body>
+</html>
+@endsection

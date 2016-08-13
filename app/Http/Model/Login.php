@@ -14,46 +14,47 @@ class Login extends Model
      * 验证注册
      */
     public function reg($data)
+{
+    //设置自动验证
+    $validator = Validator::make($data, [
+        'user_name' => 'required|between:4,32|unique:users',
+        'user_pwd' => 'required|between:6,16',
+        'user_email'=>'required|unique:users',
+        'user_phone'=>'required|unique:users'
+    ]);
+    //错误放回错误信息
+    if($validator->errors()->all())
     {
-        //设置自动验证
-        $validator = Validator::make($data, [
-            'user_name' => 'required|between:4,32|unique:users',
-            'user_pwd' => 'required|between:6,16',
-            'user_email'=>'required|unique:users',
-            'user_phone'=>'required|unique:users'
-        ]);
-        //错误放回错误信息
-        if($validator->errors()->all())
-        {
-            //获取用户注册错误信息
-            $error = $validator->errors()->all();
+        //获取用户注册错误信息
+        $error = $validator->errors()->all();
 
-            //返回用户注册错误信息
-            $english = $this->Error($error);
+        //返回用户注册错误信息
+        $english = $this->Error($error);
 
-            //调用英文翻译接口
-            $url = "http://fanyi.youdao.com/openapi.do?keyfrom=qwe1123&key=710353888&type=data&doctype=json&version=1.1&q=".$english;
+        //调用英文翻译接口
+        $url = "http://fanyi.youdao.com/openapi.do?keyfrom=qwe1123&key=710353888&type=data&doctype=json&version=1.1&q=".$english;
 
-            //将内容读取出来
-            $file = file_get_contents($url);
-            return $file;
+        //将内容读取出来
+        $file = file_get_contents($url);
+        return $file;
 
-        }
-        else
-        {
-            //将数据入库
-            $name = $data['user_name'];
-            $pwd = md5(md5($data['user_pwd']));
-            $email = $data['user_email'];
-            $phone = $data['user_phone'];
-            $arr=DB::insert("insert into users(user_name,user_pwd,user_email,user_phone) values('$name','$pwd','$email','$phone')");
-            //设置用户session值
-            if($arr){
-                Session::put('username',$name);
-                return true;
-            }
+    }
+    else
+    {
+        //将数据入库
+        $name = $data['user_name'];
+        $pwd = md5(md5($data['user_pwd']));
+        $email = $data['user_email'];
+        $phone = $data['user_phone'];
+        $arr=DB::insert("insert into users(user_name,user_pwd,user_email,user_phone) values('$name','$pwd','$email','$phone')");
+        //设置用户session值
+        if($arr){
+            Session::put('username',$name);
+            return true;
         }
     }
+}
+
     /*
      * 验证手机号是否可用
      * 用户手机号是否存在

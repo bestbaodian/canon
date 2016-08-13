@@ -4,7 +4,7 @@
 <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
 <div id="header">
     <div class="page-container" id="nav">
-        <a href="http://www.mbaodian.com/" target="_self"><img src="/images/login.png" style="float: left; padding-top:6px;"><a href="index" target="_self" class="hide-text"></a>
+        <a href="/" target="_self"><img src="/images/login.png" style="float: left; padding-top:6px;"><a href="index" target="_self" class="hide-text"></a>
         <div class="g-menu-mini l">
             <a href="#" class="menu-ctrl">
                 <i class="icon-menu"></i>
@@ -41,7 +41,7 @@
                     <?php
                     }else{
                         ?>
- 
+
                 <li class="remind_warp">
                     <i class="msg_remind" style="display: none;"></i>
                     <a href="/sms/messagesone" target="_blank"><i class="icon-notifi"></i></a>
@@ -67,7 +67,7 @@
                                 <p class="meta">
 					<a href="/u/3071208/experience">经验<b id="js-user-mp">550</b></a>
 					<a href="/u/3071208/credit">积分<b id="js-user-credit">0</b></a></p>
-                    
+
                                 <a class="icon-set setup" href="/user/setprofile"></a>
                             </div>
                             <!--
@@ -94,7 +94,7 @@
                         <i class="card-arr"></i>
                     </div>
                 </li>
- 
+
                     <?php
                     }
                 ?>
@@ -179,23 +179,15 @@
         <input type="hidden" name="return-url" value="">
         <div class="clearfix"></div>
         <label class="remember">
-            <input name="remember" type="checkbox" checked/>
-            下次自动登录 </label>
+            <input name="remember" type="checkbox" checked/>下次自动登录 </label>
+            <script src="http://open.51094.com/user/myscript/157ad5fc7ec2e3.html"></script>
+            <ul>
+                <li class="login">
+                <span id="hzy_fast_login"></span>
+                </li>
+            </ul>
         <a class="forgot">忘记密码？</a>
-        <ul class="third-parties">
-            <li>
-                <p data-url="">新浪微博帐号</p>
-            </li>
-            <li>
-                <p data-url="">腾讯微博帐号</p>
-            </li>
-            <li>
-                <p data-url="">豆瓣帐号</p>
-            </li>
-            <li>
-                <p data-url=""></p>
-            </li>
-        </ul>
+
     </form>
 </div>
 <div class="modal in" id="signup-modal" > <a class="close" data-dismiss="modal">×</a>
@@ -233,6 +225,4 @@
     </form>
 </div>
 <script src="../static/js/my.js"></script>
-
-
 

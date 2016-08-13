@@ -42,7 +42,7 @@ class CompanyController extends Controller
 		$model=new company();
 		$data=$model->college_exam($id);
 		return view('company/college_exam',['arr'=>$data]);
-		}
+	}
 }
  
 
