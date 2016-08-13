@@ -10,20 +10,21 @@
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 <meta http-equiv="Cache-Control" content="no-transform " />
 <meta name="keywords" content="面试宝典网，面试宝典官网，MOOC，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
-<meta name="description" content="慕课网（IMOOC）是学习编程最简单的免费平台。慕课网提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
+<meta name="description" content="面试宝典是学习编程最简单的免费平台。慕课网提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
 <link rel="stylesheet" href="/css/base.css" type="text/css" />
 <link rel="stylesheet" href="/css/common-less.css" type="text/css" />
 <link rel="stylesheet" href="/css/profile-less.css" type="text/css" />
 <link rel="stylesheet" href="/css/user-common-less.css" type="text/css" />
 <link rel="stylesheet" href="/css/layer.css" type="text/css" />
-<script src="../js/jquery-1.9.1.js"></script>
-<script src="../static/js/user.js"></script>
+<script src="/js/jquery-1.9.1.js"></script>
+<script src="/static/js/user.js"></script>
 </head>
 <body >
 @extends('layouts.master')
 @section('sidebar')
 @parent
 <div id="main">
+
 <div class="settings-cont clearfix">
 
   <div class="setting-left l">
@@ -34,12 +35,12 @@
       <li >
          <a href="/user/setavator">头像设置</a>
        </li>
-       
+
       <li >
         <a href="/user/setphone">手机设置</a>
                     <span class='unbound'>未绑定</span>
               </li>
-      
+
       <li >
         <a href="/user/setverifyemail">邮箱验证</a>
                     <span class='unbound'>未绑定</span>
@@ -47,82 +48,82 @@
       <li >
         <a href="/user/setresetpwd">修改密码</a>
       </li>
-      <li >
-        <a no-pjajx href="/user/setbindsns">绑定帐号</a>
-      </li>
+      {{--<li >--}}
+        {{--<a no-pjajx href="/user/setbindsns">绑定帐号</a>--}}
+      {{--</li>--}}
     </ul>
   </div>
   <div class="setting-right">
     <div class="setting-right-wrap wrap-boxes settings" >
-        
+
 
 <div id="setting-profile" class="setting-wrap setting-profile">
     <form id="profile" >
-    
+
         <div class="wlfg-wrap clearfix">
             <label class="label-name" for="nick" >昵称</label>
             <div class="rlf-group">
-                <input type="text" name="nickname" id="nick"  autocomplete="off"  data-validate="nick"  class="input rlf-input rlf-input-nick" value="凤颖" placeholder="请输入昵称."/>
+                <input type="text" name="nickname" id="nick"  autocomplete="off"  data-validate="nick"  class="input rlf-input rlf-input-nick" value="{{$user['0']['user_name']}}" placeholder="请输入昵称."/>
                 <p class="rlf-tip-wrap"></p>
             </div>
         </div>
-        
+
         <div class="wlfg-wrap clearfix">
             <label class="label-name" for="job">职位</label>
             <div class="rlf-group">
                 <select class="input rlf-select" name="job" hidefocus="true" id="job">
                     <option value="">请选择职位</option>
-                                            <option value="1" >页面重构设计</option>
-                                            <option value="6" >Web前端工程师</option>
-                                            <option value="5" >JS工程师</option>
-                                            <option value="8" >PHP开发工程师</option>
-                                            <option value="11" >JAVA开发工程师</option>
-                                            <option value="7" >移动开发工程师</option>
-                                            <option value="9" >软件测试工程师</option>
-                                            <option value="10" >Linux系统工程师</option>
-                                            <option value="2" >交互设计师</option>
-                                            <option value="3" >产品经理</option>
-                                            <option value="4" >UI设计师</option>
-                                            <option value="13" >学生</option>
-                                    </select>
+                    @foreach($career as $key=>$val)
+                        <?php
+                            if($val['c_id'] == $user[0]['user_job']){
+                                 echo "<option selected='selected' value='$val[c_id]' >$val[c_career]</option>";
+                            }else{
+                                echo "<option value='$val[c_id]' >$val[c_career]</option>";
+                            }
+                        ?>
+                    @endforeach
+                </select>
                 <p class="rlf-tip-wrap"></p>
             </div>
         </div>
-        
+
         <div class="wlfg-wrap clearfix">
             <label class="label-name" for="province-select">城市</label>
             <div class="rlf-group profile-address">
-                <select id="province-select" class='input' hidefocus="true">
-                    <option value="0">选择省份</option>
-                                    </select>
-                <select class='input' id="city-select" hidefocus="true">
+                <select id="province-select1" class='input' hidefocus="true">
+                    <option  value="0">选择省份</option>
+                    @foreach($first as $key=>$val)
+                        <option  value="{{ $val['region_id'] }}">{{ $val['region_name'] }}</option>
+                    @endforeach
+                        <option value="100">其他</option>
+                </select>
+                <select class='input' id="city-select1" hidefocus="true" >
                     <option value="0">选择城市</option>
-                                    </select>
+                </select>
                 <select class='input mr0' id="area-select" hidefocus="true">
                     <option value="0">选择区县</option>
-                                    </select>
+                </select>
                 <p class="rlf-tip-wrap"></p>
             </div>
         </div>
-        
+
         <div class="wlfg-wrap clearfix">
             <label class="label-name" >性别</label>
             <div class="rlf-group rlf-radio-group">
-                <label ><input type="radio" hidefocus="true" value="0" checked="checked"  name="sex">保密</label>
-                <label ><input type="radio" hidefocus="true" value="1"  name="sex">男</label>
-                <label ><input type="radio" hidefocus="true" value="2"  name="sex">女</label>
+                <label ><input type="radio" hidefocus="true" value="0" <?php if($user[0]['user_sex']==0){ echo "checked"; } ?> name="sex">保密</label>
+                <label ><input type="radio" hidefocus="true" value="1" <?php if($user[0]['user_sex']==1){ echo "checked"; } ?> name="sex">男</label>
+                <label ><input type="radio" hidefocus="true" value="2" <?php if($user[0]['user_sex']==2){ echo "checked"; } ?> name="sex">女</label>
             </div>
             <p class="rlf-tip-wrap"></p>
         </div>
-        
         <div class="wlfg-wrap clearfix">
             <label class="label-name" for="aboutme">个性签名</label>
             <div class="rlf-group">
-                <textarea name="aboutme" id="aboutme" cols="30" rows="5" class="textarea"></textarea>
+                <textarea name="aboutme" id="aboutme" cols="30" rows="5" class="textarea">{{$user[0]['user_aboutme']}}</textarea>
                 <p class="rlf-tip-wrap"></p>
             </div>
         </div>
-        
+
         <div class="wlfg-wrap clearfix">
             <label class="label-name" for=""></label>
             <div class="rlf-group">
@@ -130,13 +131,13 @@
             </div>
         </div>
     </form>
-    
+
 </div>
 
 
     </div>
   </div>
-  
+
 </div>
 
 </div>

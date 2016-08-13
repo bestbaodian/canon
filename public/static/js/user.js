@@ -1,35 +1,41 @@
 $(function(){
-    $("#profile-submit").click(function(){
-        var nickname = $("input[name=nickname]").val();
-        var job = $("input[name=job]").val();
-        var sex = $("input[name=sex]").val();
-        var aboutme = $("input[name=aboutme]").val();
-        //省市区
-        //var sheng=$("#province-select1").val();
-        var sheng = $("#province-select1").val();
-        var cheng = $("#city-select1").val();
-        var qu = $("#area-select").val();
-        //点击保存修改数据库
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            },
-            url:"upd_profile",
-            type:"post"
-        });
-        $.ajax({
-            data:{
-                nickname:nickname,
-                job:job,
-                sex:sex,
-                aboutme:aboutme,
-                sheng:sheng,
-                cheng:cheng,
-                qu:qu
-            },success:function(data){
-                alert(data);
-            }
-        })
+    //用户个人中心三级联动
+    $("#province-select1").change(function(){
+        $('#city-select1').text('').append("<option value='0'>选择城市</option>");
+        $('#area-select').text('').append("<option value='0'>选择区县 </option>");
+        var id=$(this).val();
+        if(id!=0){
+            $.get('getprovince', 'id=' + id, function (data) {
+                var str="";
+                var $c = $("#city-select1"),
+                    d = data,
+                    len = d.length,
+                    i = 0;
+                //$c.append("<option value='0'>选择区县 </option>");
+                for (; i < len; i++) {
+                    $c.append("<option value=" + d[i].region_id + " >" + d[i].region_name + " </option>");
+                }
+            },'json')
+        }
+    })
+    //城市两级联动
+    $("#city-select1").change(function(){
+        //$('#city-select').text('').append("<option value='0'>选择城市</option>");
+        $('#area-select').text('').append("<option value='0'>选择区县 </option>");
+        var id=$(this).val();
+        if(id!=0){
+            $.get('getprovince', 'id=' + id, function (data) {
+                var str="";
+                var $c = $("#area-select"),
+                    d = data,
+                    len = d.length,
+                    i = 0;
+                //$c.append("<option value='0'>选择区县 </option>");
+                for (; i < len; i++) {
+                    $c.append("<option value=" + d[i].region_id + " >" + d[i].region_name + " </option>");
+                }
+            },'json')
+        }
     })
 })
 

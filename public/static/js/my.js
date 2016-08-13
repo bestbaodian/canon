@@ -206,6 +206,7 @@ $(function(){
         var user_phone = $("input[name=user_phone]").val();
         var reg = /^1\d{10}$/;
         var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+
         if (reg.test(user_phone) && email_reg.test(user_email))
         {
             $.ajaxSetup({
@@ -235,6 +236,40 @@ $(function(){
         {
             alert('手机号,邮箱必须填写');
         }
-    })
 
+    })
+    //保存修改个人资料
+    $("#profile-submit").click(function(){
+        var nickname = $("input[name=nickname]").val();
+        var job = $("select[name=job]").val();
+        var sex = $(":radio:checked").val()
+        var aboutme = $("textarea[name=aboutme]").val();
+        //省市区
+        //var sheng=$("#province-select1").val();
+        var sheng = $("#province-select1").val();
+        var cheng = $("#city-select1").val();
+        var qu = $("#area-select").val();
+        //点击保存修改数据库
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            url:"upd_profile",
+            type:"post"
+        });
+        $.ajax({
+            data:{
+                nickname:nickname,
+                job:job,
+                sex:sex,
+                aboutme:aboutme,
+                sheng:sheng,
+                cheng:cheng,
+                qu:qu
+            },success:function(data){
+               alert(data);
+            }
+        })
+
+    })
 })
