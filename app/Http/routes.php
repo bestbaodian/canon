@@ -84,10 +84,11 @@ Route::get('ping', 'CourseController@ping');
 Route::get('article', 'ArticleController@article');
 Route::get('publish', 'ArticleController@publish');
 Route::post('add', 'ArticleController@add');
-Route::post('zan', 'ArticleController@zan');
+Route::get('zan', 'ArticleController@zan');
 Route::post('type', 'ArticleController@type');
 Route::get('fangfa', 'ArticleController@wxiang');
 Route::post('wping', 'ArticleController@wping');
+Route::post('types', 'ArticleController@types');
 //招聘
 Route::get('program', 'ProgramController@program');
 Route::get('etc', 'ProgramController@etc');

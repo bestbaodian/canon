@@ -43,8 +43,9 @@
                 </li>
                 <?php foreach($at_type as $k=>$v){?>
                 <li >
-                    <a data-id="105"  id="type" value="<?php echo $v['at_type']?>"><?php echo $v['at_type']?></a>
+                    <a data-id="105"  id="type" href="{{URL('article?at_id')}}=<?php echo $v['at_id']?>" value="<?php echo $v['at_type']?>"><?php echo $v['at_type']?></a>
                 </li>
+
                 <?php }?>
             </ul>
             <div class="article-tool-bar clearfix">
@@ -82,7 +83,7 @@
                             <div class="favorite l" id="zan" value="<?php echo $v['a_id']?>">
                                 <img src="images/zan.jpg"  class="zan" width="15" height="20">
 
-                                <em id="z-<?php echo $v['a_id']?>">点赞
+                                <em id="<?php echo $v['a_id']?>" class="zans">点赞
                                     <?php echo $v['a_num']?>
                                 </em>
 
@@ -253,6 +254,38 @@
 <div style="display: none">
     <script src="js/jquery-1.9.1.min.js"></script>
     <script>
+  //点赞
+  $(document).on('click',".zans",function(){
+    //var ids=$("#id").val();
+    var ids=$(this).attr('id');
+    //alert(ids);
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+            url:"{{URL('zan')}}",
+            type:"GET"
+        });
+    $.ajax({
+       data: "ids="+ids,
+       success: function(msg){
+        //alert(msg);
+        if(msg==1)
+        {
+            alert("您已经点过赞了哦");
+        }
+        else
+        {
+           alert('点赞成功');
+           location.href="{{URL('article')}}";
+        }
+     }
+ });
+
+
+  })
+
+
         $(document).on("click","#type",function(){
            var type=$(this).attr("value")
             $.post('type',{
@@ -262,6 +295,7 @@
                 $("#lie").html(data)
             })
         })
+
     </script>
 </div>
 </body>

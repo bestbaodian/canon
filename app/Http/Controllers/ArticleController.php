@@ -10,11 +10,21 @@ class ArticleController extends Controller
 {
     //方法页面
     public function article(){
-        //实例化Article
+       //实例化Article
         $articlemodel=new Article;
+        $at_id=Request::input('at_id');
+        $article_id=Request::input('article_id');
+        print_r($article_id);
         //查询ar_type表
         $at_type=$articlemodel->getar_type();
-        $article=$articlemodel->select_article();
+        if($at_id!="")
+        {
+           $article=$articlemodel->select_article1($at_id);
+        }
+        else
+        {
+           $article=$articlemodel->select_article();
+        }
        $ses = Session::get('username');
         if(empty($ses)){
             $username=0;
@@ -65,34 +75,33 @@ class ArticleController extends Controller
     }
 
     public function zan(){
-        $a_id=$_POST['zan'];
-        if(!isset($_SESSION)){
-            session_start();
-        }
-        if(empty($_SESSION['username'])){
+        $a_id=Request::input('ids');
+        if(empty(Session::get('username')))
+        {
             echo 1;
         }else{
-            $username=$_SESSION['username'];
+            $username=Session::get('username');
         }
-        $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-        if($u_id){
-
+        $model=new article();
+        $brr=$model->zan($username);
+        $u_id=$brr['user_id'];
+        $arr=$model->article_zan($a_id,$u_id);
+       if($arr)
+        {
+            $arr=$model->article($a_id);
+            //提示您已经点赞
+            echo 1;
         }
-        $u_id=empty($u_id['user_id'])?$u_id['user_id']:1;
-       echo $u_id;die;
-        $arr=DB::table('article_zan')->where("u_id",$u_id)->where("article_id",$a_id)->get();
-        if($arr){
-            $zan=DB::table('article')->where('a_id',$a_id)->first();
-        }else{
-            $zan=DB::table('article')->where('a_id',$a_id)->first();
+        else
+        {
+            $zan=$model->article($a_id);
             $nu=$zan['a_num'];
             $a_num=$nu+=1;
-            $aa=DB::insert("update article set a_num=$a_num where a_id=$a_id");
-            $a=DB::insert("insert into from article_zan(u_id,article_id) values('$u_id','$a_id')");
-            $zan=DB::table('article')->where('a_id',$a_id)->get();
+            $aa=$model->insert_article($a_num,$a_id);
+            $a2=$model->article_zan2($u_id,$a_id);
+            $zan=$model->article($a_id);
+            echo 2;
         }
-        //print_r($zan);die;
-        return json_encode($zan);
     }
 
 
