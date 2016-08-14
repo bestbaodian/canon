@@ -52,7 +52,7 @@ class Article extends Model{
             return $res;
         }
     }
-    //点赞
+    //点赞功能的实现
     public function zan($username)
     {
         $brr=DB::table('users')->where("user_name","$username")->first();

@@ -4,6 +4,9 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Session;
+/*
+*简历模块
+*/
 class Company extends Model{
 	public function direction()
 	{
