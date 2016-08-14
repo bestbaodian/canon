@@ -56,7 +56,8 @@ Route::get('save', 'WendaController@save');
 Route::post('tiwen', 'WendaController@tiwen');
 //点击标题后进入的详情页面
 Route::get('detail', 'WendaController@detail');
-//评论
+//提问之后进行显示出来
+
 Route::post('hui', 'WendaController@hui');
 //点赞
 Route::get('zid', 'WendaController@zid');
@@ -71,7 +72,7 @@ Route::get('zid', 'WendaController@zid');
 Route::get('shiti', 'CourseController@course');
 //试题搜索
 Route::post('sou', 'CourseController@sou');
-Route::post('s', 'CourseController@s');
+Route::get('s', 'CourseController@s');
 Route::post('zhuanye', 'CourseController@zhuanye');
 Route::get('xiang', 'CourseController@xiang');
 Route::post('con', 'CourseController@con');

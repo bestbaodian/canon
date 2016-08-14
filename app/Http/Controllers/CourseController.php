@@ -16,10 +16,19 @@ class CourseController extends Controller
     $arr,$zhuan,$shi,$data
     调用model  course.php
     */
-    public function course(){
+    public function course(Request $request){
+        $data = $request->all();
+        unset($data['page']);
         $login = new Course();
-        $data=$login ->course();
-        return view('course/course',['arr'=>$data['arr'],'zhuan'=>$data['zhuan'],'shi'=>$data['shi'],'lei'=>$data['lei']]);
+        $pro=$login ->course($data);
+        //print_r($pro);die;
+        /*
+         *   [perPage:protected] => 12
+            [currentPage:protected] => 1
+            [path:protected] => http://www.wwww.co/shiti
+            [query:protected] => Array
+         */
+        return view('course/course',['arr'=>$pro['arr'],'zhuan'=>$pro['zhuan'],'shi'=>$pro['shi'],'lei'=>$pro['lei'],'vv',$pro['vv'],'a'=>$pro['a'],'l'=>$pro['l']]);
     }
     /*
       搜索教程
@@ -31,6 +40,9 @@ class CourseController extends Controller
       $data=$course->sou($request);
       return view('course/zhuan',['zhuan'=>$data['zhuan']]);
     }
+    /*
+     * 用户选择题目ajax返回
+     */
     public function s(Request $request){
       $request=$request->all();
       $course = new Course();

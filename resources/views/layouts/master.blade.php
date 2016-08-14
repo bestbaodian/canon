@@ -9,11 +9,11 @@
                 <i class="icon-menu"></i>
             </a>
             <ul class="nav-item l">
-                <li><a href="shiti"  target="_self">试题</a></li>
-                <li><a href="program"  target="_self">招聘</a></li>
-                <li><a href="article"  target="_self">方法</a></li>
-                <li><a href="company"  target="_self">简历</a></li>
-		        <li><a href="wenda" target="_self">答疑</a></li>
+                <li><a href="{{url('shiti')}}"  target="_self">试题</a></li>
+                <li><a href="{{url('program')}}"  target="_self">招聘</a></li>
+                <li><a href="{{url('article')}}"  target="_self">方法</a></li>
+                <li><a href="{{url('company')}}"  target="_self">简历</a></li>
+		        <li><a href="{{url('wenda')}}" target="_self">答疑</a></li>
             </ul>
         </div>
         <div id="login-area">
@@ -43,17 +43,17 @@
 
                 <li class="remind_warp">
                     <i class="msg_remind" style="display: none;"></i>
-                    <a href="/sms/messagesone" target="_blank"><i class="icon-notifi"></i></a>
+                    <a href="{{url('sms/messagesone')}}" target="_blank"><i class="icon-notifi"></i></a>
                 </li>
         	    <li class="my_message">
-                    <a target="_blank" title="我的消息" href="/sms/messages">
+                    <a target="_blank" title="我的消息" href="{{url('sms/messages')}}">
                         <span style="display: inline;" class="msg_icon">3</span>
                         <i class="icon-mail"></i>
                         <span style="display: none;">我的消息</span>
                     </a>
                 </li>
                 <li class="set_btn user-card-box">
-                    <a target="_self" href="/user/setprofile" action-type="my_menu" class="user-card-item" id="header-avator">
+                    <a target="_self" href="{{url('user/setprofile')}}" action-type="my_menu" class="user-card-item" id="header-avator">
                         <img width="40" height="40" src="/images/unknow-40.png">
                         <i style="display: none;" class="myspace_remind"></i>
                         <span style="display: none;">动态提醒</span>
@@ -61,13 +61,13 @@
                     <div class="g-user-card">
                         <div class="card-inner">
                             <div class="card-top">
-                                <a href="/user/setprofile"><img class="l" alt="{{ Session::get('username') }}" src="/images/unknow-160.png"></a>
-                                <a href="/user/setprofile"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
+                                <a href="{{url('user/setprofile')}}"><img class="l" alt="{{ Session::get('username') }}" src="/images/unknow-160.png"></a>
+                                <a href="{{url('user/setprofile')}}"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
                                 <p class="meta">
-					<a href="/u/3071208/experience">经验<b id="js-user-mp">550</b></a>
-					<a href="/u/3071208/credit">积分<b id="js-user-credit">0</b></a></p>
+					<a href="{{url('user/setprofile')}}">经验<b id="js-user-mp">550</b></a>
+					<a href="{{url('user/setprofile')}}">积分<b id="js-user-credit">0</b></a></p>
 
-                                <a class="icon-set setup" href="/user/setprofile"></a>
+                                <a class="icon-set setup" href="{{url('user/setprofile')}}"></a>
                             </div>
                             <!--
                             <div class="card-links">
@@ -85,9 +85,9 @@
                                 </span>
                             </div>
                             <div class="card-sets clearfix">
-                                <a class="l mr30" target="_blank" href="/wenda/save">发问题</a>
-                                <a class="l" target="_blank" href="publish">写文章</a>
-                                <a class="r" href="/out?referer=http://www.mbaodian.com/">退出</a>
+                                <a class="l mr30" target="_blank" href="{{url('wenda/save')}}">发问题</a>
+                                <a class="l" target="_blank" href="{{url('publish')}}">写文章</a>
+                                <a class="r" href="{{url('out')}}">退出</a>
                             </div>
                         </div>
                         <i class="card-arr"></i>
@@ -177,14 +177,12 @@
         <input type="hidden" name="return-url" value="">
         <div class="clearfix"></div>
         <label class="remember">
-            <input name="remember" type="checkbox" checked/>下次自动登录 </label>
             <script src="http://open.51094.com/user/myscript/157ad5fc7ec2e3.html"></script>
             <ul>
                 <li class="login">
                 <span id="hzy_fast_login"></span>
                 </li>
             </ul>
-        <a class="forgot">忘记密码？</a>
 
     </form>
 </div>

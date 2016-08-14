@@ -11,12 +11,6 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <meta name="Keywords" content="面试，面试宝典，面试技巧，面试经验，面试简历，简历下载，面试试题">
     <script src="../js/push.js"></script>
-    <script type="text/javascript">
-        var OP_CONFIG={"module":"index","page":"index"};
-        var isLogin = 0;
-        var is_choice = "";
-        var seajsTimestamp="v=201603251711";
-    </script>
     <link rel="stylesheet" href="css/a.css" type="text/css">
     <script src="../js/jquery.js" async="" charset="utf-8"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -166,6 +160,9 @@
        
 <!--script-->
 <SCRIPT src="../js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
+<<<<<<< HEAD
+
+=======
 <!--图片异步加载-->
 <script type="text/javascript" src="../js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="../js/jquery.scrollLoading.js"></script>
@@ -345,6 +342,7 @@ jQuery(document).ready(function($){
     })
 </script>
 
+>>>>>>> dd508faf92d8f99b09b147dfb95136c876618aca
 </body>
 @endsection
 </html>

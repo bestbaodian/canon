@@ -1,7 +1,4 @@
-<?
-//include 'open.config.php';
-//define( 'APPID', '157ad5fcphp7ec2e3');
-//define( 'TOKEN', '06b6eca9fb5a289a994c5c4bd292d8a5');
+<?php
 namespace App\Http\Model;
 use Illuminate\Database\Eloquent\Model;
 class Logines extends Model{
@@ -10,8 +7,6 @@ class Logines extends Model{
 	private $return_uri;
 	private $access_token;
 	private $url = 'http://open.51094.com/user/auth.html';
-
-
 	function __construct(){
 		$this->appid = '157ad5fcphp7ec2e3';
 		$this->token = '06b6eca9fb5a289a994c5c4bd292d8a5';

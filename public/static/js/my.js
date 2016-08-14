@@ -255,11 +255,13 @@ $(function(){
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
             url:"upd_profile",
-            type:"post"
+            type:"post",
+            datatype:"json"
         });
         $.ajax({
+
             data:{
-                nickname:nickname,
+                user_name:nickname,
                 job:job,
                 sex:sex,
                 aboutme:aboutme,
@@ -267,7 +269,11 @@ $(function(){
                 cheng:cheng,
                 qu:qu
             },success:function(data){
-               alert(data);
+                var obj=eval('('+data+')')
+               if(obj['msg'] == "ok"){
+                    alert("保存成功")
+                   history.go(0)
+               }
             }
         })
 

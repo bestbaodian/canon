@@ -37,7 +37,6 @@ class Login extends Model
         //将内容读取出来
         $file = file_get_contents($url);
         return $file;
-
     }
     else
     {
