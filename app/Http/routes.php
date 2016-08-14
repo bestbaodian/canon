@@ -72,7 +72,7 @@ Route::get('zid', 'WendaController@zid');
 Route::get('shiti', 'CourseController@course');
 //试题搜索
 Route::post('sou', 'CourseController@sou');
-Route::post('s', 'CourseController@s');
+Route::get('s', 'CourseController@s');
 Route::post('zhuanye', 'CourseController@zhuanye');
 Route::get('xiang', 'CourseController@xiang');
 Route::post('con', 'CourseController@con');

@@ -29,17 +29,23 @@
                     <a href="/about/recruit" class="for-teacher hide-text" title="应聘讲师" target="_blank">应聘讲师</a>
                 </div>
                 <div class="course-nav-row clearfix">
+                    <?php
+                    $vv=isset($_GET['v'])?$_GET['v']:0;
+                    $a=isset($_GET['a'])?$_GET['a']:0;
+                    $l=isset($_GET['l'])?$_GET['l']:0;
+                    $p=isset($_GET['page'])?$_GET['page']:1;
+                    ?>
                     <span class="hd l">学院：</span>
                     <div class="bd">
                         <ul class="">
-                            <li class="course-nav-item on" class="type" id="type">
-                               <a href="#" class="leixing" value="0"> 全部</a>
+                            <li class="course-nav-item <?=($vv==0)?'on':''?>" class="type" id="type">
+                               <a href="{{url('shiti?v=0&a=0&l=0')}}" class="leixing" value="0"> 全部</a>
                             </li>
 
                             <?php foreach($arr as $k=>$v){?>
 
-                            <li class="course-nav-item"  class="type" id="type">
-                               <a href="#" class="leixing" value="<?php echo $v['c_id']?>">
+                            <li class="course-nav-item <?=($vv==$v['c_id'])?'on':'';?>"  class="type" id="type">
+                               <a href="{{url("shiti?v=$v[c_id]&a=0&l=0")}}" class="leixing" value="<?php echo $v['c_id']?>">
                                <?php echo $v['c_name']?></a>
                             </li>
                             <?php } ?>
@@ -51,14 +57,13 @@
                     <div class="bd">
                         <ul class="">
                             <div id="zhuanye">
-                            <li class="course-nav-item on" id="zhuan">
-                               <a href="#" class="zhuan" value="0"> 全部</a>
-                            </li>
+                                <li class="course-nav-item <?=($a==0)?'on':'';?>" id="zhuan">
+                                    <a href="shiti?v=<?=$vv?>&a=0&l=<?=$l?>" class="zhuan" value="0"> 全部</a>
+                                </li>
 
                         <?php foreach($zhuan as $k=>$v){?>
-                            <li class="course-nav-item " id="zhuan">
-                                <a href="#" class="zhuan" value="<?php echo $v['d_name']?>">
-                                <?php echo $v['d_name']?></a>
+                            <li class="course-nav-item <?=($a==$v['d_id'])?'on':'';?>" id="zhuan">
+                                <a href="{{url("shiti?v=$vv&a=$v[d_id]&l=$l")}}"><?php echo $v['d_name']?></a>
                             </li>
                         <?php } ?>
                                 </div>
@@ -70,14 +75,13 @@
                    <div class="bd">
                         <ul class="">
                             <div id="lei">
-                            <li class="course-nav-item  on" id='lei'>
-                                <a href="#" value="0" class="lei" value="0">全部</a>
-                            </li>
+                                <li class="course-nav-item  <?=($l==0)?'on':'';?>" id='lei'>
+                                    <a href="{{url("shiti?v=$vv&a=$a&l=0")}}shiti?v=<?=$vv?>&a=<?=$a?>&l=0">全部</a>
+                                </li>
                         <?php foreach($lei as $k=>$v){?>
-                            <li class="course-nav-item " id="lei">
-                                <a href="#" class="lei" value="<?php echo $v['t_name']?>">
-                                    <?php echo $v['t_name']?></a>
-                            </li>
+                                <li class="course-nav-item <?=($l==$v['t_id'])?'on':'';?>" id="lei">
+                                    <a href="{{url("shiti?v=$vv&a=$a&l=$v[t_id]")}}shiti?v=<?=$vv?>&a=<?=$a?>&l=<?php echo $v['t_id']?>"><?php echo $v['t_name']?></a>
+                                </li>
                         <?php } ?>
                                 </div>
                         </ul>
@@ -100,12 +104,15 @@
                     </span>
                     <span class="tool-item tool-pager">
                                                 <span class="pager-num">
-                            <b class="pager-cur">2</b>/<em class="pager-total">26</em>
+                            <b class="pager-cur">{{$shi->currentPage()}}</b>/<em class="pager-total">{{$shi->perPage()}}</em>
                         </span>
-                                                <a href="javascript:void(0)" class="pager-action pager-prev hide-text disabled">上一页</a>
-
-                                                <a href="/course/list?page=2" class="pager-action pager-next hide-text">下一页</a>
-                                            </span>
+                        <?php if($p<=1){ ?>
+                        <a href="javascript:void(0)" class="pager-action pager-prev hide-text disabled">上一页</a>
+                        <?php }else{ ?>
+                        <a href="shiti?page=<?=$p-1?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>" class="pager-action pager-prev hide-text">上一页</a>
+                        <?php } ?>
+                        <a href="shiti?page=<?=$p+1?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>" class="pager-action pager-next hide-text">下一页</a>
+                        </span>
                 </div>
             </div>
             <div class="course-list">
@@ -119,7 +126,8 @@
 
 
 				<div class="course-list-img">
-                                    <img width="240" height="135" alt="" src="<?php                                         if($v['c_college']=="软工学院"){
+                                    <img width="240" height="135" alt="" src="<?php
+                                    if($v['c_college']=="软工学院"){
                                         echo "/images/logo/软工.jpg";
                                     }elseif($v['c_college']=="移动通信学院"){
                                         echo "/images/logo/移动.jpg";
@@ -182,7 +190,7 @@
 </style>
           <ul>
             <li class="page">
-                  <?php echo $shi->links(); ?>
+                <?=$shi->appends(['v'=>$vv,'a'=>$a,'l'=>$l])->render()?>
             </li>
           </ul>
           </div>

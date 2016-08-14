@@ -8,21 +8,69 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 class Course extends Model{
-    public function course(){
-      $sql="select c_id,c_name from college where c_del=0";
-      $arr=DB::select($sql);
-      //专业
-      $sql="select d_name from direction";
-      $zhuan=DB::select($sql);
-      //类型
-      $lei=DB::table('type')->get();
-      //全部试题
-      $shi=DB::table('college_questions')->simplePaginate(12);
-      $data['arr']=$arr;
-      $data['zhuan']=$zhuan;
-      $data['lei']=$lei;
-      $data['shi']=$shi;
-      return $data;
+    public function course($data){
+        $arr=array();
+        if(($data)){
+            if($data['v']){
+                $college=DB::table('college')->where('c_id',$data['v'])->first();
+                $arr['c_college']=$college['c_name'];
+                //专业
+                $zhuan=DB::table('direction')->where('college_id',$data['v'])->get();
+            }else{
+                $zhuan=DB::table('direction')->get();
+            }
+            if($data['a']){
+                $direction=DB::table('direction')->where('d_id',$data['a'])->first();
+                $arr['c_direction']=$direction['d_name'];
+            }
+            if($data['l']){
+                $type=DB::table('type')->where('t_id',$data['l'])->first();
+                $arr['c_type']=$type['t_name'];
+            }
+            $pro['vv']=$data['v'];
+            $pro['a']=$data['a'];
+            $pro['l']=$data['l'];
+        }
+        else{
+            //专业
+            $zhuan=DB::table('direction')->get();
+            $pro['vv']=0;
+            $pro['a']=0;
+            $pro['l']=0;
+        }
+        //查询所有学院
+        $xue=DB::table('college')->where('c_del',0)->get();
+
+        //类型
+        $lei=DB::table('type')->get();
+        //全部试题
+        if($arr){
+//            $college = DB::table('college')->where($arr)->first();
+            $shi=DB::table('college_questions')->where($arr)->simplePaginate(12);
+        }else{
+            //全部试题
+            $shi=DB::table('college_questions')->simplePaginate(12);
+        }
+        $pro['arr']=$xue;
+        $pro['zhuan']=$zhuan;
+        $pro['lei']=$lei;
+        $pro['shi']=$shi;
+        return $pro;
+
+//        $sql="select c_id,c_name from college where c_del=0";
+//        $arr=DB::select($sql);
+//        //专业
+//        $sql="select d_name from direction";
+//        $zhuan=DB::select($sql);
+//        //类型
+//        $lei=DB::table('type')->get();
+//        //全部试题
+//        $shi=DB::table('college_questions')->simplePaginate(12);
+//        $data['arr']=$arr;
+//        $data['zhuan']=$zhuan;
+//        $data['lei']=$lei;
+//        $data['shi']=$shi;
+//        return $data;
     }
     public function sou($request){
         if(!empty($request['leixing'])){
@@ -107,10 +155,10 @@ class Course extends Model{
       $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
       $u_id=$u_id['user_id'];
       $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where u_id=$u_id order by p_id desc");
-//print_r($ping);die;
-}else{
-  $ping=array();
-}
+      }else
+      {
+          $ping=array();
+      }
       if($arr['c_college']=='软工学院'){
           $arr['img']='http://123.56.249.121/api/logo/软工.jpg';
       }elseif($arr['c_college']=='移动通信学院'){
