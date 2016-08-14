@@ -118,13 +118,9 @@
             <div class="course-list">
                 <div class="js-course-lists" id="list">
                     <ul>
-
-
                     <?php foreach($shi as $k=>$v){?>
                         <li class="course-one">
-                            <a href="xiang?id=<?php echo $v['c_id']?>" target="_self">
-
-
+                            <a href="{{url("xiang?id=$v[c_id]")}}" target="_self">
 				<div class="course-list-img">
                                     <img width="240" height="135" alt="" src="<?php
                                     if($v['c_college']=="软工学院"){
