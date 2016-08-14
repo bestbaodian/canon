@@ -142,7 +142,7 @@
                                     }elseif($v['c_college']=="游戏学院"){
                                         echo  "/images/logo/游戏.jpg";
                                     }elseif($v['c_college']=="网工学院"){
-                                        echo  "/images/api/logo/网工.jpg";
+                                        echo  "/images/logo/网工.jpg";
                                     }elseif($v['c_college']=="传媒学院"){
                                         echo  "/images/logo/传媒.jpg";
                                     }?>">
