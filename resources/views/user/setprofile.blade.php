@@ -94,7 +94,6 @@
                     <option  value="0">选择省份</option>
                     @foreach($first as $key=>$val)
                         <?php
-                        $city = isset($city)?$city:0;
                         if($val['region_id']==$city[0]['region_id']){?>
                             <option selected="selected" value="{{ $val['region_id']  }}">{{ $val['region_name'] }}</option>
                         <?php }else{?>

@@ -23,7 +23,7 @@ class UserController extends Controller
         $city = $User -> city();
         $arr = array(array("region_id"=>0,"region_name"=>"选择省份"),array("region_id"=>0,"region_name"=>"选择城市"),array("region_id"=>0,"region_name"=>"选择区县"));
         //如果用户没有设置地址就默认选择
-        if(!in_array("region_id",$city)){
+        if(empty($city)){
             $city = $arr;
         }
         return view('user/setprofile',['user'=>$user,'career'=>$career,'first'=>$district,'city'=>$city]);
