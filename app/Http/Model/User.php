@@ -99,11 +99,12 @@ class User extends Model
         $user_id  = Session::get('uid');
 
         //查询数据内容
-        $data     =DB::table('users')->select('user_province','user_city','user_area')->where("user_id",$user_id)->first();
+        $data    =DB::table('users')->select('user_province','user_city','user_area')->where("user_id",$user_id)->first();
 
         //查询
-        $regin    =DB::table('region')->select('region_id','region_name')->whereIn('region_id',$data)->get();
-        return    $regin;
+        $regin  =DB::table('region')->select('region_id','region_name')->whereIn('region_id',$data)->get();
+
+        return  $regin;
     }
 
     /*
