@@ -122,7 +122,7 @@ class ArticleController extends Controller
         return view("article/type",['article'=>$type]);
     }
 
-    //用户评论
+    //显示用户发表的文章
     public function wxiang(){
         if(empty(Session::get('usernname'))){
             $username=0;
@@ -135,31 +135,37 @@ class ArticleController extends Controller
         $arr=$model->join_artype($id);
         //aping users联查
         $aping=$model->join_users();
+        //print_r($arr);die;
       return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
     }
-
+   //用户评论
     public function wping(){
-        if(!isset($_SESSION)){
-            session_start();
-        }
-        if(empty($_SESSION['username'])){
+       if(empty(Session::get('username'))){
             $username=0;
             $u_id=0;
         }else{
-            $username=$_SESSION['username'];
-            $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-            $u_id=$u_id['user_id'];
+            $username=Session::get('username');
+            //根据用户名查询用户表
+            $model=new article();
+            $arr=$model->zan($username);
+            $u_id=$arr['user_id'];
         }
-        echo $u_id;die;
-        $a_id=$_POST['a_id'];
-        $ping=$_POST['ping'];
-        $sql="insert into aping(u_id,ap_con,a_id) values('$u_id','$ping','$a_id')";
-        $re=DB::insert($sql);
-
-        $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
-        //print_r($aping);die;
-        return json_encode($aping);
-        //return view('article/aping',['aping'=>$aping]);
+       //接收评论值和a_id
+        $a_id=Request::input('a_id');
+        $ap_con=Request::input('ap_con');
+        //添加到用户评论表中aping
+        $re=$model->insert_aping($u_id,$a_id,$ap_con);
+        //判断是否评论成功
+        if($re)
+        {
+            //两表联查users和article
+            $aping=$model->users_article();
+            echo "true";
+        }
+        else
+        {
+            echo "false";
+        }
     }
 
 }

@@ -103,6 +103,20 @@ class Article extends Model
         $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
         return $aping;
     }
+    //添加到用户评论表中aping
+       public function insert_aping($u_id,$a_id,$ap_con)
+       {
+         $sql="insert into aping(u_id,ap_con,a_id) values('$u_id','$ap_con','$a_id')";
+         $re=DB::insert($sql);
+         return $re;
+       }
+    //
+       public function users_article()
+       {
+         $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
+         return $aping;
+     }
+       
 
 
 }

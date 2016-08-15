@@ -39,7 +39,7 @@
 
             <ul class="article-tab clearfix">
                 <li  class="tabactive" >
-                    <a data-id="0" id="type" value="0" >全部</a>
+                    <a data-id="0" id="type1" value="0" href="{{URL('article')}}">全部</a>
                 </li>
                 <?php foreach($at_type as $k=>$v){?>
                 <li >
@@ -91,7 +91,7 @@
 
                             </div>
                             <div class="item-judge l">
-                                <i class="icon sns-comment"></i><em>评论 0</em>
+                                <i class="icon sns-comment"></i><a href="{{URL('fangfa?id=')}}<?php echo $v['a_id']?>"><em>评论 0</em></a>
                             </div>
                         </div>
                     </div>
