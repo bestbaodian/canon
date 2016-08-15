@@ -86,7 +86,7 @@
                                 <em id="<?php echo $v['a_id']?>" class="zans">点赞
                                     <?php echo $v['a_num']?>
                                 </em>
-
+                                <input type="hidden" id="user" value="<?php echo Session::get('username');?>">
 
 
                             </div>
@@ -263,7 +263,16 @@
 
 //点赞事件
  $(document).on('click',".zans",function(){
-    var ids=$(this).attr('id');
+    var user1=$('#user').val();
+    //判断用户是否登录
+    if(user1=="")
+    {
+        alert("请先登录");
+        location.href="{{URL('index')}}";
+    }
+    else
+    {
+        var ids=$(this).attr('id');
     //alert(ids);die;
   $.ajaxSetup({
             headers: {
@@ -276,20 +285,19 @@
        data: "ids="+ids,
        success: function(msg){
         //alert(msg);
-        if(msg==1)
-        {
-            alert("您已经点过赞了哦");
+            if(msg==1)
+            {
+                alert("您已经点过赞了哦");
+            }
+            else
+            {
+               alert('点赞成功');
+               location.href="{{URL('article')}}";
+            }
         }
-        else
-        {
-           alert('点赞成功');
-           location.href="{{URL('article')}}";
-        }
-     }
- });
-
-
-  })
+      });
+    }
+ })
 
 
         $(document).on("click","#type",function(){
