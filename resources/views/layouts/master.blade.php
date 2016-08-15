@@ -54,14 +54,14 @@
                 </li>
                 <li class="set_btn user-card-box">
                     <a target="_self" href="{{url('user/setprofile')}}" action-type="my_menu" class="user-card-item" id="header-avator">
-                        <img width="40" height="40" src="/images/unknow-40.png">
+                        <img width="40" height="40" src="/{{$data or "/images/unknow-40.png"}}">
                         <i style="display: none;" class="myspace_remind"></i>
                         <span style="display: none;">动态提醒</span>
                     </a>
                     <div class="g-user-card">
                         <div class="card-inner">
                             <div class="card-top">
-                                <a href="{{url('user/setprofile')}}"><img class="l" alt="{{ Session::get('username') }}" src="/images/unknow-160.png"></a>
+                                <a href="{{url('user/setprofile')}}"><img class="l" alt="{{ Session::get('username') }}" src="/{{$data or "images/unknow-160.png"}}"></a>
                                 <a href="{{url('user/setprofile')}}"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
                                 <p class="meta">
 					<a href="{{url('user/setprofile')}}">经验<b id="js-user-mp">550</b></a>

@@ -9,12 +9,14 @@ use Validator;
 class User extends Model
 {
     /*
-     * 用户个人中心
+     * 用户个人中心model层
+     * sql操作
      */
     public function setprofile($user)
     {
-        $sql ="select user_name,user_job,user_aboutme,user_sex from users where user_name = '$user'";
-        $data = DB::select($sql);
+        //$sql ="select user_name,user_job,user_aboutme,user_sex,user_filedir from users where user_name = '$user'";
+        $data    =DB::table('users')->select('user_name','user_job','user_aboutme','user_sex','user_filedir')->where("user_name",$user)->get();
+        //$data = DB::select($sql);
         if($data){
             return $data;
         }else{
