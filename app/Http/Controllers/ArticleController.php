@@ -6,11 +6,15 @@ use Session;
 //use Illuminate\Http\Request;
 use Request;
 use App\Http\Model\Article;
+use App\Http\Model\Index;
 class ArticleController extends Controller
 {
     //方法页面
     public function article(){
        //实例化Article
+        $index = new Index();
+        $datas = $index ->head_scu();
+        $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
         $articlemodel=new Article;
         $at_id=Request::input('at_id');
         $article_id=Request::input('article_id');
@@ -31,7 +35,6 @@ class ArticleController extends Controller
         }else{
             $username=Session::get('username');
         }
-
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
         $u_id=$articlemodel->get_usersid($username);
 
@@ -46,7 +49,7 @@ class ArticleController extends Controller
                 $article[$key]['zan']="0";
             }
         }
-        return view('article/article',['at_type'=>$at_type,'article'=>$article]);
+        return view('article/article',['at_type'=>$at_type,'article'=>$article,'picture'=>$picture]);
     }
 
 

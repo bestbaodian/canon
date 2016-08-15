@@ -54,7 +54,7 @@
                 </li>
                 <li class="set_btn user-card-box">
                     <a target="_self" href="{{url('user/setprofile')}}" action-type="my_menu" class="user-card-item" id="header-avator">
-                        <img width="40" height="40" src="/{{$data or "/images/unknow-40.png"}}">
+                        <img width="40" height="40" src="/{{$picture or "/images/unknow-40.png"}}">
                         <i style="display: none;" class="myspace_remind"></i>
                         <span style="display: none;">动态提醒</span>
                     </a>

@@ -13,8 +13,8 @@ class IndexController extends Controller
         $index = new Index();
         $shi = $index ->index();
         $data = $index ->head_scu();
-        $dats = $data['user_filedir'];
-        return view('index/index',['shi'=>$shi,'data'=>$dats]);
+        $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
+        return view('index/index',['shi'=>$shi,'picture'=>$dats]);
     }
 
     public function aaa(){
