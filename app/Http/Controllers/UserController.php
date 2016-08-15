@@ -95,7 +95,7 @@ class UserController extends Controller
                 $user_filedir = $destinationPath.$fileName;
                 $sql = "update users set user_filedir = '$user_filedir' where user_id = '$uid'";
                 $upd = DB::select($sql);
-                redirect("user/setavator");
+                return redirect("user/setavator");
 
             }
         }
