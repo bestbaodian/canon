@@ -160,9 +160,8 @@
        
 <!--script-->
 <SCRIPT src="../js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
-<<<<<<< HEAD
 
-=======
+
 <!--图片异步加载-->
 <script type="text/javascript" src="../js/jquery.lazyload.js"></script>
 <script type="text/javascript" src="../js/jquery.scrollLoading.js"></script>
@@ -341,8 +340,6 @@ jQuery(document).ready(function($){
         }
     })
 </script>
-
->>>>>>> dd508faf92d8f99b09b147dfb95136c876618aca
 </body>
 @endsection
 </html>

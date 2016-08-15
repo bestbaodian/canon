@@ -255,11 +255,17 @@
     <script src="js/jquery-1.9.1.min.js"></script>
     <script>
   //点赞
-  $(document).on('click',".zans",function(){
-    //var ids=$("#id").val();
+  //鼠标移上显示小手
+  $('.zans').mousemove(function()
+  {
+    $(this).css('cursor','pointer');
+  })
+
+//点赞事件
+ $(document).on('click',".zans",function(){
     var ids=$(this).attr('id');
-    //alert(ids);
-    $.ajaxSetup({
+    //alert(ids);die;
+  $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
