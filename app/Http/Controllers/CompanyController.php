@@ -5,7 +5,7 @@
  */
 namespace App\Http\Controllers;
 use DB;
-use App\Http\Model\company;
+use App\Http\Model\Company;
 use App\Http\Model\Index;
 use Request;
 use Session;
@@ -16,7 +16,7 @@ class CompanyController extends Controller
         $index = new Index();
         $datas = $index ->head_scu();
         $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
-		$model=new company();
+		$model=new Company();
         $ra=$model->direction();
         $arr=$model->company();
         $exam=$model->shiti();
