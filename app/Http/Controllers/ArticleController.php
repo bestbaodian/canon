@@ -6,10 +6,12 @@ use Session;
 //use Illuminate\Http\Request;
 use Request;
 use App\Http\Model\Article;
+/*
+*方法模块
+*/
 use App\Http\Model\Index;
 class ArticleController extends Controller
 {
-    //方法页面
     public function article(){
        //实例化Article
         $index = new Index();
@@ -76,7 +78,7 @@ class ArticleController extends Controller
                 echo "<script>alert('提交失败');location.href='publish';</script>";
             }
     }
-
+   //用户点赞
     public function zan(){
         $a_id=Request::input('ids');
         if(empty(Session::get('username')))
@@ -120,7 +122,7 @@ class ArticleController extends Controller
         return view("article/type",['article'=>$type]);
     }
 
-
+    //用户评论
     public function wxiang(){
         if(empty(Session::get('usernname'))){
             $username=0;
@@ -128,11 +130,12 @@ class ArticleController extends Controller
             $username=Session::get('usernname');
         }
         $id=Request::input('id');
-        $arr=DB::table("article")
-            ->join("ar_type","article.a_type","=","ar_type.at_id")
-            ->where("article.a_id",$id)->get();
-       $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
-       return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
+        $model=new article();
+        //根据a_id两表联查article和ar_type表
+        $arr=$model->join_artype($id);
+        //aping users联查
+        $aping=$model->join_users();
+      return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping]);
     }
 
     public function wping(){

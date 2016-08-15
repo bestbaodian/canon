@@ -151,6 +151,7 @@ class Course extends Model{
       $ses = Session::get('username');
       if(!empty($ses)){
         $username=$ses;
+
       //$username=$_SESSION['username'];
 //      $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
 //      $u_id=$u_id['user_id'];
