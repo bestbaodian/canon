@@ -20,13 +20,10 @@ class WendaController extends Controller
         $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
         $mwenda=new Wenda();
         $pro=$mwenda->get_t_tw();
-<<<<<<< HEAD
         //$users=$mwenda->sels();
         //print_r($pro);die;
         return view('wenda/wenda',['pro'=>$pro]);
-=======
         return view('wenda/wenda',['pro'=>$pro,'picture'=>$picture]);
->>>>>>> 22ca412d290d9f9a944e892735dbbb4284dc350d
     }
 
 
