@@ -13,12 +13,26 @@ class Article extends Model
     //查询article内容
     public function select_article1($at_id)
     {
-        $article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id where article.a_type='$at_id' order by a_id desc");
+        //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id where article.a_type='$at_id' order by a_id desc");
+        /*
+         * 针对文章类型 进行显示数据
+         */
+        $article = DB::table('article')
+            ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
+            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num')
+            ->where("article.a_type",$at_id)
+            ->orderBy('a_id', 'desc')
+            ->paginate(3);
         return $article;
     }
     public function select_article()
     {
-        $article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id order by a_id desc");
+       //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id order by a_id desc");
+        $article = DB::table('article')
+            ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
+            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num')
+            ->orderBy('a_id', 'desc')
+            ->paginate(3);
         return $article;
     }
 

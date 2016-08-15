@@ -100,6 +100,7 @@
 <?php } ?>
 
         </div>
+            <ul id="fenye"><li>{{ $article->links()}}</li></ul>
         </div>
         <div class="article-right r">
             <!-- 写文章 -->
@@ -315,4 +316,14 @@
 </body>
 @endsection
 </html>
+<style>
+    #fenye li{
+        list-style: none;
+        float: left;
+        margin-top: 20px;
+        margin-left: 80px;
+        font-size: 18px;
+        color: #ff998c;
+    }
+</style>
 

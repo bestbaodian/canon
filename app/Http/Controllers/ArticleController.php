@@ -17,20 +17,27 @@ class ArticleController extends Controller
         $index = new Index();
         $datas = $index ->head_scu();
         $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
-        $articlemodel=new Article;
+        //实例化model层
+        $articlemodel=new Article();
+
+        //接受用户get请求数据
         $at_id=Request::input('at_id');
         $article_id=Request::input('article_id');
-        print_r($article_id);
+
+        //print_r($article_id);
         //查询ar_type表
         $at_type=$articlemodel->getar_type();
+
         if($at_id!="")
         {
            $article=$articlemodel->select_article1($at_id);
+            print_r($article);
         }
         else
         {
            $article=$articlemodel->select_article();
         }
+        //die;
        $ses = Session::get('username');
         if(empty($ses)){
             $username=0;
@@ -40,17 +47,6 @@ class ArticleController extends Controller
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
         $u_id=$articlemodel->get_usersid($username);
 
-       $u_id=$articlemodel->get_usersid($username);
-
-        $u_id=$u_id['user_id'];
-        foreach($article as $key=>$val){
-            $arr=$articlemodel->get_article_zan($val);
-            if($arr){
-                $article[$key]['zan']="1";
-            }else{
-                $article[$key]['zan']="0";
-            }
-        }
         return view('article/article',['at_type'=>$at_type,'article'=>$article,'picture'=>$picture]);
     }
 
