@@ -177,7 +177,6 @@
         <input type="hidden" name="return-url" value="">
         <div class="clearfix"></div>
         <label class="remember">
-            <script src="http://open.51094.com/user/myscript/157ad5fc7ec2e3.html"></script>
             <ul>
                 <li class="login">
                 <span id="hzy_fast_login"></span>
