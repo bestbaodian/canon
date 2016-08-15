@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 use App\Http\Model\User;
 use Illuminate\Http\Request;
+use DB;
 use Session;
-
+/*
+ * user控制器
+ * 管理用户个人中心
+ * lhm
+ */
 class UserController extends Controller
 {
     //个人资料
@@ -18,7 +23,6 @@ class UserController extends Controller
 
         //地区
         $district=$User->get_region();
-
         //查询用户库中的城市
         $city = $User -> city();
         $arr = array(array("region_id"=>0,"region_name"=>"选择省份"),array("region_id"=>0,"region_name"=>"选择城市"),array("region_id"=>0,"region_name"=>"选择区县"));
@@ -53,7 +57,48 @@ class UserController extends Controller
 
     //头像设置
     public function setavator(){
-        return view('user/setavator');
+        //获取用户session信息
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        $data = $user[0]['user_filedir'];
+        return view('user/setavator',['data'=>$data]);
+    }
+    //头像上传
+    public function postpic(Request $request){
+        $datas = $request->file();
+        if(empty($datas)){
+            return redirect("user/setavator");
+        }else{
+            $a_addtime=date("Y-m-d H:i:s");
+            $file = $request->file('fileField');
+            $allowed_extensions = ["png", "jpg", "gif","JPG"];
+            //如果上传出错,返回错误信息
+            if ($file->getClientOriginalExtension() && !in_array($file->getClientOriginalExtension(), $allowed_extensions))
+            {
+                return ['error' => 'You may only storage png, jpg or gif.'];
+            }
+            $destinationPath = 'picture/';
+            //获取图片后缀名
+            $extension = $file->getClientOriginalExtension();
+            //设置图片名称
+
+            $uid=Session::get("uid");
+            $username=Session::get("username");
+            $code=md5($uid.$username);
+            $fileName = $code.'.'.$extension;
+            //print_r($fileName);die;
+
+            if($file->move($destinationPath, $fileName))
+            {
+                //设置用户头像字段入库
+                $user_filedir = $destinationPath.$fileName;
+                $sql = "update users set user_filedir = '$user_filedir' where user_id = '$uid'";
+                $upd = DB::select($sql);
+                return redirect("user/setavator");
+
+            }
+        }
     }
 
 

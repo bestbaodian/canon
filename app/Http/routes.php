@@ -13,7 +13,7 @@
 
 Route::get('/',"IndexController@index");
 Route::get('index',"IndexController@index");
-Route::get('aaa',"IndexController@aaa");
+Route::get('main',"IndexController@layouts");
 
 Route::get('login', 'LoginController@login');
 Route::get('out', 'LoginController@out');
@@ -34,6 +34,9 @@ Route::get('user/setverifyemail', 'UserController@setverifyemail');
 Route::get('user/setresetpwd', 'UserController@setresetpwd');
 Route::get('user/setbindsns', 'UserController@setbindsns');
 
+
+//头像上传
+Route::post('postpic', 'UserController@postpic');
 
 //修改用户个人中心
 Route::get('user/getprovince', 'UserController@getprovince');

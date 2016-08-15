@@ -7,6 +7,7 @@
 namespace App\Http\Controllers;
 use DB;
 use App\Http\Model\program;
+use App\Http\Model\Index;
 class ProgramController extends Controller
 {
 	/*
@@ -16,7 +17,10 @@ class ProgramController extends Controller
         $model=new program();
         $all = $model->program();
         $data = $model->recruit1();
-        return view('program/program',['all'=>$all,'data'=>$data]);
+        $index = new Index();
+        $datas = $index ->head_scu();
+        $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
+        return view('program/program',['all'=>$all,'data'=>$data,'picture'=>$picture]);
     }
    /*
      *根据职位查询信息

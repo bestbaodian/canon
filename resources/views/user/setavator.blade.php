@@ -19,6 +19,7 @@
 var is_choice = "";
   var seajsTimestamp="v=201604211612";
   </script>
+
  
 <!--
 <link rel="stylesheet" href="/static/component/logic/login/login-regist.css" type="text/css" />
@@ -30,6 +31,7 @@ var is_choice = "";
 <link rel="stylesheet" href="/css/layer.css" type="text/css" />
 <link rel="stylesheet" href="/css/user_settings_avtou-less.css" type="text/css" />
 <link rel="stylesheet" href="/css/login-regist.css" type="text/css" />
+    {{--<script src="/static/js/user.js"></script>--}}
 </head>
 <body >
 @extends('layouts.master')
@@ -66,28 +68,39 @@ var is_choice = "";
     </ul>
   </div>
   <div class="setting-right">
-    <div class="setting-right-wrap wrap-boxes settings" >
-        
+      <form enctype="multipart/form-data" method="post" action="{{url('postpic')}}" >
+
+      <div class="setting-right-wrap wrap-boxes settings" >
+
 <div class="setting-wrap setting-avator clearfix" id="setting-avator">
+
 	<div class="avator-img l">
-		<div><img width="220" height="220" src="/images/unknow-220.png"></div>
-		<div><input type="button" class="js-avator-try avator-try" value="换一换" hidefocus="true"></div>
+		<div><img width="220" height="220" src="/{{$data or 'images/unknow-160.png'}}"></div>
+
+		<div>
+            <input type="submit" class="btn-style-01" value="提交" />
+        </div>
 	</div>
 	<div class="avator-btn-group">
 		<div class="avator-btn-inner" id="avator-btns">
-				        	        <div class="avator-btn-snswrap">
-	        	<span data-sns="qq" class="l-sns-btn l-sns-qq"><i class="icon-qq"></i>从 QQ 帐号同步头像</span>
+            <div class="avator-btn-snswrap">
+                                       {{-- <a class="avator-btn-fake" hidefocus="true" href="javascript:void(0)">选择文件</a>
+                                        <input type="file" accept="image/*" id="" name="fileField" title="上传头像">--}}
 			</div>
 	        	        
 	        <div class="avator-btn-wrap">
-				<form enctype="multipart/form-data" method="post" action="postpic" target="uploadtarget">
 		            <a class="avator-btn-fake" hidefocus="true" href="javascript:void(0)">上传头像</a>
+
 		            <input type="file" accept="image/*" id="upload" name="fileField" title="上传头像">
-		            <input type="hidden" value="1" name="type">
-	            </form>
+
+
+		            <input type="hidden" value="{{csrf_token()}}" name="_token">
+
+
                 <iframe frameborder="0" style="display:none;" name="uploadtarget" id="uploadtarget" src="about:blank"></iframe>
 	        </div>
-		</div>
+    </form>
+</div>
 		<div style="display:none;" class="avator-upload-wrap">
 			<span class="rlf-btn-green btn-block" aria-role="button" id="avator-btn-save" hidefocus="true">保存</span>
 		</div>
@@ -119,13 +132,47 @@ var is_choice = "";
 
 
 <!--script-->
-<script src="/jss/ssologin.js"></script>
+<script src="/js/ssologin.js"></script>
 <script type="text/javascript" src="/js/sea.js"></script>
 <script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
 <script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
- 
 
+<style>
+    .btn-style-01{
+        border-style:none;
+        padding:8px 30px;
+        line-height:18px;
+        color:#fff;
+        font:16px "Microsoft YaHei", Verdana, Geneva, sans-serif;
+        cursor:pointer;
+        border:1px #ae7d0a solid;
+        -webkit-box-shadow:inset 0px 0px 1px #f00000;
+        -moz-box-shadow:inset 0px 0px 1px #fff;
+        box-shadow:inset 0px 0px 1px #fff;/*内发光效果*/
+        -webkit-border-radius:4px;
+        -moz-border-radius:4px;
+        border-radius:4px;/*边框圆角*/
+        text-shadow:1px 1px 0px #b67f01;/*字体阴影效果*/
+        background-color:#feb100;
+        background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#feb100), to(#e8a201));
+        background-image: -webkit-linear-gradient(top, #feb100 0%, #e8a201 100%);
+        background-image: -moz-linear-gradient(top, #feb100 0%, #e8a201 100%);
+        background-image: -ms-linear-gradient(top, #feb100 0%, #e8a201 100%);
+        background-image: -o-linear-gradient(top, #feb100 0%, #e8a201 100%);
+        background-image: linear-gradient(top, #feb100 0%, #e8a201 100%);/*颜色渐变效果*/
+    }
+    .btn-style-01:hover {
+        background-color:#f00000;
+        background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#e8a201), to(#feb100));
+        background-image: -webkit-linear-gradient(top, #e8a201 0%, #feb100 100%);
+        background-image: -moz-linear-gradient(top, #e8a201 0%, #feb100 100%);
+        background-image: -ms-linear-gradient(top, #e8a201 0%, #feb100 100%);
+        background-image: -o-linear-gradient(top, #e8a201 0%, #feb100 100%);
+        background-image: linear-gradient(top, #e8a201 0%, #feb100 100%);
+    }
+
+</style>
 
 <div style="display: none">
 </div>

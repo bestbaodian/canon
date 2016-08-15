@@ -6,17 +6,21 @@
 namespace App\Http\Controllers;
 use DB;
 use App\Http\Model\company;
+use App\Http\Model\Index;
 use Request;
 use Session;
 class CompanyController extends Controller
 {
 	//公司列表
 	public function index(){
+        $index = new Index();
+        $datas = $index ->head_scu();
+        $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
 		$model=new company();
         $ra=$model->direction();
         $arr=$model->company();
         $exam=$model->shiti();
-       return view('company/index',['arr'=>$arr,'re'=>$ra,'exam'=>$exam]);
+       return view('company/index',['arr'=>$arr,'re'=>$ra,'exam'=>$exam,'picture'=>$picture]);
 	}
 	//根据专业查询试题
 	public function college(){
