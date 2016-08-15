@@ -61,7 +61,7 @@
                     <div class="g-user-card">
                         <div class="card-inner">
                             <div class="card-top">
-                                <a href="{{url('user/setprofile')}}"><img class="l" alt="{{ Session::get('username') }}" src="/{{$data or "images/unknow-160.png"}}"></a>
+                                <a href="{{url('user/setprofile')}}"><img class="l" alt="{{ Session::get('username') }}" src="/{{$picture or "images/unknow-160.png"}}"></a>
                                 <a href="{{url('user/setprofile')}}"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
                                 <p class="meta">
 					<a href="{{url('user/setprofile')}}">经验<b id="js-user-mp">550</b></a>
