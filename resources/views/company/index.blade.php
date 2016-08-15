@@ -28,7 +28,7 @@
 </style>
 @extends('layouts.master')
 @section('sidebar')
-    @parent
+@parent
 
 <body style="background:#fff;">
 <input type="hidden"  id="college">

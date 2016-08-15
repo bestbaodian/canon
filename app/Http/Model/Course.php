@@ -9,8 +9,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 class Course extends Model{
     public function course($data){
+        //定义空数组
         $arr=array();
-        if(($data)){
+        if($data){
             if($data['v']){
                 $college=DB::table('college')->where('c_id',$data['v'])->first();
                 $arr['c_college']=$college['c_name'];

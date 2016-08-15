@@ -76,11 +76,11 @@
                         <ul class="">
                             <div id="lei">
                                 <li class="course-nav-item  <?=($l==0)?'on':'';?>" id='lei'>
-                                    <a href="{{url("shiti?v=$vv&a=$a&l=0")}}shiti?v=<?=$vv?>&a=<?=$a?>&l=0">全部</a>
+                                        <a href="{{url("shiti?v=$vv&a=$a&l=0")}}">全部</a>
                                 </li>
                         <?php foreach($lei as $k=>$v){?>
                                 <li class="course-nav-item <?=($l==$v['t_id'])?'on':'';?>" id="lei">
-                                    <a href="{{url("shiti?v=$vv&a=$a&l=$v[t_id]")}}shiti?v=<?=$vv?>&a=<?=$a?>&l=<?php echo $v['t_id']?>"><?php echo $v['t_name']?></a>
+                                    <a href="{{url("shiti?v=$vv&a=$a&l=$v[t_id]")}}"><?php echo $v['t_name']?></a>
                                 </li>
                         <?php } ?>
                                 </div>
@@ -104,7 +104,7 @@
                     </span>
                     <span class="tool-item tool-pager">
                                                 <span class="pager-num">
-                            <b class="pager-cur">{{$shi->currentPage()}}</b>/<em class="pager-total">{{$shi->perPage()}}</em>
+                            <b class="pager-cur">{{$shi->currentPage()}}</b>/<em class="pager-total"><?php echo ceil(count($shi)/12);?></em>
                         </span>
                         <?php if($p<=1){ ?>
                         <a href="javascript:void(0)" class="pager-action pager-prev hide-text disabled">上一页</a>
