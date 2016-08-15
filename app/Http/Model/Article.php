@@ -3,33 +3,40 @@ namespace App\Http\Model;
 
 use DB;
 use Illuminate\Database\Eloquent\Model;
-class Article extends Model{
-    public function getar_type(){
+class Article extends Model
+{
+    public function getar_type()
+    {
         $at_type=DB::table('ar_type')->get();
         return $at_type;
     }
     //查询article内容
-    public function select_article1($at_id){
+    public function select_article1($at_id)
+    {
         $article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id where article.a_type='$at_id' order by a_id desc");
         return $article;
     }
-    public function select_article(){
+    public function select_article()
+    {
         $article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id order by a_id desc");
         return $article;
     }
 
     //得到userid
-    public function get_usersid($username){
+    public function get_usersid($username)
+    {
         $u_id=DB::table('users')->where("user_name","$username")->orwhere("user_email","$username")->first();
         return $u_id;
     }
     //article_zan
-    public function get_article_zan($val){
+    public function get_article_zan($val)
+    {
         $arr=DB::table('article_zan')->where(["u_id"=>0,"article_id"=>$val['a_id']])->first();
         return $arr;
     }
     //a_lei
-    public function get_a_lei(){
+    public function get_a_lei()
+    {
         $a_lei=DB::table('a_lei')->get();
         return $a_lei;
     }
@@ -51,8 +58,10 @@ class Article extends Model{
            $res=DB::insert("insert into article(a_title,a_type,a_con,a_addtime,a_logo,a_lei) values('$a_title','$a_type','$a_con','$a_addtime','$a_logo','$a_lei')");
             return $res;
         }
+
     }
-    //点赞功能的实现
+    
+     //点赞功能的实现
     public function zan($username)
     {
         $brr=DB::table('users')->where("user_name","$username")->first();
@@ -78,4 +87,23 @@ class Article extends Model{
         $a=DB::insert("insert into article_zan(u_id,article_id) values('$u_id','$a_id')");
         return $a;
     }
+
+    /*
+    *用户评论
+    */
+    //根据a_id两表联查article和ar_type表
+    public function join_artype($id)
+    {
+        $arr=DB::table("article")->join("ar_type","article.a_type","=","ar_type.at_id")->where("article.a_id",$id)->get();
+        return $arr;
+    }
+   //aping users联查
+    public function join_users()
+    {
+        $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
+        return $aping;
+    }
+
+
 }
+    
