@@ -31,7 +31,6 @@ class ArticleController extends Controller
         if($at_id!="")
         {
            $article=$articlemodel->select_article1($at_id);
-            print_r($article);
         }
         else
         {
