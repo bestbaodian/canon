@@ -6,13 +6,10 @@ use Session;
 //use Illuminate\Http\Request;
 use Request;
 use App\Http\Model\Article;
-<<<<<<< HEAD
 /*
 *方法模块
 */
-=======
 use App\Http\Model\Index;
->>>>>>> 04bbc6f95a2a08156397ecdf4e40dd189c16e0bd
 class ArticleController extends Controller
 {
     public function article(){
