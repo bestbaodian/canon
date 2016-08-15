@@ -131,11 +131,10 @@ var is_choice = "";
 
 
 
-<!--script-->
+
 <script src="/js/ssologin.js"></script>
 <script type="text/javascript" src="/js/sea.js"></script>
 <script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
-<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
 
 <style>

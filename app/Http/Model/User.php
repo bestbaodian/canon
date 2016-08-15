@@ -120,4 +120,52 @@ class User extends Model
         $var   = Session::get('error');
         return $var;
     }
+    /*
+     * @得到用户原来密码
+     * 查询数据库
+     */
+    public function get_old($pwd)
+    {
+        $mima=md5(md5($pwd));
+        $user_id=Session::get("uid");
+        $data = DB::table('users')->select("user_pwd")->where('user_id',$user_id)->first();
+        //return $data;
+        if($mima==$data['user_pwd']){
+            $arr=array(
+                'msg' => 'ok',
+                'error' => '0'
+            );
+            return $arr;
+        }else{
+            $arr=array(
+                'msg' => 'ok',
+                'error' => '密码错误'
+            );
+            return $arr;
+         }
+    }
+    //修改数据库密码
+    public function gai_pwd($pwd){
+        $user_id=Session::get("uid");
+        $new_pwd=md5(md5($pwd));
+        $arr=DB::table('users')
+            ->where('user_id', $user_id)
+            ->update(['user_pwd' => $new_pwd]);
+        if($arr){
+            $data=array(
+                "message"=>'ok',
+                "error"=>'0'
+            );
+            Session::forget("uid");
+            Session::forget("username");
+            return $data;
+        }else{
+            $data=array(
+                "message"=>'密码输入错误',
+                "error"=>'1'
+            );
+            return $data;
+        }
+    }
+
 }

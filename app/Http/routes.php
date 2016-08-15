@@ -40,14 +40,20 @@ Route::post('postpic', 'UserController@postpic');
 
 //修改用户个人中心
 Route::get('user/getprovince', 'UserController@getprovince');
+
 //修改个人资料
 Route::post('user/upd_profile', 'UserController@updprofile');
+
+//修改密码
+Route::post('user/upd_pwd', 'UserController@updpwd');
+Route::post('user/check_pwd', 'UserController@checkpwd');
 //个人中心
 Route::get('sms/messages', 'SmsController@messages');
 Route::get('sms/messagesone', 'SmsController@messagesone');
 Route::get('sms/messagestwo', 'SmsController@messagestwo');
 Route::get('sms/notices', 'SmsController@notices');
 Route::get('friend/friendlist', 'FriendController@friendlist');
+
 /*
  * 猿问开始
  */
