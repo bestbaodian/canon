@@ -125,7 +125,10 @@ var is_choice = "";
                                     },
                                     success:function(data){
                                       //$("#list").html(data)
-                                      alert(data);
+                                      //alert(data);
+                                      if(data==1){
+                                          location.href='wenda';
+                                      }
                                     }
                                   })
                 })

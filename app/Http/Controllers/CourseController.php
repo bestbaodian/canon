@@ -71,9 +71,6 @@ class CourseController extends Controller
         if(!empty(Session::get('username'))){
             echo "1";
         }else{
-            //$username=$_SESSION['username'];
-            //$u_id=table('users')->where("user_phone","$username")->orwhere("user_email","$username")->pluck('user_id');
-           // $u_id=1;
             $username=Session::get('username');
             $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
   	        $u_id=$u_id['user_id'];

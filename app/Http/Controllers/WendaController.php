@@ -16,6 +16,8 @@ class WendaController extends Controller
         //实例化问答model层
         $mwenda=new Wenda();
         $pro=$mwenda->get_t_tw();
+        //$users=$mwenda->sels();
+        //print_r($pro);die;
         return view('wenda/wenda',['pro'=>$pro]);
     }
 
@@ -46,9 +48,10 @@ class WendaController extends Controller
         if(!isset($_SESSION)){
             session_start();
         }
-        //$u_id=$_SESSION['u_id'];
+        //$u_id=$_SESSION['username'];
         //var_dump($t_content);die;
-        $u_id=Session::get("u_id");
+        $u_id=Session::get("uid");
+        //echo $u_id;die;
         $arr1=DB::insert("INSERT INTO t_tw(t_title,t_content,user_id,d_id) values('$t_title','$t_content','$u_id','$pro')");
          if($arr1){
             exit('1');
