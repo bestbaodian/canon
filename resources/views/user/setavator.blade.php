@@ -133,8 +133,11 @@ var is_choice = "";
 
 
 <script src="/js/ssologin.js"></script>
+<<<<<<< HEAD
 <script type="text/javascript" src="/js/sea.js"></script>
 <script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
+=======
+>>>>>>> 41e854e0b7da2a1cdfd92d363faf1075e8772884
 
 
 <style>

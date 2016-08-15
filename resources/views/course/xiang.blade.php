@@ -11,34 +11,7 @@
 <meta property="wb:webmaster" content="c4f857219bfae3cb">
 <meta http-equiv="Access-Control-Allow-Origin" content="*">
 <meta http-equiv="Cache-Control" content="no-transform ">
-
 <meta name="Keywords" content="">
-<script src="js/push.js"></script><script src="js/rt.js" async="" type="text/javascript"></script><script type="text/javascript">
-
-      var OP_CONFIG={"module":"course","page":"view","userInfo":{"uid":"3116765","nickname":"qq_\u672c\u5bab\u672a\u6b7b\u4f11\u60f3\u7eb3\u59be_03116765","head":"http:\/\/img.mukewang.com\/user\/56f9e5ab0001e7b101000100-80-80.jpg","usertype":"1","roleid":0}};
-  var isLogin = 1;
-var is_choice = "";
-  var seajsTimestamp="v=201603290933";
-    var ownName="3165819322@qq.com"
-  
-</script>
-
-
-<script>
-/*学习页通用配置*/
-var GC = {
-  course: {
-    id: 85,
-    name: 'Java入门第一季',
-    pic: 'http://img.mukewang.com/536059be00010b6d06000338-240-135.jpg',
-    video_url: 'http://v1.mukewang.com/935343da-25ee-4de7-93db-78f8bfb41c34/H.mp4'
-  },
-  classmates: 20 // 你的同学一页显示数量
-};
-</script>
-
-
-
 <link rel="stylesheet" href="css/a2.css" type="text/css">
 <script src="js/jquery_002.js" async="" charset="utf-8"></script><script src="js/seajs-text.js" async="" charset="utf-8"></script><script src="js/common.js" async="" charset="utf-8"></script><script src="js/share.js"></script><script src="js/string.js" async="" charset="utf-8"></script><script src="js/suggest.js" async="" charset="utf-8"></script><script src="js/store.js" async="" charset="utf-8"></script><script src="js/json.js" async="" charset="utf-8"></script><script src="javascripts/im.js" async="" charset="utf-8"></script><script src="js/view.js" async="" charset="utf-8"></script><link href="css/share_style0_16.css" rel="stylesheet"><script src="js/course_common.js" async="" charset="utf-8"></script><script src="js/course_collection.js" async="" charset="utf-8"></script><script src="js/socket.js" async="" charset="utf-8"></script><script src="js/jquery.js" async="" charset="utf-8"></script><script src="js/layer.js" async="" charset="utf-8"></script><link href="css/layer2.css" rel="stylesheet" charset="utf-8"></head>
 <body>
@@ -356,56 +329,16 @@ var GC = {
 
 <!--script-->
 <script src="js/ssologin.js"></script>
-<script type="text/javascript" src="js/sea.js"></script>
-<script type="text/javascript" src="js/sea_config.js"></script>
 <script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
- 
-<script type="text/javascript">
-  (function(){
-    var imgPic = GC.course.pic || 'http://img.mukewang.com/static/img/common/logo.png',
-        text = '我正在参加@慕课网  的一门课程【' + GC.course.name + '】，很不错哦！快来一起学习吧！', //节名称
-        url = 'http://www.mukewang.com' + window.location.pathname;
 
-    window._bd_share_config = {
-        "common": {
-            "bdUrl": url,
-            "bdSnsKey": {
-              'tsina':'2788596354'
-            },
-            "bdText": text,
-            "bdMini": "2",
-            "bdMiniList": false,
-            "bdPic": imgPic,
-            "bdStyle": "0",
-            "bdSize": "16"
-        },
-        "share": {}
-    };
-    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-  })();
+<script type="text/javascript">
 </script>
 <div class="mask"></div>
 
 
 <div style="display: none">
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff0cfcccd7b1393990c78efdeebff3968' type='text/javascript'%3E%3C/script%3E"));
-(function (d) {
-window.bd_cpro_rtid="rHT4P1c";
-var s = d.createElement("script");s.type = "text/javascript";s.async = true;s.src = location.protocol + "//cpro.baidu.com/cpro/ui/rt.js";
-var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
-})(document);
-</script><script src="js/h.js" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=f0cfcccd7b1393990c78efdeebff3968" target="_blank"><img src="picture/21.gif" height="20" width="20" border="0"></a>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    bp.src = '//push.zhanzhang.baidu.com/push.js';
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
+
 </div><script src="xiang_files/user.htm" type="text/javascript"></script><script src="xiang_files/iplookup.php" type="text/javascript"></script>
 
 

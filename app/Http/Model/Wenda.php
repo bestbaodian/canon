@@ -20,7 +20,18 @@ class Wenda extends Model{
                 $join->on('users.user_id', '=', 't_tw.user_id');
             })
             ->simplePaginate(5);
+//        $users = DB::table('t_tw')->distinct()->get();
+//        $data['pro']=$pro;
+//        $data['users']=$users;
         return $pro;
+    }
+    public function sels(){
+        //$users = DB::table('t_tw')->distinct()->get();
+        $users = DB::table('t_tw')
+            ->join('direction', 't_tw.d_id', '=', 'dirction.d_id')
+            ->join('users', 'users.user_id', '=', 't_tw.user_id')
+            ->get();
+        return $users;
     }
     //direction
     public function get_direction(){

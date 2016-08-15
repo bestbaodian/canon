@@ -59,7 +59,13 @@ class CourseController extends Controller
       $request=$request->all();
       $course = new Course();
       $data=$course->xiang($request);
-        return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping']]);
+      //加载登录成功之后的头像
+      $index = new Index();
+      $data1 = $index ->head_scu();
+      $dats = isset($data1['user_filedir'])?$data1['user_filedir']:"";
+        //print_r($dats);die;
+
+      return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'picture'=>$dats]);
     }
 	 public function con()
     {
@@ -69,9 +75,6 @@ class CourseController extends Controller
         if(!empty(Session::get('username'))){
             echo "1";
         }else{
-            //$username=$_SESSION['username'];
-            //$u_id=table('users')->where("user_phone","$username")->orwhere("user_email","$username")->pluck('user_id');
-           // $u_id=1;
             $username=Session::get('username');
             $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
   	        $u_id=$u_id['user_id'];

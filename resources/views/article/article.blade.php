@@ -39,7 +39,7 @@
 
             <ul class="article-tab clearfix">
                 <li  class="tabactive" >
-                    <a data-id="0" id="type" value="0" >全部</a>
+                    <a data-id="0" id="type1" value="0" href="{{URL('article')}}">全部</a>
                 </li>
                 <?php foreach($at_type as $k=>$v){?>
                 <li >
@@ -86,12 +86,12 @@
                                 <em id="<?php echo $v['a_id']?>" class="zans">点赞
                                     <?php echo $v['a_num']?>
                                 </em>
-
+                                <input type="hidden" id="user" value="<?php echo Session::get('username');?>">
 
 
                             </div>
                             <div class="item-judge l">
-                                <i class="icon sns-comment"></i><em>评论 0</em>
+                                <i class="icon sns-comment"></i><a href="{{URL('fangfa?id=')}}<?php echo $v['a_id']?>"><em>评论 0</em></a>
                             </div>
                         </div>
                     </div>
@@ -255,11 +255,26 @@
     <script src="js/jquery-1.9.1.min.js"></script>
     <script>
   //点赞
-  $(document).on('click',".zans",function(){
-    //var ids=$("#id").val();
-    var ids=$(this).attr('id');
-    //alert(ids);
-    $.ajaxSetup({
+  //鼠标移上显示小手
+  $('.zans').mousemove(function()
+  {
+    $(this).css('cursor','pointer');
+  })
+
+//点赞事件
+ $(document).on('click',".zans",function(){
+    var user1=$('#user').val();
+    //判断用户是否登录
+    if(user1=="")
+    {
+        alert("请先登录");
+        location.href="{{URL('index')}}";
+    }
+    else
+    {
+        var ids=$(this).attr('id');
+    //alert(ids);die;
+  $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             },
@@ -270,20 +285,19 @@
        data: "ids="+ids,
        success: function(msg){
         //alert(msg);
-        if(msg==1)
-        {
-            alert("您已经点过赞了哦");
+            if(msg==1)
+            {
+                alert("您已经点过赞了哦");
+            }
+            else
+            {
+               alert('点赞成功');
+               location.href="{{URL('article')}}";
+            }
         }
-        else
-        {
-           alert('点赞成功');
-           location.href="{{URL('article')}}";
-        }
-     }
- });
-
-
-  })
+      });
+    }
+ })
 
 
         $(document).on("click","#type",function(){

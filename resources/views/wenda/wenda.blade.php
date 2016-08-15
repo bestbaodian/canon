@@ -46,8 +46,8 @@
         <a class="js-quiz" href="save">我要提问</a>
       </div>
       <div class="nav">
-        
-              </div><!--.nav end-->
+      </div>
+      <!--.nav end-->
       <!--推荐位-->
                   <ul class="recommend">
                 

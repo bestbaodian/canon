@@ -151,9 +151,11 @@ class Course extends Model{
       $ses = Session::get('username');
       if(!empty($ses)){
         $username=$ses;
+
       //$username=$_SESSION['username'];
-      $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-      $u_id=$u_id['user_id'];
+//      $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
+//      $u_id=$u_id['user_id'];
+      $u_id = Session::get("uid");
       $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where u_id=$u_id order by p_id desc");
       }else
       {
