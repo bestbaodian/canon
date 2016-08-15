@@ -43,9 +43,15 @@ class CompanyController extends Controller
 	public function college_exam()
 	{
 		$id=Request::input('id');
-		$model=new company();
+		//加载登录成功之后的头像
+		$index = new Index();
+        //$shi = $index ->index();
+        $data = $index ->head_scu();
+        $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
+        //print_r($dats);die;
+        $model=new company();
 		$data=$model->college_exam($id);
-		return view('company/college_exam',['arr'=>$data]);
+		return view('company/college_exam',['arr'=>$data,'picture'=>$dats]);
 	}
 }
  

@@ -14,17 +14,14 @@ use Session;
 class WendaController extends Controller
 {
     public function wenda(){
-        //实例化问答model层
+         //加载登录成功之后的头像
         $index = new Index();
-        $datas = $index ->head_scu();
-        $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
+        $data = $index ->head_scu();
+        $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
         $mwenda=new Wenda();
         $pro=$mwenda->get_t_tw();
-        //$users=$mwenda->sels();
-        //print_r($pro);die;
-        return view('wenda/wenda',['pro'=>$pro]);
-        return view('wenda/wenda',['pro'=>$pro,'picture'=>$picture]);
-    }
+        return view('wenda/wenda',['pro'=>$pro,'picture'=>$dats]);
+     }
 
 
     public function save(){
@@ -32,15 +29,16 @@ class WendaController extends Controller
         $mwenda=new Wenda();
         header('Content-Type: text/html; charset=utf-8');
         $username=Session::get("username");
-        //echo $username;die;
+         //加载登录成功之后的头像
+        $index = new Index();
+        $data = $index ->head_scu();
+        $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
         if(empty($username)){
             echo "<script>alert('请先登录'),location.href='index'</script>";die;
         }else{
-            //$pro=DB::table('direction')->get();
             $pro=$mwenda->get_direction();
-            //print_r($pro);die;
-        //显示各个学院
-        return view('wenda/save',['pro'=>$pro]);
+         //显示各个学院
+        return view('wenda/save',['pro'=>$pro,'picture'=>$dats]);
         }
         
     }
