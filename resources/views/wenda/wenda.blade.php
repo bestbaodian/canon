@@ -11,9 +11,9 @@
 <meta http-equiv="Cache-Control" content="no-transform " />
 <meta name="Keywords" content="" />
 <meta name="Description" content="猿问是由面试宝典为广大IT爱好者提供的专业问答交流平台,这里大牛云集,用户可根据自身需求,提出相关问题,也可为有问题同学进行解答,互帮互助,分享知识！" />
-
+<link rel="stylesheet" href="../css/myemojiPl.css">	
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
-
+<script src="../js/myemojiPl.js"></script>
 <link rel="stylesheet" href="css/c0e7cb6dbd3c47c9bcf65581ec74e79d.css" type="text/css" />
 </head>
 <body style="background:#fff;">
@@ -87,15 +87,10 @@
         </div>
         <div class="ctrl-bar clearfix">
             <span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">
-
-
-
-
-
-            <em class='bb' >赞同</em>
-
-
-
+            <em class='bb' id="<?php echo $v['t_id'] ?>">赞同</em>
+            </span>
+            <span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">
+            <em class='aa' >评论</em>
             </span>
             <div class="share-box clearfix">
                 
@@ -140,6 +135,15 @@
 
 
 <?php } ?>
+<script src="../js/jquery.js"></script>    
+<script>
+    $(function(){
+        $(document).on('click','.bb',function(){
+            var id=$(this).attr(id);
+            alert(id);
+        })
+    })
+</script>   
 <style>
             .pager{
                 position:absolute;
@@ -169,6 +173,7 @@
     </div><!--title end-->
     <ul class="cls-list">
                 <li>
+            
             <div class="class-info">
                 <div class="class-icon">
                     <a href="/wenda/20" target="_blank">
@@ -177,35 +182,9 @@
                 </div><!--.class-icon end-->
                 <h4><a href="/wenda/20" target="_blank">Linux</a></h4>
                 <p class="follow-person">12162人关注</p>
-                                <a href="javascript:void(0)" data-tag-id="20" class="follow">关注</a>
+                                <a href="guanzhu" data-tag-id="20" class="follow">关注</a>
                             </div><!--.class-info end-->
             <div class="desc">Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于P...</div>
-        </li><!--li end-->
-                <li>
-            <div class="class-info">
-                <div class="class-icon">
-                    <a href="/wenda/25" target="_blank">
-                        <img src="picture/563afed80001928100900090.jpg" alt="CSS3"/>
-                    </a>
-                </div><!--.class-icon end-->
-                <h4><a href="/wenda/25" target="_blank">CSS3</a></h4>
-                <p class="follow-person">18014人关注</p>
-                                <a href="javascript:void(0)" data-tag-id="25" class="follow">关注</a>
-                            </div><!--.class-info end-->
-            <div class="desc">CSS即层叠样式表（Cascading StyleSheet）。 在...</div>
-        </li><!--li end-->
-                <li>
-            <div class="class-info">
-                <div class="class-icon">
-                    <a href="/wenda/12" target="_blank">
-                        <img src="picture/563aff7e0001c8c700900090.jpg" alt="Android"/>
-                    </a>
-                </div><!--.class-icon end-->
-                <h4><a href="/wenda/12" target="_blank">Android</a></h4>
-                <p class="follow-person">31584人关注</p>
-                                <a href="javascript:void(0)" data-tag-id="12" class="follow">关注</a>
-                            </div><!--.class-info end-->
-            <div class="desc">Android是一种基于Linux的自由及开放源代码的操作系统，主要...</div>
         </li><!--li end-->
             </ul><!--.cls-list end-->
 </div><!--.recommend-class end-->
@@ -332,13 +311,6 @@
     <a class="elevator-top" href="javascript:;" style="display:none" id="backTop"></a>
 </div>
 
-  <div class="wd-scroll">
-    <a href="/wenda/save" class="ques">提问</a>
-    <a href="javascript:void(0)" class="to-top" title="返回顶部"><i class="icon-up2"></i></a>
-    <a href="/user/feedback" class="feedback" title="意见反馈"><i class="icon-feedback"></i></a>
-  </div>
-
-
 
 <!--script-->
 <script src="js/ssologin.js"></script>
@@ -391,16 +363,131 @@ var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
             });
      });  */
 </script>
-
-
-
-
-
-
 </div>
-
-
 </body>
-
 @endsection
 </html>
+<script>
+var emojiconfig = {
+    tieba: {
+        name: "贴吧表情",
+        path: "img/tieba/",
+        maxNum: 50,
+        file: ".jpg",
+        placeholder: ":{alias}:",
+        alias: {
+            1: "hehe",
+            2: "haha",
+            3: "tushe",
+            4: "a",
+            5: "ku",
+            6: "lu",
+            7: "kaixin",
+            8: "han",
+            9: "lei",
+            10: "heixian",
+            11: "bishi",
+            12: "bugaoxing",
+            13: "zhenbang",
+            14: "qian",
+            15: "yiwen",
+            16: "yinxian",
+            17: "tu",
+            18: "yi",
+            19: "weiqu",
+            20: "huaxin",
+            21: "hu",
+            22: "xiaonian",
+            23: "neng",
+            24: "taikaixin",
+            25: "huaji",
+            26: "mianqiang",
+            27: "kuanghan",
+            28: "guai",
+            29: "shuijiao",
+            30: "jinku",
+            31: "shengqi",
+            32: "jinya",
+            33: "pen",
+            34: "aixin",
+            35: "xinsui",
+            36: "meigui",
+            37: "liwu",
+            38: "caihong",
+            39: "xxyl",
+            40: "taiyang",
+            41: "qianbi",
+            42: "dnegpao",
+            43: "chabei",
+            44: "dangao",
+            45: "yinyue",
+            46: "haha2",
+            47: "shenli",
+            48: "damuzhi",
+            49: "ruo",
+            50: "OK"
+        },
+        title: {
+            1: "呵呵",
+            2: "哈哈",
+            3: "吐舌",
+            4: "啊",
+            5: "酷",
+            6: "怒",
+            7: "开心",
+            8: "汗",
+            9: "泪",
+            10: "黑线",
+            11: "鄙视",
+            12: "不高兴",
+            13: "真棒",
+            14: "钱",
+            15: "疑问",
+            16: "阴脸",
+            17: "吐",
+            18: "咦",
+            19: "委屈",
+            20: "花心",
+            21: "呼~",
+            22: "笑脸",
+            23: "冷",
+            24: "太开心",
+            25: "滑稽",
+            26: "勉强",
+            27: "狂汗",
+            28: "乖",
+            29: "睡觉",
+            30: "惊哭",
+            31: "生气",
+            32: "惊讶",
+            33: "喷",
+            34: "爱心",
+            35: "心碎",
+            36: "玫瑰",
+            37: "礼物",
+            38: "彩虹",
+            39: "星星月亮",
+            40: "太阳",
+            41: "钱币",
+            42: "灯泡",
+            43: "茶杯",
+            44: "蛋糕",
+            45: "音乐",
+            46: "haha",
+            47: "胜利",
+            48: "大拇指",
+            49: "弱",
+            50: "OK"
+        }
+      },
+    AcFun:{
+    	name : "AcFun表情",
+    	path : "img/AcFun/",
+    	maxNum : 54,
+    	file : ".png"
+    }
+  };
+$('.Main').myEmoji({emojiconfig : emojiconfig});
+$('.Main3').myEmoji();
+$('.Main2').myEmoji();
+</script> 
