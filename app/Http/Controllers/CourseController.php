@@ -54,13 +54,7 @@ class CourseController extends Controller
       $request=$request->all();
       $course = new Course();
       $data=$course->xiang($request);
-      //加载登录成功之后的头像
-      $index = new Index();
-      $data1 = $index ->head_scu();
-      $dats = isset($data1['user_filedir'])?$data1['user_filedir']:"";
-        //print_r($dats);die;
-
-      return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'picture'=>$dats]);
+      return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping']]);
     }
 	 public function con()
     {

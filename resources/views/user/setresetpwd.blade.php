@@ -51,7 +51,7 @@
         <a href="/user/setresetpwd"  class="onactive">修改密码</a>
       </li>
       <li >
-        <a no-pjajx href="/user/setbindsns">绑定帐号</a>
+        <a no-pjajx href="/user/setbindsns">我的收藏</a>
       </li>
     </ul>
   </div>

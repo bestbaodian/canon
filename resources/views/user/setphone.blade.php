@@ -12,13 +12,6 @@
 <meta name="keywords" content="面试宝典网，面试宝典官网，MOOC，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
 <meta name="description" content="慕课网（IMOOC）是学习编程最简单的免费平台。慕课网提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
 <link rel="stylesheet" href="/css/base.css" type="text/css" />
-<script type="text/javascript">
-
-      var OP_CONFIG={"module":"user","page":"setprofile","userInfo":{"uid":3071208,"nickname":"\u51e4\u9896","head":"http:\/\/img.mukewang.com\/images\/unknow-80.png","usertype":"1","roleid":0}};
-  var isLogin = 1;
-var is_choice = "";
-  var seajsTimestamp="v=201604211612";
-  </script>
  
 <!--
 <link rel="stylesheet" href="/static/component/logic/login/login-regist.css" type="text/css" />
@@ -60,7 +53,7 @@ var is_choice = "";
         <a href="/user/setresetpwd">修改密码</a>
       </li>
       <li >
-        <a no-pjajx href="/user/setbindsns">绑定帐号</a>
+        <a no-pjajx href="/user/setbindsns">我的收藏</a>
       </li>
     </ul>
   </div>
@@ -103,10 +96,10 @@ var is_choice = "";
 
 
 <!--script-->
-<script src="/jss/ssologin.js"></script>
+<script src="/js/ssologin.js"></script>
 <script type="text/javascript" src="/js/sea.js"></script>
 <script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
-<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
+
 
  
 

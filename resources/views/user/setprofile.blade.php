@@ -48,9 +48,10 @@
       <li >
         <a href="/user/setresetpwd">修改密码</a>
       </li>
-      {{--<li >--}}
-        {{--<a no-pjajx href="/user/setbindsns">绑定帐号</a>--}}
-      {{--</li>--}}
+      <li >
+
+        <a no-pjajx href="/user/setbindsns">我的收藏</a>
+      </li>
     </ul>
   </div>
   <div class="setting-right">

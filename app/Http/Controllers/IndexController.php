@@ -15,6 +15,9 @@ class IndexController extends Controller
         return view('index/index',['shi'=>$shi,]);
     }
 
+    public function layouts(){
+        return view('layouts/master');
+    }
     public function aaa(){
         echo Session::get("username");
     }

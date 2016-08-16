@@ -69,13 +69,6 @@
 
                                 <a class="icon-set setup" href="{{url('user/setprofile')}}"></a>
                             </div>
-                            <!--
-                            <div class="card-links">
-                                <a href="/space/index" class="my-mooc l">我的慕课<i class="dot-update"></i></a>
-                                <span class="split l"></span>
-                                <a href="/myclub/myquestion/t/ques" class="my-sns l">我的社区</a>
-                            </div>
-                            -->
                             <div class="card-history">
                                 <span class="history-item">
                                     <span class="tit text-ellipsis">python进阶</span>

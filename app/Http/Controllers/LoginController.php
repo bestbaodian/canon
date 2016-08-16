@@ -16,7 +16,7 @@ use DB;
 class LoginController extends Controller
 {
     public function login(){
-        return view('login/login');
+
     }
     /*
      * 验证手机号是否可用

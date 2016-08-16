@@ -108,7 +108,10 @@ class UserController extends Controller
         }
     }
 
-    //检测数据库密码是否一致
+    /*
+     * 检测数据库密码是否一致
+     */
+
     public function checkpwd(Request $request){
         $request=$request->all();
         $pwd=$request["oldpwd"];
@@ -116,7 +119,10 @@ class UserController extends Controller
         $user_data=$muser->get_old($pwd);
         return json_encode($user_data);
     }
-    //修改数据库密码
+
+    /*
+     * //修改数据库密码
+     */
     public function updpwd(Request $request){
         $request=$request->all();
         $pwd=$request['newpass'];
@@ -125,13 +131,19 @@ class UserController extends Controller
         return json_encode($msg);
 
     }
-    //手机设置
+
+    /*
+     * 手机设置
+     */
+
     public function setphone(){
         return view('user/setphone');
     }
 
+    /*
+     * !!邮箱验证
+     */
 
-    //邮箱验证
     public function setverifyemail(){
         return view('user/setverifyemail');
     }

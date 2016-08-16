@@ -61,7 +61,7 @@ var is_choice = "";
         <a href="/user/setresetpwd">修改密码</a>
       </li>
       <li  class="active">
-        <a no-pjajx href="/user/setbindsns"  class="onactive">绑定帐号</a>
+        <a no-pjajx href="/user/setbindsns"  class="onactive">我的收藏</a>
       </li>
     </ul>
   </div>
@@ -69,23 +69,23 @@ var is_choice = "";
     <div class="setting-right-wrap wrap-boxes settings" >
         
 <div class="setting-bindsns">
-<p>绑定第三方帐号，可以直接登录，还可以将内容同步到以下平台，与更多好友分享。</p>
+<p>最近</p>
 <div class="setting-bindsns-inner clearfix">
 		<div class="setting-bindsns-weixin l">
 		<i class="icon-weixin"></i>
-		<p>未绑定帐号</p>
-		<a class="rlf-btn-green sbtn-green js-bind " hidefocus="true" aria-role="button" href="/passport/user/tplogin?tp=weixin&amp;bind=1">立即绑定</a>
+		<p></p>
+		<a class="rlf-btn-green sbtn-green js-bind " hidefocus="true" aria-role="button" href="/passport/user/tplogin?tp=weixin&amp;bind=1"></a>
 	</div>
 			<div class="setting-bindsns-weibo l">
 		<i class="icon-weibo"></i>
-		<p>未绑定帐号</p>
-		<a class="rlf-btn-green sbtn-green js-bind " hidefocus="true" aria-role="button" href="/passport/user/tplogin?tp=weibo&amp;bind=1">立即绑定</a>
+		<p></p>
+		<a class="rlf-btn-green sbtn-green js-bind " hidefocus="true" aria-role="button" href="/passport/user/tplogin?tp=weibo&amp;bind=1"></a>
 	</div>
 	
 		<div class="setting-bindsns-qq binded-qq l">
 		<i class="icon-qq"></i>
-		<p>已绑定QQ帐号</p>
-		<a href="javascript:void(0)" class="sbtn-gy" data-unbind="qq">解除绑定</a>
+		<p></p>
+		<a href="javascript:void(0)" class="sbtn-gy" data-unbind="qq"></a>
 	</div>
 	</div>
 </div>
