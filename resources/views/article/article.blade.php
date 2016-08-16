@@ -321,7 +321,7 @@
         list-style: none;
         float: left;
         margin-top: 20px;
-        margin-left: 80px;
+        margin-left: 30px;
         font-size: 18px;
         color: #ff998c;
     }

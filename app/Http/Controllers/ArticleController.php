@@ -38,7 +38,8 @@ class ArticleController extends Controller
         }
         //die;
        $ses = Session::get('username');
-        if(empty($ses)){
+        if
+        (empty($ses)){
             $username=0;
         }else{
             $username=Session::get('username');
@@ -118,14 +119,20 @@ class ArticleController extends Controller
     }
 
     //显示用户发表的文章
+    //评论是先判断是否登录
     public function wxiang(){
-        if(empty(Session::get('usernname'))){
-            $username=0;
+        if(empty(Session::get('username'))){
+            //$username=0;
+            //article
+            echo "<script>alert('请先登录');location.href='article'</script>";
         }else{
             $username=Session::get('usernname');
         }
         $id=Request::input('id');
         $model=new article();
+        //查询这篇文章的所有评论
+        $ping_data=$model->get_ping($id);
+        //print_r($ping_data);die;
         //根据a_id两表联查article和ar_type表
         $arr=$model->join_artype($id);
         //aping users联查
@@ -136,7 +143,8 @@ class ArticleController extends Controller
         $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
         //print_r($dats);die;
 
-      return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'picture'=>$dats]);
+
+      return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'picture'=>$dats,'ping_data'=>$ping_data]);
     }
    //用户评论
     public function wping(){
@@ -153,8 +161,9 @@ class ArticleController extends Controller
        //接收评论值和a_id
         $a_id=Request::input('a_id');
         $ap_con=Request::input('ap_con');
+        $ap_addtime=date("Y-m-d H:i:s");
         //添加到用户评论表中aping
-        $re=$model->insert_aping($u_id,$a_id,$ap_con);
+        $re=$model->insert_aping($u_id,$a_id,$ap_con,$ap_addtime);
         //判断是否评论成功
         if($re)
         {

@@ -140,6 +140,7 @@ var isLogin=1
      <input type="button" id="user1" value="<?php echo session::get('username')?>">
         <textarea name="content1" id="con1" cols="100" rows="10"></textarea>
         <input type="hidden" id="aid" value="<?php echo $arr['a_id'];?>">
+        {{--原来的 评论  判断是否登录 转移到一开始点评论进去 判断--}}
         <button class="btn btn-green r" id="js-submit" onclick="cons();">评论</button>
     </div>
  
@@ -155,8 +156,57 @@ var isLogin=1
         <!-- 评论 -->
         <div id="all_comments" class="df-title">全部评论<span class="comment-num"><i>2</i>条</span></div>
         <div class="feedback-list" id="js-feedback-list-wrap">
-            
-        <div id="js-feedback-list"><div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a href="/u/1938237/articles"><img width="40" src="http://img.mukewang.com/5458640c0001b0a702200220-100-100.jpg"></a><a target="_blank" href="/u/1938237/articles" class="nick">qq_青枣工作室_0</a><span class="com-floor r">2F</span></div><div class="feed-list-content"><p></p><p>广告帖，鉴定完毕...</p><p></p><div class="comment-footer"><span class="feed-list-times"> 2小时前</span><span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="reply-btn">回复</span><span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="agree-with r"><b>赞同</b><em>1</em></span></div></div></div><div class="reply-box"></div><div class="release-reply"><a class="user-head" href="/u/3071208/articles"><img alt="凤颖" src="http://img.mukewang.com/images/unknow-160.png"></a><a class="nick" href="/u/3071208/articles">凤颖</a><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div class="release-reply-btn" data-comment-uid="1938237">提交</div></div></div></div></div></div><div class="comment-box"><div class="comment clearfix"><div class="feed-author l"><a href="/u/2477249/articles"><img width="40" src="http://img.mukewang.com/545850d50001645502200220-100-100.jpg"></a><a target="_blank" href="/u/2477249/articles" class="nick">逗你玩而已</a><span class="com-floor r">1F</span></div><div class="feed-list-content"><p></p><p>都是那点东西抄来抄去<br></p><p></p><div class="comment-footer"><span class="feed-list-times"> 8小时前</span><span data-username="逗你玩而已" data-uid="2477249" data-commentid="23489" class="reply-btn">回复</span><span data-username="逗你玩而已" data-uid="2477249" data-commentid="23489" class="agree-with r"><b>赞同</b><em>0</em></span></div></div></div><div class="reply-box"></div><div class="release-reply"><a class="user-head" href="/u/3071208/articles"><img alt="凤颖" src="http://img.mukewang.com/images/unknow-160.png"></a><a class="nick" href="/u/3071208/articles">凤颖</a><div class="replay-con"><div class="textarea-wrap"><textarea placeholder="写下你的回复..."></textarea></div><p class="errtip"></p><div class="reply-ctrl clearfix"><div class="verify-code"></div><div class="btn-wrap"><div class="cancel-btn">取消</div><div class="release-reply-btn" data-comment-uid="2477249">提交</div></div></div></div></div></div></div></div>
+
+
+
+        <div id="js-feedback-list">
+        {{--评论数据循环开始--}}
+            @foreach($ping_data as $key=>$val)
+            <div class="comment-box">
+                <div class="comment clearfix">
+                    <div class="feed-author l">
+                        <a href="/u/1938237/articles"><img width="40" src="http://img.mukewang.com/5458640c0001b0a702200220-100-100.jpg"></a>
+                        <a target="_blank" href="/u/1938237/articles" class="nick"><?php echo session::get('username')?></a>
+                        <span class="com-floor r">1F</span>
+                    </div>
+                    <div class="feed-list-content">
+                        <p></p>
+                        <p>{{$val['ap_con']}}</p>
+                        <p></p>
+                        <div class="comment-footer">
+                            <span class="feed-list-times"> 2小时前</span>
+                            <span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="reply-btn">回复</span>
+                            <span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="agree-with r">
+                                <b>赞同</b>
+                                <em>1</em>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="reply-box"></div>
+                <div class="release-reply">
+                    <a class="user-head" href="/u/3071208/articles">
+                        <img alt="凤颖" src="http://img.mukewang.com/images/unknow-160.png"></a>
+                    <a class="nick" href="/u/3071208/articles">凤颖</a>
+                    <div class="replay-con"><div class="textarea-wrap">
+                            <textarea placeholder="写下你的回复..."></textarea>
+                        </div>
+                        <p class="errtip"></p>
+                        <div class="reply-ctrl clearfix">
+                            <div class="verify-code"></div>
+                            <div class="btn-wrap">
+                                <div class="cancel-btn">取消</div>
+                                <div class="release-reply-btn" data-comment-uid="1938237">提交</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{--评论数据循环结束--}}
+            @endforeach
+        </div>
+        </div>
         <!-- 分页页码  -->
         <div class="qa-comment-page" style="display: none;"></div>
     </div>
@@ -280,13 +330,13 @@ var isLogin=1
       <script>
          function cons()
          {
-            var user1=$('#user1').val();
-             if(user1==0){
-                  alert("请先登录");
-                  location.href="{{URL('index')}}";
-              }
-              else
-              {
+            //var user1=$('#user1').val();
+             //if(user1==0){
+                 // alert("请先登录");
+                 // location.href="{{URL('index')}}";
+              //}
+              //else
+             // {
                 var con1=$('#con1').val();
                 var aid=$('#aid').val();
                 $.ajax({
@@ -307,10 +357,10 @@ var isLogin=1
                 });
 
 
-              }
+             // }
          }
-          
-         
+
+
       </script>
 <div style="display: none">
 </div>

@@ -111,6 +111,17 @@ class Article extends Model
         $arr=DB::table("article")->join("ar_type","article.a_type","=","ar_type.at_id")->where("article.a_id",$id)->get();
         return $arr;
     }
+
+    //查出这篇文章的相关评论
+    public function get_ping($id){
+        $data = DB::table('aping')
+            ->join('article', 'aping.a_id', '=', 'article.a_id')
+            ->select('ap_id', 'ap_con', 'u_id','aping.a_id')
+            ->where('aping.a_id',$id)
+            ->get();
+        return $data;
+    }
+
    //aping users联查
     public function join_users()
     {
@@ -118,9 +129,9 @@ class Article extends Model
         return $aping;
     }
     //添加到用户评论表中aping
-       public function insert_aping($u_id,$a_id,$ap_con)
+       public function insert_aping($u_id,$a_id,$ap_con,$ap_addtime)
        {
-         $sql="insert into aping(u_id,ap_con,a_id) values('$u_id','$ap_con','$a_id')";
+         $sql="insert into aping(u_id,ap_con,a_id,ap_addtime) values('$u_id','$ap_con','$a_id','$ap_addtime')";
          $re=DB::insert($sql);
          return $re;
        }
