@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Model\Wenda;
-use App\Http\Model\Index;
 use Session;
 
 /**
@@ -14,13 +13,9 @@ use Session;
 class WendaController extends Controller
 {
     public function wenda(){
-         //加载登录成功之后的头像
-        $index = new Index();
-        $data = $index ->head_scu();
-        $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
         $mwenda=new Wenda();
         $pro=$mwenda->get_t_tw();
-        return view('wenda/wenda',['pro'=>$pro,'picture'=>$dats]);
+        return view('wenda/wenda',['pro'=>$pro]);
      }
 
 

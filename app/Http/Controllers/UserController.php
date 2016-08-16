@@ -91,12 +91,19 @@ class UserController extends Controller
 
             if($file->move($destinationPath, $fileName))
             {
-                //设置用户头像字段入库
+                /*
+                 * 设置用户头像字段入库
+                 */
                 $user_filedir = $destinationPath.$fileName;
                 $sql = "update users set user_filedir = '$user_filedir' where user_id = '$uid'";
                 $upd = DB::select($sql);
-                return redirect("user/setavator");
 
+                /*
+                 * 修改用户头像重新设置session
+                 */
+                $da  = DB::table('users')->select("user_filedir")->where("user_id",$uid)->first();
+                Session::put('user_filedir',$da['user_filedir']);
+                header('location:user/setavator');
             }
         }
     }

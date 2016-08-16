@@ -40,7 +40,9 @@ class Login extends Model
     }
     else
     {
-        //将数据入库
+        /*  注册
+         * //将数据入库
+         */
         $name = $data['user_name'];
         $pwd = md5(md5($data['user_pwd']));
         $email = $data['user_email'];
@@ -48,7 +50,10 @@ class Login extends Model
         $arr=DB::insert("insert into users(user_name,user_pwd,user_email,user_phone) values('$name','$pwd','$email','$phone')");
         //设置用户session值
         if($arr){
+            $data=DB::table('users')->where('user_phone',"$phone")->where('user_email',"$email")->first();
             Session::put('username',$name);
+            Session::put('uid',$data['user_id']);
+            Session::put('user_filedir',$data['user_filedir']);
             return true;
         }
     }
@@ -128,6 +133,7 @@ class Login extends Model
         if($arr){
             Session::put('username',$arr[0]['user_name']);
             Session::put('uid',$arr[0]['user_id']);
+            Session::put('user_filedir',$arr[0]['user_filedir']);
             return 5;
         }else{
             return 6;
@@ -145,6 +151,7 @@ class Login extends Model
         if($arr){
             Session::put('username',$arr[0]['user_name']);
             Session::put('uid',$arr[0]['user_id']);
+            Session::put('user_filedir',$arr[0]['user_filedir']);
             echo 5;
         }else{
             echo 6;
