@@ -137,13 +137,9 @@ class ArticleController extends Controller
         //aping users联查
         $aping=$model->join_users();
         //加载登录成功之后的头像
-        $index = new Index();
-        $data = $index ->head_scu();
-        $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
+
         //print_r($dats);die;
-
-
-      return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'picture'=>$dats,'ping_data'=>$ping_data]);
+      return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data]);
     }
    //用户评论
     public function wping(){
