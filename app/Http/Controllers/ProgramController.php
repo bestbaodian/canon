@@ -17,10 +17,7 @@ class ProgramController extends Controller
         $model=new program();
         $all = $model->program();
         $data = $model->recruit1();
-        $index = new Index();
-        $datas = $index ->head_scu();
-        $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
-        return view('program/program',['all'=>$all,'data'=>$data,'picture'=>$picture]);
+        return view('program/program',['all'=>$all,'data'=>$data]);
     }
    /*
      *根据职位查询信息

@@ -13,11 +13,10 @@ use App\Http\Model\Index;
 class ArticleController extends Controller
 {
     public function article(){
-       //实例化Article
-        $index = new Index();
-        $datas = $index ->head_scu();
-        $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
-        //实例化model层
+       /*
+        *实例化Article
+        *实例化model层
+        */
         $articlemodel=new Article();
 
         //接受用户get请求数据
@@ -46,7 +45,7 @@ class ArticleController extends Controller
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
         $u_id=$articlemodel->get_usersid($username);
 
-        return view('article/article',['at_type'=>$at_type,'article'=>$article,'picture'=>$picture]);
+        return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
 
 

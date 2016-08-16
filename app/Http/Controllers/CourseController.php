@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Http\Model\Course;
-use App\Http\Model\Index;
 use App\Http\Requests;
 use Session;
 use Validator;
@@ -22,11 +21,7 @@ class CourseController extends Controller
         unset($data['page']);
         $login = new Course();
         $pro=$login ->course($data);
-        //用户头像信息
-        $index = new Index();
-        $datas = $index ->head_scu();
-        $picture = isset($datas['user_filedir'])?$datas['user_filedir']:"";
-        return view('course/course',['arr'=>$pro['arr'],'zhuan'=>$pro['zhuan'],'shi'=>$pro['shi'],'lei'=>$pro['lei'],'vv',$pro['vv'],'a'=>$pro['a'],'l'=>$pro['l'],'picture'=>$picture]);
+        return view('course/course',['arr'=>$pro['arr'],'zhuan'=>$pro['zhuan'],'shi'=>$pro['shi'],'lei'=>$pro['lei'],'vv',$pro['vv'],'a'=>$pro['a'],'l'=>$pro['l']]);
     }
     /*
       搜索教程

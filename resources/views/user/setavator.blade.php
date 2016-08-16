@@ -75,7 +75,7 @@ var is_choice = "";
 <div class="setting-wrap setting-avator clearfix" id="setting-avator">
 
 	<div class="avator-img l">
-		<div><img width="220" height="220" src="/{{$data or 'images/unknow-160.png'}}"></div>
+		<div><img width="220" height="220" src="/<?php if(Session::get('user_filedir')){ echo Session::get('user_filedir'); }else{ echo "images/unknow-160.png"; };?>"></div>
 
 		<div>
             <input type="submit" class="btn-style-01" value="提交" />
@@ -133,13 +133,6 @@ var is_choice = "";
 
 
 <script src="/js/ssologin.js"></script>
-<<<<<<< HEAD
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
-=======
->>>>>>> 41e854e0b7da2a1cdfd92d363faf1075e8772884
-
-
 <style>
     .btn-style-01{
         border-style:none;
