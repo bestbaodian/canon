@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Model\Wenda;
+use App\Http\Model\Index;
 use Session;
 
 /**
@@ -127,6 +128,18 @@ class WendaController extends Controller
     //             }
                
     //     }
-
-    
+    /*
+    用户关注之后，进入相应的关注页面
+    */
+    public function guanzhu(){
+        return view('wenda/guanzhu');
+    }
+    /*
+    显示有什么关注的类
+    */
+    public function follow(){
+        $content = DB::table('direction')->get();
+        //return view('wenda/wenda',['content'=>$content]);
+    }
+   
 }

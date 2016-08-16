@@ -42,6 +42,10 @@ var is_choice = "";
     <script defer="defer" type="text/javascript" src="../js/codemirror.js">
     </script><link href="../css/codemirrorhx.css" type="text/css" rel="stylesheet">
     <script defer="defer" type="text/javascript" src="../js/ZeroClipboard.js"></script>
+    <link rel="stylesheet" href="../js/assets/design/css/trumbowyg.css">
+    <script src="../js/assets/jquery.min.js"></script>
+    <script src="../js/assets/trumbowyg.js"></script>
+    <script src="../js/assets/plugins/base64/trumbowyg.base64.js"></script>
     </head>
 <body style="background:#fff;">
 
@@ -69,11 +73,9 @@ var is_choice = "";
 
 
                  <script src="js/jquery-1.9.1.js"></script>
-                 <body>
-                  <textarea id="content" name="t_content" row="5" col="6" onkeyup="fun1()">  
-      
-                  </textarea>  
-                    <span id="c_content"></span>   
+                 <body>            
+                <textarea id="content" name="t_content" row="5" col="6" onkeyup="fun1()"></textarea>  
+                <span id="c_content"></span>   
                     
                 </body>
                 </div>
