@@ -66,10 +66,12 @@ var isLogin=1
         </div>
 
         <div class="detail-content ">
+            <input type="hidden" id="a_id" value="<?php echo $arr['a_id'];?>"/>
             <p><?php echo $arr['a_con']?></p>
         </div>
                 <!-- 标签 -->
                 <div class="cat-box clearfix">
+                    {{--需要把标签变活--}}
                        <a class="cat l" href="/article/tag/5" target="_blank">Html/CSS</a>
                        <a class="cat l" href="/article/tag/25" target="_blank">CSS3</a>
                     </div>
@@ -165,7 +167,7 @@ var isLogin=1
             <div class="comment-box">
                 <div class="comment clearfix">
                     <div class="feed-author l">
-                        <a href="/u/1938237/articles"><img width="40" src="http://img.mukewang.com/5458640c0001b0a702200220-100-100.jpg"></a>
+                        <a href=""><img width="40" alt="{{Session::get('username')}}" src="<?php echo Session::get('user_filedir');?>"></a>
                         <a target="_blank" href="/u/1938237/articles" class="nick"><?php echo session::get('username')?></a>
                         <span class="com-floor r">1F</span>
                     </div>
@@ -174,11 +176,21 @@ var isLogin=1
                         <p>{{$val['ap_con']}}</p>
                         <p></p>
                         <div class="comment-footer">
-                            <span class="feed-list-times"> 2小时前</span>
+                            <span class="feed-list-times"> {{$val['ap_addtime']}}　　评论</span>
                             <span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="reply-btn">回复</span>
                             <span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="agree-with r">
-                                <b>赞同</b>
-                                <em>1</em>
+                                <b id="z_{{$val['ap_id']}}" onclick="likes({{$val['ap_id']}})">
+                                    <?php
+                                    $arr_id=explode(',',$val['allid']);
+                                    ?>
+                                    <?php if(in_array(Session::get('uid'),$arr_id)){
+                                            echo '已点赞';
+                                        }else{
+                                            echo '点赞';
+                                        }
+                                    ?>
+                                </b>
+                                <em id="znum_{{$val['ap_id']}}">{{$val['count']}}</em>
                             </span>
                         </div>
                     </div>
@@ -186,7 +198,7 @@ var isLogin=1
                 <div class="reply-box"></div>
                 <div class="release-reply">
                     <a class="user-head" href="/u/3071208/articles">
-                        <img alt="凤颖" src="http://img.mukewang.com/images/unknow-160.png"></a>
+                        <img alt="{{Session::get('user_filedir')}}" src="<?php echo Session::get('user_filedir'); ?>"></a>
                     <a class="nick" href="/u/3071208/articles">凤颖</a>
                     <div class="replay-con"><div class="textarea-wrap">
                             <textarea placeholder="写下你的回复..."></textarea>
@@ -205,6 +217,7 @@ var isLogin=1
 
             {{--评论数据循环结束--}}
             @endforeach
+            <ul id="fenye"><li>{{ $ping_data->appends(['id' =>$arr['a_id'] ])->links() }}</li></ul>
         </div>
         </div>
         <!-- 分页页码  -->
@@ -330,39 +343,70 @@ var isLogin=1
       <script>
          function cons()
          {
-            //var user1=$('#user1').val();
-             //if(user1==0){
-                 // alert("请先登录");
-                 // location.href="{{URL('index')}}";
-              //}
-              //else
-             // {
-                var con1=$('#con1').val();
-                var aid=$('#aid').val();
-                $.ajax({
-                       type: "POST",
-                       url: "{{URL('wping')}}",
-                       data: "ap_con="+con1+"&a_id="+aid,
-                       success: function(msg){
-                        if(msg=="true")
-                        {
-                            alert("评论成功");
-                            location.href="{{URL('article')}}";
-                        }
-                        else
-                        {
-                            alert("请重新评论");
-                        }
-                       }
-                });
-
-
-             // }
+            var con1=$('#con1').val();
+            var aid=$('#aid').val();
+            $.ajax({
+                   type: "POST",
+                   url: "{{URL('wping')}}",
+                   data: "ap_con="+con1+"&a_id="+aid,
+                   success: function(msg){
+                    if(msg=="true") {
+                        alert("评论成功");
+                        location.reload();
+                    }
+                    else{
+                        alert("请重新评论");
+                    }
+                   }
+            });
          }
-
-
+          //点赞
+         //(评论的id)
+          function likes(ap_id){
+              //获取这篇文章的id
+              var a_id=$("#a_id").val();
+             var ap_id=ap_id;
+              var ap_zannum=$("#znum_"+ap_id).html();
+              $.ajaxSetup({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                  },
+                  url:"zanping",
+                  type:"post",
+                  datatype:"json"
+              });
+              $.ajax({
+                  data:{
+                      ap_id:ap_id
+                  },success:function(data){
+                      var obj=eval("("+data+")");
+                      /*if(obj['error']!=1){
+                          location.href("fangfa?id="+a_id);
+                      }*/
+                      if(obj['msg']==0){
+                         // $("#znum_"+ap_id).html("obj['num']");
+                          $("#z_"+ap_id).html("已赞");
+                          $("#znum_"+ap_id).html(parseInt(ap_zannum)+1);
+                      }else{
+                          //$("#znum_"+ap_id).html("obj['num']");
+                          $("#z_"+ap_id).html("点赞");
+                          $("#znum_"+ap_id).html(ap_zannum-1);
+                      }
+                  }
+              })
+          }
       </script>
 <div style="display: none">
 </div>
 </body>
 </html>
+<style>
+    #fenye li{
+        list-style: none;
+        float: left;
+        margin-top: 20px;
+        margin-left: 30px;
+        font-size: 18px;
+        color: #ff998c;
+    }
+</style>

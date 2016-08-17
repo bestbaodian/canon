@@ -54,6 +54,13 @@ Route::get('sms/messagestwo', 'SmsController@messagestwo');
 Route::get('sms/notices', 'SmsController@notices');
 Route::get('friend/friendlist', 'FriendController@friendlist');
 
+
+/*
+ * 方法模块
+ * */
+//给评论点赞路由
+Route::post('zanping','ArticleController@zp');
+
 /*
  * 猿问开始
  */

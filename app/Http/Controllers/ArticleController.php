@@ -135,14 +135,14 @@ class ArticleController extends Controller
         $arr=$model->join_artype($id);
         //aping users联查
         $aping=$model->join_users();
-        //加载登录成功之后的头像
-
-        //print_r($dats);die;
-      return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data]);
+        //查ping_zan表里有没有用户点赞的信息
+        $u_id=Session::get("uid");
+        // $u_z_p=$model->get_uzp($id,$u_id);
+        return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data]);
     }
-   //用户评论
+    //用户评论
     public function wping(){
-       if(empty(Session::get('username'))){
+        if(empty(Session::get('username'))){
             $username=0;
             $u_id=0;
         }else{
@@ -152,7 +152,7 @@ class ArticleController extends Controller
             $arr=$model->zan($username);
             $u_id=$arr['user_id'];
         }
-       //接收评论值和a_id
+        //接收评论值和a_id
         $a_id=Request::input('a_id');
         $ap_con=Request::input('ap_con');
         $ap_addtime=date("Y-m-d H:i:s");
@@ -168,6 +168,25 @@ class ArticleController extends Controller
         else
         {
             echo "false";
+        }
+    }
+    //登录的用户赞文章的评论
+    public function zp(Request $request){
+        $ap_id=Request::input('ap_id');
+        //获取 本篇文章的id,登陆人的用户id, 若点赞ping_zan添加一条数据  若取消赞 则删除
+        $u_id=Session::get("uid");
+        $model=new Article();
+        $u_z_p=$model->get_uzp($ap_id,$u_id);
+        if($u_z_p==""){
+            //该用户没有赞过这条评论,则添加
+            $add_zan=$model->add_z($ap_id,$u_id);
+            return json_encode($add_zan);
+            //var_dump($add_zan);
+        }else{
+            //删除数据库
+            $del_zan=$model->del_z($ap_id,$u_id);
+            return json_encode($del_zan);
+            //var_dump($del_zan);
         }
     }
 
