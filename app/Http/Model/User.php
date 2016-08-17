@@ -60,7 +60,7 @@ class User extends Model
 
         //更改昵称验证唯一性
         $validator = Validator::make($arr, [
-            'user_name' => 'required|between:4,6',
+            'user_name' => 'required|between:2,6',
         ]);
         //判断是否有错误
         if($validator->errors()->all()){

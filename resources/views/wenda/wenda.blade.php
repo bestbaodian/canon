@@ -13,27 +13,23 @@
 <meta name="Description" content="猿问是由面试宝典为广大IT爱好者提供的专业问答交流平台,这里大牛云集,用户可根据自身需求,提出相关问题,也可为有问题同学进行解答,互帮互助,分享知识！" />
 <link rel="stylesheet" href="../css/myemojiPl.css">	
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
-<script src="../js/myemojiPl.js"></script>
 <link rel="stylesheet" href="css/c0e7cb6dbd3c47c9bcf65581ec74e79d.css" type="text/css" />
 </head>
 <body style="background:#fff;">
 
 @extends('layouts.master')
 @section('sidebar')
-@parent            
-        <div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
-            <div class="search-area min" data-search="top-banner">
-                <input class="search-input" data-suggest-trigger="suggest-trigger" placeholder="请输入想搜索的内容..." type="text" autocomplete="off">
-                <input type='hidden' class='btn_search' data-search-btn="search-btn" />
-                <ul class="search-area-result" data-suggest-result="suggest-result">
-                </ul>
-            </div>
-            <div class='showhide-search' data-show='no'><i class='icon-search'></i></div>
-        </div>
+@parent
+
+<div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
+    <div class="search-area min" data-search="top-banner">
+        <input class="search-input" data-suggest-trigger="suggest-trigger" placeholder="请输入想搜索的内容..." type="text" autocomplete="off">
+        <input type='hidden' class='btn_search' data-search-btn="search-btn" />
+        <ul class="search-area-result" data-suggest-result="suggest-result">
+        </ul>
     </div>
+            <div class='showhide-search' data-show='no'><i class='icon-search'></i></div>
 </div>
-
-
 <div id="main">
 
 
@@ -54,12 +50,6 @@
               </ul><!--recommend end-->
                   <!--左侧列表内容-->
       <div >
-        
-
-
-
-
-
 
 <?php foreach($pro as $k=>$v){?>
 
@@ -135,27 +125,18 @@
 
 
 <?php } ?>
-<script src="../js/jquery.js"></script>    
-<script>
-    $(function(){
-        $(document).on('click','.bb',function(){
-            var id=$(this).attr(id);
-            alert(id);
-        })
-    })
-</script>   
 <style>
-            .pager{
-                position:absolute;
-                left:400px;
-                bottom:-20px;
-            }
-                        .pager li{
-                            float:left;
-                            margin-left:100px;
-                font-size:xx-large;
-                        }
-                    </style>
+        .pager{
+            position:absolute;
+            left:400px;
+            bottom:-20px;
+        }
+        .pager li{
+            float:left;
+            margin-left:100px;
+            font-size:xx-large;
+        }
+</style>
              <?php echo $pro->links(); ?>
 
 

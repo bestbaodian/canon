@@ -12,12 +12,8 @@
 <meta name="keywords" content="面试宝典网，面试宝典官网，MOOC，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
 <meta name="description" content="慕课网（IMOOC）是学习编程最简单的免费平台。慕课网提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
 <link rel="stylesheet" href="/css/base.css" type="text/css" />
- 
-<!--
-<link rel="stylesheet" href="/static/component/logic/login/login-regist.css" type="text/css" />
-<link rel="stylesheet" href="/static/css/settings.css" type="text/css" />
--->
-<link rel="stylesheet" href="/css/common-less.css" type="text/css" />
+<script src="/js/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="/css/common-less.css" stype="text/css" />
 <link rel="stylesheet" href="/css/profile-less.css" type="text/css" />
 <link rel="stylesheet" href="/css/user-common-less.css" type="text/css" />
 <link rel="stylesheet" href="/css/user-phone-less.css" type="text/css" />
@@ -42,13 +38,12 @@
        
       <li  class="active">
         <a href="/user/setphone" class="onactive">手机设置</a>
-                    <span class='unbound'>未绑定</span>
-              </li>
-      
+          <span class='unbound'>未绑定</span>
+      </li>
       <li >
         <a href="/user/setverifyemail">邮箱验证</a>
-                    <span class='unbound'>未绑定</span>
-              </li>
+          <span class='unbound'>未绑定</span>
+      </li>
       <li >
         <a href="/user/setresetpwd">修改密码</a>
       </li>
@@ -66,12 +61,10 @@
     </div>
             <h4>手机未绑定，为帐户安全请绑定手机号</h4>
         <div class="phonebox">
-            <a class="binding" href="/user/setphonestep">立即绑定</a>
+            <a class="binding" href="javascript:void(0)">立即绑定</a>
         </div>
-        <p>可用手机号加密码登录面试宝典网</p>
     <p>可通过手机号找回密码</p>
 </div>
-
 
     </div>
   </div>
@@ -93,15 +86,12 @@
     <a class="elevator-top" href="javascript:;" style="display:none" id="backTop"></a>
 </div>
 
+<script>
+    //手机号
+    $("#").click(function(){
 
-
-<!--script-->
-<script src="/js/ssologin.js"></script>
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
-
-
- 
+    })
+</script>
 
 
 <div style="display: none">

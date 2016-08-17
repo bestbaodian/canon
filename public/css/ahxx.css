@@ -4401,7 +4401,6 @@ body {
   font-weight: bold;
 }
 .share-rl-tips .rule-arrow {
-  background: url(/static/img/common/rl-arrow.png) 0 -11px no-repeat;
   position: absolute;
   right: 51px;
   top: -6px;

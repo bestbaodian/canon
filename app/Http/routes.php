@@ -73,6 +73,8 @@ Route::get('follow', 'WendaController@follow');
 Route::post('hui', 'WendaController@hui');
 //点赞
 Route::get('zid', 'WendaController@zid');
+
+Route::get("agree","WendaController@agree");
 /*
  * 猿问结束
  */
@@ -97,7 +99,7 @@ Route::get('ping', 'CourseController@ping');
 Route::get('article', 'ArticleController@article');
 Route::get('publish', 'ArticleController@publish');
 Route::post('add', 'ArticleController@add');
-Route::get('zan', 'ArticleController@zan');
+Route::any('zan', 'ArticleController@zan');
 Route::post('type', 'ArticleController@type');
 Route::get('fangfa', 'ArticleController@wxiang');
 Route::post('wping', 'ArticleController@wping');

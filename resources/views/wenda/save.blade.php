@@ -11,40 +11,16 @@
 <meta http-equiv="Cache-Control" content="no-transform ">
 <meta name="Keywords" content="">
 <meta name="Description" content="">
-
-
-
-<script src="js/push.js"></script><script src="js/rt.js" async="" type="text/javascript"></script><script type="text/javascript">
-
-      var OP_CONFIG={"module":"wenda","page":"save","userInfo":{"uid":"3116310","nickname":"core3116310","head":"http:\/\/img.mukewang.com\/user\/56f9d3ae0001e1c701000100-80-80.jpg","usertype":"1","roleid":0}};
-  var isLogin = 1;
-var is_choice = "";
-  var seajsTimestamp=" ";
-    var ownName=" "
-  
-</script>
-
-
     <link rel="stylesheet" href="../css/ahx.css" type="text/css">
-    <script src="../js/jquery.js" async="" charset="utf-8">
-    </script><script src="../js/seajs-text.js" async="" charset="utf-8"></script>
-    <script src="../images/js/common.js" async="" charset="utf-8"></script>
+    <script src="../js/jquery.js" async="" charset="utf-8"></script>
     <script src="../js/string.js" async="" charset="utf-8"></script>
-    <script src="../js/suggest.js" async="" charset="utf-8"></script>
-    <script src="../js/store.js" async="" charset="utf-8"></script>
-    <script src="../js/json.js" async="" charset="utf-8"></script>
-    <script src="../js/im.js" async="" charset="utf-8"></script>
-    <script src="../images/js/save.js" async="" charset="utf-8"></script>
     <script src="../js/socket.js" async="" charset="utf-8"></script>
-    <script src="../js/autocomplete.js" async="" charset="utf-8">
-    </script><script src="../js/verify-code.js" async="" charset="utf-8">
-    </script><link rel="stylesheet" type="text/css" href="../css/ueditorhx.css">
+    <link rel="stylesheet" type="text/css" href="../css/ueditorhx.css">
     <script defer="defer" type="text/javascript" src="../js/codemirror.js">
     </script><link href="../css/codemirrorhx.css" type="text/css" rel="stylesheet">
     <script defer="defer" type="text/javascript" src="../js/ZeroClipboard.js"></script>
     <link rel="stylesheet" href="../js/assets/design/css/trumbowyg.css">
     <script src="../js/assets/jquery.min.js"></script>
-    <script src="../js/assets/trumbowyg.js"></script>
     <script src="../js/assets/plugins/base64/trumbowyg.base64.js"></script>
     </head>
 <body style="background:#fff;">
@@ -73,9 +49,9 @@ var is_choice = "";
 
 
                  <script src="js/jquery-1.9.1.js"></script>
-                 <body>            
-                <textarea id="content" name="t_content" row="5" col="6" onkeyup="fun1()"></textarea>  
-                <span id="c_content"></span>   
+                 <body>
+                <textarea id="content" name="t_content" style="margin-left:29px; width: 810px;height: 260px;" row="5" col="6" onkeyup="fun1()"></textarea>
+                <span id="c_content"></span>
                     
                 </body>
                 </div>
@@ -104,7 +80,7 @@ var is_choice = "";
         </div>
         <div class="saveques-bottom">
 <!--          <a href="javascript:void(0)" id="ques-submit-btn" class="btn btn-red link-btn publishbtn" >发布提问</a>-->
-                <a href="javascript:void(0)" id="ques-submit-btn" class="aaaa" >发布提问</a>
+                <a href="javascript:void(0)" id="ques-submit-btn" style="background-color: rgba(247, 179, 146, 0.87)" class="aaaa" >发布提问</a>
           <p class="global-errortip js-global-error"></p>
         </div>
         <script>
@@ -123,7 +99,7 @@ var is_choice = "";
             $(function(){
                 $(document).on('click',".aaaa",function(){
                     var title=$("#t_title").val();
-                    var content=$("#content").val();
+                    var content=UE.getEditor('content').execCommand( "getlocaldata" );
                     var pro=$("#pro").val();
                     if(pro==0){
                         alert('所属学院不能为空');die;
@@ -195,51 +171,14 @@ var is_choice = "";
 <script type="text/javascript" charset="utf-8" src="js/ueditor_002.js"></script>
 <script type="text/javascript" charset="utf-8" src="js/ueditor.js"> </script>
 <script type="text/javascript" charset="utf-8" src="js/zh-cn.js"></script>
-<!--<script type="text/javascript" charset="utf-8" src="/static/lib/ueditor/ueditor.final.min.js"></script>-->
-<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
+
 <div style="display: none">
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff0cfcccd7b1393990c78efdeebff3968' type='text/javascript'%3E%3C/script%3E"));
-(function (d) {
-window.bd_cpro_rtid="rHT4P1c";
-var s = d.createElement("script");s.type = "text/javascript";s.async = true;s.src = location.protocol + "//cpro.baidu.com/cpro/ui/rt.js";
-var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
-})(document);
-</script><script src="js/h.js" type="text/javascript"></script><a href="http://tongji.baidu.com/hm-web/welcome/ico?s=f0cfcccd7b1393990c78efdeebff3968" target="_blank"><img src="../images/21.gif" border="0" width="20" height="20"></a>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    bp.src = '//push.zhanzhang.baidu.com/push.js';
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
 </div>
-<div class="edui-imooc" style="position: fixed; left: 0px; top: 0px; width: 0px; height: 0px;" id="edui_fixedlayer"><div style="display: none;" id="edui43" class="edui-popup  edui-bubble edui-imooc" onmousedown="return false;"> <div id="edui43_body" class="edui-popup-body edui-imooc"> <iframe class="edui-imooc" style="position:absolute;z-index:-1;left:0;top:0;background-color: transparent;" src="../images/detail_files/a_002.htm" width="100%" frameborder="0" height="100%"></iframe> <div class="edui-shadow edui-imooc"></div> <div id="edui43_content" class="edui-popup-content edui-imooc">  </div> </div></div></div><div style="position: absolute; left: 0px; top: -9999px; width: 1px; height: 1px; z-index: 999999999;" class="global-zeroclipboard-container" id="global-zeroclipboard-html-bridge"><object id="global-zeroclipboard-flash-bridge" name="global-zeroclipboard-flash-bridge" type="application/x-shockwave-flash" data="../save_files/ZeroClipboard.swf" width="100%" height="100%"><param name="allowScriptAccess" value="sameDomain"><param name="allowNetworking" value="all"><param name="menu" value="false"><param name="wmode" value="transparent"><param name="flashvars" value="trustedOrigins=www.imooc.com%2C%2F%2Fwww.imooc.com%2Chttp%3A%2F%2Fwww.imooc.com"></object></div></body></html>
-<style>
-    #content{
-        //background-color: #f00;
-        height:150px;
-        width:800px;
-        box-shadow: 10px 10px 5px #888888;  
-        border:2px solid;  
-        border-radius:25px;  
-        //background: url(5.jpg); 
-        margin-left: 35px;
-        font-family:"华文行楷"
-            
-    }
-    .aaaa{
-        background-color: #4CAF50; /* Green */  
-        border: none;  
-        color: white;  
-        padding: 15px 32px;  
-        text-align: center;  
-        text-decoration: none;  
-        display: inline-block;  
-    }
-</style>
+<script type="text/javascript" charset="utf-8" src="baidu/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="baidu/ueditor.all.min.js"> </script>
+<script type="text/javascript">
+    var ue = UE.getEditor('content');
+</script>
 @endsection
 
 

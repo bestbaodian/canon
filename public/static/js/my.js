@@ -271,8 +271,10 @@ $(function(){
             },success:function(data){
                 var obj=eval('('+data+')')
                if(obj['msg'] == "ok"){
-                    alert("保存成功")
-                   history.go(0)
+                    alert("保存成功");
+                   location.reload()
+               }else{
+                   alert(obj['translation'])
                }
             }
         })

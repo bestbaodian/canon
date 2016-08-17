@@ -18,7 +18,6 @@
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
     </head>
 <body id="index">
-
 @extends('layouts.master')
 @section('sidebar')
 @parent
