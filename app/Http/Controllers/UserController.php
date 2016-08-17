@@ -103,7 +103,7 @@ class UserController extends Controller
                  */
                 $da  = DB::table('users')->select("user_filedir")->where("user_id",$uid)->first();
                 Session::put('user_filedir',$da['user_filedir']);
-                header("location:http://www.mbaodian.com/user/setavator");
+                return redirect("user/setavator");
             }
         }
     }

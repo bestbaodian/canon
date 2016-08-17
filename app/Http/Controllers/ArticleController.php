@@ -45,7 +45,6 @@ class ArticleController extends Controller
         }
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
         $u_id=$articlemodel->get_usersid($username);
-
         return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
 
