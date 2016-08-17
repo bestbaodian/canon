@@ -25,7 +25,7 @@ Route::post('name_deng', 'LoginController@name_deng');
 Route::post('email_deng','LoginController@email_deng');
 //第三方登陆--qq登陆
 Route::get('qq_login', 'LoginController@qq_login');
-
+Route::get('Ic',"IcController@Ic");
 //个人中心
 Route::get('user/setprofile', 'UserController@setprofile');
 Route::get('user/setavator', 'UserController@setavator');

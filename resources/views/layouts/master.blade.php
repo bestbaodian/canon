@@ -14,12 +14,13 @@
                 <li><a href="{{url('article')}}"  target="_self">方法</a></li>
                 <li><a href="{{url('company')}}"  target="_self">简历</a></li>
 		        <li><a href="{{url('wenda')}}" target="_self">答疑</a></li>
+		        <li><a href="{{url('Ic')}}" target="_self">面试公司</a></li>
             </ul>
         </div>
         <div id="login-area">
             <ul    <?php if(empty(Session::get('username'))){ ?> class="header-unlogin clearfix" <?php }else{ ?> class="clearfix logined" <?php }?>>
                 <li class="header-app">
-                    <a href="/mobile/app">
+                    <a href="#">
                         <span class="icon-appdownload"></span>
                     </a>
                     <div class="QR-download">
