@@ -34,6 +34,7 @@
                     $a=isset($_GET['a'])?$_GET['a']:0;
                     $l=isset($_GET['l'])?$_GET['l']:0;
                     $p=isset($_GET['page'])?$_GET['page']:1;
+                    $top=isset($_GET['top'])?$_GET['top']:0;
                     ?>
                     <span class="hd l">学院：</span>
                     <div class="bd">
@@ -90,8 +91,8 @@
             </div>
             <div class="course-tool-bar clearfix">
                 <div class="tool-left l">
-                    <a href="/course/list?sort=last" class="sort-item">最新</a>
-                    <a href="/course/list?sort=pop" class="sort-item active">最热</a>
+                    <a href="{{url("shiti?v=$vv&a=$a&l=$l")}}" class="sort-item <?=$top==0?"":"active"?>">最新</a>
+                    <a href="{{url("shiti?v=$vv&a=$a&l=$l&top=1")}}" class="sort-item <?=$top==1?"":"active"?>">最热</a>
                 </div>
                 <div class="l">
                     <span class="tool-item" style="display: none;">
@@ -104,14 +105,14 @@
                     </span>
                     <span class="tool-item tool-pager">
                                                 <span class="pager-num">
-                            <b class="pager-cur">{{$shi->currentPage()}}</b>/<em class="pager-total"><?php echo ceil(count($shi)/12);?></em>
+                            <b class="pager-cur">{{$shi->currentPage()}}</b>/<em class="pager-total">{{$shi->lastPage()}}</em>
                         </span>
                         <?php if($p<=1){ ?>
                         <a href="javascript:void(0)" class="pager-action pager-prev hide-text disabled">上一页</a>
                         <?php }else{ ?>
-                        <a href="shiti?page=<?=$p-1?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>" class="pager-action pager-prev hide-text">上一页</a>
+                        <a href="shiti?page=<?=$p-1?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>&top=<?=$top?>" class="pager-action pager-prev hide-text">上一页</a>
                         <?php } ?>
-                        <a href="shiti?page=<?=$p+1?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>" class="pager-action pager-next hide-text">下一页</a>
+                        <a href="shiti?page=<?=$p+1?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>&top=<?=$top?>" class="pager-action pager-next hide-text">下一页</a>
                         </span>
                 </div>
             </div>
@@ -120,7 +121,7 @@
                     <ul>
                     <?php foreach($shi as $k=>$v){?>
                         <li class="course-one">
-                            <a href="{{url("xiang?id=$v[c_id]")}}" target="_self">
+                            <a href="{{url("xiang?id=$v[c_id]&v=$vv&a=$a&l=$l")}}" target="_self">
 				<div class="course-list-img">
                                     <img width="240" height="135" alt="" src="<?php
                                     if($v['c_college']=="软工学院"){
@@ -144,7 +145,7 @@
                                     }?>">
                                 </div>
                                 <h5>
-                                    <span><a href="xiang?id=<?php echo $v['c_id']?>" target="_self"><?php echo $v['c_name']?></a></span>
+                                    <span><a href="{{url("xiang?id=$v[c_id]&v=$vv&a=$a&l=$l")}}" target="_self"><?php echo $v['c_name']?></a></span>
                                 </h5>
                                 <div class="tips">
                                     <p class="text-ellipsis">类型:<?php echo $v['c_type']?></p>
@@ -165,30 +166,18 @@
                 </div>
             </div>
 <style>
-			.pager{
-			    position:absolute;
-			    left:400px;
-			    bottom:-20px;
-			}
-      .pager li{
-          float:left;
-          margin-left:100px;
-          font-size:xx-large;
-      }
-      page{
-        list-style: none;
-        float: left;
-        margin-left: 25px;
-        border: 2px solid red;
-        position: absolute;
-        margin-left: 250px;
-      }
+    .pagination{
+        position:absolute;
+        left:400px;
+        bottom:-20px;
+    }
+    .pagination li{
+        float:left;
+        margin-left:10px;
+        font-size:24px
+    }
 </style>
-          <ul>
-            <li class="page">
-                <?=$shi->appends(['v'=>$vv,'a'=>$a,'l'=>$l])->render()?>
-            </li>
-          </ul>
+            <?=$shi->appends(['v'=>$vv,'a'=>$a,'l'=>$l,'top'=>$top])->render()?>
           </div>
     </div>
 </div>

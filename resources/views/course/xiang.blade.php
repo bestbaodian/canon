@@ -13,13 +13,16 @@
 <meta http-equiv="Cache-Control" content="no-transform ">
 <meta name="Keywords" content="">
 <link rel="stylesheet" href="css/a2.css" type="text/css">
-<script src="js/jquery_002.js" async="" charset="utf-8"></script><script src="js/seajs-text.js" async="" charset="utf-8"></script><script src="js/common.js" async="" charset="utf-8"></script><script src="js/share.js"></script><script src="js/string.js" async="" charset="utf-8"></script><script src="js/suggest.js" async="" charset="utf-8"></script><script src="js/store.js" async="" charset="utf-8"></script><script src="js/json.js" async="" charset="utf-8"></script><script src="javascripts/im.js" async="" charset="utf-8"></script><script src="js/view.js" async="" charset="utf-8"></script><link href="css/share_style0_16.css" rel="stylesheet"><script src="js/course_common.js" async="" charset="utf-8"></script><script src="js/course_collection.js" async="" charset="utf-8"></script><script src="js/socket.js" async="" charset="utf-8"></script><script src="js/jquery.js" async="" charset="utf-8"></script><script src="js/layer.js" async="" charset="utf-8"></script><link href="css/layer2.css" rel="stylesheet" charset="utf-8"></head>
 <body>
 
 @extends('layouts.master')
 @section('sidebar')
 @parent
-
+<?php
+$vv=isset($_GET['v'])?$_GET['v']:0;
+$a=isset($_GET['a'])?$_GET['a']:0;
+$l=isset($_GET['l'])?$_GET['l']:0;
+?>
 
 <div id="main">
 
@@ -30,12 +33,11 @@
         <h3 class="1"></h3>
         <h2 class="l"><br/> The good seaman<br/><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is known in bad weather.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
         </h2>
             <a href="javascript:void(0);" class="l video-desc-trigger" id="js-video-trigger">
         <i class="ic-video"></i>
       </a>
-          </div>
+    </div>
     <div class="statics clearfix">
       <div class="static-item ">
         <span class="meta-value"><strong><?php echo $arr['c_direction']?></strong></span>
@@ -62,9 +64,9 @@
       <!-- share -->
       <div data-bd-bind="1459252125792" class="share-action r bdsharebuttonbox bdshare-button-style0-16">
         分享
-        <a title="分享到微信" href="javascript:;" class="share wx js-share" data-cmd="weixin"></a>
-        <a title="分享到QQ空间" href="javascript:;" class="share qq js-share" data-cmd="qzone"></a>
-        <a title="分享到新浪微博" href="javascript:;" class="share sina js-share" data-cmd="tsina"></a>
+        {{--<a title="分享到微信" href="javascript:;" class="share wx js-share" data-cmd="weixin"></a>--}}
+        {{--<a title="分享到QQ空间" href="javascript:;" class="share qq js-share" data-cmd="qzone"></a>--}}
+        {{--<a title="分享到新浪微博" href="javascript:;" class="share sina js-share" data-cmd="tsina"></a>--}}
       </div>
       <i class="split-line r"></i>
             <a href="javascript:;" data-cmd="follow" class="follow-action r js-follow-action" data-cid="85">
@@ -132,17 +134,28 @@
 
         </div>
         <div class="outline-list">
-                      <ul>
-                              <li class="chapter clearfix ">
+            <ul>
+                <li class="chapter clearfix ">
                   <i class="chapter-icon"></i>
-                  <div class="chapter-bd l">
-                     {{-- <h5 class="name">第1章 Java初体验</h5>--}}
-                      <p class="desc"><?php echo $arr['c_answer']?></p>
-                  </div>
+                    <div class="chapter-bd l">
+                     {{-- <h5 class="name">第1章 Java初体验</h5>--}}<p class="desc"><?php echo $arr['c_answer']?></p>
+                    </div>
                 </li>
-                          </ul>
-                              </div>
+            </ul>
+        </div>
       </div>
+        {{--试题选题功能--}}
+        <div>
+            <?php if($min){ ?>
+            <a href="xiang?id=<?=$min?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">上一题</a>
+            <? } ?>
+            <?php if($max){ ?>
+            <a href="xiang?id=<?=$max?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">下一题</a>
+            <? } ?>
+
+
+
+        </div>
         <span style="float: right" id="ping">立即评价</span>
         <div id="pinglun">
             <textarea rows="5" cols="100" id="con" placeholder="请输入评论:" style="background:#33ffff"></textarea>
@@ -326,21 +339,12 @@
 </div>
 
 
-
 <!--script-->
 <script src="js/ssologin.js"></script>
-<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
-
 
 <script type="text/javascript">
 </script>
 <div class="mask"></div>
-
-
-<div style="display: none">
-
-</div><script src="xiang_files/user.htm" type="text/javascript"></script><script src="xiang_files/iplookup.php" type="text/javascript"></script>
-
 
 </body></html>
 <script src="js/jquery-1.8.3.min.js"></script>
@@ -362,7 +366,7 @@
             //alert(data)
             if(data==1){
                 alert('请先登录');
-                location.href='index.php/login';
+                location.href='index';
             }else{
                 $("#list").html(data)
             }

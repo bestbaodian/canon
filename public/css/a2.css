@@ -2216,7 +2216,6 @@ i {
   width: 16px;
   height: 16px;
   vertical-align: -3px;
-  background: url('/static/img/course/v2/info_s.png') no-repeat 0 0;
 }
 .course-infos .statics {
   position: absolute;
@@ -2272,7 +2271,6 @@ i {
   width: 14px;
   height: 14px;
   margin-right: 4px;
-  background: url('/static/img/course/v2/info_s.png') no-repeat 0 -20px;
   vertical-align: middle;
 }
 .course-infos .statics .static-time {
@@ -2305,7 +2303,6 @@ i {
 }
 .course-infos .extra .follow-action,
 .course-infos .extra .share {
-  background-image: url('/static/img/course/v2/info_s.png');
   background-repeat: no-repeat;
 }
 .course-infos .extra .share {
@@ -2567,7 +2564,6 @@ i {
   width: 40px;
   height: 40px;
   margin: 5px 0 0 0;
-  background: url(/static/img/course_info_sprit.png) no-repeat 0 -106px;
 }
 .outline-list .chapter .chapter-bd {
   position: relative;

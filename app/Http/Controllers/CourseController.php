@@ -24,37 +24,15 @@ class CourseController extends Controller
         return view('course/course',['arr'=>$pro['arr'],'zhuan'=>$pro['zhuan'],'shi'=>$pro['shi'],'lei'=>$pro['lei'],'vv',$pro['vv'],'a'=>$pro['a'],'l'=>$pro['l']]);
     }
     /*
-      搜索教程
-      根据相应的条件产生相应的学习资料
-    */
-    public function sou(Request $request){
-      $request=$request->all();
-      $course = new Course();
-      $data=$course->sou($request);
-      return view('course/zhuan',['zhuan'=>$data['zhuan']]);
-    }
-    /*
-     * 用户选择题目ajax返回
+     * 用户详情页面  制作人:: 张峻玮
+     * 2016-8-17 14:34
      */
-    public function s(Request $request){
-      $request=$request->all();
-      $course = new Course();
-      $data=$course->s($request);
-        //$shi=DB::select($shi);
-        return view('course/shi',['shi'=>$data['shi']]);
-    }
-    public function zhuanye(Request $request){
-      $request=$request->all();
-      $course = new Course();
-      $data=$course->zhuanye($request);
-        //print_r($arr);die;
-      return view('course/shi',['shi'=>$data['arr']]);
-    }
     public function xiang(Request $request){
-      $request=$request->all();
+        //接收  试题id  --学院id  -- 专业id  -- 类型id
+        // 各项参数
       $course = new Course();
       $data=$course->xiang($request);
-      return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping']]);
+      return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min']]);
     }
 	 public function con()
     {

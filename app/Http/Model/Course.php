@@ -45,12 +45,23 @@ class Course extends Model{
         //类型
         $lei=DB::table('type')->get();
         //全部试题
-        if($arr){
+
+        if(isset($data['top'])){
+            if($arr){
 //            $college = DB::table('college')->where($arr)->first();
-            $shi=DB::table('college_questions')->where($arr)->simplePaginate(12);
+                $shi=DB::table('college_questions')->where($arr)->orderBy('c_num','desc')->Paginate(12);
+            }else{
+                //全部试题
+                $shi=DB::table('college_questions')->orderBy('c_num','desc')->Paginate(12);
+            }
         }else{
-            //全部试题
-            $shi=DB::table('college_questions')->simplePaginate(12);
+            if($arr){
+//            $college = DB::table('college')->where($arr)->first();
+                $shi=DB::table('college_questions')->where($arr)->orderBy('c_id','desc')->Paginate(12);
+            }else{
+                //全部试题
+                $shi=DB::table('college_questions')->orderBy('c_id','desc')->Paginate(12);
+            }
         }
         $pro['arr']=$xue;
         $pro['zhuan']=$zhuan;
@@ -73,116 +84,72 @@ class Course extends Model{
 //        $data['shi']=$shi;
 //        return $data;
     }
-    public function sou($request){
-        if(!empty($request['leixing'])){
-            $type=$request['leixing'];
-        }else{
-            $type='';
-        }
-        if($type==0){
-            $sql="select d_id,d_name from direction";
-        }else {
-            $sql = "select d_id,d_name from direction where college_id=".$type;
-        }
-        $zhuan=DB::select($sql);
-        //print_r($zhuan);die;
-        //根据学院的id查询学院的名称
-      $college = DB::table('college')->where('c_id',$type)->first();
-      //类型的试题
-      // $shi="select * from college_questions where c_college='".$college['c_name']."'";
-      // $shi=DB::select($shi);
-      $college_name=$college['c_name'];
-      $shi=DB::table('college_questions')->where('c_college',"$college_name")->simplePaginate(12);
-      $data['zhuan']=$zhuan;
-      $data['shi']=$shi;
-      return $data;
-    }
-
-
-    public function s($request){
-      if(!empty($request['leixing'])){
-          $type= $request['leixing'];
-      }else{
-          $type='';
-      }
-      if($type==0){
-          $shi=DB::table('college_questions')->simplePaginate(12);
-      }else{
-          $college = DB::table('college')->where('c_id',$type)->first();
-          //类型的试题
-          $college_name=$college['c_name'];
-          $shi=DB::table('college_questions')->where('c_college',"$college_name")->simplePaginate(12);
-      }
-      $data['shi']=$shi;
-      return $data;
-    }
-
-    public function zhuanye($request){
-      $zhuan=$request['zhuan'];
-      $lei=$request['lei'];
-      if($zhuan=='0'){
-          if($lei=='0'){
-             // $zhi='都为空';
-              $arr=DB::table('college_questions')->simplePaginate(12);
-          }else{
-             // $zhi='类型非空专业为空';
-              $arr=DB::table('college_questions')->where('c_type',"$lei")->simplePaginate(12);
-          }
-
-      }else{
-          if($lei=='0'){
-             // $zhi='专业非空类型为空';
-              $arr=DB::table('college_questions')->where('c_direction',"$zhuan")->simplePaginate(12);
-          }else{
-              //$zhi="都不为空";
-             $arr=DB::table('college_questions')->where('c_direction',"$zhuan")->where('c_type',"$lei")->simplePaginate(12);
-          }
-      }
-      $data['arr']=$arr;
-      return $data;
-    }
+    /*
+     * 试题详情页面   制作人::张峻玮
+     */
 
     public function xiang($request){
-      $id=$request['id'];
-      $num=DB::table('college_questions')->where("c_id",$id)->first();
-      $num=$num['c_num']+=1;
-      $sq=DB::update("update college_questions set c_num='$num' where c_id=".$id);
-      $arr=DB::table('college_questions')->where('c_id',$id)->first();
-    //print_r($arr);die;
-      $ses = Session::get('username');
-      if(!empty($ses)){
-        $username=$ses;
+        //接收  试题id  --学院id  -- 专业id  -- 类型id
+        // 各项参数
+        $id=$request->get('id');
+        $v=$request->get('v',0);
+        $a=$request->get('a',0);
+        $l=$request->get('l',0);
+        //定义空数据 查询创建分页条件
+        $arr=array();
 
-      //$username=$_SESSION['username'];
-//      $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-//      $u_id=$u_id['user_id'];
-      $u_id = Session::get("uid");
-      $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where u_id=$u_id order by p_id desc");
-      }else
-      {
-          $ping=array();
-      }
-      if($arr['c_college']=='软工学院'){
-          $arr['img']='http://123.56.249.121/api/logo/软工.jpg';
-      }elseif($arr['c_college']=='移动通信学院'){
-          $arr['img']='http://123.56.249.121/api/logo/移动.jpg';
-      }elseif($arr['c_college']=='云计算学院'){
-          $arr['img']='http://123.56.249.121/api/logo/云计算.jpg';
-      }elseif($arr['c_college']=='高翻学院'){
-          $arr['img']='http://123.56.249.121/api/logo/高翻.jpg';
-      }elseif($arr['c_college']=='国际经贸学院'){
-          $arr['img']='http://123.56.249.121/api/logo/经贸.jpg';
-      }elseif($arr['c_college']=='建筑学院'){
-          $arr['img']='http://123.56.249.121/api/logo/建筑.jpg';
-      }elseif($arr['c_college']=='游戏学院'){
-          $arr['img']='http://123.56.249.121/api/logo/游戏.jpg';
-      }elseif($arr['c_college']=='网工学院'){
-          $arr['img']='http://123.56.249.121/api/logo/网工.jpg';
-      }elseif($arr['c_college']=='传媒学院'){
-          $arr['img']='http://123.56.249.121/api/logo/传媒.jpg';
-      }
-      $data['arr']=$arr;
-      $data['ping']=$ping;
-      return $data;
+        if($v){
+            $college=DB::table('college')->where('c_id',$v)->first();
+            $arr['c_college']=$college['c_name'];
+        }
+        if($a){
+            $direction=DB::table('direction')->where('d_id',$a)->first();
+            $arr['c_direction']=$direction['d_name'];
+        }
+        if($l){
+            $type=DB::table('type')->where('t_id',$l)->first();
+            $arr['c_type']=$type['t_name'];
+        }
+        if($arr){
+            $arr_max=DB::table('college_questions')->select('c_id')->where('c_id','>',$id)->where($arr)->first();
+            $arr_min=DB::table('college_questions')->select('c_id')->where('c_id','<',$id)->where($arr)->orderby('c_id','desc')->first();
+        }else{
+            $arr_max=DB::table('college_questions')->select('c_id')->where('c_id','>',$id)->first();
+            $arr_min=DB::table('college_questions')->select('c_id')->where('c_id','<',$id)->orderby('c_id','desc')->first();
+        }
+
+        $sq=DB::update("update college_questions set c_num=c_num + 1 where c_id=".$id);
+
+        $arr=DB::table('college_questions')->where('c_id',$id)->first();
+
+        $username = Session::get('username');
+
+        $ping=DB::table('e_ping')
+            ->join('users','e_ping.u_id','=','users.user_id')
+            ->where('e_id',$id)->orderby('p_id','desc')->take(5)->get();
+        if($arr['c_college']=='软工学院'){
+            $arr['img']='http://123.56.249.121/api/logo/软工.jpg';
+        }elseif($arr['c_college']=='移动通信学院'){
+            $arr['img']='http://123.56.249.121/api/logo/移动.jpg';
+        }elseif($arr['c_college']=='云计算学院'){
+            $arr['img']='http://123.56.249.121/api/logo/云计算.jpg';
+        }elseif($arr['c_college']=='高翻学院'){
+            $arr['img']='http://123.56.249.121/api/logo/高翻.jpg';
+        }elseif($arr['c_college']=='国际经贸学院'){
+            $arr['img']='http://123.56.249.121/api/logo/经贸.jpg';
+        }elseif($arr['c_college']=='建筑学院'){
+            $arr['img']='http://123.56.249.121/api/logo/建筑.jpg';
+        }elseif($arr['c_college']=='游戏学院'){
+            $arr['img']='http://123.56.249.121/api/logo/游戏.jpg';
+        }elseif($arr['c_college']=='网工学院'){
+            $arr['img']='http://123.56.249.121/api/logo/网工.jpg';
+        }elseif($arr['c_college']=='传媒学院'){
+            $arr['img']='http://123.56.249.121/api/logo/传媒.jpg';
+        }
+        $data['arr']=$arr;
+        $data['ping']=$ping;
+        $data['max']=$arr_max['c_id'];
+        $data['min']=$arr_min['c_id'];
+        return $data;
     }
 }
