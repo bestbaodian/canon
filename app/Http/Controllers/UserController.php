@@ -57,9 +57,6 @@ class UserController extends Controller
 
     //头像设置
     public function setavator(Request $request){
-        if($request->input("up")){
-            echo '<script>location.reload()</script>';
-        }
         //获取用户session信息
         $username = Session::get("username");
         $User  =new  User();
@@ -106,7 +103,7 @@ class UserController extends Controller
                  */
                 $da  = DB::table('users')->select("user_filedir")->where("user_id",$uid)->first();
                 Session::put('user_filedir',$da['user_filedir']);
-                return redirect("user/setavator?up=ASDW");
+                header("location:user/setavator");
             }
         }
     }
