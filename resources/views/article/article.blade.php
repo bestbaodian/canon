@@ -284,9 +284,16 @@
         });
     $.ajax({
        data: "ids="+ids,
-       success: function(msg){
+       success: function(data){
         //alert(msg);
-            if(msg==1)
+           var obj=eval("("+data+")");
+           if(obj['msg']==1){
+               alert("您已经点过赞了哦");
+           }else{
+               alert('点赞成功');
+               location.href="{{URL('article')}}";
+           }
+           /* if(msg==1)
             {
                 alert("您已经点过赞了哦");
             }
@@ -294,7 +301,7 @@
             {
                alert('点赞成功');
                location.href="{{URL('article')}}";
-            }
+            }*/
         }
       });
     }

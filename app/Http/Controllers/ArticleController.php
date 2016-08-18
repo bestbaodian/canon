@@ -10,6 +10,13 @@ use App\Http\Model\Article;
 *方法模块
 */
 use App\Http\Model\Index;
+/*
+ * 方法模块
+ * 展示文章
+ *      对应文章评论
+ *      点赞
+ *          lhm
+ */
 class ArticleController extends Controller
 {
     public function article(){
@@ -46,7 +53,9 @@ class ArticleController extends Controller
         return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
 
-
+    /*
+     * 发布文章功能
+     */
     public function publish(){
         //查看是否登录
         $username=Session::get("username");
@@ -59,7 +68,10 @@ class ArticleController extends Controller
         }
     }
     
-    //写文章
+    /*
+     * 发布文章
+     * 添加数据库
+     */
     public function add(){
         $a_title = Request::input('a_title');
         $a_type=Request::input('a_type');
@@ -76,7 +88,9 @@ class ArticleController extends Controller
                 echo "<script>alert('提交失败');location.href='publish';</script>";
             }
     }
-   //用户点赞
+   /*
+    * 对应文章点赞功能
+    * */
     public function zan(){
         $a_id=Request::input('ids');
         if(empty(Session::get('username')))
@@ -93,7 +107,13 @@ class ArticleController extends Controller
         {
             $arr=$model->article($a_id);
             //提示您已经点赞
-            echo 1;
+            if($arr){
+                $article_zan=array(
+                    "msg"=>'1',
+                    "error"=>'0'
+                );
+                return json_encode($article_zan);
+            }
         }
         else
         {
@@ -103,7 +123,7 @@ class ArticleController extends Controller
             $aa=$model->insert_article($a_num,$a_id);
             $a2=$model->article_zan2($u_id,$a_id);
             $zan=$model->article($a_id);
-            echo 2;
+            return json_encode($a2);
         }
     }
 
