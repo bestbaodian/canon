@@ -176,7 +176,7 @@ class UserController extends Controller
             //第一次签到
             $res=DB::insert("insert into qiandao (num,days,pond,ltime,uid) VALUES ('$num','$days','$pond','$time','$uid')");
             if ($res) {
-                $_SESSION['user_pond']  =$pond;
+                Session::put('user_pond',$pond);;
                 $data[0]='签到成功，获得' . $pond . '积分';
                 $data[1]=$pond;
                 //echo '第一次签到成功';
@@ -203,7 +203,7 @@ class UserController extends Controller
                 $ntime = date("Y-m-d");
                 $res=DB::update("update qiandao set num='$nnum',days='$ndays',pond='$npond',ltime='$ntime' where uid='$uid'");
                 if ($res) {
-                    $_SESSION['user_pond']  = $npond;
+                    Session::put('user_pond',$npond);
                     $data=array();
                     // echo '连续签到成功';
                     $data[0]='签到成功，获得' . $nponds . '积分';
@@ -234,7 +234,7 @@ class UserController extends Controller
                     $res=DB::update("update qiandao set num='$nnum',days='$ndays',pond='$npond',ltime='$ntime' where uid='$uid'");
                     if ($res) {
                         // echo '非连续签到成功';
-                        $_SESSION['user_pond']  = $npond;
+                        Session::put('user_pond',$npond);
                         $data[0]='签到成功，获得' . $nponds . '积分';
                         $data[1]=$npond;
                         return json_encode($data);
