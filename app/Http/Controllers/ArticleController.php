@@ -22,7 +22,6 @@ class ArticleController extends Controller
         //接受用户get请求数据
         $at_id=Request::input('at_id');
         $article_id=Request::input('article_id');
-
         //print_r($article_id);
         //查询ar_type表
         $at_type=$articlemodel->getar_type();
@@ -37,8 +36,7 @@ class ArticleController extends Controller
         }
         //die;
        $ses = Session::get('username');
-        if
-        (empty($ses)){
+        if (empty($ses)){
             $username=0;
         }else{
             $username=Session::get('username');
@@ -50,9 +48,15 @@ class ArticleController extends Controller
 
 
     public function publish(){
-        $at_type=DB::table('ar_type')->get();
-        $a_lei=DB::table('a_lei')->get();
-       return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
+        //查看是否登录
+        $username=Session::get("username");
+        if($username==""){
+            echo "<script>alert('请先登录');location.href='/'</script>";
+        }else{
+            $at_type=DB::table('ar_type')->get();
+            $a_lei=DB::table('a_lei')->get();
+            return view('article/publish',['ar_type'=>$at_type,'a_lei'=>$a_lei]);
+        }
     }
     
     //写文章
@@ -137,7 +141,8 @@ class ArticleController extends Controller
         $aping=$model->join_users();
         //查ping_zan表里有没有用户点赞的信息
         $u_id=Session::get("uid");
-        // $u_z_p=$model->get_uzp($id,$u_id);
+        //查看该条文章有多少评论
+        //$ping_num=$model->get_pingnum($id);,'ping_num'=>$ping_num
         return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data]);
     }
     //用户评论
@@ -159,16 +164,7 @@ class ArticleController extends Controller
         //添加到用户评论表中aping
         $re=$model->insert_aping($u_id,$a_id,$ap_con,$ap_addtime);
         //判断是否评论成功
-        if($re)
-        {
-            //两表联查users和article
-            $aping=$model->users_article();
-            echo "true";
-        }
-        else
-        {
-            echo "false";
-        }
+        return json_encode($re);
     }
     //登录的用户赞文章的评论
     public function zp(Request $request){

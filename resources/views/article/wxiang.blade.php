@@ -350,13 +350,13 @@ var isLogin=1
                    url: "{{URL('wping')}}",
                    data: "ap_con="+con1+"&a_id="+aid,
                    success: function(msg){
-                    if(msg=="true") {
-                        alert("评论成功");
-                        location.reload();
-                    }
-                    else{
-                        alert("请重新评论");
-                    }
+                       var obj=eval("("+msg+")");
+                       if(obj['error']){
+                           alert("评论成功");
+                           location.reload();
+                       }else{
+                           alert("评论异常");
+                       }
                    }
             });
          }

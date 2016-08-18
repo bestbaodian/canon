@@ -19,7 +19,7 @@ class Article extends Model
          */
         $article = DB::table('article')
             ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
-            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num')
+            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num','a_pingnum')
             ->where("article.a_type",$at_id)
             ->orderBy('a_id', 'desc')
             ->paginate(3);
@@ -30,7 +30,7 @@ class Article extends Model
        //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id order by a_id desc");
         $article = DB::table('article')
             ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
-            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num')
+            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num','a_pingnum')
             ->orderBy('a_id', 'desc')
             ->paginate(3);
         return $article;
@@ -149,7 +149,20 @@ class Article extends Model
     {
         $sql="insert into aping(u_id,ap_con,a_id,ap_addtime) values('$u_id','$ap_con','$a_id','$ap_addtime')";
         $re=DB::insert($sql);
-        return $re;
+        if($re){
+            DB::select("update article set a_pingnum=a_pingnum+1 where a_id='$a_id'");
+            $arr=array(
+                "msg"=>'ok',
+                "error"=>'0'
+            );
+            return $arr;
+        }else{
+            $arr=array(
+                "msg"=>'no',
+                "error"=>'1'
+            );
+            return $arr;
+        }
     }
     //
     //查询用户是否对这条评论赞过
@@ -203,6 +216,14 @@ class Article extends Model
             );
             return $arr;
         }
+    }
+    //查看该篇文章有多少评论
+    public function get_pingnum($id){
+        $ping_num = DB::table('aping')
+            ->select('*')
+            ->where('a_id', $id)
+            ->count();
+        return $ping_num;
     }
 
 }
