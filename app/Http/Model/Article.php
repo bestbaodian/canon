@@ -42,7 +42,7 @@ class Article extends Model
         $u_id=DB::table('users')->where("user_name","$username")->orwhere("user_email","$username")->first();
         return $u_id;
     }
-
+//CREATE TABLE `order_log` (`order_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,`order_num` INT,`sub_num` INT,`buy_time` DATETIME,`user_num` INT)
     //article_zan
     public function get_article_zan($val)
     {
@@ -98,6 +98,11 @@ class Article extends Model
     {
         $zan=DB::table('article')->where('a_id',$a_id)->first();
         return $zan;
+        /*$arr=array(
+            'msg'=>'1',
+            'error'=>'0'
+        );
+        return $arr;*/
     }
     public function insert_article($a_num,$a_id)
     {
@@ -107,7 +112,11 @@ class Article extends Model
     public function article_zan2($u_id,$a_id)
     {
         $a=DB::insert("insert into article_zan(u_id,article_id) values('$u_id','$a_id')");
-        return $a;
+        $arr=array(
+            'msg'=>'2',//点赞成功
+            'error'=>'0'
+        );
+        return $arr;
     }
 
     /*
