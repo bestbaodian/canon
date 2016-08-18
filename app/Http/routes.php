@@ -53,7 +53,8 @@ Route::get('sms/messagesone', 'SmsController@messagesone');
 Route::get('sms/messagestwo', 'SmsController@messagestwo');
 Route::get('sms/notices', 'SmsController@notices');
 Route::get('friend/friendlist', 'FriendController@friendlist');
-
+//用户签到
+Route::get("qiandao","UserController@qiandao");
 
 /*
  * 方法模块

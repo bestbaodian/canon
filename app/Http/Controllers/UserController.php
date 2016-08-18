@@ -164,8 +164,8 @@ class UserController extends Controller
      * 制作人::张泽远
      * 2016-08-18
      */
-    public function qiandao(){
-        $uid=Request::input('uid');
+    public function qiandao(Request $request){
+        $uid=$request->get('uid');
         //echo $uid;die;
         $time=date("Y-m-d");
         glob($num = '1');

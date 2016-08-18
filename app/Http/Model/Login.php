@@ -134,6 +134,8 @@ class Login extends Model
             Session::put('username',$arr[0]['user_name']);
             Session::put('uid',$arr[0]['user_id']);
             Session::put('user_filedir',$arr[0]['user_filedir']);
+            Session::put('user_ex',$arr[0]['user_experience']);
+            Session::put('user_pond',$arr[0]['user_integral']);
             return 5;
         }else{
             return 6;
@@ -152,6 +154,8 @@ class Login extends Model
             Session::put('username',$arr[0]['user_name']);
             Session::put('uid',$arr[0]['user_id']);
             Session::put('user_filedir',$arr[0]['user_filedir']);
+            Session::put('user_ex',$arr[0]['user_experience']);
+            Session::put('user_pond',$arr[0]['user_integral']);
             echo 5;
         }else{
             echo 6;
