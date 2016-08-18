@@ -54,6 +54,20 @@ class Login extends Model
             Session::put('username',$name);
             Session::put('uid',$data['user_id']);
             Session::put('user_filedir',$data['user_filedir']);
+
+            //用户注册给用户设置签到表
+            //设置经验--积分
+            $Q = DB::table('qiandao')->where("uid",$data['user_id'])->first();
+            if($Q){
+                Session::put('user_pond',$Q['pond']);
+                Session::put('user_ex',$Q['ex']);
+            }else{
+                $uid = $data['user_id'];
+                $res=DB::insert("insert into qiandao (num,days,pond,ltime,uid) VALUES ('','','','','$uid')");
+                $datas = DB::table('qiandao')->where("uid",$uid)->first();
+                Session::put('user_pond',$datas['pond']);
+                Session::put('user_ex',$datas['ex']);
+            }
             return true;
         }
     }
@@ -134,6 +148,17 @@ class Login extends Model
             Session::put('username',$arr[0]['user_name']);
             Session::put('uid',$arr[0]['user_id']);
             Session::put('user_filedir',$arr[0]['user_filedir']);
+            $data = DB::table('qiandao')->where("uid",$arr[0]['user_id'])->first();
+            if($data){
+                Session::put('user_pond',$data['pond']);
+                Session::put('user_ex',$data['ex']);
+            }else{
+                $uid = $arr[0]['user_id'];
+                $res=DB::insert("insert into qiandao (num,days,pond,ltime,uid) VALUES ('','','','','$uid')");
+                $datas = DB::table('qiandao')->where("uid",$arr[0]['user_id'])->first();
+                Session::put('user_pond',$datas['pond']);
+                Session::put('user_ex',$datas['ex']);
+            }
             return 5;
         }else{
             return 6;
@@ -152,9 +177,22 @@ class Login extends Model
             Session::put('username',$arr[0]['user_name']);
             Session::put('uid',$arr[0]['user_id']);
             Session::put('user_filedir',$arr[0]['user_filedir']);
-            echo 5;
+            $data = DB::table('qiandao')->where("uid",$arr[0]['user_id'])->first();
+            if($data){
+                Session::put('user_pond',$data['pond']);
+                Session::put('user_ex',$data['ex']);
+            }else{
+                $uid = $arr[0]['user_id'];
+                $res=DB::insert("insert into qiandao (num,days,pond,ltime,uid) VALUES ('','','','','$uid')");
+                $datas = DB::table('qiandao')->where("uid",$arr[0]['user_id'])->first();
+                Session::put('user_pond',$datas['pond']);
+                Session::put('user_ex',$datas['ex']);
+            }
+
+
+            return 5;
         }else{
-            echo 6;
+            return 6;
         }
     }
 }

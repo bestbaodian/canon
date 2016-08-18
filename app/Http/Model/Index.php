@@ -19,6 +19,7 @@ class Index extends Model
     }
 
     /*
+     * 主页 显示招聘信息
      * 制作人 :: 王浩东 2016-08-17 21:10
      */
     public function program()

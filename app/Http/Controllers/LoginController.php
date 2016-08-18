@@ -89,6 +89,10 @@ class LoginController extends Controller
      */
     public function out(){
         Session::forget("username");
+        Session::forget("uid");
+        Session::forget("user_filedir");
+        Session::forget("user_pond");
+        Session::forget("user_ex");
         echo "<script>alert('退出成功');location.href='index'</script>";
     }
 
