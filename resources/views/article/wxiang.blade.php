@@ -73,9 +73,10 @@ var isLogin=1
                 <!-- 标签 -->
                 <div class="cat-box clearfix">
                     {{--需要把标签变活--}}
-
-                       <a class="cat l" href="/article/tag/5" target="_blank">Html/CSS</a>
-                       <a class="cat l" href="/article/tag/25" target="_blank">CSS3</a>
+                    @foreach($typer as $key=>$val)
+                        <a class="cat l" href="#" target="_blank">{{$val['al_name']}}</a>
+                    @endforeach
+                        {{--<a class="cat l" href="/article/tag/25" target="_blank">2</a>--}}
                     </div>
             
         <div class="active-box clearfix">
@@ -158,7 +159,7 @@ var isLogin=1
             </p>
         </div>
         <!-- 评论 -->
-        <div id="all_comments" class="df-title">全部评论<span class="comment-num"><i>2</i>条</span></div>
+        <div id="all_comments" class="df-title">全部评论<span class="comment-num"><i></i></span></div>
         <div class="feedback-list" id="js-feedback-list-wrap">
 
 

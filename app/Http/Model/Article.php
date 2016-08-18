@@ -5,18 +5,24 @@ use DB;
 use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
+    /*
+     * 查看所有文章类型
+     * 添加文章时选择类型
+     */
     public function getar_type()
     {
         $at_type=DB::table('ar_type')->get();
         return $at_type;
     }
-    //查询article内容
+
+    /*
+     * 查询article内容
+     * 针对文章类型 进行显示数据
+     */
     public function select_article1($at_id)
     {
         //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id where article.a_type='$at_id' order by a_id desc");
-        /*
-         * 针对文章类型 进行显示数据
-         */
+
         $article = DB::table('article')
             ->join('users', 'article.a_adduser', '=', 'users.user_id')
             ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
@@ -27,6 +33,10 @@ class Article extends Model
             ->paginate(3);
         return $article;
     }
+
+    /*
+     * 显示所有审核通过的文章
+     */
     public function select_article()
     {
        //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id order by a_id desc");
@@ -39,31 +49,45 @@ class Article extends Model
             ->paginate(3);
         return $article;
     }
-    //点击文章详情  浏览量+1
+
+    /*
+     * 点击文章详情  浏览量+1
+     */
     public function add_articlenum($id){
         DB::select("update article set brows=brows+1 where a_id='$id'");
     }
-    //得到userid
+
+    /*
+     * 得到userid
+     */
     public function get_usersid($username)
     {
         $u_id=DB::table('users')->where("user_name","$username")->orwhere("user_email","$username")->first();
         return $u_id;
     }
-    //article_zan
+
+    /*
+     * article_zan
+     */
     public function get_article_zan($val)
     {
         $arr=DB::table('article_zan')->where(["u_id"=>0,"article_id"=>$val['a_id']])->first();
         return $arr;
     }
 
-    //a_lei
+    /*
+     * 得到文章类型(所有)
+     */
     public function get_a_lei()
     {
         $a_lei=DB::table('a_lei')->get();
         return $a_lei;
     }
 
-    //写文章
+    /*
+     * 写文章
+     * 得到数据传值 入库
+     */
     public function add($a_title,$a_type,$a_con,$a_addtime,$file,$a_lei,$a_adduser)
     {
         $allowed_extensions = ["png", "jpg", "gif","JPG"];
@@ -81,28 +105,50 @@ class Article extends Model
             return $res;
         }
     }
-    //用户评论内容查询
+
+    /*
+     * 用户评论内容查询
+     */
     public function users_article(){
         $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
         return $aping;
     }
-    //点赞功能的实现
+
+    /*
+     * 点赞功能的实现
+     */
     public function zan($username){
         $brr=DB::table('users')->where("user_name","$username")->first();
         return $brr;
     }
+
+    /*
+     * 文章点赞功能查询
+     */
     public function article_zan($a_id,$u_id){
         $arr=DB::table('article_zan')->where("u_id",$u_id)->where("article_id",$a_id)->get();
         return $arr;
     }
+
+    /*
+     * 得到对应id查询相应文章
+     */
     public function article($a_id){
         $zan=DB::table('article')->where('a_id',$a_id)->first();
         return $zan;
     }
+
+    /*
+     * 点赞数量增加
+     */
     public function insert_article($a_num,$a_id){
         $aa=DB::insert("update article set a_num=$a_num where a_id=$a_id");
         return $aa;
     }
+
+    /*
+     * 没点过赞的人点赞成功
+     */
     public function article_zan2($u_id,$a_id){
         $a=DB::insert("insert into article_zan(u_id,article_id) values('$u_id','$a_id')");
         $arr=array(
@@ -118,7 +164,16 @@ class Article extends Model
     //根据a_id两表联查article和ar_type表
     public function join_artype($id)
     {
-        $arr=DB::table("article")->join("ar_type","article.a_type","=","ar_type.at_id")->where("article.a_id",$id)->get();
+        $arr=DB::table("article")
+            ->join("ar_type","article.a_type","=","ar_type.at_id")
+            ->where("article.a_id",$id)
+            ->get();
+        $lei2 = explode(',',$arr[0]['a_lei']);
+        $lei = DB::table("a_lei")
+            ->whereIn('al_id',$lei2)
+            ->select("al_name")
+            ->get();
+        $arr['lei']=$lei;
         return $arr;
     }
 
@@ -146,7 +201,9 @@ class Article extends Model
         return $aping;
     }
 
-    //添加到用户评论表中aping
+    /*
+     * 添加到用户评论表中aping
+     */
     public function insert_aping($u_id,$a_id,$ap_con,$ap_addtime)
     {
         $sql="insert into aping(u_id,ap_con,a_id,ap_addtime) values('$u_id','$ap_con','$a_id','$ap_addtime')";
@@ -166,8 +223,16 @@ class Article extends Model
             return $arr;
         }
     }
-    //
-    //查询用户是否对这条评论赞过
+
+    /*
+     * 文章详情页
+     * 查看文章类型
+     */
+
+
+    /*
+     * 查询用户是否对这条评论赞过
+     */
     public function get_uzp($id,$u_id){
         $data = DB::table('ping_zan')
             ->where('ap_id',$id)
@@ -175,7 +240,10 @@ class Article extends Model
             ->first();
         return $data;
     }
-    //点赞  添加数据表
+
+    /*
+     * 点赞  添加数据表
+     */
     public function add_z($ap_id,$u_id){
         $addz=DB::table('ping_zan')->insert(
             [
@@ -198,7 +266,9 @@ class Article extends Model
         }
     }
 
-    //点击取消赞  删除数据表
+    /*
+     * 点击取消赞  删除数据表
+     */
     public function del_z($ap_id,$u_id){
         $delz=DB::table('ping_zan')
             ->where('ap_id', $ap_id)
@@ -219,7 +289,10 @@ class Article extends Model
             return $arr;
         }
     }
-    //查看该篇文章有多少评论
+
+    /*
+     * 查看该篇文章有多少评论
+     */
     public function get_pingnum($id){
         $ping_num = DB::table('aping')
             ->select('*')
@@ -260,6 +333,7 @@ class Article extends Model
             ->get();
         return $arr;
     }
+
 
 }
     

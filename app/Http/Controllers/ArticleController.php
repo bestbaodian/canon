@@ -163,6 +163,9 @@ class ArticleController extends Controller
         $ping_data=$model->get_ping($id);
         //根据a_id两表联查article和ar_type表
         $arr=$model->join_artype($id);
+       //print_r($arr);
+        //查出该篇文章类型
+       // die;
         //aping users联查
         $aping=$model->join_users();
         //查ping_zan表里有没有用户点赞的信息
@@ -174,7 +177,7 @@ class ArticleController extends Controller
          * 作者热门文章
          */
         $hot=$model->get_re($id);
-        return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'hot'=>$hot]);
+        return view('article/wxiang',['arr'=>$arr[0],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'hot'=>$hot]);
     }
     /*
      * 显示对应文章相关内容
