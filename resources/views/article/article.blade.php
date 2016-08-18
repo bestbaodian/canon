@@ -91,7 +91,7 @@
 
                             </div>
                             <div class="item-judge l">
-                                <i class="icon sns-comment"></i><a href="{{URL('fangfa?id=')}}<?php echo $v['a_id']?>"><em>评论 0</em></a>
+                                <i class="icon sns-comment"></i><a href="{{URL('fangfa?id=')}}<?php echo $v['a_id']?>"><em>评论 <?php echo $v['a_pingnum'];?></em></a>
                             </div>
                         </div>
                     </div>
