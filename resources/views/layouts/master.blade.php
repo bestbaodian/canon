@@ -228,6 +228,7 @@
                 var data = eval(msg);
                 $('#spans').html(data[1])
                 alert(data[0]);
+                location.reload()
             }
         });
     })  </script>
