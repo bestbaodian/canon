@@ -166,11 +166,10 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         <span style="float: right" id="ping">立即评价</span>
         <div id="pinglun">
             <textarea rows="5" cols="100" id="con" placeholder="请输入评论:" style="background:#33ffff"></textarea>
-<<<<<<< HEAD
+
             <button id="subs">提交评论</button>
-=======
-            <button id="">提交评论</button>
->>>>>>> 86f1ae3d491f87c76b452581b307f8ab64519701
+
+
         </div>
       <div class="evaluation-list">
         <h3>试题评价</h3>
@@ -192,13 +191,13 @@ $l=isset($_GET['l'])?$_GET['l']:0;
             <div class="evaluation-con" id="list">
                 <?php foreach($ping as $k=>$v){?>
               <div class="content-box">
-<<<<<<< HEAD
+
                       <a href="#" class="img-box"><span><img src="" width="40px" height="40px" alt="518000"></span></a>
                   <div class="user-info clearfix">
-=======
-                  <a href="#" class="img-box"><span><img src="images/u.jpg" width="40px" height="40px" alt="518000"></span></a>
-                    <div class="user-info clearfix">
->>>>>>> 86f1ae3d491f87c76b452581b307f8ab64519701
+
+                  {{--<a href="#" class="img-box"><span><img src="images/u.jpg" width="40px" height="40px" alt="518000"></span></a>--}}
+                    {{--<div class="user-info clearfix">--}}
+
                   <a href="#" class="username"><?php echo $v['user_phone']?></a>
                   <div class="star-box">
                       <img src="images/xing.jpg" width="20" height="20">
