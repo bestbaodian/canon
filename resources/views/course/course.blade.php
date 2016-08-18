@@ -105,7 +105,7 @@
                     </span>
                     <span class="tool-item tool-pager">
                                                 <span class="pager-num">
-                            <b class="pager-cur">{{$shi->currentPage()}}</b>/<em class="pager-total">{{$shi->lastPage()}}</em>
+                           <em class="pager-total">{{$shi->total()}}条</em>　　<b class="pager-cur">{{$shi->currentPage()}}</b>/<em class="pager-total">{{$shi->lastPage()}}</em>
                         </span>
                         <?php if($p<=1){ ?>
                         <a href="javascript:void(0)" class="pager-action pager-prev hide-text disabled">上一页</a>
