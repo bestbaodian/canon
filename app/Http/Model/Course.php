@@ -152,4 +152,76 @@ class Course extends Model{
         $data['min']=$arr_min['c_id'];
         return $data;
     }
+    /*
+     *试题评论 马天天
+     */
+    //查询用户表
+    public function sel_users($username)
+    {
+        $brr=DB::table('users')->where("user_name","$username")->first();
+        return $brr;
+    }
+    //试题评论入库
+    public function insert_eping($con,$u_id,$c_id,$e_addtime)
+    {
+        $re=DB::table('e_ping')->insert([
+            'p_con'=>$con,
+            'u_id'=>$u_id,
+            'e_id'=>$c_id,
+            'e_addtime'=>$e_addtime
+        ]);
+        return $re;
+    }
+    //首先查询关注表
+    public function sel_follow($c_id,$u_id)
+    {
+        $arr=DB::table('follow')->where('u_id',$u_id)->where('c_id',$c_id)->first();
+        return $arr;
+    }
+    //试题关注
+    /*
+     * 制作人 :: 马天天
+     */
+    public function follow($c_id,$u_id)
+    {
+        $brr=DB::table('follow')->insert([
+          'c_id'=>$c_id,
+          'u_id'=>$u_id
+        ]);
+        return $brr;
+    }
+    //取消关注
+    /*
+     * 制作人 :: 马天天
+     */
+    public function qx_follow($c_id)
+    {
+        $re=DB::table('follow')->where('c_id',$c_id)->delete();
+        return $re;
+    }
+
+    public function pinglun_shiti($request)
+    {
+        $con = $request->input("con");
+        $c_id = $request->input("c_id");
+        $score1 = $request->input("score");
+        $score = substr($score1,'8','1');
+        $u_id = Session::get('uid');
+        $e_addtime = date("Y-m-d H:i:s",time());
+        $pinglun_shiti = DB::table('e_ping')->insert(
+            array(
+                'p_con' => $con,
+                'u_id' => $u_id,
+                'e_Id' => $c_id,
+                'e_addtime' => $e_addtime,
+                'e_score' => $score
+            )
+        );
+        $arr = DB::table('e_ping')
+            ->join('users','u_id','=','users.user_id')
+            ->where('e_id',$c_id)
+            ->orderby('e_addtime','desc')->get();
+        return $arr;
+    }
+
 }

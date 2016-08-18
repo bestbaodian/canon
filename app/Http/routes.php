@@ -97,8 +97,11 @@ Route::post('sou', 'CourseController@sou');
 Route::get('s', 'CourseController@s');
 Route::post('zhuanye', 'CourseController@zhuanye');
 Route::get('xiang', 'CourseController@xiang');
-Route::post('con', 'CourseController@con');
+Route::post('contents', 'CourseController@contents');
 Route::get('ping', 'CourseController@ping');
+Route::post('state', 'CourseController@state');
+
+Route::post('pinglun_shiti','CourseController@pinglun_shiti');//试题评论
 /*
  * 试题结束
  */

@@ -28,36 +28,85 @@ class CourseController extends Controller
      * 2016-8-17 14:34
      */
     public function xiang(Request $request){
+       $all = $request->all();
+       $c_id = $all['id'];
+        //print_r($c_id);die;
         //接收  试题id  --学院id  -- 专业id  -- 类型id
         // 各项参数
-      $course = new Course();
-      $data=$course->xiang($request);
-      return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min']]);
+        $course = new Course();
+        $data=$course->xiang($request);
+
+        $u_id=Session::get('uid');
+        if($u_id){
+            $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where e_ping.e_id=$c_id order by u_id desc");
+        }
+       //查询
+        $follow=$course->sel_follow($c_id,$u_id);
+        //print_r($follow);die;
+        return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min'],'follow'=>$follow,'ping'=>$ping]);
     }
     /*
      * 页面评论选星功能
      * 制作人 :: 时庆庆
      * 时间 :: 2016-08-18
      */
-
-
-
-
-	 public function con()
+    public function pinglun_shiti(Request $request){
+        //echo $u_id;die;
+        $Cou = new Course();
+        $arr = $Cou ->pinglun_shiti($request);
+        return view('course.pinglun')->with('ping',$arr);
+    }
+    /*
+     * 试题关注 马天天
+     */
+    //试题关注
+    public function state(Request $request)
     {
-          $con = $_POST['con'];
-          $c_id = $_POST['c_id'];
-          $e_addtime=date("Y-m-d H:i:s");
-        if(!empty(Session::get('username'))){
-            echo "1";
-        }else{
-            $username=Session::get('username');
-            $u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-  	        $u_id=$u_id['user_id'];
-            $sql="insert into e_ping(p_con,u_id,e_id,e_addtime) values('$con',$u_id,'$c_id','$e_addtime')";
-            $re=DB::insert($sql);
-            $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where u_id=$u_id order by p_id desc");
-            return view('course/ping',['ping'=>$ping]);
+        $post=$request->all();
+        $c_id=$post['c_id'];
+        $u_id=$post['u_id'];
+        $username=Session::get('username');
+        //判断当前用户名是否存在
+        //如果不存在，重新登录
+        if(empty(Session::get('username')))
+        {
+            $arr=array(
+                "msg"=>"2",
+                "error"=>"0"
+            );
+            return json_encode($arr);
+        }
+        //用户存在
+        else
+        {
+            //根据用户名查询
+            $model=new course();
+           //查询
+            $date=$model->sel_follow($c_id,$u_id);
+           if($date)
+           {
+              //取消关注
+               $re=$model->qx_follow($c_id);
+               $arr=array(
+                   'msg'=>'3',
+                   'error'=>'1'
+               );
+               return json_encode($arr);
+           }
+            else
+            {
+                 //添加关注
+                $brr=$model->follow($c_id,$u_id);
+                if($brr)
+                {
+                    $arr=array(
+                        'msg'=>'1',
+                        'error'=>'0'
+                    );
+                    return json_encode($arr);
+                }
+            }
+
         }
     }
 
