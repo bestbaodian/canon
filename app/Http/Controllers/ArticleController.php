@@ -169,7 +169,12 @@ class ArticleController extends Controller
         $u_id=Session::get("uid");
         //查看该条文章有多少评论
         //$ping_num=$model->get_pingnum($id);,'ping_num'=>$ping_num
-        return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data]);
+        /*
+         * 制作人 ::王鹏飞
+         * 作者热门文章
+         */
+        $hot=$model->get_re($id);
+        return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'hot'=>$hot]);
     }
     /*
      * 显示对应文章相关内容

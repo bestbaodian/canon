@@ -236,7 +236,28 @@ class Article extends Model
         $arr=DB::table("article")
             ->join("ar_type","a_type","=","at_id")
             ->join("users","article.a_adduser","=","users.user_id")
-            ->orderby("article.brows","DESC")->limit(3)->get();
+            ->orderby("article.brows","DESC")
+            ->where("a_state",1)
+            ->limit(3)
+            ->get();
+        return $arr;
+    }
+
+    /*
+         * 方法详情热门文章
+         *制作人：王鹏飞
+         */
+    public function get_re($id){
+        $uid=DB::table("article")->where("a_id","$id")->get();
+        $u_id=$uid[0]["a_adduser"];
+        $arr=DB::table("article")
+            ->join("ar_type","a_type","=","at_id")
+            ->where("a_adduser","$u_id")
+            ->where("a_id","!=","$id")
+            ->where("a_state",1)
+            ->orderby("brows","DESC")
+            ->limit(3)
+            ->get();
         return $arr;
     }
 

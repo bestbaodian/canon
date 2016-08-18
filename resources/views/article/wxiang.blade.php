@@ -55,13 +55,14 @@ var isLogin=1
     <!-- 文章详情 -->
     <div class="detail-content-wrap">
         <h1 class="detail-title">
-        <?php echo $arr['a_title'];?>
+
+            {{$arr['a_title']}}
                 </h1>
         <div class="dc-addon clearfix">
             <div class="dc-profile clearfix">
-                <span class="spacer l">15小时前</span>
-                <span class="spacer l spacer-2">120浏览</span>
-                <a class="spacer l" href="#comment" >2评论</a>
+                <span class="spacer l">{{$arr['a_addtime']}}发布</span>
+                <span class="spacer l spacer-2">{{$arr['brows']}}浏览</span>
+                <!--<a class="spacer l" href="#comment" >评论</a>-->
                                                                                                             </div>
         </div>
 
@@ -72,6 +73,7 @@ var isLogin=1
                 <!-- 标签 -->
                 <div class="cat-box clearfix">
                     {{--需要把标签变活--}}
+
                        <a class="cat l" href="/article/tag/5" target="_blank">Html/CSS</a>
                        <a class="cat l" href="/article/tag/25" target="_blank">CSS3</a>
                     </div>
@@ -96,11 +98,11 @@ var isLogin=1
             <div class="small-share l">
                 <ul class="share-wrap">
                     <li class="weichat-posi">
-                        <!-- <div class="bdsharebuttonbox weichat-style">
-                            <a href="#" class="bds_weixin icon-nav icon-share-weichat" data-cmd="weixin" title="分享到微信"></a>
-                            <a href="#" class="bds_tsina icon-nav icon-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-                            <a href="#" class="bds_qzone icon-nav icon-share-qq" data-cmd="qzone" title="分享到QQ空间"></a>
-                        </div> -->
+                         <div class="bdsharebuttonbox weichat-style">
+                            {{--<a href="#" class="bds_weixin icon-nav icon-share-weichat" data-cmd="weixin" title="分享到微信"></a>--}}
+                            {{--<a href="#" class="bds_tsina icon-nav icon-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>--}}
+                            {{--<a href="#" class="bds_qzone icon-nav icon-share-qq" data-cmd="qzone" title="分享到QQ空间"></a>--}}
+                        </div>
                     <div class="bshare-custom">
                     <a title="分享到QQ空间" class="bshare-qzone"></a>
                     <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
@@ -251,54 +253,22 @@ var isLogin=1
     </div>
         <!-- 作者信息end -->
 
-    <!-- 作者热门文章 -->
-        <div class="other-article">
+    <!-- 作者热门文章 制作人::王鹏飞-->
+    <div class="other-article">
         <h2>作者的热门文章</h2>
         <ul>
-                    <li>
-                <a href="/article/5917" title="java面试题，分享几个！答案你知道吗？"><h3>java面试题，分享几个！答案你知道吗？</h3></a>
-                                <p>1. J2EE是什么？它包括哪些技术？ 解答：从整体上讲，J2EE是使用Java技术开发企业级应用的工业标准，它是Java技术不断适应和促进企业级应用过程中的产物。适用于企业级应用的J2EE，提供一个平台独立的、可移植的、多用户的、安全的和基于标准的企业级平台，从而简化企业应用的开发、管理和部署。J2EE是一个标准，而不是一</p>
-                                <div class="show-box clearfix">
-                    <span class="spacer l">3240浏览</span>
-                    <span class="spacer l spacer-2">53推荐</span>
-                    <span class="spacer l" href="" >4评论</span>
-                </div>
-            </li>
-                    <li>
-                <a href="/article/5901" title="如何面试3w的java工程师的成功秘籍，你知道吗？"><h3>如何面试3w的java工程师的成功秘籍，你知道吗？</h3></a>
-                                <div class="show-box clearfix">
-                    <span class="spacer l">2247浏览</span>
-                    <span class="spacer l spacer-2">38推荐</span>
-                    <span class="spacer l" href="" >2评论</span>
-                </div>
-            </li>
-                    <li>
-                <a href="/article/6607" title="Java新手必掌握的基础知识"><h3>Java新手必掌握的基础知识</h3></a>
-                                <div class="show-box clearfix">
-                    <span class="spacer l">1834浏览</span>
-                    <span class="spacer l spacer-2">37推荐</span>
-                    <span class="spacer l" href="" >1评论</span>
-                </div>
-            </li>
-                    <li>
-                <a href="/article/7611" title="小白学习java需要不求甚解？"><h3>小白学习java需要不求甚解？</h3></a>
-                                <div class="show-box clearfix">
-                    <span class="spacer l">919浏览</span>
-                    <span class="spacer l spacer-2">11推荐</span>
-                    <span class="spacer l" href="" >6评论</span>
-                </div>
-            </li>
-                    <li>
-                <a href="/article/6603" title="Java final关键字详解"><h3>Java final关键字详解</h3></a>
-                                <div class="show-box clearfix">
-                    <span class="spacer l">857浏览</span>
-                    <span class="spacer l spacer-2">9推荐</span>
-                    <span class="spacer l" href="" >0评论</span>
-                </div>
-            </li>
-                </ul>
+            @foreach($hot as $k=>$v)
+                <li>
+                    <a href="fangfa?id={{$v['a_id']}}" title="{{$v['a_title']}}"><h3>{{$v["a_title"]}}</h3></a>
+                    <p>{{$v["a_con"]}}</p>
+                    <div class="show-box clearfix">
+                        <span class="spacer l">{{$v["brows"]}}浏览</span>
+                    </div>
+                </li>
+            @endforeach
+        </ul>
     </div>
-        <!-- 作者热门文章end -->
+    <!-- 作者热门文章end -->
 
     <!-- 广告 -->
                     <!-- 广告end -->
