@@ -20,10 +20,9 @@ use App\Http\Model\Index;
 class ArticleController extends Controller
 {
     public function article(){
-       /*
-        *实例化Article
-        *实例化model层
-        */
+
+        //实例化Article model层
+
         $articlemodel=new Article();
 
         //接受用户get请求数据
@@ -49,7 +48,7 @@ class ArticleController extends Controller
             $username=Session::get('username');
         }
         //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-        $u_id=$articlemodel->get_usersid($username);
+        //$u_id=$articlemodel->get_usersid($username);
         return view('article/article',['at_type'=>$at_type,'article'=>$article]);
     }
 
@@ -80,13 +79,15 @@ class ArticleController extends Controller
         $file = Request::file('a_logo');
         $array=Request::input('tag');
         $a_lei=implode(',', $array);
+        //获取添加文章的用户id
+        $a_adduser=Session::get("uid");
         $model=new article();
-        $re=$model->add($a_title,$a_type,$a_con,$a_addtime,$file,$a_lei);  
+        $re=$model->add($a_title,$a_type,$a_con,$a_addtime,$file,$a_lei,$a_adduser);
         if($re==1){
-              echo "<script>alert('提交成功');location.href='article';</script>";
-            }else{
-                echo "<script>alert('提交失败');location.href='publish';</script>";
-            }
+            echo "<script>alert('提交成功');location.href='article';</script>";
+        }else{
+            echo "<script>alert('提交失败');location.href='publish';</script>";
+        }
     }
    /*
     * 对应文章点赞功能
@@ -127,7 +128,9 @@ class ArticleController extends Controller
         }
     }
 
-
+    /*
+     * 查看文章相关类型
+     */
     public function type(){
         $type=$_POST['type'];
         if($type=='0'){
@@ -135,13 +138,14 @@ class ArticleController extends Controller
         }else{
             $type=DB::table('article')->where("a_type",$type)->get();
         }
-
-        //print_r($type);die;
         return view("article/type",['article'=>$type]);
     }
 
-    //显示用户发表的文章
-    //评论是先判断是否登录
+    /*
+     * 显示用户发表的文章
+     * 评论是先判断是否登录
+     */
+
     public function wxiang(){
         if(empty(Session::get('username'))){
             //$username=0;
@@ -165,7 +169,10 @@ class ArticleController extends Controller
         //$ping_num=$model->get_pingnum($id);,'ping_num'=>$ping_num
         return view('article/wxiang',['arr'=>$arr[0],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data]);
     }
-    //用户评论
+    /*
+     * 显示对应文章相关内容
+     * 实现评论功能
+     */
     public function wping(){
         if(empty(Session::get('username'))){
             $username=0;
@@ -186,7 +193,9 @@ class ArticleController extends Controller
         //判断是否评论成功
         return json_encode($re);
     }
-    //登录的用户赞文章的评论
+    /*
+     * 登录的用户赞文章的评论
+     */
     public function zp(Request $request){
         $ap_id=Request::input('ap_id');
         //获取 本篇文章的id,登陆人的用户id, 若点赞ping_zan添加一条数据  若取消赞 则删除
