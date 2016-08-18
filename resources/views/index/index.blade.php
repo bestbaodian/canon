@@ -231,14 +231,21 @@
 <script type="text/javascript" src="../js/jquery.scrollLoading.js"></script>
 <script>
 //图片异步加载
+// $(document).ready(function($){
+//     $("img").lazyload({
+//     placeholder:"grey.gif", //加载图片前的占位图片
+//     effect:"fadeIn" //加载图片使用的效果(淡入)
+//     });
+// });
+//图片异步加载
 jQuery(document).ready(function($){
         //实现图片慢慢浮现出来的效果
             $("img").load(function () {
                 //图片默认隐藏  
                 $(this).hide();
                 //使用fadeIn特效  
-                //$(this).fadeIn("5000");
-                $(this).stop().fadeIn("5000");
+                $(this).fadeIn("5000");
+                //$(this).stop().fadeIn("5000");
             });
             // 异步加载图片，实现逐屏加载图片
             $(".scrollLoading").scrollLoading(); 
