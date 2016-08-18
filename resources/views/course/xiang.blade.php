@@ -147,10 +147,10 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         {{--试题选题功能--}}
         <div>
             <?php if($min){ ?>
-            <a href="xiang?id=<?=$min?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">上一题</a>
+            <a href="xiang?id=<?=$min?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">下一题</a>
             <? } ?>
             <?php if($max){ ?>
-            <a href="xiang?id=<?=$max?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">下一题</a>
+            <a href="xiang?id=<?=$max?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">上一题</a>
             <? } ?>
 
 
@@ -159,7 +159,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         <span style="float: right" id="ping">立即评价</span>
         <div id="pinglun">
             <textarea rows="5" cols="100" id="con" placeholder="请输入评论:" style="background:#33ffff"></textarea>
-            <button id="sub">提交评论</button>
+            <button id="">提交评论</button>
         </div>
       <div class="evaluation-list">
         <h3>试题评价</h3>
