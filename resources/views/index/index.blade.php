@@ -99,12 +99,12 @@
         <ul class="icourse-course clearfix">
             <?php foreach($pro as $k=>$v){?>
             <li>
-                <a  href="college_exam?id=<?php echo $v['p_id']?>">
+                <a  href="college_exam?id=<?php echo $v['p_name']?>">
                     <div class="icourse-img">
-                        <img class="scrollLoading" src="" alt="">
+                        <img class="scrollLoading" src="{{url("$v[img]")}}" alt="">
                     </div>
                     <div class="icourse-intro clearfix">
-                        <p>:{{$v['p_id']}}</p>
+                        <p>:{{$v['p_name']}}</p>
                         <span class="l ">{{$v['p_name']}}</span>
                     </div>
                     <div class="icourse-tips clearfix">
@@ -120,146 +120,146 @@
 </div>
 <!--招聘结束 -->
 
-<!--方法方法开始 -->
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">方法</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['c_id']?>">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="<?php
-                        if($v['c_college']=="软工学院"){
-                            echo "/images/logo/软工.jpg";
-                        }elseif($v['c_college']=="移动通信学院"){
-                            echo "/images/logo/移动.jpg";
-                        }else if($v['c_college']=="云计算学院"){
-                            echo  "/images/logo/云计算.jpg";
-                        }elseif($v['c_college']=="高翻学院"){
-                            echo  "/images/logo/高翻.jpg";
-                        }elseif($v['c_college']=="国际经贸学院"){
-                            echo  "/images/logo/经贸.jpg";
-                        }elseif($v['c_college']=="建筑学院"){
-                            echo  "/images/logo/建筑.jpg";
-                        }elseif($v['c_college']=="游戏学院"){
-                            echo  "/images/logo/游戏.jpg";
-                        }elseif($v['c_college']=="网工学院"){
-                            echo  "/images/logo/网工.jpg";
-                        }elseif($v['c_college']=="传媒学院"){
-                            echo  "/images/logo/传媒.jpg";
-                        }?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>答案:{{$v['c_answer']}}</p>
-                        <span class="l ">{{$v['c_type']}}</span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2>{{$v['c_name']}}</h2>
-                        <span class="l ">{{$v['c_college']}}</span>
-                        <span class="r">{{$v['c_num']}}人学习</span>
-                    </div>
-                </a>
-            </li>
-            <?php } ?>
-        </ul>
-    </div>
-</div>
-<!--面试方法结束 -->
+{{--<!--方法方法开始 -->--}}
+{{--<div class="icourse">--}}
+    {{--<div class="incourse-wrap idx-width">--}}
+        {{--<h2 class="icourse-title">方法</h2>--}}
+        {{--<ul class="icourse-course clearfix">--}}
+            {{--<?php foreach($shi as $k=>$v){?>--}}
+            {{--<li>--}}
+                {{--<a  href="college_exam?id=<?php echo $v['c_id']?>">--}}
+                    {{--<div class="icourse-img">--}}
+                        {{--<img class="scrollLoading" src="<?php--}}
+                        {{--if($v['c_college']=="软工学院"){--}}
+                            {{--echo "/images/logo/软工.jpg";--}}
+                        {{--}elseif($v['c_college']=="移动通信学院"){--}}
+                            {{--echo "/images/logo/移动.jpg";--}}
+                        {{--}else if($v['c_college']=="云计算学院"){--}}
+                            {{--echo  "/images/logo/云计算.jpg";--}}
+                        {{--}elseif($v['c_college']=="高翻学院"){--}}
+                            {{--echo  "/images/logo/高翻.jpg";--}}
+                        {{--}elseif($v['c_college']=="国际经贸学院"){--}}
+                            {{--echo  "/images/logo/经贸.jpg";--}}
+                        {{--}elseif($v['c_college']=="建筑学院"){--}}
+                            {{--echo  "/images/logo/建筑.jpg";--}}
+                        {{--}elseif($v['c_college']=="游戏学院"){--}}
+                            {{--echo  "/images/logo/游戏.jpg";--}}
+                        {{--}elseif($v['c_college']=="网工学院"){--}}
+                            {{--echo  "/images/logo/网工.jpg";--}}
+                        {{--}elseif($v['c_college']=="传媒学院"){--}}
+                            {{--echo  "/images/logo/传媒.jpg";--}}
+                        {{--}?>" alt="">--}}
+                    {{--</div>--}}
+                    {{--<div class="icourse-intro clearfix">--}}
+                        {{--<p>答案:{{$v['c_answer']}}</p>--}}
+                        {{--<span class="l ">{{$v['c_type']}}</span>--}}
+                    {{--</div>--}}
+                    {{--<div class="icourse-tips clearfix">--}}
+                        {{--<h2>{{$v['c_name']}}</h2>--}}
+                        {{--<span class="l ">{{$v['c_college']}}</span>--}}
+                        {{--<span class="r">{{$v['c_num']}}人学习</span>--}}
+                    {{--</div>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<?php } ?>--}}
+        {{--</ul>--}}
+    {{--</div>--}}
+{{--</div>--}}
+{{--<!--面试方法结束 -->--}}
 
-<!--简历开始 -->
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">简历</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['c_id']?>">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="<?php
-                        if($v['c_college']=="软工学院"){
-                            echo "/images/logo/软工.jpg";
-                        }elseif($v['c_college']=="移动通信学院"){
-                            echo "/images/logo/移动.jpg";
-                        }else if($v['c_college']=="云计算学院"){
-                            echo  "/images/logo/云计算.jpg";
-                        }elseif($v['c_college']=="高翻学院"){
-                            echo  "/images/logo/高翻.jpg";
-                        }elseif($v['c_college']=="国际经贸学院"){
-                            echo  "/images/logo/经贸.jpg";
-                        }elseif($v['c_college']=="建筑学院"){
-                            echo  "/images/logo/建筑.jpg";
-                        }elseif($v['c_college']=="游戏学院"){
-                            echo  "/images/logo/游戏.jpg";
-                        }elseif($v['c_college']=="网工学院"){
-                            echo  "/images/logo/网工.jpg";
-                        }elseif($v['c_college']=="传媒学院"){
-                            echo  "/images/logo/传媒.jpg";
-                        }?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>答案:{{$v['c_answer']}}</p>
-                        <span class="l ">{{$v['c_type']}}</span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2>{{$v['c_name']}}</h2>
-                        <span class="l ">{{$v['c_college']}}</span>
-                        <span class="r">{{$v['c_num']}}人学习</span>
-                    </div>
-                </a>
-            </li>
-            <?php } ?>
-        </ul>
-    </div>
-</div>
-<!--简历介绍-->
+{{--<!--简历开始 -->--}}
+{{--<div class="icourse">--}}
+    {{--<div class="incourse-wrap idx-width">--}}
+        {{--<h2 class="icourse-title">简历</h2>--}}
+        {{--<ul class="icourse-course clearfix">--}}
+            {{--<?php foreach($shi as $k=>$v){?>--}}
+            {{--<li>--}}
+                {{--<a  href="college_exam?id=<?php echo $v['c_id']?>">--}}
+                    {{--<div class="icourse-img">--}}
+                        {{--<img class="scrollLoading" src="<?php--}}
+                        {{--if($v['c_college']=="软工学院"){--}}
+                            {{--echo "/images/logo/软工.jpg";--}}
+                        {{--}elseif($v['c_college']=="移动通信学院"){--}}
+                            {{--echo "/images/logo/移动.jpg";--}}
+                        {{--}else if($v['c_college']=="云计算学院"){--}}
+                            {{--echo  "/images/logo/云计算.jpg";--}}
+                        {{--}elseif($v['c_college']=="高翻学院"){--}}
+                            {{--echo  "/images/logo/高翻.jpg";--}}
+                        {{--}elseif($v['c_college']=="国际经贸学院"){--}}
+                            {{--echo  "/images/logo/经贸.jpg";--}}
+                        {{--}elseif($v['c_college']=="建筑学院"){--}}
+                            {{--echo  "/images/logo/建筑.jpg";--}}
+                        {{--}elseif($v['c_college']=="游戏学院"){--}}
+                            {{--echo  "/images/logo/游戏.jpg";--}}
+                        {{--}elseif($v['c_college']=="网工学院"){--}}
+                            {{--echo  "/images/logo/网工.jpg";--}}
+                        {{--}elseif($v['c_college']=="传媒学院"){--}}
+                            {{--echo  "/images/logo/传媒.jpg";--}}
+                        {{--}?>" alt="">--}}
+                    {{--</div>--}}
+                    {{--<div class="icourse-intro clearfix">--}}
+                        {{--<p>答案:{{$v['c_answer']}}</p>--}}
+                        {{--<span class="l ">{{$v['c_type']}}</span>--}}
+                    {{--</div>--}}
+                    {{--<div class="icourse-tips clearfix">--}}
+                        {{--<h2>{{$v['c_name']}}</h2>--}}
+                        {{--<span class="l ">{{$v['c_college']}}</span>--}}
+                        {{--<span class="r">{{$v['c_num']}}人学习</span>--}}
+                    {{--</div>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<?php } ?>--}}
+        {{--</ul>--}}
+    {{--</div>--}}
+{{--</div>--}}
+{{--<!--简历介绍-->--}}
 
-<!--答疑开始 -->
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">答疑</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['c_id']?>">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="<?php
-                        if($v['c_college']=="软工学院"){
-                            echo "/images/logo/软工.jpg";
-                        }elseif($v['c_college']=="移动通信学院"){
-                            echo "/images/logo/移动.jpg";
-                        }else if($v['c_college']=="云计算学院"){
-                            echo  "/images/logo/云计算.jpg";
-                        }elseif($v['c_college']=="高翻学院"){
-                            echo  "/images/logo/高翻.jpg";
-                        }elseif($v['c_college']=="国际经贸学院"){
-                            echo  "/images/logo/经贸.jpg";
-                        }elseif($v['c_college']=="建筑学院"){
-                            echo  "/images/logo/建筑.jpg";
-                        }elseif($v['c_college']=="游戏学院"){
-                            echo  "/images/logo/游戏.jpg";
-                        }elseif($v['c_college']=="网工学院"){
-                            echo  "/images/logo/网工.jpg";
-                        }elseif($v['c_college']=="传媒学院"){
-                            echo  "/images/logo/传媒.jpg";
-                        }?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>答案:{{$v['c_answer']}}</p>
-                        <span class="l ">{{$v['c_type']}}</span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2>{{$v['c_name']}}</h2>
-                        <span class="l ">{{$v['c_college']}}</span>
-                        <span class="r">{{$v['c_num']}}人学习</span>
-                    </div>
-                </a>
-            </li>
-            <?php } ?>
-        </ul>
-    </div>
-</div>
-<!--答疑介绍-->
+{{--<!--答疑开始 -->--}}
+{{--<div class="icourse">--}}
+    {{--<div class="incourse-wrap idx-width">--}}
+        {{--<h2 class="icourse-title">答疑</h2>--}}
+        {{--<ul class="icourse-course clearfix">--}}
+            {{--<?php foreach($shi as $k=>$v){?>--}}
+            {{--<li>--}}
+                {{--<a  href="college_exam?id=<?php echo $v['c_id']?>">--}}
+                    {{--<div class="icourse-img">--}}
+                        {{--<img class="scrollLoading" src="<?php--}}
+                        {{--if($v['c_college']=="软工学院"){--}}
+                            {{--echo "/images/logo/软工.jpg";--}}
+                        {{--}elseif($v['c_college']=="移动通信学院"){--}}
+                            {{--echo "/images/logo/移动.jpg";--}}
+                        {{--}else if($v['c_college']=="云计算学院"){--}}
+                            {{--echo  "/images/logo/云计算.jpg";--}}
+                        {{--}elseif($v['c_college']=="高翻学院"){--}}
+                            {{--echo  "/images/logo/高翻.jpg";--}}
+                        {{--}elseif($v['c_college']=="国际经贸学院"){--}}
+                            {{--echo  "/images/logo/经贸.jpg";--}}
+                        {{--}elseif($v['c_college']=="建筑学院"){--}}
+                            {{--echo  "/images/logo/建筑.jpg";--}}
+                        {{--}elseif($v['c_college']=="游戏学院"){--}}
+                            {{--echo  "/images/logo/游戏.jpg";--}}
+                        {{--}elseif($v['c_college']=="网工学院"){--}}
+                            {{--echo  "/images/logo/网工.jpg";--}}
+                        {{--}elseif($v['c_college']=="传媒学院"){--}}
+                            {{--echo  "/images/logo/传媒.jpg";--}}
+                        {{--}?>" alt="">--}}
+                    {{--</div>--}}
+                    {{--<div class="icourse-intro clearfix">--}}
+                        {{--<p>答案:{{$v['c_answer']}}</p>--}}
+                        {{--<span class="l ">{{$v['c_type']}}</span>--}}
+                    {{--</div>--}}
+                    {{--<div class="icourse-tips clearfix">--}}
+                        {{--<h2>{{$v['c_name']}}</h2>--}}
+                        {{--<span class="l ">{{$v['c_college']}}</span>--}}
+                        {{--<span class="r">{{$v['c_num']}}人学习</span>--}}
+                    {{--</div>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<?php } ?>--}}
+        {{--</ul>--}}
+    {{--</div>--}}
+{{--</div>--}}
+{{--<!--答疑介绍-->--}}
 
 
 <!--script-->
