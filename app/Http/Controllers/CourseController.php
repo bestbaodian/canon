@@ -34,6 +34,15 @@ class CourseController extends Controller
       $data=$course->xiang($request);
       return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min']]);
     }
+    /*
+     * 页面评论选星功能
+     * 制作人 :: 时庆庆
+     * 时间 :: 2016-08-18
+     */
+
+
+
+
 	 public function con()
     {
           $con = $_POST['con'];
