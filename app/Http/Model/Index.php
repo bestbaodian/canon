@@ -10,6 +10,7 @@ class Index extends Model
     /*
     * 制作人 :: 王浩东 2016-08-17 16:46
     */
+    //查询试题信息
     public function index()
     {
         return DB::table('college_questions')

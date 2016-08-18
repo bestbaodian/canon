@@ -64,15 +64,25 @@ $l=isset($_GET['l'])?$_GET['l']:0;
       <!-- share -->
       <div data-bd-bind="1459252125792" class="share-action r bdsharebuttonbox bdshare-button-style0-16">
         分享
-        {{--<a title="分享到微信" href="javascript:;" class="share wx js-share" data-cmd="weixin"></a>--}}
-        {{--<a title="分享到QQ空间" href="javascript:;" class="share qq js-share" data-cmd="qzone"></a>--}}
-        {{--<a title="分享到新浪微博" href="javascript:;" class="share sina js-share" data-cmd="tsina"></a>--}}
+          <div class="bshare-custom"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
       </div>
       <i class="split-line r"></i>
-            <a href="javascript:;" data-cmd="follow" class="follow-action r js-follow-action" data-cid="85">
-        关注
-      </a>
-          </div>
+        <?php
+        if($follow){
+        ?>
+        <a href="javascript:;" onclick="zhu(<?php echo Session::get('uid')?>);" class="follow-action r js-follow-a  ction" data-cid="85">
+            取消关注
+        </a>
+        <?php
+        }else{
+        ?>
+        <a href="javascript:;" onclick="zhu(<?php echo Session::get('uid')?>);" class="follow-action r js-follow-a  ction" data-cid="85">
+            关注
+        </a>
+        <?php
+        }
+        ?>
+        </div>
   </div>
   <div class="info-bg" id="js-info-bg">
     <div class="cover-img-wrap">
@@ -147,19 +157,20 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         {{--试题选题功能--}}
         <div>
             <?php if($min){ ?>
-            <a href="xiang?id=<?=$min?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">下一题</a>
+            <a href="{{url("xiang?id=$min&v=$vv&a=$a&l=$l")}}">下一题</a>
             <? } ?>
             <?php if($max){ ?>
-            <a href="xiang?id=<?=$max?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">上一题</a>
+            <a href="{{url("xiang?id=$max&v=$vv&a=$a&l=$l")}}">上一题</a>
             <? } ?>
-
-
-
         </div>
         <span style="float: right" id="ping">立即评价</span>
         <div id="pinglun">
             <textarea rows="5" cols="100" id="con" placeholder="请输入评论:" style="background:#33ffff"></textarea>
+<<<<<<< HEAD
+            <button id="subs">提交评论</button>
+=======
             <button id="">提交评论</button>
+>>>>>>> 86f1ae3d491f87c76b452581b307f8ab64519701
         </div>
       <div class="evaluation-list">
         <h3>试题评价</h3>
@@ -171,21 +182,23 @@ $l=isset($_GET['l'])?$_GET['l']:0;
               <img src="images/xing.jpg" width="20" height="20">
               <img src="images/xing.jpg" width="20" height="20">
               <img src="images/xing.jpg" width="20" height="20">
-                                              </div><!--star-box end-->
+          </div><!--star-box end-->
           <p>内容实用：9.9</p>
           <p>通俗易懂：9.6</p>
           <p>逻辑清晰：9.4</p>
           <p class="person_num"><em>1337</em>位同学参与评价</p>
         </div><!--evaluation-info end-->
-                            <div class="evaluation">
-
+          <div class="evaluation">
             <div class="evaluation-con" id="list">
                 <?php foreach($ping as $k=>$v){?>
-
-
               <div class="content-box">
-                      <a href="#" class="img-box"><span><img src="images/u.jpg" width="40px" height="40px" alt="518000"></span></a>
+<<<<<<< HEAD
+                      <a href="#" class="img-box"><span><img src="" width="40px" height="40px" alt="518000"></span></a>
+                  <div class="user-info clearfix">
+=======
+                  <a href="#" class="img-box"><span><img src="images/u.jpg" width="40px" height="40px" alt="518000"></span></a>
                     <div class="user-info clearfix">
+>>>>>>> 86f1ae3d491f87c76b452581b307f8ab64519701
                   <a href="#" class="username"><?php echo $v['user_phone']?></a>
                   <div class="star-box">
                       <img src="images/xing.jpg" width="20" height="20">
@@ -202,11 +215,9 @@ $l=isset($_GET['l'])?$_GET['l']:0;
               </div>
                 <?php } ?><!--content end-->
             </div><!--evaluation-con end-->
-
-
-                      </div><!--evaluation end-->
+          </div><!--evaluation end-->
                     <!--evaluation end-->
-                        </div><!--evaluation-list end-->
+      </div><!--evaluation-list end-->
             <div class="more-evaluation"><a href="#" target="_blank">查看更多评价</a></div>
           </div><!--content end-->
     <div class="aside r">
@@ -345,7 +356,6 @@ $l=isset($_GET['l'])?$_GET['l']:0;
 <script type="text/javascript">
 </script>
 <div class="mask"></div>
-
 </body></html>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script>
@@ -356,20 +366,55 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         $("#pinglun").show()
 
     })
-    $(document).on("click","#sub",function(){
+    $(document).on("click","#subs",function(){
         var con=$("#con").val()
         var c_id=$("#s_id").val()
-        $.post('index.php/con',{
+        $.post("{{URL('contents')}}",{
             con:con,
-            c_id:c_id
-        },function(data){
-            //alert(data)
-            if(data==1){
-                alert('请先登录');
-                location.href='index';
-            }else{
-                $("#list").html(data)
+            c_id:c_id,
+          },function(data){
+            //alert(data);
+            var obj=eval("("+data+")");
+             //alert(obj);
+            if(obj['msg']=='1')
+            {
+              alert("评论成功");
+              location.href="xiang?id="+c_id;
+            }
+           else
+            {
+              alert("请先登录");
+              location.href="{{URL('index')}}";
             }
         })
     })
+    //关注
+    function zhu(uid)
+   {
+       var c_id=$("#s_id").val()
+       $.ajax({
+           type: "POST",
+           url: "{{URL('state')}}",
+           data: "c_id="+c_id+"&u_id="+uid,
+           success: function(data){
+               //alert(data);
+               obj=eval("("+data+")");
+               if(obj['msg']=='2')
+               {
+                   alert("请先登录");
+                   location.href="{{URL('index')}}";die;
+               }
+               if(obj['msg']=='3')
+               {
+                  //alert("取消关注");
+                   $('.follow-action').html("关注");
+               }
+               else
+               {
+                   $('.follow-action').html("取消关注");
+               }
+
+           }
+       });
+   }
 </script>

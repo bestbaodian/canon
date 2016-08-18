@@ -182,6 +182,10 @@
         $('#wmd-input-js-mk').click(function(){
             $(this).css('border','#fff 0 solid')
         })
+<<<<<<< HEAD
+
+=======
+>>>>>>> 86f1ae3d491f87c76b452581b307f8ab64519701
         $(document).on("click","#al_name",function(){
             var num=$('#biao').children('span').length
             if(num<3){
@@ -194,9 +198,13 @@
         });
         $(document).on("click","#al_names",function(){
             var id=$(this).attr('gid');
-    // $(':hidden[value='+id+']').remove();
+            // $(':hidden[value='+id+']').remove();
             $(this).attr('id','al_name').appendTo('.tag-box')
         });
+<<<<<<< HEAD
+
+=======
+>>>>>>> 86f1ae3d491f87c76b452581b307f8ab64519701
         $('form').submit(function(e){
             var title=$('#art-title').val()
             var cat=$('#art-cat').val()
