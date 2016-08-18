@@ -103,7 +103,7 @@ class UserController extends Controller
                  */
                 $da  = DB::table('users')->select("user_filedir")->where("user_id",$uid)->first();
                 Session::put('user_filedir',$da['user_filedir']);
-                header("location:http://www.mbaodian.com/user/setavator");
+                return redirect("user/setavator");
             }
         }
     }
@@ -158,5 +158,96 @@ class UserController extends Controller
     //绑定账号
     public function setbindsns(){
         return view('user/setbindsns');
+    }
+
+    /*
+     * 签到
+     * 制作人::张泽远
+     * 2016-08-18
+     */
+    public function qiandao(Request $request){
+        $uid=$request->get('uid');
+        //echo $uid;die;
+        $time=date("Y-m-d");
+        glob($num = '1');
+        glob($days = '1');
+        glob($pond = '1');
+        $arr=DB::select("select * from qiandao WHERE uid='$uid'");
+        if (empty($arr[0]['qid'])) {
+            //第一次签到
+            $res=DB::insert("insert into qiandao (num,days,pond,ltime,uid) VALUES ('$num','$days','$pond','$time','$uid')");
+            if ($res) {
+                Session::put('user_pond',$pond);;
+                $data[0]='签到成功，获得' . $pond . '积分';
+                $data[1]=$pond;
+                //echo '第一次签到成功';
+                return json_encode($data);
+                die;
+            } else {
+                $data[0]='签到失败，获得0积分';
+                $data[1]=0;
+                return json_encode($data);
+                die;
+            }
+        } else {
+            //第二次签到
+            $arr=DB::select("select * from qiandao WHERE uid='$uid'");
+            $ltime = $arr[0]['ltime'];
+            $time = date("Y-m-d");
+            $ctime = floor((strtotime($time) - strtotime($ltime)) / 86400);
+            if ($ctime == 1) {
+                //连续签到
+                $nnum = $arr[0]['num'] + 1;
+                $ndays = $arr[0]['days'] + 1;
+                $npond = $arr[0]['pond'] + $arr[0]['days'] + 1;
+                $nponds = $arr[0]['days'] + 1;
+                $ntime = date("Y-m-d");
+                $res=DB::update("update qiandao set num='$nnum',days='$ndays',pond='$npond',ltime='$ntime' where uid='$uid'");
+                if ($res) {
+                    Session::put('user_pond',$npond);
+                    $data=array();
+                    // echo '连续签到成功';
+                    $data[0]='签到成功，获得' . $nponds . '积分';
+                    $data[1]=$npond;
+                    return json_encode($data);
+                    die;
+                } else {
+                    $data[0]='签到失败，获得0积分';
+                    $data[1]=0;
+                    return json_encode($data);
+                    die;
+                }
+            } else {
+                if ($ctime == 0) {
+                    $arr=DB::select("select * from qiandao WHERE uid='$uid'");
+                    $npond = $arr[0]['pond'];
+                    $data[0]='您今天已经签到';
+                    $data[1]=$npond;
+                    return json_encode($data);
+                    die;
+                } else {
+                    //非连续签到
+                    $nnum = $arr[0]['num'] + 1;
+                    $ndays = 1;
+                    $npond = $arr[0]['pond'] + 1;
+                    $nponds = 1;
+                    $ntime = date("Y-m-d");
+                    $res=DB::update("update qiandao set num='$nnum',days='$ndays',pond='$npond',ltime='$ntime' where uid='$uid'");
+                    if ($res) {
+                        // echo '非连续签到成功';
+                        Session::put('user_pond',$npond);
+                        $data[0]='签到成功，获得' . $nponds . '积分';
+                        $data[1]=$npond;
+                        return json_encode($data);
+                        die;
+                    } else {
+                        $data[0]='签到失败，获得0积分';
+                        $data[1]=0;
+                        return json_encode($data);
+                        die;
+                    }
+                }
+            }
+        }
     }
 }

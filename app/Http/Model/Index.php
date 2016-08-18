@@ -7,22 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class Index extends Model
 {
+    /*
+    * 制作人 :: 王浩东 2016-08-17 16:46
+    */
+    //查询试题信息
     public function index()
     {
-        return DB::table('shiti')->orderBy("click","desc")->limit(8)->get();
+        return DB::table('college_questions')
+            ->select("c_id","c_college","c_name","c_type","c_direction","c_num","c_answer")
+            ->limit(8)->orderBy("c_num","desc")
+            ->get();
     }
+
     /*
-     * 用户头像信息
+     * 主页 显示招聘信息
+     * 制作人 :: 王浩东 2016-08-17 21:10
      */
-    public function head_scu()
+    public function program()
     {
-        $user = Session::get("username");
-        $data    =DB::table('users')->select('user_filedir')->where("user_name",$user)->first();
-        //$data = DB::select($sql);
-        if($data){
-            return $data;
-        }else{
-            return $data=array('error'=>"1");
-        }
+        $all = DB::table('position')->limit(8)->orderBy('p_id','asc')->get();
+        return $all;
     }
+
 }

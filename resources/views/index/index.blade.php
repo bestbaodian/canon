@@ -52,175 +52,86 @@
         <ul class="icourse-course clearfix">
             <?php foreach($shi as $k=>$v){?>
             <li>
-                <a  href="college_exam?id=<?php echo $v['s_id']?>">
+                <a  href="{{url("xiang?id=$v[c_id]&v=0&a=0&l=0")}}">
                     <div class="icourse-img">
-                        <img class="scrollLoading" src="http://123.56.249.121/android/web/<?php echo $v['s_img']?>" alt="">
+                        <img class="scrollLoading" src="<?php
+                        if($v['c_college']=="软工学院"){
+                            echo "/images/logo/软工.jpg";
+                        }elseif($v['c_college']=="移动通信学院"){
+                            echo "/images/logo/移动.jpg";
+                        }else if($v['c_college']=="云计算学院"){
+                            echo  "/images/logo/云计算.jpg";
+                        }elseif($v['c_college']=="高翻学院"){
+                            echo  "/images/logo/高翻.jpg";
+                        }elseif($v['c_college']=="国际经贸学院"){
+                            echo  "/images/logo/经贸.jpg";
+                        }elseif($v['c_college']=="建筑学院"){
+                            echo  "/images/logo/建筑.jpg";
+                        }elseif($v['c_college']=="游戏学院"){
+                            echo  "/images/logo/游戏.jpg";
+                        }elseif($v['c_college']=="网工学院"){
+                            echo  "/images/logo/网工.jpg";
+                        }elseif($v['c_college']=="传媒学院"){
+                            echo  "/images/logo/传媒.jpg";
+                        }?>" alt="">
                     </div>
                     <div class="icourse-intro clearfix">
-                        <p>公司:<?php echo $v['company_name']?></p>
-            <span class="l ">
-                              <?php echo $v['addtime']?>
-                          </span>
-            <span class="r">
-              课程时长：29分
-            </span>
+                        <p>答案:{{$v['c_answer']}}</p>
+                        <span class="l ">{{$v['c_type']}}</span>
                     </div>
                     <div class="icourse-tips clearfix">
-                        <h2><?php echo $v['s_logo']?></h2>
-                        <span class="l "><?php echo substr($v['addtime'],'0','10')?></span>
-                        <span class="r"><?php echo $v['click']?>人学习</span>
+                        <h2>{{$v['c_name']}}</h2>
+                        <span class="l ">{{$v['c_college']}}</span>
+                        <span class="r">{{$v['c_num']}}人学习</span>
                     </div>
                 </a>
             </li>
                 <?php } ?>
-
         </ul>
     </div>
 </div>
 <!--试题结束 -->
 
 <!--招聘开始 -->
-
-<!--招聘结束 -->
-
-<!--面试方法开始 -->
-
-<!--面试方法结束 -->
-
-<!--简历开始 -->
 <div class="icourse">
     <div class="incourse-wrap idx-width">
         <h2 class="icourse-title">招聘</h2>
         <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
+            <?php foreach($pro as $k=>$v){?>
             <li>
-                <a  href="college_exam?id=<?php echo $v['s_id']?>" target="_blank">
+                <a  href="college_exam?id=<?php echo $v['p_name']?>">
                     <div class="icourse-img">
-                        <img class="scrollLoading" src="http://123.56.249.121/android/web/<?php echo $v['s_img']?>" alt="">
+                        <img class="scrollLoading" src="{{url("$v[img]")}}" alt="">
                     </div>
                     <div class="icourse-intro clearfix">
-                        <p>公司:<?php echo $v['company_name']?></p>
-            <span class="l ">
-                              <?php echo $v['addtime']?>
-                          </span>
-            <span class="r">
-              课程时长：29分
-            </span>
+                        <p>:{{$v['p_name']}}</p>
+                        <span class="l ">{{$v['p_name']}}</span>
                     </div>
                     <div class="icourse-tips clearfix">
-                        <h2><?php echo $v['s_logo']?></h2>
-                        <span class="l "><?php echo substr($v['addtime'],'0','10')?></span>
-                        <span class="r"><?php echo $v['click']?>人学习</span>
+                        <h2>{{$v['p_name']}}</h2>
+                        <span class="l ">{{$v['p_name']}}</span>
+                        <span class="r">{{$v['c_num'] or "暂无"}}人学习</span>
                     </div>
                 </a>
             </li>
-                <?php } ?>
-
+            <?php } ?>
         </ul>
     </div>
 </div>
-<!--面试简历结束 -->
+<!--招聘结束 -->
+
+<!--方法方法开始 -->
+
+<!--面试方法结束 -->
+
+<!--简历开始 -->
+
+<!--简历介绍-->
 
 <!--答疑开始 -->
 
+{{--<!--答疑介绍-->--}}
 
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">方法</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['s_id']?>" target="_blank">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="http://123.56.249.121/android/web/<?php echo $v['s_img']?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>公司:<?php echo $v['company_name']?></p>
-            <span class="l ">
-                              <?php echo $v['addtime']?>
-                          </span>
-            <span class="r">
-              课程时长：29分
-            </span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2><?php echo $v['s_logo']?></h2>
-                        <span class="l "><?php echo substr($v['addtime'],'0','10')?></span>
-                        <span class="r"><?php echo $v['click']?>人学习</span>
-                    </div>
-                </a>
-            </li>
-                <?php } ?>
-
-        </ul>
-    </div>
-</div>
-<!--答疑结束 -->
-
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">简历</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['s_id']?>" target="_blank">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="http://123.56.249.121/android/web/<?php echo $v['s_img']?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>公司:<?php echo $v['company_name']?></p>
-            <span class="l ">
-                              <?php echo $v['addtime']?>
-                          </span>
-            <span class="r">
-              课程时长：29分
-            </span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2><?php echo $v['s_logo']?></h2>
-                        <span class="l "><?php echo substr($v['addtime'],'0','10')?></span>
-                        <span class="r"><?php echo $v['click']?>人学习</span>
-                    </div>
-                </a>
-            </li>
-            <?php } ?>
-
-        </ul>
-    </div>
-</div>
-
-
-<div class="icourse">
-    <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">答疑</h2>
-        <ul class="icourse-course clearfix">
-            <?php foreach($shi as $k=>$v){?>
-            <li>
-                <a  href="college_exam?id=<?php echo $v['s_id']?>" target="_blank">
-                    <div class="icourse-img">
-                        <img class="scrollLoading" src="http://123.56.249.121/android/web/<?php echo $v['s_img']?>" alt="">
-                    </div>
-                    <div class="icourse-intro clearfix">
-                        <p>公司:<?php echo $v['company_name']?></p>
-            <span class="l ">
-                              <?php echo $v['addtime']?>
-                          </span>
-            <span class="r">
-              课程时长：29分
-            </span>
-                    </div>
-                    <div class="icourse-tips clearfix">
-                        <h2><?php echo $v['s_logo']?></h2>
-                        <span class="l "><?php echo substr($v['addtime'],'0','10')?></span>
-                        <span class="r"><?php echo $v['click']?>人学习</span>
-                    </div>
-                </a>
-            </li>
-            <?php } ?>
-
-        </ul>
-    </div>
-</div>
 
 <!--script-->
 <SCRIPT src="../js/jquery-1.9.1.min.js" type="text/javascript"></SCRIPT>
@@ -250,166 +161,6 @@ jQuery(document).ready(function($){
             // 异步加载图片，实现逐屏加载图片
             $(".scrollLoading").scrollLoading(); 
 });
-
-  var flag=false;
-    $('#username').blur(function(){
-       // alert(123);
-        var username=$(this).val();
-        if(username=='') {
-            $('#name_sp').html('用户名非空');
-            //alert(123);
-            flag=true;
-            return flag;
-        }else{
-            $('#name_sp').html('');
-            // alert(456);
-            return flag;
-        }
-    })
-    var emailflag=false;
-    $('#email').blur(function(){
-        var email=$("#email").val();
-        var reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if(reg.test(email)){
-            // alert(123)
-            $("#email_sp").html('')
-            emailflag=true;
-            return emailflag;
-        }else{
-            // alert(456)
-            // alert(456)
-            $("#email_sp").html('格式错误')
-            return emailflag;
-        }
-    })
-    var phoneflag=false;
-    $("#phone").blur(function(){
-        var phone=$("#phone").val();
-        var reg = /^1\d{10}$/;
-        if(reg.test(phone)){
-            $("#phone_sp").html('')
-            phoneflag=true;
-            return phoneflag;
-        }else{
-            $("#phone_sp").html('格式错误');
-            return phoneflag;
-        }
-    })
-    function show(){
-        if(this.aa.password.type='password'){
-            box.innerHTML = "<input type='text' name='password'  value="+this.aa.password.value+">";
-            box3.innerHTML = "<a href='javascript:void(0)' onclick='hid();'>隐藏密码</a>";
-        }
-    }
-    function hid(){
-        if(this.aa.password.type='text'){
-            box.innerHTML = "<input type='password' name='password'  value="+this.aa.password.value+">";
-            box3.innerHTML = "<a href='javascript:void(0)' onclick='show();'>显示密码</a>";
-        }
-    }
-    $("#u_name").blur(function() {
-        var u_name = $("#u_name").val();
-        var token  = $("#token").val()
-        var reg = /^1\d{10}$/;
-        var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-            if (reg.test(u_name)) {
-            // alert(u_name)
-            $.post('name', {
-                u_name: u_name
-            }, function (data) {
-                //alert(data)
-                if (data == 1) {
-                    $("#sp_name").html('<font color="#5ff137">√</font>')
-                } else if (data == 2) {
-                    $("#sp_name").html('<font color="#f00">×</font>')
-                }
-       })
-
-        } else if (email_reg.test(u_name)) {
-            $.post('email', {
-                u_name: u_name
-            }, function (data) {
-                if (data == 1) {
-                    $("#sp_name").html('<font color="#5ff137">√</font>')
-                } else if (data == 2) {
-                    $("#sp_name").html('<font color="#f00">×</font>')
-                }
-            })
-        } else {
-            $("#sp_name").html('格式错误')
-        }
-    })
-    $("#password").blur(function() {
-        var u_name = $("#u_name").val()
-        var u_pwd = $("#password").val()
-        var reg = /^1\d{10}$/;
-        var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-        if (reg.test(u_name)) {
-            $.ajax({
-                url:"name_pwd",
-                type:"post",
-                async : false,
-                data:{
-                    u_name: u_name,
-                    u_pwd: u_pwd
-                },success:function(data){
-                    if (data == 3) {
-                        $("#sp_pwd").html('<font color="#5ff137">√</font>')
-                    } else if (data == 4) {
-                        $("#sp_pwd").html('<font color="#f00">×</font>');
-                    }
-                }
-            })
-        } else if (email_reg.test(u_name)) {
-            $.post('email_pwd', {
-                u_name: u_name,
-                u_pwd: u_pwd
-            }, function (data) {
-                if (data == 3) {
-                    $("#sp_pwd").html('<font color="#5ff137">√</font>')
-                } else if (data == 4) {
-                    $("#sp_pwd").html('<font color="#f00">×</font>');
-                }
-            })
-        }
-    })
-    $("#sub").click(function(){
-        var sp_name=$("#sp_name").html();
-        var sp_pwd=$("#sp_pwd").html();
-        var u_name=$("#u_name").val();
-        var u_pwd=$("#password").val();
-        if(sp_name=='<font color="#5ff137">√</font>' && sp_pwd=='<font color="#5ff137">√</font>'){
-            var reg = /^1\d{10}$/;
-            var email_reg = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-            if (reg.test(u_name)) {
-                $.post('name_deng',{
-                    u_name:u_name,
-                    u_pwd:u_pwd
-                },function(data){
-                    if(data==5){
-                        alert('登陆成功');location.href='index';
-                    }else if(data==6){
-                        alert('登陆失败');location.href='login';
-                    }
-                })
-            }else if(email_reg.test(u_name)){
-                $.post('email_deng',{
-                    u_name:u_name,
-                    u_pwd:u_pwd
-                },function(data){
-                    if(data==5){
-                        alert('登陆成功');location.href='index';
-                    }else if(data==6){
-                        alert('登陆失败');location.href='login';
-                    }
-                })
-            }
-
-
-        }else{
-            alert("条件不成立");
-        }
-    })
 </script>
 </body>
 @endsection

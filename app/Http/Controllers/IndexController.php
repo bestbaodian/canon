@@ -12,7 +12,8 @@ class IndexController extends Controller
     public function index(){
         $index = new Index();
         $shi = $index ->index();
-        return view('index/index',['shi'=>$shi,]);
+        $pro = $index ->program();
+        return view('index/index',['shi'=>$shi,'pro'=>$pro]);
     }
 
     public function layouts(){
