@@ -65,10 +65,9 @@
                                 <a href="{{url('user/setprofile')}}"><img class="l" alt="{{ Session::get('username') }}" src="/<?php if(Session::get('user_filedir')){ echo Session::get('user_filedir'); }else{ echo "images/unknow-160.png"; };?>"></a>
                                 <a href="{{url('user/setprofile')}}"><span class="name text-ellipsis">{{ Session::get('username') }}</span></a>
                                 <p class="meta">
-					<a href="{{url('user/setprofile')}}">经验<b id="js-user-mp">550</b></a>
-					<a href="{{url('user/setprofile')}}">积分<b id="js-user-credit">0</b></a></p>
-
-                                <a class="icon-set setup" href="{{url('user/setprofile')}}"></a>
+					<a href="{{url('user/setprofile')}}">经验<b id="js-user-mp"><?php if(Session::get('user_ex')){echo Session::get('user_ex');}else{echo 0;} ?></b></a>
+					<a href="{{url('user/setprofile')}}">积分<b id="js-user-credit"><?php if(Session::get('user_pond')){echo Session::get('user_pond');}else{echo 0;} ?></b></a></p>
+                                <a href="javascript:void(0)" class="qiandao" id="{{Session::get('uid')}}">立即签到</a>
                             </div>
                             <div class="card-history">
                                 <span class="history-item">
@@ -215,3 +214,20 @@
 </div>
 <script src="../static/js/my.js"></script>
 
+<script>
+    /*
+     *  用户签到js请求
+     */
+    $('.qiandao').click(function() {
+        var uid=$('.qiandao').attr('id');
+        $.ajax({
+            type: "get",
+            url: "{{url('qiandao')}}",
+            data: "uid="+uid,
+            success: function(msg){
+                var data = eval(msg);
+                $('#spans').html(data[1])
+                alert(data[0]);
+            }
+        });
+    })  </script>
