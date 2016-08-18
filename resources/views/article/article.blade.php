@@ -38,11 +38,11 @@
         <div class="article-left l">
 
             <ul class="article-tab clearfix">
-                <li  class="tabactive" >
+                <li  class="<?=(!isset($_GET['at_id'])||$_GET['at_id']==0)?'tabactive':''?>" >
                     <a data-id="0" id="type1" value="0" href="{{URL('article')}}">全部</a>
                 </li>
                 <?php foreach($at_type as $k=>$v){?>
-                <li >
+                <li  class="<?=(isset($_GET['at_id'])&&$_GET['at_id']==$v['at_id'])?'tabactive':''?>">
                     <a data-id="105"  id="type" href="{{URL('article?at_id')}}=<?php echo $v['at_id']?>" value="<?php echo $v['at_type']?>"><?php echo $v['at_type']?></a>
                 </li>
 
@@ -59,32 +59,32 @@
             <?php foreach($article as $k=>$v){?>
             <div class="article-lwrap ">
                 <!-- text -->
-                <input type="hidden" id="a_id" value="<?php echo $v['a_id']?>">
+                <input type="hidden" id="a_id" value="{{$v['a_id']}}">
                 <div class="">
                     <h3 class="item-title">
-                        <a href="{{URL('fangfa?id=')}}<?php echo $v['a_id']?>" target="_blank" class="title-detail"><?php echo $v['a_title']?></a>
+                        <a href="{{URL('fangfa?id=')}}{{$v['a_id']}}" target="_blank" class="title-detail">{{$v['a_title']}}</a>
                     </h3>
-                    <p class="item-bd"><?php echo $v['a_con']?></p>
+                    <p class="item-bd">{{$v['a_con']}}</p>
                     <div class="item-btm clearfix">
                         <ul class="l left-info">
                             <li class="hd-pic">
                                 <a class="publisher-hd" href="#" target="_blank">
                                     <img src="" alt="" width="20" height="20" />
                                 </a>
-                                <a class="publisher-name" href="#" target="_blank">用户</a>
+                                <a class="publisher-name" href="#" target="_blank">用户:{{$v['user_name']}}</a>
                             </li>
                             <li class="now-tag">
-                                <a class="item-tag" href="#" target="_blank"><?php echo $v['at_type']?></a>
+                                <a class="item-tag" href="#" target="_blank">{{$v['at_type']}}</a>
                             </li>
-                            <li class="pass-time"><span><?php echo $v['a_addtime']?></span></li>
-                            <li class="pass-time"><span><?php echo $v['a_num']?>浏览</span></li>
+                            <li class="pass-time"><span>{{$v['a_addtime']}}</span></li>
+                            <li class="pass-time"><span>{{$v['brows']}}浏览</span></li>
                         </ul>
                         <div class="r right-info">
-                            <div class="favorite l" id="zan" value="<?php echo $v['a_id']?>">
+                            <div class="favorite l" id="zan" value="{{$v['a_id']}}">
                                 <img src="images/zan.jpg"  class="zan" width="15" height="20">
 
-                                <em id="<?php echo $v['a_id']?>" class="zans">点赞
-                                    <?php echo $v['a_num']?>
+                                <em id="{{$v['a_id']}}" class="zans">点赞
+                                    {{$v['a_num']}}
                                 </em>
                                 <input type="hidden" id="user" value="<?php echo Session::get('username');?>">
 
@@ -117,50 +117,30 @@
                 <h2 class="panel-hd">推荐文章</h2>
                 <div class="remon-main">
                     <ul>
-                        <li>
-                            <h3 class="remon-title">
-                                <a href="#" class="title-detail">什么才算是真正的编程能力？</a>
-                            </h3>
-                            <p class="remon-bd">知乎上看到一题主的发问： 还在读书，也在实验室帮忙做了些东西，自己也搭过几个网站。在周围人看来似乎好...</p>
-                            <div class="arti-info clearfix">
-                                <ul>
-                                    <li class="hd-pic">
-                                        <a class="publisher-hd" href="#" target="_blank">
-                                            <img src="" alt="" width="20" height="20" />
-                                        </a>
-                                        <a class="publisher-name" href="#" target="_blank">奋斗在路上</a>
-                                    </li>
-                                    <li class="now-tag">
-                                        <a class="item-tag" href="#" target="_blank">职场/生活</a>
-                                    </li>
-                                    <li class="now-tag">
-                                        <span class="viewed-num">20038浏览</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <h3 class="remon-title">
-                                <a href="#" class="title-detail">C语言知识点大汇总</a>
-                            </h3>
-                            <p class="remon-bd">【前言】 看到有读者说想要一些IOS开发前需要学习哪些知识，今天就把我再CSDN上的C语言博客拿过来分享给大...</p>
-                            <div class="arti-info clearfix">
-                                <ul>
-                                    <li class="hd-pic">
-                                        <a class="publisher-hd" href="#" target="_blank">
-                                            <img src="picture/545861d500015cc602200220-100-100.jpg" alt="" width="20" height="20" />
-                                        </a>
-                                        <a class="publisher-name" href="#" target="_blank">i爱慕客</a>
-                                    </li>
-                                    <li class="now-tag">
-                                        <a class="item-tag" href="#" target="_blank">后端开发</a>
-                                    </li>
-                                    <li class="now-tag">
-                                        <span class="viewed-num">10288浏览</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        @foreach($arr as $k=>$v)
+                            <li>
+                                <h3 class="remon-title">
+                                    <a href="{{URL("fangfa?id=$v[a_id]")}}" class="title-detail">{{$v["a_title"]}}</a>
+                                </h3>
+                                <p class="remon-bd">{{$v["a_con"]}}</p>
+                                <div class="arti-info clearfix">
+                                    <ul>
+                                        <li class="hd-pic">
+                                            <a class="publisher-hd" href="#" target="_blank">
+                                                <img src="" alt="" width="20" height="20" />
+                                            </a>
+                                            <a class="publisher-name" href="#" target="_blank">{{$v["user_name"]}}</a>
+                                        </li>
+                                        <li class="now-tag">
+                                            <a class="item-tag" href="#" target="_blank">{{$v["at_type"]}}</a>
+                                        </li>
+                                        <li class="now-tag">
+                                            <span class="viewed-num">{{$v["brows"]}}浏览</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

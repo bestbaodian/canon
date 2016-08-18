@@ -28,18 +28,16 @@ class ArticleController extends Controller
         //接受用户get请求数据
         $at_id=Request::input('at_id');
         $article_id=Request::input('article_id');
-        //print_r($article_id);
         //查询ar_type表
         $at_type=$articlemodel->getar_type();
-
-        if($at_id!="")
-        {
+        if($at_id!=""){
            $article=$articlemodel->select_article1($at_id);
-        }
-        else
-        {
+            //print_r($article);
+        }else{
            $article=$articlemodel->select_article();
+            //print_r($article);
         }
+        //print_r($article);
         //die;
        $ses = Session::get('username');
         if (empty($ses)){
@@ -47,9 +45,12 @@ class ArticleController extends Controller
         }else{
             $username=Session::get('username');
         }
-        //$u_id=DB::table('users')->where("user_phone","$username")->orwhere("user_email","$username")->first();
-        //$u_id=$articlemodel->get_usersid($username);
-        return view('article/article',['at_type'=>$at_type,'article'=>$article]);
+
+        /*
+         * 推荐文章显示 王鹏飞
+         */
+        $Recommend=$articlemodel->get_tiu();
+        return view('article/article',['at_type'=>$at_type,'article'=>$article,'arr'=>$Recommend]);
     }
 
     /*
@@ -84,7 +85,7 @@ class ArticleController extends Controller
         $model=new article();
         $re=$model->add($a_title,$a_type,$a_con,$a_addtime,$file,$a_lei,$a_adduser);
         if($re==1){
-            echo "<script>alert('提交成功');location.href='article';</script>";
+            echo "<script>alert('正在审核,请稍后...');location.href='article';</script>";
         }else{
             echo "<script>alert('提交失败');location.href='publish';</script>";
         }
@@ -156,9 +157,10 @@ class ArticleController extends Controller
         }
         $id=Request::input('id');
         $model=new article();
+        //触发点击详情这个事件  浏览量就+1
+        $article_num=$model->add_articlenum($id);
         //查询这篇文章的所有评论
         $ping_data=$model->get_ping($id);
-        //print_r($ping_data);die;
         //根据a_id两表联查article和ar_type表
         $arr=$model->join_artype($id);
         //aping users联查

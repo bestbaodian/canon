@@ -182,7 +182,7 @@
         $('#wmd-input-js-mk').click(function(){
             $(this).css('border','#fff 0 solid')
         })
-        $("#al_name").live("click",function(){
+        $(document).on("click","#al_name",function(){
             var num=$('#biao').children('span').length
             if(num<3){
                 $(this).attr('id','al_names').css('cursor','pointer').appendTo('#biao')
@@ -191,12 +191,12 @@
             }else{
                 alert('您最多可以选择3个标签哟！')
             }
-        })
-        $("#al_names").live("click",function(){
+        });
+        $(document).on("click","#al_names",function(){
             var id=$(this).attr('gid');
     // $(':hidden[value='+id+']').remove();
             $(this).attr('id','al_name').appendTo('.tag-box')
-        })
+        });
         $('form').submit(function(e){
             var title=$('#art-title').val()
             var cat=$('#art-cat').val()

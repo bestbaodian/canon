@@ -18,11 +18,11 @@ class Article extends Model
          * 针对文章类型 进行显示数据
          */
         $article = DB::table('article')
-/*            ->join('users', 'article.u_id', '=', 'contacts.user_id')
-            ->select('users.*', 'contacts.phone', 'orders.price')*/
+            ->join('users', 'article.a_adduser', '=', 'users.user_id')
             ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
-            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num','a_pingnum')
+            ->select('users.user_name','a_id', 'a_title', 'at_type','a_con','a_addtime','a_num','brows','a_pingnum')
             ->where("article.a_type",$at_id)
+            ->where("a_state",1)
             ->orderBy('a_id', 'desc')
             ->paginate(3);
         return $article;
@@ -31,20 +31,24 @@ class Article extends Model
     {
        //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id order by a_id desc");
         $article = DB::table('article')
+            ->join('users', 'article.a_adduser', '=', 'users.user_id')
             ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
-            ->select('a_id', 'a_title', 'at_type','a_con','a_addtime','a_num','a_pingnum')
+            ->select('users.user_name','a_id', 'a_title', 'at_type','a_con','a_addtime','a_num','brows','a_pingnum')
+            ->where("a_state",1)
             ->orderBy('a_id', 'desc')
             ->paginate(3);
         return $article;
     }
-
+    //点击文章详情  浏览量+1
+    public function add_articlenum($id){
+        DB::select("update article set brows=brows+1 where a_id='$id'");
+    }
     //得到userid
     public function get_usersid($username)
     {
         $u_id=DB::table('users')->where("user_name","$username")->orwhere("user_email","$username")->first();
         return $u_id;
     }
-//CREATE TABLE `order_log` (`order_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,`order_num` INT,`sub_num` INT,`buy_time` DATETIME,`user_num` INT)
     //article_zan
     public function get_article_zan($val)
     {
@@ -222,6 +226,18 @@ class Article extends Model
             ->where('a_id', $id)
             ->count();
         return $ping_num;
+    }
+
+    /*
+     * 方法推荐文章
+     *制作人：王鹏飞
+     */
+    public function get_tiu(){
+        $arr=DB::table("article")
+            ->join("ar_type","a_type","=","at_id")
+            ->join("users","article.a_adduser","=","users.user_id")
+            ->orderby("article.brows","DESC")->limit(3)->get();
+        return $arr;
     }
 
 }
