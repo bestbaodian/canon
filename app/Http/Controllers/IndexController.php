@@ -13,7 +13,6 @@ class IndexController extends Controller
         $index = new Index();
         $shi = $index ->index();
         $pro = $index ->program();
-
         return view('index/index',['shi'=>$shi,'pro'=>$pro]);
     }
 

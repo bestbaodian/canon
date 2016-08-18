@@ -147,14 +147,11 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         {{--试题选题功能--}}
         <div>
             <?php if($min){ ?>
-            <a href="xiang?id=<?=$min?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">下一题</a>
+            <a href="{{url("xiang?id=$min&v=$vv&a=$a&l=$l")}}">下一题</a>
             <? } ?>
             <?php if($max){ ?>
-            <a href="xiang?id=<?=$max?>&v=<?=$vv?>&a=<?=$a?>&l=<?=$l?>">上一题</a>
+            <a href="{{url("xiang?id=$max&v=$vv&a=$a&l=$l")}}">上一题</a>
             <? } ?>
-
-
-
         </div>
         <span style="float: right" id="ping">立即评价</span>
         <div id="pinglun">
@@ -171,20 +168,17 @@ $l=isset($_GET['l'])?$_GET['l']:0;
               <img src="images/xing.jpg" width="20" height="20">
               <img src="images/xing.jpg" width="20" height="20">
               <img src="images/xing.jpg" width="20" height="20">
-                                              </div><!--star-box end-->
+          </div><!--star-box end-->
           <p>内容实用：9.9</p>
           <p>通俗易懂：9.6</p>
           <p>逻辑清晰：9.4</p>
           <p class="person_num"><em>1337</em>位同学参与评价</p>
         </div><!--evaluation-info end-->
-                            <div class="evaluation">
-
+          <div class="evaluation">
             <div class="evaluation-con" id="list">
                 <?php foreach($ping as $k=>$v){?>
-
-
               <div class="content-box">
-                      <a href="#" class="img-box"><span><img src="images/u.jpg" width="40px" height="40px" alt="518000"></span></a>
+                  <a href="#" class="img-box"><span><img src="images/u.jpg" width="40px" height="40px" alt="518000"></span></a>
                     <div class="user-info clearfix">
                   <a href="#" class="username"><?php echo $v['user_phone']?></a>
                   <div class="star-box">
@@ -202,11 +196,9 @@ $l=isset($_GET['l'])?$_GET['l']:0;
               </div>
                 <?php } ?><!--content end-->
             </div><!--evaluation-con end-->
-
-
-                      </div><!--evaluation end-->
+          </div><!--evaluation end-->
                     <!--evaluation end-->
-                        </div><!--evaluation-list end-->
+      </div><!--evaluation-list end-->
             <div class="more-evaluation"><a href="#" target="_blank">查看更多评价</a></div>
           </div><!--content end-->
     <div class="aside r">
@@ -345,7 +337,6 @@ $l=isset($_GET['l'])?$_GET['l']:0;
 <script type="text/javascript">
 </script>
 <div class="mask"></div>
-
 </body></html>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script>
