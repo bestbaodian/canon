@@ -134,11 +134,15 @@ var isLogin=1
     <!-- 文章详情end -->
   
     <!-- 相关阅读 -->
-<div class="react-article">
-        <h2>相关阅读</h2><ul><li><a title="前端开发的七宗罪" href="/article/1277"><h3>前端开发的七宗罪</h3></a>                                    <p>前端开发在最近几年逐渐走红，越来越多的开发者加入前端开发队伍。但前端在大学中没有课程体系，而且知识也在不断更新着。大家对它的认识也各不相同。博主有过技术经理，项目经理，面试官，前端开发的经历，参与过较...</p></li><li><a title="【慕星人独白】在一个急躁的心理状态下，怎样正常的生活" href="/article/4485"><h3>【慕星人独白】在一个急躁的心理状态下，怎样正常的生活</h3></a></li><li><a title="【特别推荐】一枚应届生对近来前端界流派之争的一点思考" href="/article/4533"><h3>【特别推荐】一枚应届生对近来前端界流派之争的一点思考</h3></a></li><li><a title="Node.js 给前端带来了什么？" href="/article/7443"><h3>Node.js 给前端带来了什么？</h3></a></li><li><a title="2016 年后 Web开发趋势是什么" href="/article/7913"><h3>2016 年后 Web开发趋势是什么</h3></a></li></ul>
-    </div>
+{{--<div class="react-article">--}}
+        {{--<h2>相关阅读</h2><ul><li><a title="前端开发的七宗罪" href="/article/1277"><h3>前端开发的七宗罪</h3></a>                                    <p>前端开发在最近几年逐渐走红，越来越多的开发者加入前端开发队伍。但前端在大学中没有课程体系，而且知识也在不断更新着。大家对它的认识也各不相同。博主有过技术经理，项目经理，面试官，前端开发的经历，参与过较...</p></li><li><a title="【慕星人独白】在一个急躁的心理状态下，怎样正常的生活" href="/article/4485"><h3>【慕星人独白】在一个急躁的心理状态下，怎样正常的生活</h3></a></li><li><a title="【特别推荐】一枚应届生对近来前端界流派之争的一点思考" href="/article/4533"><h3>【特别推荐】一枚应届生对近来前端界流派之争的一点思考</h3></a></li><li><a title="Node.js 给前端带来了什么？" href="/article/7443"><h3>Node.js 给前端带来了什么？</h3></a></li><li><a title="2016 年后 Web开发趋势是什么" href="/article/7913"><h3>2016 年后 Web开发趋势是什么</h3></a></li></ul>--}}
+    {{--</div>--}}
     <!-- 相关阅读end -->
- 
+
+
+
+
+
  <div class="detail-feedback-wrap" style="">
         <!-- 评论框 -->
     <div>
@@ -161,17 +165,14 @@ var isLogin=1
         <!-- 评论 -->
         <div id="all_comments" class="df-title">全部评论<span class="comment-num"><i></i></span></div>
         <div class="feedback-list" id="js-feedback-list-wrap">
-
-
-
         <div id="js-feedback-list">
         {{--评论数据循环开始--}}
             @foreach($ping_data as $key=>$val)
             <div class="comment-box">
                 <div class="comment clearfix">
                     <div class="feed-author l">
-                        <a href=""><img width="40" alt="{{Session::get('username')}}" src="<?php echo Session::get('user_filedir');?>"></a>
-                        <a target="_blank" href="/u/1938237/articles" class="nick"><?php echo session::get('username')?></a>
+                        <a href=""><img width="40" alt="{{$val['user_name']}}" src="{{$val['user_filedir']}}"></a>
+                        <a target="_blank" href="#" class="nick">{{$val['user_name']}}</a>
                         <span class="com-floor r">1F</span>
                     </div>
                     <div class="feed-list-content">
@@ -180,7 +181,7 @@ var isLogin=1
                         <p></p>
                         <div class="comment-footer">
                             <span class="feed-list-times"> {{$val['ap_addtime']}}　　评论</span>
-                            <span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="reply-btn">回复</span>
+                            <span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="reply-btn" onclick="reply(<?= $val['ap_id']?>)" >回复</span>
                             <span data-username="qq_青枣工作室_0" data-uid="1938237" data-commentid="23493" class="agree-with r">
                                 <b id="z_{{$val['ap_id']}}" onclick="likes({{$val['ap_id']}})">
                                     <?php
@@ -198,29 +199,20 @@ var isLogin=1
                         </div>
                     </div>
                 </div>
-                <div class="reply-box"></div>
-                <div class="release-reply">
-                    <a class="user-head" href="/u/3071208/articles">
-                        <img alt="{{Session::get('user_filedir')}}" src="<?php echo Session::get('user_filedir'); ?>"></a>
-                    <a class="nick" href="/u/3071208/articles">凤颖</a>
-                    <div class="replay-con"><div class="textarea-wrap">
-                            <textarea placeholder="写下你的回复..."></textarea>
+                    @if(isset($val['huifu']))
+                    <div style="margin-left: 60px;">
+                        @foreach($val['huifu'] as $vv)
+                            <img width="40" alt="{{$vv['user_name']}}" src="<?php if($vv['user_filedir']){ echo $vv['user_filedir'];}else{ echo "/images/unknow-40.png"; }?>">
+                            <span style="color: red">{{$vv['user_name']}}</span>:&nbsp;&nbsp;
+                            <?=$vv['ap_cont']?>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <?=$vv['article_addtime'] ?><br><br>
+                        @endforeach
                         </div>
-                        <p class="errtip"></p>
-                        <div class="reply-ctrl clearfix">
-                            <div class="verify-code"></div>
-                            <div class="btn-wrap">
-                                <div class="cancel-btn">取消</div>
-                                <div class="release-reply-btn" data-comment-uid="1938237">提交</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endif
+                <div class="reply-box" id="tr_<?= $val['ap_id']?>"></div>
             </div>
-
             {{--评论数据循环结束--}}
             @endforeach
-            <ul id="fenye"><li>{{ $ping_data->appends(['id' =>$arr['a_id'] ])->links() }}</li></ul>
         </div>
         </div>
         <!-- 分页页码  -->
@@ -312,25 +304,25 @@ var isLogin=1
 <!--script-->
 <script src="/js/jquery-1.9.1.min.js"></script>
       <script>
-         function cons()
-         {
-            var con1=$('#con1').val();
-            var aid=$('#aid').val();
-            $.ajax({
-                   type: "POST",
-                   url: "{{URL('wping')}}",
-                   data: "ap_con="+con1+"&a_id="+aid,
-                   success: function(msg){
-                       var obj=eval("("+msg+")");
-                       if(obj['error']){
-                           alert("评论成功");
-                           location.reload();
-                       }else{
-                           alert("评论异常");
-                       }
-                   }
-            });
-         }
+         {{--function cons()--}}
+         {{--{--}}
+            {{--var con1=$('#con1').val();--}}
+            {{--var aid=$('#aid').val();--}}
+            {{--$.ajax({--}}
+                   {{--type: "POST",--}}
+                   {{--url: "{{URL('wping')}}",--}}
+                   {{--data: "ap_con="+con1+"&a_id="+aid,--}}
+                   {{--success: function(msg){--}}
+                       {{--var obj=eval("("+msg+")");--}}
+                       {{--if(obj['error']){--}}
+                           {{--alert("评论成功");--}}
+                           {{--location.reload();--}}
+                       {{--}else{--}}
+                           {{--alert("评论异常");--}}
+                       {{--}--}}
+                   {{--}--}}
+            {{--});--}}
+         {{--}--}}
           //点赞
          //(评论的id)
           function likes(ap_id){
@@ -366,18 +358,36 @@ var isLogin=1
                   }
               })
           }
+         function reply(ap_id){
+             $(".reply-box").html('');
+             $("#tr_"+ap_id).html("<textarea style='width: 690px;height: 100px;' placeholder='写下你的回复...' id='a_ping'></textarea>&nbsp;<a href='javascript:void(0)' onclick='a_ping()' style='font-size: 20px;color: red;background-color: #ffffff'>回复楼主<a>");
+         }
+         function a_ping(){
+             var a_ping = $("#a_ping").val();
+             var a_id=$("#a_ping").parent().attr('id');
+             var articleid = $("#aid").val()
+             //alert(a_id);
+             if(a_ping == ''){
+                 alert('请输入回复内容');
+             }else{
+                 $.ajax({
+                     type: "POST",
+                     url: "a_ping",
+                     data:{
+                         ping:a_ping,
+                         ap_id:a_id,
+                         articleid:articleid
+                     },
+                     success: function(msg){
+                         alert('回复成功');
+                         $(".reply-box").html('');
+                         $("#js-feedback-list").html(msg)
+                     }
+                 });
+             }
+         }
       </script>
 <div style="display: none">
 </div>
 </body>
 </html>
-<style>
-    #fenye li{
-        list-style: none;
-        float: left;
-        margin-top: 20px;
-        margin-left: 30px;
-        font-size: 18px;
-        color: #ff998c;
-    }
-</style>

@@ -62,7 +62,7 @@
                 <input type="hidden" id="a_id" value="{{$v['a_id']}}">
                 <div class="">
                     <h3 class="item-title">
-                        <a href="{{URL('fangfa?id=')}}{{$v['a_id']}}" target="_blank" class="title-detail">{{$v['a_title']}}</a>
+                        <a href="{{URL('fangfa?id=')}}{{$v['a_id']}}" target="_self" class="title-detail">{{$v['a_title']}}</a>
                     </h3>
                     <p class="item-bd">{{$v['a_con']}}</p>
                     <div class="item-btm clearfix">

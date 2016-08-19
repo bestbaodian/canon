@@ -148,6 +148,7 @@ class ArticleController extends Controller
      */
 
     public function wxiang(){
+        header("content-type:text/html;charset=utf8");
         if(empty(Session::get('username'))){
             //$username=0;
             //article
@@ -158,14 +159,14 @@ class ArticleController extends Controller
         $id=Request::input('id');
         $model=new article();
         //触发点击详情这个事件  浏览量就+1
-        $article_num=$model->add_articlenum($id);
+        $model->add_articlenum($id);
         //查询这篇文章的所有评论
         $ping_data=$model->get_ping($id);
         //根据a_id两表联查article和ar_type表
         $arr=$model->join_artype($id);
 
         //针对评论的内容回复
-        $pinghui = $model->ph($id);
+        //$pinghui = $model->ph($id);
 
         //查出该篇文章类型
        // die;
@@ -181,8 +182,9 @@ class ArticleController extends Controller
          * 制作人 ::王鹏飞
          * 作者热门文章
          */
+        //print_r($ping_data);die;
         $hot=$model->get_re($id);
-        return view('article/wxiang',['arr'=>$arr[0],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,$pinghui['aping'],'house'=>$pinghui['is_house']]);
+        return view('article/wxiang',['arr'=>$arr[0],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot]);
     }
     /*
      * 显示对应文章相关内容
@@ -266,34 +268,26 @@ class ArticleController extends Controller
         }
     }
     //回复评论人的回复
-    public function a_ping(Request $request){
+    public function a_ping(){
         if(Session::get('username')==""){
             $username=0;
             $u_id=0;
         }else{
             $u_id = Session::get('uid');
         }
-        $request = $request->all();
-        $ap_id2=$request['ap_id'];
+        $ap_id2 = Request::input('ap_id');
+        $ping = Request::input('ping');
+        $articleid = Request::input('articleid');
         $ap_id = substr($ap_id2,3);
-        $ping=$request['ping'];
         //echo $ap_id;die;
         $a_addtime = date("Y-m-d H:i:s",time());
         $sql="insert into a_ping(u_id,ap_cont,ap_id,article_addtime) values('$u_id','$ping','$ap_id','$a_addtime')";
         $re=DB::insert($sql);
 
-        $aping = DB::table('aping')->join("users", "aping.u_id", "=", "users.user_id")->join("article", "aping.a_id", "=", "article.a_id")->orderBy("aping.ap_id", "desc")->select('aping.ap_id','aping.ap_con','aping.u_id','article.a_id','aping.a_addtime','users.user_name','users.img','article.a_num','article.a_con','article.a_title')->get();
-        //回答（回答评论）
-        $a_ping = DB::table('a_ping')->join('aping','a_ping.ap_id','=','aping.ap_id')->leftjoin('users','a_ping.u_id','=','users.user_id')->orderBy('a_ping.article_addtime','desc')->orderBy('a_ping.ap_id')->select('a_ping.article_id','a_ping.ap_cont','a_ping.u_id','a_ping.ap_id','a_ping.article_addtime','aping.ap_con','aping.a_id','aping.a_addtime','users.user_name','users.img')->get();
-        //print_r($a_ping);die;
-        foreach($aping as $key => $v){
-            foreach($a_ping as $k => $a){
-                if($v['ap_id'] ==$a['ap_id']){
-                    $aping[$key]['answer'][]=$a;
-                }
-            }
-        }
-        return view('article/a_ping', ['aping' => $aping]);
+        //实例化model
+        $ph = new Article();
+        $aping = $ph->get_ping($articleid);
+        return view('article/a_ping', ['ping_data' => $aping]);
     }
 
 }

@@ -61,7 +61,8 @@ Route::get("qiandao","UserController@qiandao");
  * */
 //给评论点赞路由
 Route::post('zanping','ArticleController@zp');
-
+//文章瀑布流
+Route::post('a_ping', 'ArticleController@a_ping');
 /*
  * 猿问开始
  */

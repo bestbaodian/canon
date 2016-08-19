@@ -185,17 +185,46 @@ class Article extends Model
 
     /*
      * 查出这篇文章的相关评论
-     * 制作人::李慧敏
+     * 制作人::李慧敏 // 时庆庆 张峻玮
      */
+    //->select('a_ping.article_id', 'a_ping.ap_cont', 'a_ping.u_id', 'a_ping.ap_id', 'a_ping.article_addtime', 'aping.ap_con', 'aping.a_id', 'aping.ap_addtime', 'users.user_name', 'users.user_filedir')
+
     public function get_ping($id)
     {
         $data = DB::table('aping')
             ->leftjoin('article', 'aping.a_id', '=', 'article.a_id')
             ->leftjoin('ping_zan', 'aping.ap_id', '=', 'ping_zan.ap_id')
-            ->select('aping.ap_id', 'ap_con', 'aping.a_id', 'ap_zannum', 'ap_iszan', 'ap_addtime', DB::raw('count(ping_zan.u_id) as count'), DB::raw('group_concat(ping_zan.u_id) as allid'))
+            ->leftjoin('users','aping.u_id','=','users.user_id')
+            ->select(
+                'aping.ap_con',
+                'aping.ap_addtime',
+                'users.user_name',
+                'users.user_filedir',
+                'aping.ap_id',
+                'ap_con',
+                'aping.a_id',
+                'ap_zannum',
+                'ap_iszan',
+                'ap_addtime',
+                DB::raw('count(ping_zan.u_id) as count'), DB::raw('group_concat(ping_zan.u_id) as allid'))
             ->where('aping.a_id', $id)
+
             ->groupBy('aping.ap_id')
-            ->paginate(3);
+            ->get();
+        foreach($data as $key=>$val){
+            $por = DB::table('aping')
+                ->join('a_ping','aping.ap_id','=','a_ping.ap_id')
+                ->join('users','users.user_id','=','a_ping.u_id')
+                ->where('aping.ap_id',$val['ap_id'])
+                ->get();
+            if(!empty($por))
+            {
+                $data[$key]['huifu']=$por;
+            }
+        }
+
+
+
         return $data;
     }
 

@@ -279,7 +279,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                 <?php foreach($ping as $k=>$v){?>
                 <div class="evaluation-con" id="list">
                     <div class="content-box">
-                        <a href="#" class="img-box"><span><img src="/{{$v['user_filedir']}}" width="40px" height="40px" alt="518000"></span></a>
+                        <a href="#" class="img-box"><span><img src="<?php if($v['user_filedir']){ echo $v['user_filedir']; }else{ echo "images/unknow-40.png"; }?>" width="40px" height="40px" alt="518000"></span></a>
                         <div class="user-info clearfix">
                             <a href="#" class="username"><?php echo $v['user_phone']?></a>
                             <div class="star-box">
@@ -317,7 +317,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
             </div><!--evaluation end-->
             <!--evaluation end-->
         </div>
-            <div class="more-evaluation"><a href="#" target="_blank">查看更多评价</a></div>
+            {{--<div class="more-evaluation"><a href="#" target="_blank">查看更多评价</a></div>--}}
           </div><!--content end-->
     <div class="aside r">
       <div class="bd">
