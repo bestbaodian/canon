@@ -167,9 +167,9 @@ $(function(){
                         u_pwd:u_pwd
                     },success:function(data){
                         if (data == 5) {
-                            location.href='index';
+                            location.reload()
                         } else if (data == 6) {
-                            alert('登陆失败');location.href='login';
+                            alert('登陆失败');location.reload()
                         }
                     }
                 })
@@ -187,9 +187,9 @@ $(function(){
                         u_pwd:u_pwd
                     },success:function(data){
                         if (data == 5) {
-                            location.href='index';
+                            location.reload()
                         } else if (data == 6) {
-                            alert('登陆失败');location.href='login';
+                            alert('登陆失败');location.reload()
                         }
                     }
                 })
@@ -224,7 +224,7 @@ $(function(){
                     user_phone:user_phone
                 },success:function(data){
                     if(data == "true"){
-                        location.href="index"
+                        location.reload()
                     }else{
                         var dataObj=eval("("+data+")")
                         $("#check_reg").html(dataObj.translation).show(1).delay(2000).hide(1)

@@ -61,7 +61,8 @@ Route::get("qiandao","UserController@qiandao");
  * */
 //给评论点赞路由
 Route::post('zanping','ArticleController@zp');
-
+//文章瀑布流
+Route::post('a_ping', 'ArticleController@a_ping');
 /*
  * 猿问开始
  */
@@ -100,6 +101,8 @@ Route::get('xiang', 'CourseController@xiang');
 Route::post('contents', 'CourseController@contents');
 Route::get('ping', 'CourseController@ping');
 Route::post('state', 'CourseController@state');
+
+Route::post('pinglun_shiti','CourseController@pinglun_shiti');//试题评论
 /*
  * 试题结束
  */

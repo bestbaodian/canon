@@ -179,6 +179,9 @@ class Course extends Model{
         return $arr;
     }
     //试题关注
+    /*
+     * 制作人 :: 马天天
+     */
     public function follow($c_id,$u_id)
     {
         $brr=DB::table('follow')->insert([
@@ -188,22 +191,37 @@ class Course extends Model{
         return $brr;
     }
     //取消关注
+    /*
+     * 制作人 :: 马天天
+     */
     public function qx_follow($c_id)
     {
         $re=DB::table('follow')->where('c_id',$c_id)->delete();
         return $re;
     }
-//    //修改状态
-//    //修改为关注
-//    public function up_state1($u_id)
-//    {
-//      $state1=DB::table('follow')->where('u_id',$u_id)->update(['f_state' => 1]);
-//        return $state1;
-//    }
-//    //修改为取消关注
-//    public function up_state0($u_id)
-//    {
-//        $state0=DB::table('follow')->where('u_id',$u_id)->update(['f_state' => 0]);
-//        return $state0;
-//    }
+
+    public function pinglun_shiti($request)
+    {
+        $con = $request->input("con");
+        $c_id = $request->input("c_id");
+        $score1 = $request->input("score");
+        $score = substr($score1,'8','1');
+        $u_id = Session::get('uid');
+        $e_addtime = date("Y-m-d H:i:s",time());
+        $pinglun_shiti = DB::table('e_ping')->insert(
+            array(
+                'p_con' => $con,
+                'u_id' => $u_id,
+                'e_Id' => $c_id,
+                'e_addtime' => $e_addtime,
+                'e_score' => $score
+            )
+        );
+        $arr = DB::table('e_ping')
+            ->join('users','u_id','=','users.user_id')
+            ->where('e_id',$c_id)
+            ->orderby('e_addtime','desc')->get();
+        return $arr;
+    }
+
 }

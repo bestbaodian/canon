@@ -150,6 +150,7 @@ class ArticleController extends Controller
      */
 
     public function wxiang(){
+        header("content-type:text/html;charset=utf8");
         if(empty(Session::get('username'))){
             //$username=0;
             //article
@@ -163,23 +164,29 @@ class ArticleController extends Controller
         $model=new article();
 
         //触发点击详情这个事件  浏览量就+1
-        $article_num=$model->add_articlenum($id);
+        $model->add_articlenum($id);
         //查询这篇文章的所有评论
         $ping_data=$model->get_ping($id);
         //根据a_id两表联查article和ar_type表
         $arr=$model->join_artype($id);
+        //查出该篇文章类型
+       // die;
+
+
         //aping users联查
         $aping=$model->join_users();
         //查ping_zan表里有没有用户点赞的信息
         $u_id=Session::get("uid");
+
         //查看该条文章有多少评论
         //$ping_num=$model->get_pingnum($id);,'ping_num'=>$ping_num
         /*
          * 制作人 ::王鹏飞
          * 作者热门文章
          */
+        //print_r($ping_data);die;
         $hot=$model->get_re($id);
-        return view('article/wxiang',['arr'=>$arr[0],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'hot'=>$hot]);
+        return view('article/wxiang',['arr'=>$arr[0],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot]);
     }
     /*
      * 显示对应文章相关内容
@@ -225,6 +232,64 @@ class ArticleController extends Controller
             return json_encode($del_zan);
             //var_dump($del_zan);
         }
+    }
+
+    public function addhouse_article(){
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        $c_id = $_POST['id'];
+        //$user_name = Session::get('username');
+        $user_name=$_SESSION['username'];
+        $u_id=DB::table('users')->where("user_name","$user_name")->get();
+        $u_id=$u_id[0]['user_id'];
+        $arr = DB::insert("insert into house_article(user_id,article_id) values('$u_id','$c_id')");
+        if($arr){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
+
+    //取消收藏
+    public function delhouse_article(){
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        $c_id = $_POST['id'];
+        //$user_name = Session::get('username');
+        $user_name=$_SESSION['username'];
+        $u_id=DB::table('users')->where("user_name","$user_name")->get();
+        $u_id=$u_id[0]['user_id'];
+        $arr = DB::delete("delete from house_article where user_id = '$u_id' and article_id = '$c_id'");
+        if($arr){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+    //回复评论人的回复
+    public function a_ping(){
+        if(Session::get('username')==""){
+            $username=0;
+            $u_id=0;
+        }else{
+            $u_id = Session::get('uid');
+        }
+        $ap_id2 = Request::input('ap_id');
+        $ping = Request::input('ping');
+        $articleid = Request::input('articleid');
+        $ap_id = substr($ap_id2,3);
+        //echo $ap_id;die;
+        $a_addtime = date("Y-m-d H:i:s",time());
+        $sql="insert into a_ping(u_id,ap_cont,ap_id,article_addtime) values('$u_id','$ping','$ap_id','$a_addtime')";
+        $re=DB::insert($sql);
+
+        //实例化model
+        $ph = new Article();
+        $aping = $ph->get_ping($articleid);
+        return view('article/a_ping', ['ping_data' => $aping]);
     }
 
 }

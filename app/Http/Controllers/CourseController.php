@@ -33,58 +33,28 @@ class CourseController extends Controller
         //print_r($c_id);die;
         //接收  试题id  --学院id  -- 专业id  -- 类型id
         // 各项参数
-      $course = new Course();
-      $data=$course->xiang($request);
+        $course = new Course();
+        $data=$course->xiang($request);
 
-
-     $u_id=Session::get('uid');
+        $u_id=Session::get('uid');
+        if($u_id){
+            $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where e_ping.e_id=$c_id order by e_ping.e_addtime desc");
+        }
        //查询
-      $follow=$course->sel_follow($c_id,$u_id);
+        $follow=$course->sel_follow($c_id,$u_id);
         //print_r($follow);die;
-      return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min'],'follow'=>$follow]);
+        return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min'],'follow'=>$follow,'ping'=>$ping]);
     }
     /*
-     *试题评论 马天天
-     * 调用model层course 方法
+     * 页面评论选星功能
+     * 制作人 :: 时庆庆
+     * 时间 :: 2016-08-18
      */
-    //试题添加评论
-	 public function contents(Request $request)
-    {
-          $post=$request->all();
-          $con = $post['con'];
-          $c_id = $post['c_id'];
-          $e_addtime=date("Y-m-d H:i:s");
-          //判断当前用户名是否存在
-          //如果不存在，重新登录
-        if(empty(Session::get('username')))
-        {
-          $arr=array(
-              "msg"=>"2",
-              "error"=>"0"
-              );
-          return json_encode($arr);
-        }
-          //用户存在
-          else{
-            $username=Session::get('username');
-            //根据用户名查询
-            $model=new course();
-            $brr=$model->sel_users($username);
-              //取出头像
-            $picture=$brr['user_filedir'];
-            $u_id=$brr['user_id'];
-            //添加评论入库
-            $re=$model->insert_eping($con,$u_id,$c_id,$e_addtime);
-             //评论成功
-            if($re)
-            {
-               $arr=array(
-              "msg"=>"1",
-              "error"=>"1"
-              );
-              return json_encode($arr);
-            }
-         }
+    public function pinglun_shiti(Request $request){
+        //echo $u_id;die;
+        $Cou = new Course();
+        $arr = $Cou ->pinglun_shiti($request);
+        return view('course.pinglun')->with('ping',$arr);
     }
     /*
      * 试题关注 马天天

@@ -13,6 +13,73 @@
 <meta http-equiv="Cache-Control" content="no-transform ">
 <meta name="Keywords" content="">
 <link rel="stylesheet" href="css/a2.css" type="text/css">
+    <style>
+        body,div,ul,li,p{margin:0;padding:0;}
+        body{color:#666;font:12px/1.5 Arial;}
+        ul{list-style-type:none;}
+        #star{position:relative;width:600px;margin:0px auto;}
+        #star ul,#star span{float:left;display:inline;height:25px;line-height:30px;}
+        #star ul{margin:10px 10px;}
+        #star li{float:left;height:28px;width:24px;cursor:pointer;text-indent:-9999px;background:url(images/star.png) no-repeat;}
+        #star strong{color:#f60;padding-left:10px;}
+        #star li.on{background-position:0 -30px;height:35px;}
+        #star p{position:absolute;top:20px;width:159px;height:60px;display:none;background:url(images/icon.gif ) no-repeat;padding:7px 10px 0;}
+        #star p em{color:#f60;display:block;font-style:normal;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function ()
+        {
+            var oStar = document.getElementById("star");
+            var aLi = oStar.getElementsByTagName("li");
+            var oUl = oStar.getElementsByTagName("ul")[0];
+            var oSpan = oStar.getElementsByTagName("span")[1];
+            var oP = oStar.getElementsByTagName("p")[0];
+            var i = iScore = iStar = 0;
+            var aMsg = [
+                "很不满意|差得太离谱，面试根本不问这个问题",
+                "不满意|内容不实用，去了公司用不到，不满意",
+                "一般|内容一般，逻辑描述不清晰",
+                "满意|逻辑挺好，内容晦涩了点，还是挺满意的",
+                "非常满意|各方面都非常好，非常满意"
+            ]
+            for (i = 1; i <= aLi.length; i++)
+            {
+                aLi[i - 1].index = i;
+                //鼠标移过显示分数
+                aLi[i - 1].onmouseover = function ()
+                {
+                    fnPoint(this.index);
+                    //浮动层显示
+                    oP.style.display = "block";
+                    //计算浮动层位置
+                    oP.style.left = oUl.offsetLeft + this.index * this.offsetWidth - 104 + "px";
+                    //匹配浮动层文字内容
+                    oP.innerHTML = "<em><b>" + this.index + "</b> 分 " + aMsg[this.index - 1].match(/(.+)\|/)[1] + "</em>" + aMsg[this.index - 1].match(/\|(.+)/)[1]
+                };
+                //鼠标离开后恢复上次评分
+                aLi[i - 1].onmouseout = function ()
+                {
+                    fnPoint();
+                    //关闭浮动层
+                    oP.style.display = "none"
+                };
+                //点击后进行评分处理
+                aLi[i - 1].onclick = function ()
+                {
+                    iStar = this.index;
+                    oP.style.display = "none";
+                    oSpan.innerHTML = "<strong>" + (this.index) + " 分</strong> (" + aMsg[this.index - 1].match(/\|(.+)/)[1] + ")"
+                }
+            }
+            //评分处理
+            function fnPoint(iArg)
+            {
+                //分数赋值
+                iScore = iArg || iStar;
+                for (i = 0; i < aLi.length; i++) aLi[i].className = i < iScore ? "on" : "";
+            }
+        };
+    </script>
 <body>
 
 @extends('layouts.master')
@@ -163,61 +230,94 @@ $l=isset($_GET['l'])?$_GET['l']:0;
             <a href="{{url("xiang?id=$max&v=$vv&a=$a&l=$l")}}">上一题</a>
             <? } ?>
         </div>
-        <span style="float: right" id="ping">立即评价</span>
+        <?php
+        if(Session::get('username')==""){
+        $user_name = 0; ?>
+        <div style="float: right"><a href="#login-modal" id="ping" data-category="UserAccount" data-action="login" data-toggle="modal"  style="color: red">立即评价</a></div>
+        <?php }else{
+        $user_name = 1; ?>
+        <div style="float: right"><a href="javascript:void(0)"  id="ping" onclick="pingjia(<?php echo $user_name;?>)">立即评价</a></div>
+        <?php  }
+        ?>
+
+
+        <!--
+            评论功能 制作人:: 时庆庆
+        -->
         <div id="pinglun">
-            <textarea rows="5" cols="100" id="con" placeholder="请输入评论:" style="background:#33ffff"></textarea>
-
-            <button id="subs">提交评论</button>
-
-
-        </div>
-      <div class="evaluation-list">
-        <h3>试题评价</h3>
-        <div class="evaluation-info clearfix">
-          <p class="satisfaction">满意度评分：<em>9.9</em></p>
-          <div class="star-box">
-              <img src="images/xing.jpg" width="20" height="20">
-              <img src="images/xing.jpg" width="20" height="20">
-              <img src="images/xing.jpg" width="20" height="20">
-              <img src="images/xing.jpg" width="20" height="20">
-              <img src="images/xing.jpg" width="20" height="20">
-          </div><!--star-box end-->
-          <p>内容实用：9.9</p>
-          <p>通俗易懂：9.6</p>
-          <p>逻辑清晰：9.4</p>
-          <p class="person_num"><em>1337</em>位同学参与评价</p>
-        </div><!--evaluation-info end-->
-          <div class="evaluation">
-            <div class="evaluation-con" id="list">
+            <div id="star" style="float:left;">
+                <span>点击打分:</span>
+                <ul style="float:left">
+                    <li><a href="javascript:;"> 1 </a></li>
+                    <li><a href="javascript:;"> 2 </a></li>
+                    <li><a href="javascript:;"> 3 </a></li>
+                    <li><a href="javascript:;"> 4 </a></li>
+                    <li><a href="javascript:;"> 5 </a></li>
+                </ul>
+                <span id="score"></span>
+                <p></p>
+            </div>
+            <textarea rows="5" cols="100" id="con" placeholder="请输入评论:" style="background:#ffffff"></textarea>
+            <a href="javascript:void(0)" id="subs">提交评论</a></div>
+        <div class="evaluation-list">
+            <h3>试题评价</h3>
+            <div class="evaluation-info clearfix">
+                <p class="satisfaction">满意度评分：<em>9.9</em></p>
+                <div class="star-box">
+                    <img src="images/xing.jpg" width="20" height="20">
+                    <img src="images/xing.jpg" width="20" height="20">
+                    <img src="images/xing.jpg" width="20" height="20">
+                    <img src="images/xing.jpg" width="20" height="20">
+                    <img src="images/xing.jpg" width="20" height="20">
+                </div><!--star-box end-->
+                <p>内容实用：9.9</p>
+                <p>通俗易懂：9.6</p>
+                <p>逻辑清晰：9.4</p>
+                <p class="person_num"><em>1337</em>位同学参与评价</p>
+            </div><!--evaluation-info end-->
+            <div class="evaluation">
                 <?php foreach($ping as $k=>$v){?>
-              <div class="content-box">
-
-                      <a href="#" class="img-box"><span><img src="" width="40px" height="40px" alt="518000"></span></a>
-                  <div class="user-info clearfix">
-
-                  {{--<a href="#" class="img-box"><span><img src="images/u.jpg" width="40px" height="40px" alt="518000"></span></a>--}}
-                    {{--<div class="user-info clearfix">--}}
-
-                  <a href="#" class="username"><?php echo $v['user_phone']?></a>
-                  <div class="star-box">
-                      <img src="images/xing.jpg" width="20" height="20">
-                      <img src="images/xing.jpg" width="20" height="20">
-                      <img src="images/xing.jpg" width="20" height="20">
-                      <img src="images/xing.jpg" width="20" height="20">
-                      <img src="images/xing.jpg" width="20" height="20">
-                   </div>
+                <div class="evaluation-con" id="list">
+                    <div class="content-box">
+                        <a href="#" class="img-box"><span><img src="<?php if($v['user_filedir']){ echo $v['user_filedir']; }else{ echo "images/unknow-40.png"; }?>" width="40px" height="40px" alt="518000"></span></a>
+                        <div class="user-info clearfix">
+                            <a href="#" class="username"><?php echo $v['user_phone']?></a>
+                            <div class="star-box">
+                                @if($v['e_score'] == 1)
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                @elseif($v['e_score'] == 2)
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                @elseif($v['e_score'] == 3)
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                @elseif($v['e_score'] == 4)
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                @else
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                    <img src="images/xing.jpg" width="20" height="20">
+                                @endif
+                            </div>
+                        </div>
+                        <p class="content"><?php echo $v['p_con']?></p>
+                        <div class="info">
+                            <span class="time">时间：<?php echo $v['e_addtime']?></span>
+                        </div>
+                    </div>
+                    <!--content end-->
                 </div>
-                <p class="content"><?php echo $v['p_con']?></p>
-                <div class="info">
-                  <span class="time">时间：<?php echo $v['e_addtime']?></span>
-                </div>
-              </div>
-                <?php } ?><!--content end-->
-            </div><!--evaluation-con end-->
-          </div><!--evaluation end-->
-                    <!--evaluation end-->
-      </div><!--evaluation-list end-->
-            <div class="more-evaluation"><a href="#" target="_blank">查看更多评价</a></div>
+                    <?php } ?><!--evaluation-con end--
+            </div><!--evaluation end-->
+            <!--evaluation end-->
+        </div>
+            {{--<div class="more-evaluation"><a href="#" target="_blank">查看更多评价</a></div>--}}
           </div><!--content end-->
     <div class="aside r">
       <div class="bd">
@@ -363,30 +463,32 @@ $l=isset($_GET['l'])?$_GET['l']:0;
    })
     $(document).on("click",'#ping',function(){
         $("#pinglun").show()
-
+        $("#ping").hide()
     })
-    $(document).on("click","#subs",function(){
-        var con=$("#con").val()
-        var c_id=$("#s_id").val()
-        $.post("{{URL('contents')}}",{
-            con:con,
-            c_id:c_id,
-          },function(data){
-            //alert(data);
-            var obj=eval("("+data+")");
-             //alert(obj);
-            if(obj['msg']=='1')
-            {
-              alert("评论成功");
-              location.href="xiang?id="+c_id;
-            }
-           else
-            {
-              alert("请先登录");
-              location.href="{{URL('index')}}";
-            }
-        })
-    })
+   //评论
+   $(document).on("click","#subs",function(){
+       var con=$("#con").val();
+       var c_id=$("#s_id").val();
+       var score=$("#score").html();
+       if(score == ''){
+           $("#score").html("<span style='color: red'>请点击打分</span>")
+       }else{
+           if(con == '') {
+               alert('请输入评论内容')
+           }else{
+               $.ajax({
+                   type: "POST",
+                   url: "pinglun_shiti",
+                   data: "con="+con+"&c_id="+c_id+"&score="+score,
+                   success: function(msg){
+                       alert('评论成功');
+                       $("#pinglun").hide();
+                       $('.evaluation').html(msg);
+                   }
+               });
+           }
+       }
+   })
     //关注
     function zhu(uid)
    {
