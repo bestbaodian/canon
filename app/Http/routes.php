@@ -56,6 +56,13 @@ Route::get('friend/friendlist', 'FriendController@friendlist');
 //用户签到
 Route::get("qiandao","UserController@qiandao");
 
+//加载手机验证页面
+Route::get('user/setphonestep', 'UserController@setphonestep');
+//手机号绑定
+Route::get('user/bang', 'UserController@bang');
+//手机号绑定验证码验证
+Route::post('user/yanzheng', 'UserController@yanzheng');
+
 /*
  * 方法模块
  * */

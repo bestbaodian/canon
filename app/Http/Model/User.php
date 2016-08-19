@@ -15,7 +15,7 @@ class User extends Model
     public function setprofile($user)
     {
         //$sql ="select user_name,user_job,user_aboutme,user_sex,user_filedir from users where user_name = '$user'";
-        $data    =DB::table('users')->select('user_name','user_job','user_aboutme','user_sex','user_filedir')->where("user_name",$user)->get();
+        $data    =DB::table('users')->select('user_name','user_job','user_aboutme','user_sex','user_filedir','user_phone_status','user_phone')->where("user_name",$user)->get();
         //$data = DB::select($sql);
         if($data){
             return $data;

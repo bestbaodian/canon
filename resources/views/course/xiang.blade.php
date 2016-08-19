@@ -276,6 +276,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                 <p class="person_num"><em>1337</em>位同学参与评价</p>
             </div><!--evaluation-info end-->
             <div class="evaluation">
+                <?php if(Session::get('id')){ ?>
                 <?php foreach($ping as $k=>$v){?>
                 <div class="evaluation-con" id="list">
                     <div class="content-box">
@@ -313,7 +314,11 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                     </div>
                     <!--content end-->
                 </div>
-                    <?php } ?><!--evaluation-con end--
+                    <?php } }
+                    else{
+
+                    }?>
+                    <!--evaluation-con end--
             </div><!--evaluation end-->
             <!--evaluation end-->
         </div>

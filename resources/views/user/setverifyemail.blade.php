@@ -32,32 +32,37 @@
 
 <div class="settings-cont clearfix">
 
-  <div class="setting-left l">
-    <ul class="wrap-boxes">
-      <li>
-        <a href="/user/setprofile">个人资料</a>
-      </li>
-      <li >
-         <a href="/user/setavator">头像设置</a>
-       </li>
-       
-      <li >
-        <a href="/user/setphone">手机设置</a>
+    <div class="setting-left l">
+        <ul class="wrap-boxes">
+            <li class="active">
+                <a href="{{url("/user/setprofile")}}" class="onactive">个人资料</a>
+            </li>
+            <li >
+                <a href="{{url('/user/setavator')}}">头像设置</a>
+            </li>
+
+            <li >
+                @if($user[0]['user_phone_status'] == 1)
+                    <a href="{{url("user/setphonestep")}}">手机设置</a>
+                    <span class='unbound'>已绑定</span>
+                @else
+                    <a href="{{url('/user/setphone')}}">手机设置</a>
                     <span class='unbound'>未绑定</span>
-              </li>
-      
-      <li  class="active">
-        <a href="/user/setverifyemail"  class="onactive">邮箱验证</a>
-                    <span class='unbound'>未绑定</span>
-              </li>
-      <li >
-        <a href="/user/setresetpwd">修改密码</a>
-      </li>
-      <li >
-        <a no-pjajx href="/user/setbindsns">我的收藏</a>
-      </li>
-    </ul>
-  </div>
+                @endif
+            </li>
+            <li >
+                <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
+                <span class='unbound'>未绑定</span>
+            </li>
+            <li >
+                <a href="{{url('/user/setresetpwd')}}">修改密码</a>
+            </li>
+            <li >
+
+                <a no-pjajx href="/user/setbindsns">我的收藏</a>
+            </li>
+        </ul>
+    </div>
   <div class="setting-right">
     <div class="setting-right-wrap wrap-boxes settings" >
         
