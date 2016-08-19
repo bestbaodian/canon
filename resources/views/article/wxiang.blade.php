@@ -304,25 +304,29 @@ var isLogin=1
 <!--script-->
 <script src="/js/jquery-1.9.1.min.js"></script>
       <script>
-         {{--function cons()--}}
-         {{--{--}}
-            {{--var con1=$('#con1').val();--}}
-            {{--var aid=$('#aid').val();--}}
-            {{--$.ajax({--}}
-                   {{--type: "POST",--}}
-                   {{--url: "{{URL('wping')}}",--}}
-                   {{--data: "ap_con="+con1+"&a_id="+aid,--}}
-                   {{--success: function(msg){--}}
-                       {{--var obj=eval("("+msg+")");--}}
-                       {{--if(obj['error']){--}}
-                           {{--alert("评论成功");--}}
-                           {{--location.reload();--}}
-                       {{--}else{--}}
-                           {{--alert("评论异常");--}}
-                       {{--}--}}
-                   {{--}--}}
-            {{--});--}}
-         {{--}--}}
+         function cons()
+         {
+            var con1=$('#con1').val();
+             if(con1!=""){
+                 var aid=$('#aid').val();
+                 $.ajax({
+                     type: "POST",
+                     url: "{{URL('wping')}}",
+                     data: "ap_con="+con1+"&a_id="+aid,
+                     success: function(msg){
+                         var obj=eval("("+msg+")");
+                         if(obj['error']){
+                             alert("评论成功");
+                             location.reload();
+                         }else{
+                             alert("评论异常");
+                         }
+                     }
+                 });
+             }else{
+                 alert('内容不能为空')
+             }
+         }
           //点赞
          //(评论的id)
           function likes(ap_id){
