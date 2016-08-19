@@ -5,6 +5,12 @@ use App\Http\Model\User;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+
+use App\Http\Model\Topclient;
+use App\Http\Model\Resultset;
+use App\Http\Model\Requestcheckutil;
+use App\Http\Model\Toplogger;
+use App\Http\Model\AlibabaAliqinFcSmsNumSendRequest;
 /*
  * user控制器
  * 管理用户个人中心
@@ -58,11 +64,12 @@ class UserController extends Controller
     //头像设置
     public function setavator(Request $request){
         //获取用户session信息
+
         $username = Session::get("username");
         $User  =new  User();
         $user  =$User->setprofile($username);
         $data = $user[0]['user_filedir'];
-        return view('user/setavator',['data'=>$data]);
+        return view('user/setavator',['data'=>$data,'user'=>$user]);
     }
     //头像上传
     public function postpic(Request $request){
@@ -133,32 +140,99 @@ class UserController extends Controller
     }
 
     /*
-     * 手机设置
+     * 手机设置 2016-08-19
+     * 手机号码验证绑定 :: 制作人::胡建
      */
 
     public function setphone(){
-        return view('user/setphone');
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        return view('user/setphone',['user'=>$user]);
     }
 
+    /*加载手机验证页面*/
+    public function setphonestep(){
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        return view('user/fyan',['user'=>$user]);
+    }
+    public function bang(Request $request){
+        $phone=$request->get('phone');
+        //print_r($phone);die;
+        $Topclient = new Topclient();
+        //print_r($Topclient);die;
+        $ResultSet = new ResultSet();
+        $RequestCheckUtil = new RequestCheckUtil();
+        $TopLogger = new TopLogger();
+        $req = new AlibabaAliqinFcSmsNumSendRequest();
+        header("content-type:text/html;charset=utf8");
+        $Topclient->appkey ='23427168';
+        $Topclient->secretKey = '426fa158c141c68757396c4f57333ce0';
+        $req->setExtend("123456");
+        $req->setSmsType("normal");
+        $req->setSmsFreeSignName("一路狂跑");
+        //生成验证码
+        $rand=rand(1000,9999);
+        Session::put('rands', $rand);
+        $req->setSmsParam("{\"name\":\"小神\",\"verf\":\"$rand\"}");
+        $req->setRecNum($phone);
+        $req->setSmsTemplateCode("SMS_13010293");
+        $resp = $Topclient->execute($req);
+        var_dump($resp);
+
+    }
+    /*
+     * 手机号绑定验证码验证
+     */
+    public function yanzheng(Request $request){
+        $yan=Session::get('rands');
+        $uid=Session::get('uid');
+        $confirm=$request->input();
+        //print_r($yan);die;
+        $phone=$confirm['confirm'];
+        if($confirm['confirm']!=$yan){
+            echo "<script>alert('绑定失败')</script>";
+            return redirect('user/setphone');
+        }else{
+            echo "<script>alert('绑定成功')</script>";
+            return redirect('user/setphone');
+            DB::update("update users set user_phone=$phone,user_phone_status = 1 where user_id = '$uid'");
+
+        }
+
+    }
     /*
      * !!邮箱验证
      */
 
     public function setverifyemail(){
-        return view('user/setverifyemail');
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        return view('user/setverifyemail',['user'=>$user]);
     }
 
 
     //修改密码
     public function setresetpwd(){
-        return view('user/setresetpwd');
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        return view('user/setresetpwd',['user'=>$user]);
     }
 
 
     //绑定账号
     public function setbindsns(){
-        return view('user/setbindsns');
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        return view('user/setbindsns',['user'=>$user]);
     }
+
+
 
     /*
      * 签到

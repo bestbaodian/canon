@@ -27,48 +27,55 @@
 
 <div class="settings-cont clearfix">
 
-  <div class="setting-left l">
-    <ul class="wrap-boxes">
-      <li>
-        <a href="/user/setprofile">个人资料</a>
-      </li>
-      <li >
-         <a href="/user/setavator">头像设置</a>
-       </li>
-       
-      <li  class="active">
-        <a href="/user/setphone" class="onactive">手机设置</a>
-          <span class='unbound'>未绑定</span>
-      </li>
-      <li >
-        <a href="/user/setverifyemail">邮箱验证</a>
-          <span class='unbound'>未绑定</span>
-      </li>
-      <li >
-        <a href="/user/setresetpwd">修改密码</a>
-      </li>
-      <li >
-        <a no-pjajx href="/user/setbindsns">我的收藏</a>
-      </li>
-    </ul>
-  </div>
+    <div class="setting-left l">
+        <ul class="wrap-boxes">
+            <li class="active">
+                <a href="{{url("/user/setprofile")}}/user/setprofile" class="onactive">个人资料</a>
+            </li>
+            <li >
+                <a href="{{url('/user/setavator')}}">头像设置</a>
+            </li>
+
+            <li >
+                @if($user[0]['user_phone_status'] == 1)
+                    <a href="{{url("user/setphonestep")}}">手机设置</a>
+                    <span class='unbound'>已绑定</span>
+                @else
+                    <a href="{{url('/user/setphone')}}">手机设置</a>
+                    <span class='unbound'>未绑定</span>
+                @endif
+            </li>
+            <li >
+                <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
+                <span class='unbound'>未绑定</span>
+            </li>
+            <li >
+                <a href="{{url('/user/setresetpwd')}}">修改密码</a>
+            </li>
+            <li >
+
+                <a no-pjajx href="/user/setbindsns">我的收藏</a>
+            </li>
+        </ul>
+    </div>
   <div class="setting-right">
     <div class="setting-right-wrap wrap-boxes settings" >
-        
- <div class="setting-phone setting-phone-verify">
-    <div class="phonelogo">
-        <i class="icon-mobile"></i>
-    </div>
+
+        <div class="setting-phone setting-phone-verify">
+            <div class="phonelogo">
+                <i class="icon-mobile"></i>
+            </div>
             <h4>手机未绑定，为帐户安全请绑定手机号</h4>
-        <div class="phonebox">
-            <a class="binding" href="javascript:void(0)">立即绑定</a>
+            <div class="phonebox">
+                <a class="binding" href="/user/setphonestep">立即绑定</a>
+            </div>
+            <p>可用手机号加密码登录面试宝典网</p>
+            <p>可通过手机号找回密码</p>
         </div>
-    <p>可通过手机号找回密码</p>
-</div>
 
     </div>
   </div>
-  
+
 </div>
 
 </div>
