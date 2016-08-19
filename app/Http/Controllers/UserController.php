@@ -168,17 +168,17 @@ class UserController extends Controller
         $TopLogger = new TopLogger();
         $req = new AlibabaAliqinFcSmsNumSendRequest();
         header("content-type:text/html;charset=utf8");
-        $Topclient->appkey ='23427168';
-        $Topclient->secretKey = '426fa158c141c68757396c4f57333ce0';
+        $Topclient->appkey ='23435932';
+        $Topclient->secretKey = '115d3e752e61d4339c45b8a6551797ea';
         $req->setExtend("123456");
         $req->setSmsType("normal");
-        $req->setSmsFreeSignName("一路狂跑");
+        $req->setSmsFreeSignName("宝典");
         //生成验证码
         $rand=rand(1000,9999);
         Session::put('rands', $rand);
-        $req->setSmsParam("{\"name\":\"小神\",\"verf\":\"$rand\"}");
+        $req->setSmsParam("{\"name\":\"$rand\",\"verf\":\"$rand\"}");
         $req->setRecNum($phone);
-        $req->setSmsTemplateCode("SMS_13010293");
+        $req->setSmsTemplateCode("SMS_13190328");
         $resp = $Topclient->execute($req);
         var_dump($resp);
 
