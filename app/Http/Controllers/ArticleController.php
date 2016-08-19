@@ -50,7 +50,9 @@ class ArticleController extends Controller
          * 推荐文章显示 王鹏飞
          */
         $Recommend=$articlemodel->get_tiu();
-        return view('article/article',['at_type'=>$at_type,'article'=>$article,'arr'=>$Recommend]);
+        //达人排行版
+        $daren=$articlemodel->get_daren();
+        return view('article/article',['at_type'=>$at_type,'article'=>$article,'arr'=>$Recommend,'users'=>$daren]);
     }
 
     /*
@@ -156,16 +158,16 @@ class ArticleController extends Controller
             $username=Session::get('usernname');
         }
         $id=Request::input('id');
+
+
         $model=new article();
+
         //触发点击详情这个事件  浏览量就+1
         $article_num=$model->add_articlenum($id);
         //查询这篇文章的所有评论
         $ping_data=$model->get_ping($id);
         //根据a_id两表联查article和ar_type表
         $arr=$model->join_artype($id);
-       //print_r($arr);
-        //查出该篇文章类型
-       // die;
         //aping users联查
         $aping=$model->join_users();
         //查ping_zan表里有没有用户点赞的信息

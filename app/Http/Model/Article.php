@@ -35,6 +35,14 @@ class Article extends Model
     }
 
     /*
+     * 查询文章浏览量最多的用户
+     */
+    public function get_daren(){
+        $sql="select user_filedir,users.user_name,sum(brows) from article inner join users on article.a_adduser=users.user_id where article.a_state=1 GROUP BY article.a_adduser ORDER BY sum(brows) desc limit 6";
+        $users=DB::select($sql);
+        return $users;
+    }
+    /*
      * 显示所有审核通过的文章
      */
     public function select_article()
@@ -113,6 +121,15 @@ class Article extends Model
         $aping=DB::table('aping')->join("users","aping.u_id","=","users.user_id")->join("article","aping.a_id","=","article.a_id")->orderBy("aping.ap_id","desc")->limit(3)->get();
         return $aping;
     }
+
+    /*
+     * 文章详情页显示文章作者
+     */
+    public function get_user($id){
+        $user = DB::table('users')->where('user_id', $id)->first();
+        return $user;
+    }
+
 
     /*
      * 点赞功能的实现
