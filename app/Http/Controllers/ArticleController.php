@@ -47,12 +47,13 @@ class ArticleController extends Controller
         }
 
         /*
-         * 推荐文章显示 王鹏飞
+         * 推荐文章显示
          */
         $Recommend=$articlemodel->get_tiu();
         //达人排行版
         $daren=$articlemodel->get_daren();
-        return view('article/article',['at_type'=>$at_type,'article'=>$article,'arr'=>$Recommend,'users'=>$daren]);
+        //print_r($daren);die;
+        return view('article/article',['at_type'=>$at_type,'article'=>$article,'arr'=>$Recommend,'daren'=>$daren]);
     }
 
     /*
@@ -173,7 +174,10 @@ class ArticleController extends Controller
        // die;
 
 
-        //aping users联查
+
+        /*
+         * 查询文章和评论内容
+         */
         $aping=$model->join_users();
         //查ping_zan表里有没有用户点赞的信息
         $u_id=Session::get("uid");
@@ -181,12 +185,14 @@ class ArticleController extends Controller
         //查看该条文章有多少评论
         //$ping_num=$model->get_pingnum($id);,'ping_num'=>$ping_num
         /*
-         * 制作人 ::王鹏飞
          * 作者热门文章
          */
-        //print_r($ping_data);die;
         $hot=$model->get_re($id);
-        return view('article/wxiang',['arr'=>$arr[0],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot]);
+
+        //print_r($arr);die;
+
+        //查出该篇文章的作者一共有多少文章和总浏览量
+        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot]);
     }
     /*
      * 显示对应文章相关内容

@@ -3,6 +3,11 @@ namespace App\Http\Model;
 
 use DB,Session;
 use Illuminate\Database\Eloquent\Model;
+/*
+ *方法模块
+ * model层  数据库操作
+ * lhm
+ * */
 class Article extends Model
 {
     /*
@@ -38,7 +43,7 @@ class Article extends Model
      * 查询文章浏览量最多的用户
      */
     public function get_daren(){
-        $sql="select user_filedir,users.user_name,sum(brows) from article inner join users on article.a_adduser=users.user_id where article.a_state=1 GROUP BY article.a_adduser ORDER BY sum(brows) desc limit 6";
+        $sql="select user_filedir,users.user_name,sum(brows) from article inner join users on article.a_adduser=users.user_id where article.a_state=1 GROUP BY article.a_adduser ORDER BY sum(brows) desc limit 10";
         $users=DB::select($sql);
         return $users;
     }
@@ -196,6 +201,10 @@ class Article extends Model
             ->whereIn('al_id', $lei2)
             ->select("al_name")
             ->get();
+        $user_id = $arr[0]['a_adduser'];
+        $sql = "select count(*),sum(brows) from article where a_adduser='$user_id'";
+        $dats=DB::select($sql);
+        $arr['yulan']=$dats;
         $arr['lei'] = $lei;
         return $arr;
     }
@@ -253,6 +262,11 @@ class Article extends Model
         $aping = DB::table('aping')->join("users", "aping.u_id", "=", "users.user_id")->join("article", "aping.a_id", "=", "article.a_id")->orderBy("aping.ap_id", "desc")->limit(3)->get();
         return $aping;
     }
+    /*
+     * 查出该篇文章的作者一共有多少文章和总浏览量
+     */
+
+
 
     /*
      * 添加到用户评论表中aping
@@ -360,7 +374,6 @@ class Article extends Model
 
     /*
      * 方法推荐文章
-     *制作人：王鹏飞
      */
     public function get_tiu()
     {
@@ -376,7 +389,6 @@ class Article extends Model
 
     /*
          * 方法详情热门文章
-         *制作人：王鹏飞
          */
     public function get_re($id)
     {

@@ -64,7 +64,7 @@
                     <h3 class="item-title">
                         <a href="{{URL('fangfa?id=')}}{{$v['a_id']}}" target="_self" class="title-detail">{{$v['a_title']}}</a>
                     </h3>
-                    <p class="item-bd">{{$v['a_con']}}</p>
+                    <p class="item-bd">{{substr($v['a_con'],0,100)}}...<p>
                     <div class="item-btm clearfix">
                         <ul class="l left-info">
                             <li class="hd-pic">
@@ -149,16 +149,22 @@
                 <h2 class="panel-hd">达人排行榜</h2>
                 <div class="article-weekly clearfix">
                     <ol class="weekly-top">
+                        @foreach($daren as $key=>$vv)
                         <li>
                             <a href="#" class="l hot-head" target="_blank" title="">
-                                <img src="picture/554ce69d0001044101000100-100-100.jpg" alt="" width="40" height="40" />
+                                <img src="
+                                <?php if($vv['user_filedir']==""){
+                                        echo "/images/unknow-40.png";
+                                    }else{
+                                        echo $vv['user_filedir'];
+                                }?>
+                                " alt="" width="40" height="40" />
                             </a>
-                            <a href="#" target="_blank" class="hot-name">
-                                夜叉L</a>
+                            <a href="#" target="_blank" class="hot-name">{{$vv['user_name']}}</a>
 
-                            <i class="rank-num weektop-first">1</i>
+                            <i class="rank-num weektop-first">{{$key+1}}</i>
                         </li>
-
+                        @endforeach
                     </ol>
                 </div>
             </div>
