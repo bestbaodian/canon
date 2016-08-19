@@ -191,15 +191,15 @@ class UserController extends Controller
         $uid=Session::get('uid');
         $confirm=$request->input();
         //print_r($yan);die;
-        $phone=$confirm['confirm'];
+        $confirm['confirm'];
+        $phone=$confirm['phone'];
         if($confirm['confirm']!=$yan){
-            echo "<script>alert('绑定失败')</script>";
-            return redirect('user/setphone');
+            $url = $request->url();
+            echo "<script>alert('绑定失败');location.href='/user/setphone'</script>";
         }else{
-            echo "<script>alert('绑定成功')</script>";
-            return redirect('user/setphone');
             DB::update("update users set user_phone=$phone,user_phone_status = 1 where user_id = '$uid'");
-
+            $url = $request->url();
+            echo "<script>alert('绑定成功');location.href='/user/setphonestep'</script>";
         }
 
     }
