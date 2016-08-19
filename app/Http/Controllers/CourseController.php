@@ -39,6 +39,8 @@ class CourseController extends Controller
         $u_id=Session::get('uid');
         if($u_id){
             $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where e_ping.e_id=$c_id order by e_ping.e_addtime desc");
+        }else{
+            $ping = "";
         }
        //查询
         $follow=$course->sel_follow($c_id,$u_id);

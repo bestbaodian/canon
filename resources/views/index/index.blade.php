@@ -99,7 +99,7 @@
         <ul class="icourse-course clearfix">
             <?php foreach($pro as $k=>$v){?>
             <li>
-                <a  href="college_exam?id=<?php echo $v['p_name']?>">
+                <a  href="#">
                     <div class="icourse-img">
                         <img class="scrollLoading" src="{{url("$v[img]")}}" alt="">
                     </div>
