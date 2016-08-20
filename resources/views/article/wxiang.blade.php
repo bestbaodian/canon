@@ -48,7 +48,7 @@ var isLogin=1
 <div class="detail-left l">
     <!-- 面包屑 -->
     <div class="detail-path">
-        <a href="/article">手记</a> \
+        <a href="/article">方法</a> \
         <span> <?php echo $arr['a_title'];?></span>
     </div>
     <!-- 面包屑end -->
@@ -232,10 +232,10 @@ var isLogin=1
             <span class="user-job"></span>
             <span class="user-desc">{{$aping[0]['user_aboutme']}}</span>
         <div class="btn-box clearfix">
-            <a href="/u/2788726/articles" target="_blank" class="article-num r-bor l">
+            <a href="#" target="_blank" class="article-num r-bor l">
                 <span>{{$sum_yulan[0]['count(*)']}}</span>篇文章
             </a>
-            <a href="/u/2788726/articles?type=praise" target="_blank" class="article-recom l">
+            <a href="#" target="_blank" class="article-recom l">
                 <span>{{$sum_yulan[0]['sum(brows)']}}</span>浏览
             </a>
         </div>
