@@ -249,7 +249,7 @@ var isLogin=1
             @foreach($hot as $k=>$v)
                 <li>
                     <a href="{{url("fangfa?id=$v[a_id]")}}" title="{{$v['a_title']}}"><h3>{{$v["a_title"]}}</h3></a>
-                    <p>{{$v["a_con"]}}</p>
+                    <p><?php echo mb_substr($v['a_con'],0,100);?></p>
                     <div class="show-box clearfix">
                         <span class="spacer l">{{$v["brows"]}}浏览</span>
                     </div>

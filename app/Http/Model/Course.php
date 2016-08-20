@@ -68,24 +68,9 @@ class Course extends Model{
         $pro['lei']=$lei;
         $pro['shi']=$shi;
         return $pro;
-
-//        $sql="select c_id,c_name from college where c_del=0";
-//        $arr=DB::select($sql);
-//        //专业
-//        $sql="select d_name from direction";
-//        $zhuan=DB::select($sql);
-//        //类型
-//        $lei=DB::table('type')->get();
-//        //全部试题
-//        $shi=DB::table('college_questions')->simplePaginate(12);
-//        $data['arr']=$arr;
-//        $data['zhuan']=$zhuan;
-//        $data['lei']=$lei;
-//        $data['shi']=$shi;
-//        return $data;
     }
     /*
-     * 试题详情页面   制作人::张峻玮
+     * 试题详情页面
      */
 
     public function xiang($request){

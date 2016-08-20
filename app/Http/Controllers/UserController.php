@@ -236,7 +236,6 @@ class UserController extends Controller
 
     /*
      * 签到
-     * 制作人::张泽远
      * 2016-08-18
      */
     public function qiandao(Request $request){

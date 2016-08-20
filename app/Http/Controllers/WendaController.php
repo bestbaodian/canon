@@ -52,7 +52,7 @@ class WendaController extends Controller
          } 
     }
     /*
-     * 陈学卫 答疑详情页展示功能 / 点赞+评论+回复
+     *  答疑详情页展示功能 / 点赞+评论+回复
      */
     public function detail(Request $request){
         //接受用户选择的数据
@@ -88,7 +88,7 @@ class WendaController extends Controller
     }
 
     /*
-     * 陈学卫 点赞功能  2016 -08 -17 10:13
+     *  点赞功能  2016 -08 -17 10:13
      */
     public function agree(Request $request)
     {
