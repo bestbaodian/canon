@@ -3,6 +3,11 @@ namespace App\Http\Model;
 
 use DB,Session;
 use Illuminate\Database\Eloquent\Model;
+/*
+ *方法模块
+ * model层  数据库操作
+ * lhm
+ * */
 class Article extends Model
 {
     /*
@@ -34,6 +39,14 @@ class Article extends Model
         return $article;
     }
 
+    /*
+     * 查询文章浏览量最多的用户
+     */
+    public function get_daren(){
+        $sql="select user_filedir,users.user_name,sum(brows) from article inner join users on article.a_adduser=users.user_id where article.a_state=1 GROUP BY article.a_adduser ORDER BY sum(brows) desc limit 10";
+        $users=DB::select($sql);
+        return $users;
+    }
     /*
      * 显示所有审核通过的文章
      */
@@ -115,6 +128,15 @@ class Article extends Model
     }
 
     /*
+     * 文章详情页显示文章作者
+     */
+    public function get_user($id){
+        $user = DB::table('users')->where('user_id', $id)->first();
+        return $user;
+    }
+
+
+    /*
      * 点赞功能的实现
      */
     public function zan($username)
@@ -178,6 +200,10 @@ class Article extends Model
             ->whereIn('al_id', $lei2)
             ->select("al_name")
             ->get();
+        $user_id = $arr[0]['a_adduser'];
+        $sql = "select count(*),sum(brows) from article where a_adduser='$user_id'";
+        $dats=DB::select($sql);
+        $arr['yulan']=$dats;
         $arr['lei'] = $lei;
         return $arr;
     }
@@ -233,6 +259,11 @@ class Article extends Model
         $aping = DB::table('aping')->join("users", "aping.u_id", "=", "users.user_id")->join("article", "aping.a_id", "=", "article.a_id")->orderBy("aping.ap_id", "desc")->limit(3)->get();
         return $aping;
     }
+    /*
+     * 查出该篇文章的作者一共有多少文章和总浏览量
+     */
+
+
 
     /*
      * 添加到用户评论表中aping
@@ -340,7 +371,6 @@ class Article extends Model
 
     /*
      * 方法推荐文章
-     *制作人：王鹏飞
      */
     public function get_tiu()
     {
@@ -356,7 +386,6 @@ class Article extends Model
 
     /*
          * 方法详情热门文章
-         *制作人：王鹏飞
          */
     public function get_re($id)
     {
@@ -372,58 +401,6 @@ class Article extends Model
             ->get();
         return $arr;
     }
-    //评论回复
-    /*
-     * 制作人::时庆庆
-     */
-    public function ph($id)
-    {
-        $username = Session::get('username');
-        $arr = DB::table("article")
-            ->join("ar_type", "article.a_type", "=", "ar_type.at_id")
-            ->where("article.a_id", $id)->get();
-        //评论
-        $aping = DB::table('aping')
-            ->join("users", "aping.u_id", "=", "users.user_id")
-            ->join("article", "aping.a_id", "=", "article.a_id")
-            ->orderBy("aping.ap_id", "desc")
-            ->select('aping.ap_id', 'aping.ap_con', 'aping.u_id', 'article.a_id', 'aping.ap_addtime', 'users.user_name', 'users.user_filedir', 'article.a_num', 'article.a_con', 'article.a_title')
-            ->get();
-        //回答（回答评论）
-        $a_ping = DB::table('a_ping')
-            ->join('aping', 'a_ping.ap_id', '=', 'aping.ap_id')
-            ->leftjoin('users', 'a_ping.u_id', '=', 'users.user_id')
-            ->orderBy('a_ping.article_addtime', 'desc')
-            ->orderBy('a_ping.ap_id')
-            ->select('a_ping.article_id', 'a_ping.ap_cont', 'a_ping.u_id', 'a_ping.ap_id', 'a_ping.article_addtime', 'aping.ap_con', 'aping.a_id', 'aping.ap_addtime', 'users.user_name', 'users.user_filedir')
-            ->get();
-        //print_r($a_ping);die;
-        foreach ($aping as $key => $v) {
-            foreach ($a_ping as $k => $a) {
-                if ($v['ap_id'] == $a['ap_id']) {
-                    $aping[$key]['answer'][] = $a;
-                }
-            }
-        }
-        //print_r($aping);die;
-        //查询是否收藏
-        if (Session::get('username')=="") {
-            $data['aping'] = $aping;
-            $data['is_house'] ="";
-            return $data;
-        } else {
-            $user_id = DB::table('users')->where("user_name", "$username")
-                ->orwhere("user_phone", "$username")
-                ->orwhere("user_email", "$username")
-                ->first();
-            //  print_r($user_id);die;
-            $u_id = $user_id['user_id'];
-            $is_house = DB::table("collection_r")->where(['user_id' => $u_id, 'article_id' => $id])->get();
-            $data['aping'] = $aping;
-            $data['is_house'] = $is_house;
-            return $data;
-        }
 
-    }
 }
     

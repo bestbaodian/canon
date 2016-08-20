@@ -223,24 +223,20 @@ var isLogin=1
 <div class="detail-right r"><!-- 右侧start -->
     <!-- 作者信息 -->
         <div class="aside-author">
-        <div class="p clearfix">
-            <a href="/u/2788726/articles" class="l" title="咖啡失眠中" target="_blank">
-                <img src="http://img.mukewang.com/533e4d710001322402000200-100-100.jpg">
+        <div class="p clearfix" style="margin-left: 10px;">
+            <a href="#" class="l" title="{{$aping[0]['user_name']}}" target="_blank">
+                <img  src="{{$aping[0]['user_filedir']}}">
             </a>
         </div>
-        <a class="nick" href="/u/2788726/articles" title="咖啡失眠中" target="_blank">
-        咖啡失眠中
-        </a>
-                                <span class="user-job">学生</span>
-        <span class="user-desc">
-            成为java大神就是我要做的
-        </span>
+            <a class="nick" href="#" title="{{$aping[0]['user_name']}}" target="_blank">{{$aping[0]['user_name']}}</a>
+            <span class="user-job"></span>
+            <span class="user-desc">{{$aping[0]['user_aboutme']}}</span>
         <div class="btn-box clearfix">
             <a href="/u/2788726/articles" target="_blank" class="article-num r-bor l">
-                <span>8</span>篇文章
+                <span>{{$sum_yulan[0]['count(*)']}}</span>篇文章
             </a>
             <a href="/u/2788726/articles?type=praise" target="_blank" class="article-recom l">
-                <span>0</span>推荐
+                <span>{{$sum_yulan[0]['sum(brows)']}}</span>浏览
             </a>
         </div>
     </div>
@@ -252,8 +248,8 @@ var isLogin=1
         <ul>
             @foreach($hot as $k=>$v)
                 <li>
-                    <a href="fangfa?id={{$v['a_id']}}" title="{{$v['a_title']}}"><h3>{{$v["a_title"]}}</h3></a>
-                    <p>{{$v["a_con"]}}</p>
+                    <a href="{{url("fangfa?id=$v[a_id]")}}" title="{{$v['a_title']}}"><h3>{{$v["a_title"]}}</h3></a>
+                    <p><?php echo mb_substr($v['a_con'],0,100);?></p>
                     <div class="show-box clearfix">
                         <span class="spacer l">{{$v["brows"]}}浏览</span>
                     </div>

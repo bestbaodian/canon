@@ -120,9 +120,42 @@
 </div>
 <!--招聘结束 -->
 
-<!--方法方法开始 -->
-
-<!--面试方法结束 -->
+<!--方法开始 -->
+<div class="icourse">
+    <div class="incourse-wrap idx-width">
+        <h2 class="icourse-title">试题</h2>
+        <ul class="icourse-course clearfix">
+            <?php foreach($article as $key=>$val){?>
+            <li>
+                <a  href="{{url("fangfa?id=$val[a_id]")}}">
+                    <div class="icourse-img">
+                        <img class="scrollLoading" src="{{url("$val[a_logo]")}}" alt="">
+                    </div>
+                    <div class="icourse-intro clearfix">
+                        <p>标题:{{$val['a_title']}}</p>
+                        <span class="l "><?php echo mb_substr($val['a_con'],0,30)?></span>
+                    </div>
+                    <div class="icourse-tips clearfix">
+                        <h2></h2>
+                        <span class="l ">类型:<?php
+                            $leis = explode(',',$val['a_lei']);
+                                    foreach($lei as $s=>$d){
+                                        foreach($d as $m=>$n){
+                                            if(in_array($n['al_id'],$leis)){
+                                                echo $n['al_name']."  ";
+                                            }
+                                        }
+                                    }
+                            ?></span>
+                        <span class="r">{{$val['brows']}}浏览</span>
+                    </div>
+                </a>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
+<!--方法结束 -->
 
 <!--简历开始 -->
 
