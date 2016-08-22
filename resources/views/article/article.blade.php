@@ -20,13 +20,17 @@
     @parent
 
     <div id="main">
+        <?php
+        $at_id=isset($_GET['at_id'])?$_GET['at_id']:0;
+        $top=isset($_GET['top'])?$_GET['top']:0;
+        ?>
 
     <div class="container clearfix">
         <div class="article-left l">
 
             <ul class="article-tab clearfix">
                 <li  class="<?=(!isset($_GET['at_id'])||$_GET['at_id']==0)?'tabactive':''?>" >
-                    <a data-id="0" id="type1" value="0" href="{{URL('article')}}">全部</a>
+                    <a data-id="0" id="type1" value="0" href="{{url("article?at_id=0")}}">全部</a>
                 </li>
                 <?php foreach($at_type as $k=>$v){?>
                 <li  class="<?=(isset($_GET['at_id'])&&$_GET['at_id']==$v['at_id'])?'tabactive':''?>">
@@ -37,8 +41,8 @@
             </ul>
             <div class="article-tool-bar clearfix">
                 <div class="tool-left l">
-                    <a href="{{url("article?new=0")}}" class="sort-item active">最新</a>
-                    <a href="{{url("article?top=1")}}" class="sort-item ">热门</a>
+                    <a href="{{url("article?at_id=$at_id")}}" class="sort-item <?=$top==0?"active":""?>">最新</a>
+                    <a href="{{url("article?at_id=$at_id&top=1")}}" class="sort-item <?=$top==1?"active":""?>">热门</a>
                 </div>
             </div>
             <div id="lie">
