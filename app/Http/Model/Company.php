@@ -20,9 +20,10 @@ class Company extends Model{
 		$arr = DB::select($sql);
 		return $arr;
 	}
-	public function shiti()
+    //查询简历表
+	public function gather()
 	{
-		$exam = DB::table('shiti')->simplePaginate(9);
+		$exam = DB::table('gather')->simplePaginate(9);
 		return $exam;
 	}
 	//查看试题
@@ -30,22 +31,22 @@ class Company extends Model{
 	{
 		if(!empty($id))
 		{
-			$sql = "select click from shiti where s_id='$id'";
-			$click=DB::select($sql);
-			$click_1 =($click[0]['click'])+1;
-			$upd = "update shiti set click='$click_1' where s_id='$id'";
-			$upd_sav = DB::update($upd);
-			//$id=session::get('id');
+			$data=DB::table('gather')->where('g_id',$id)->first();
+			$g_click =($data['g_click'])+1;
+			//修改点击量
+            $click=DB::table('gather')
+                ->where('g_id', $id)
+                ->update(['g_click' => $g_click]);
 		 }
 		//$id=session::get('id');
 		//return $id;die;
-		$count=DB::table('exam')->where('company_id',"$id")->count();
-		if($count==0){
-		 echo "<script>alert('暂无试题');location.href='company'</script>";
-				}else{
-		$data=DB::table('exam')->where('company_id',"$id")->paginate(1);
+//		$count=DB::table('exam')->where('company_id',"$id")->count();
+//		if($count==0){
+//		 echo "<script>alert('暂无试题');location.href='company'</script>";
+//				}else{
+//		$data=DB::table('exam')->where('company_id',"$id")->paginate(1);
 		return $data;
-				     }
+				     //}
 	}
 } 
 ?>

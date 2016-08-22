@@ -8,6 +8,9 @@ use DB;
 use App\Http\Model\Company;
 use Request;
 use Session;
+/*
+ * 简历管理 马天天
+ */
 class CompanyController extends Controller
 {
 	//公司列表
@@ -15,8 +18,8 @@ class CompanyController extends Controller
 		$model=new Company();
         $ra=$model->direction();
         $arr=$model->company();
-        $exam=$model->shiti();
-       return view('company/index',['arr'=>$arr,'re'=>$ra,'exam'=>$exam]);
+        $exam=$model->gather();
+        return view('company/index',['arr'=>$arr,'re'=>$ra,'exam'=>$exam]);
 	}
 	//根据专业查询试题
 	public function college(){
@@ -39,15 +42,10 @@ class CompanyController extends Controller
 	public function college_exam()
 	{
 		$id=Request::input('id');
-		//加载登录成功之后的头像
-		$index = new Index();
-        //$shi = $index ->index();
-        $data = $index ->head_scu();
-        $dats = isset($data['user_filedir'])?$data['user_filedir']:"";
-        //print_r($dats);die;
         $model=new company();
 		$data=$model->college_exam($id);
-		return view('company/college_exam',['arr'=>$data,'picture'=>$dats]);
+        //print_r($data);die;
+		return view('company/college_exam',['arr'=>$data]);
 	}
 }
  

@@ -18,55 +18,23 @@
 </head>
 @extends('layouts.master')
 @section('sidebar')
-    @parent
+@parent
 
 <body>
 	   <div style="width:72%; height:80%; background:#fff; border:1px solid #ccc; margin-left:15%; margin-top:10px; margin-bottom:5px;">
-	   	
+
 
 
 
 		<div style="width:975px; height:465px; margin-top:20px;">
-		@foreach($arr as $key=>$value)
-		<div style="width:975px; height:55px; border-bottom:1px solid #ccc;"><img src="images/wenhao.png" style="float:left;">
-		<span style=" font-size:26px; display:block; float:left; margin-top:5px;">
-			<?php if($value['status']==1){
-				echo "单选题";
-			}else if($value['status']==0){
-				echo "简答题";
-			}
-			?>
-		</span></div>
-		<?php if($value['status']==1){ ?>
-			<div style=" width:975px; height:300px; ">
-				<span style=" display:block; font-size:18px; margin-left:15px; margin-top:20px;">{{$value['e_name']}}</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['a']}}</span>
-				</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['b']}}</span>
-				</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['c']}}</span>
-				</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['d']}}</span>
-				</span>
-			</div>
-			<?php }else if($value['status']==0){ ?>
-			<div style=" width:975px; height:300px; ">
-				<span style=" display:block; font-size:18px; margin-left:15px; margin-top:20px;">{{$value['e_name']}}</span>
-
-				<textarea name="" id="" cols="30" rows="10" style="margin-left:15px; width:902px; height:210px;"></textarea>
-
-			</div>
-			<?php }?>
-			@endforeach
-			<img src="images/next.png" alt="<<<<<>>>>>>" id="img" style=" margin-top:10px; margin-left:5px;">
-			{{$arr->render()}}
+           <span><?php echo $arr['g_name'] ?></span>
+            <div>
+                <img src="<?php echo $arr['g_dir'] ?>" width="350px" height="450px"/>
+            </div>
+       </div>
 		</div>
 	   </div>
-	   <div id="sel_hide" style="margin-left:15%; margin-top:10px; width:72%; background:#fff; border:1px solid #ccc; margin-bottom:10px;"><h3>&nbsp;&nbsp;&nbsp;正确答案为:</h3><span style="font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$value['e_an']}}</span></div>	   	
+
 	   <script src="js/jquery-1.8.3.min.js"></script>
 	   <script>
 	   $(function(){

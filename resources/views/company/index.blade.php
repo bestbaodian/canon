@@ -89,20 +89,20 @@ data-id="134">阿里巴巴</a>
 <div class="module-box">
 <div class="menu-box">
 <ul class="menu clearfix">
-<li class="selected"><a href="javascript:void(0);">最新</a></li>
+<li class="selected"><a href="javascript:void(0);">简历模板</a></li>
 </ul>
 </div>
 <div class="module-body" id="exam">
 <ul class="content-item-box clearfix">
 @foreach($exam as $key=>$value)
 <li>
-<a href="{{URL('college_exam?id=')}}<?php echo $value['s_id'];?>">
+<a href="{{URL('college_exam?id=')}}<?php echo $value['g_id'];?>">
 <div class="content-item-brief">
-<h1>{{$value['s_logo']}}</h1>
+<h1>{{$value['g_name']}}</h1>
 <div class="web-logoimg">
-<img src="http://123.56.249.121/android/web/{{$value['s_img']}}" style="width:50px; height:50px;" />
+<img src="{{$value['g_dir']}}" style="width:50px; height:50px;" />
 </div>
-<div class="exam-foot">已有{{$value['click']}}人参加</div>
+<div class="exam-foot">已有{{$value['g_click']}}人参加</div>
 <dl class="exam-info">
 <dd><span class="link-green"></span></dd>
 <dd class="exam-btn"><span class="btn  btn-block btn-primary" >查看详情</span></dd>
@@ -113,15 +113,7 @@ data-id="134">阿里巴巴</a>
 @endforeach
 </ul>
 </div>
-<div class="pagination">
-     <style>
-                        .pager li{
-                            float:left;
-                            margin-left:200px;
-                        }
-                    </style>
-<?php echo $exam->render(); ?>
-</div>
+
 </div>
 </div>
 </div>
