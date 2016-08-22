@@ -48,8 +48,13 @@
                 @endif
             </li>
             <li >
-                <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
-                <span class='unbound'>未绑定</span>
+                @if($user[0]['user_email_status'] == 1)
+                    <a href="{{url("user/setbindemail")}}">邮箱验证</a>
+                    <span class='unbound'>已绑定</span>
+                @else
+                    <a href="{{url('user/setverifyemail')}}">邮箱验证</a>
+                    <span class='unbound'>未绑定</span>
+                @endif
             </li>
             <li >
                 <a href="{{url('/user/setresetpwd')}}">修改密码</a>
@@ -65,7 +70,6 @@
 
 <div class="pwd-reset-wrap setting-resetpwd">
     {{--<form id="resetpwdform" method="post">--}}
-    <input type="hidden" name="url" value="{{url('index')}}"/>
         <div class="wlfg-wrap">
             <label for="" class="label-name">当前密码</label>
             <div class="rlf-group">
@@ -118,11 +122,6 @@
 </div>
 
 
-
-<!--script-->
-<script src="/js/ssologin.js"></script>
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
 
  
 

@@ -51,20 +51,21 @@
 
                             <div class="qa-header-right r">
                                 <!-- credit -->
-                                <div class="share-rl-tips share-posi js-share-statue">
+                                <!---分享即送积分-->
+                                <!--<div class="share-rl-tips share-posi js-share-statue">
                                     <span>分享即可 +</span><strong>1积分</strong>
                                     <span class="rule-arrow"></span>
-                                </div>
+                                </div>-->
                                 <!-- share -->
                                 <div class="small-share l wd-share">
                                     <ul class="share-wrap">
                                         <li class="weichat-posi js-top-share">
-                                            <div class="bdsharebuttonbox weichat-style bdshare-button-style0-16" data-tag="share_1" data-quesid="325735">
+                                            <!--<div class="bdsharebuttonbox weichat-style bdshare-button-style0-16" data-tag="share_1" data-quesid="325735">
                                                 <a href="#" class="bds_weixin icon-nav icon-share-weichat" data-cmd="weixin" title="分享到微信"></a>
                                                 {{--<a href="#" class="bds_qzone icon-nav icon-share-qq" data-cmd="qzone" title="分享到QQ空间"></a>--}}
                                                 <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
                                                 <a href="#" class="bds_tsina icon-nav icon-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-                                            </div>
+                                            </div>-->
                                         </li>
                                     </ul>
                                 </div>

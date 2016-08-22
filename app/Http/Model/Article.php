@@ -24,7 +24,7 @@ class Article extends Model
      * 查询article内容
      * 针对文章类型 进行显示数据
      */
-    public function select_article1($at_id)
+    public function select_article1($at_id,$new_id=0,$top=0)
     {
         //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id where article.a_type='$at_id' order by a_id desc");
 

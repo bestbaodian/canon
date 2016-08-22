@@ -5,6 +5,7 @@ use App\Http\Model\User;
 use Illuminate\Http\Request;
 use DB;
 use Session;
+use Illuminate\Support\Facades\Mail;
 
 use App\Http\Model\Topclient;
 use App\Http\Model\Resultset;
@@ -207,6 +208,14 @@ class UserController extends Controller
      * !!邮箱验证
      */
 
+    public function bangemail()
+    {
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+       return view('user/setemail',['user'=>$user]);
+    }
+
     public function setverifyemail(){
         $username = Session::get("username");
         $User  =new  User();
@@ -232,8 +241,83 @@ class UserController extends Controller
         return view('user/setbindsns',['user'=>$user]);
     }
 
+    //发送邮件验证用户邮箱唯一
+    public function send_email(Request $request)
+    {
+        $email = $request->input('email');
+        Session::put('email',$email);
+        Session::put('email_rand',rand(10000,99999));
+        $name = '学院君';
+        $flag = Mail::send('user.send_email',['name'=>$name],function ($message){
+            $to = Session::get('email');
+            $message ->to($to)->subject('面试宝典-绑定邮箱');
+        });
+        if($flag){
+            $data = array(
+                'msg'=>'ok',
+                'error'=>'0',
+                'result'=>'成功'
+            );
+            return json_encode($data);
+        }else{
+            $data = array(
+                'msg'=>'no',
+                'error'=>'1',
+                'result'=>'失败'
+            );
+            return json_encode($data);
+        }
+    }
 
-
+    /*
+     *验证* 验证码是否正确
+     */
+    public function check_code(Request $request){
+        $code = $request->input('code');
+        $ses_code = Session::get('email_rand');
+        if($code==$ses_code){
+            $data = array(
+                'msg'=>'ok',
+                'error'=>'0',
+                'result'=>'成功'
+            );
+            return json_encode($data);
+        }else{
+            $data = array(
+                'msg'=>'no',
+                'error'=>'1',
+                'result'=>'失败'
+            );
+            return json_encode($data);
+        }
+    }
+    /*
+     * 验证用户邮箱&验证码提交是否正确
+     */
+    public function sub_code(Request $request)
+    {
+        $email = $request->input('email');
+        $code = $request->input('code');
+        $ses_code = Session::get('email_rand');
+        //验证*验证码是否正确
+        if($code == $ses_code){
+            $User = new User();
+            $arr = $User->sub_code($email);
+            $data = array(
+                'msg'=>'ok',
+                'error'=>'0',
+                'result'=>'成功'
+            );
+            return json_encode($data);
+        }else{
+            $data = array(
+                'msg'=>'no',
+                'error'=>'1',
+                'result'=>'失败'
+            );
+            return json_encode($data);
+        }
+    }
     /*
      * 签到
      * 2016-08-18
