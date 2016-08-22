@@ -42,9 +42,7 @@
                             <li class="course-nav-item <?=($vv==0)?'on':''?>" class="type" id="type">
                                <a href="{{url('shiti?v=0&a=0&l=0')}}" class="leixing" value="0"> 全部</a>
                             </li>
-
                             <?php foreach($arr as $k=>$v){?>
-
                             <li class="course-nav-item <?=($vv==$v['c_id'])?'on':'';?>"  class="type" id="type">
                                <a href="{{url("shiti?v=$v[c_id]&a=0&l=0")}}" class="leixing" value="<?php echo $v['c_id']?>">
                                <?php echo $v['c_name']?></a>
