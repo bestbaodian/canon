@@ -58,8 +58,13 @@ var is_choice = "";
                 @endif
             </li>
             <li >
-                <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
-                <span class='unbound'>未绑定</span>
+                @if($user[0]['user_email_status'] == 1)
+                    <a href="{{url("user/setbindemail")}}">邮箱验证</a>
+                    <span class='unbound'>已绑定</span>
+                @else
+                    <a href="{{url('user/setverifyemail')}}">邮箱验证</a>
+                    <span class='unbound'>未绑定</span>
+                @endif
             </li>
             <li >
                 <a href="{{url('/user/setresetpwd')}}">修改密码</a>
@@ -117,12 +122,6 @@ var is_choice = "";
 </div>
 
 
-
-<!--script-->
-<script src="/jss/ssologin.js"></script>
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
-<script type="text/javascript">seajs.use("/static/page/"+OP_CONFIG.module+"/"+OP_CONFIG.page);</script>
 
  
 

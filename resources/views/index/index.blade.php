@@ -136,8 +136,8 @@
                         <span class="l "><?php echo mb_substr($val['a_con'],0,30)?></span>
                     </div>
                     <div class="icourse-tips clearfix">
-                        <h2></h2>
-                        <span class="l ">类型:<?php
+                        <h2>{{$val['a_title']}}</h2>
+                        <span class="l ">标签:<?php
                             $leis = explode(',',$val['a_lei']);
                                     foreach($lei as $s=>$d){
                                         foreach($d as $m=>$n){

@@ -27,11 +27,11 @@ class ArticleController extends Controller
 
         //接受用户get请求数据
         $at_id=Request::input('at_id');
-        $article_id=Request::input('article_id');
+        $new_id=Request::input('new');
         //查询ar_type表
         $at_type=$articlemodel->getar_type();
         if($at_id!=""){
-           $article=$articlemodel->select_article1($at_id);
+           $article=$articlemodel->select_article1($at_id,$new_id);
             //print_r($article);
         }else{
            $article=$articlemodel->select_article();
