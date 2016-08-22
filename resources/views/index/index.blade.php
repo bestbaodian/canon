@@ -123,7 +123,7 @@
 <!--方法开始 -->
 <div class="icourse">
     <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">试题</h2>
+        <h2 class="icourse-title">方法</h2>
         <ul class="icourse-course clearfix">
             <?php foreach($article as $key=>$val){?>
             <li>
