@@ -224,13 +224,13 @@ var isLogin=1
     <!-- 作者信息 -->
         <div class="aside-author">
         <div class="p clearfix" style="margin-left: 10px;">
-            <a href="#" class="l" title="{{$aping[0]['user_name']}}" target="_blank">
-                <img  src="{{$aping[0]['user_filedir']}}">
+            <a href="#" class="l" title="{{$arr['user_name']}}" target="_blank">
+                <img  src="{{$arr['user_filedir']}}">
             </a>
         </div>
-            <a class="nick" href="#" title="{{$aping[0]['user_name']}}" target="_blank">{{$aping[0]['user_name']}}</a>
+            <a class="nick" href="#" title="{{$arr['user_name']}}" target="_blank">{{$arr['user_name']}}</a>
             <span class="user-job"></span>
-            <span class="user-desc">{{$aping[0]['user_aboutme']}}</span>
+            <span class="user-desc">{{$arr['user_aboutme']}}</span>
         <div class="btn-box clearfix">
             <a href="#" target="_blank" class="article-num r-bor l">
                 <span>{{$sum_yulan[0]['count(*)']}}</span>篇文章

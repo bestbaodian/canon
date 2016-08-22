@@ -37,14 +37,7 @@ class ArticleController extends Controller
            $article=$articlemodel->select_article();
             //print_r($article);
         }
-        //print_r($article);
-        //die;
-       $ses = Session::get('username');
-        if (empty($ses)){
-            $username=0;
-        }else{
-            $username=Session::get('username');
-        }
+
 
         /*
          * 推荐文章显示
@@ -171,10 +164,6 @@ class ArticleController extends Controller
         //根据a_id两表联查article和ar_type表
         $arr=$model->join_artype($id);
         //查出该篇文章类型
-       // die;
-
-
-
         /*
          * 查询文章和评论内容
          */
