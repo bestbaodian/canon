@@ -178,7 +178,7 @@ class User extends Model
             return $data;
         }
     }
-
+    //提交email信息
     public function sub_code($email)
     {
         $user_id = Session::get('uid');
@@ -186,5 +186,33 @@ class User extends Model
             ->where('user_id', $user_id)
             ->update(['user_email' => $email,'user_email_status'=>1]);
         return $arr;
+    }
+
+    //我的收藏展示->试题收藏
+    public function question_house($username)
+    {
+        $users = DB::table('users')->where("user_name",$username)->get();
+        $user_id = $users[0]['user_id'];
+        $college_questions = DB::table('college_questions')
+            ->join('follow', 'college_questions.c_id', '=', 'follow.c_id')
+            ->join('users', 'users.user_id', '=', 'follow.u_id')
+            ->select('c_name','c_answer','college_questions.c_id as c_id')
+            ->where('users.user_id',$user_id)
+            ->get();
+        return $college_questions;
+    }
+
+    //我的收藏展示->文章收藏
+    public function article_house($username)
+    {
+        $users = DB::table('users')->where("user_name",$username)->get();
+        $user_id = $users[0]['user_id'];
+        $article = DB::table('article')
+            ->join('house_article', 'article.a_id', '=', 'house_article.article_id')
+            ->join('users', 'users.user_id', '=', 'house_article.user_id')
+            ->select('a_title','a_con','article.a_id as a_id')
+            ->where('users.user_id',$user_id)
+            ->get();
+        return $article;
     }
 }

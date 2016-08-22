@@ -23,32 +23,61 @@ class Article extends Model
     /*
      * 查询article内容
      * 针对文章类型 进行显示数据
+     * 有文章类型 默认最新  显示文章
      */
-    public function select_article1($at_id,$new_id=0,$top=0)
+    public function select_article1($data)
     {
         //$article=DB::select("select a_id,a_title,at_type,a_con,a_addtime,a_num from article left join ar_type on article.a_type=ar_type.at_id where article.a_type='$at_id' order by a_id desc");
+        if($data['at_id']){
+            if(isset($data['top'])){
+                $article = DB::table('article')
+                    ->join('users', 'article.a_adduser', '=', 'users.user_id')
+                    ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
+                    ->select('users.user_name', 'a_id', 'a_title', 'at_type', 'a_con', 'a_addtime', 'a_num', 'brows', 'a_pingnum')
+                    ->where("article.a_type", $data['at_id'])
+                    ->where("a_state", 1)
+                    ->orderBy('brows', 'desc')
+                    ->paginate(3);
+                return $article;
+            }
+                $article = DB::table('article')
+                    ->join('users', 'article.a_adduser', '=', 'users.user_id')
+                    ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
+                    ->select('users.user_name', 'a_id', 'a_title', 'at_type', 'a_con', 'a_addtime', 'a_num', 'brows', 'a_pingnum')
+                    ->where("article.a_type", $data['at_id'])
+                    ->where("a_state", 1)
+                    ->orderBy('a_id', 'desc')
+                    ->paginate(3);
+                return $article;
 
-        $article = DB::table('article')
-            ->join('users', 'article.a_adduser', '=', 'users.user_id')
-            ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
-            ->select('users.user_name', 'a_id', 'a_title', 'at_type', 'a_con', 'a_addtime', 'a_num', 'brows', 'a_pingnum')
-            ->where("article.a_type", $at_id)
-            ->where("a_state", 1)
-            ->orderBy('a_id', 'desc')
-            ->paginate(3);
-        return $article;
+
+        }else{
+            if(isset($data['top'])){
+                $article = DB::table('article')
+                    ->join('users', 'article.a_adduser', '=', 'users.user_id')
+                    ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
+                    ->select('users.user_name', 'a_id', 'a_title', 'at_type', 'a_con', 'a_addtime', 'a_num', 'brows', 'a_pingnum')
+                    ->where("a_state", 1)
+                    ->orderBy('brows', 'desc')
+                    ->paginate(3);
+                return $article;
+            }
+            $article = DB::table('article')
+                ->join('users', 'article.a_adduser', '=', 'users.user_id')
+                ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
+                ->select('users.user_name', 'a_id', 'a_title', 'at_type', 'a_con', 'a_addtime', 'a_num', 'brows', 'a_pingnum')
+                ->where("a_state", 1)
+                ->orderBy('a_id', 'desc')
+                ->paginate(3);
+            return $article;
+        }
+
     }
 
+
+
     /*
-     * 查询文章浏览量最多的用户
-     */
-    public function get_daren(){
-        $sql="select user_filedir,users.user_name,sum(brows) from article inner join users on article.a_adduser=users.user_id where article.a_state=1 GROUP BY article.a_adduser ORDER BY sum(brows) desc limit 10";
-        $users=DB::select($sql);
-        return $users;
-    }
-    /*
-     * 显示所有审核通过的文章
+     * 无类型  默认显示所有  最新文章
      */
     public function select_article()
     {
@@ -63,6 +92,15 @@ class Article extends Model
         return $article;
     }
 
+
+     /*
+      * 查询文章浏览量最多的用户
+      */
+    public function get_daren(){
+        $sql="select user_filedir,users.user_name,sum(brows) from article inner join users on article.a_adduser=users.user_id where article.a_state=1 GROUP BY article.a_adduser ORDER BY sum(brows) desc limit 10";
+        $users=DB::select($sql);
+        return $users;
+    }
     /*
      * 点击文章详情  浏览量+1
      */
@@ -202,9 +240,10 @@ class Article extends Model
             ->select("al_name")
             ->get();
         $user_id = $arr[0]['a_adduser'];
-        $sql = "select count(*),sum(brows) from article where a_adduser='$user_id'";
+        $sql = "select count(*),sum(brows) from article where a_adduser='$user_id' and a_state=1";
         $dats=DB::select($sql);
         $arr['yulan']=$dats;
+
         $arr['lei'] = $lei;
         return $arr;
     }

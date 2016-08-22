@@ -291,6 +291,67 @@ class UserController extends Controller
             return json_encode($data);
         }
     }
+
+    /*
+     * 我的收藏
+     */
+    public function my_house(){
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+
+        //用户收藏信息查询
+        $college_questions =$User->question_house($username);
+        return view('user/my_house',['college_questions' => $college_questions,'user'=>$user]);
+    }
+
+    /*
+     * 收藏文章
+     */
+    public function my_house_article(){
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+
+        $article = $User->article_house($username);
+
+        return view('user/my_house_article',['article' => $article,'user'=>$user]);
+
+    }
+
+    /*
+     * 我的评价
+     */
+    public function my_ping(){
+        if(!isset($_SESSION)){
+            session_start();
+        }
+        if(empty($_SESSION['username'])){
+            return view('user/my_ping');
+        }else {
+            $user_name = $_SESSION['username'];
+            $users = DB::table('users')->where("user_name", $user_name)->get();
+            $user_id = $users[0]['user_id'];
+            $shiti = DB::table('e_ping')
+                ->join('users', 'e_ping.u_id', '=', 'users.user_id')
+                ->join('college_questions', 'e_ping.e_id', '=', 'college_questions.c_id')
+                ->select('c_name', 'c_answer')
+                ->distinct('c_name')
+                ->distinct('c_answer')
+                ->where('users.user_id', $user_id)
+                ->get();
+            $shiti_ping = DB::table('e_ping')
+                ->join('users', 'e_ping.u_id', '=', 'users.user_id')
+                ->join('college_questions', 'e_ping.e_id', '=', 'college_questions.c_id')
+                ->select('p_con')
+                ->where('users.user_id', $user_id)
+                ->get();
+            //print_r($shiti_ping);die;
+            //$shiti = array_unique($arr);
+            //print_r($shiti);die;
+            return view('user/my_ping', ['shiti' => $shiti,'shiti_ping' => $shiti_ping]);
+        }
+    }
     /*
      * 验证用户邮箱&验证码提交是否正确
      */

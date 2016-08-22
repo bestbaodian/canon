@@ -9,9 +9,9 @@
     <meta http-equiv="Cache-Control" content="no-transform ">
     <link rel = "Shortcut Icon" href=http://www.mbaodian.com/favicon.ico>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" href="css/a.css" type="text/css">
     <meta name="Keywords" content="面试，面试宝典，面试技巧，面试经验，面试简历，简历下载，面试试题">
     <script src="../js/push.js"></script>
-    <link rel="stylesheet" href="css/a.css" type="text/css">
     <script src="../js/jquery.js" async="" charset="utf-8"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="stylesheet" type="text/css" href="../static/css/ui2.css?2013032917">

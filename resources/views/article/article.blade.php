@@ -11,19 +11,6 @@
     <meta http-equiv="Cache-Control" content="no-transform " />
     <meta name="Keywords" content="" />
     <meta name="Description" content="面试宝典为IT专业技术人员提供最新的文章信息,包括PHP,JAVA,C语言,MySql,DB2等相关文章,更多IT技术资讯、原创内容、开源代码尽在慕课社区" />
-
-    <script type="text/javascript">
-
-
-        var OP_CONFIG={"module":"article","page":"index"};
-        var isLogin = 0;
-        var is_choice = "";
-        var seajsTimestamp="v=201603251711";
-
-    </script>
-
-
-
     <link rel="stylesheet" href="css/3dd38c5eb19043548362b1f191b56a92.css" type="text/css" />
 </head>
 <body >
@@ -33,13 +20,17 @@
     @parent
 
     <div id="main">
+        <?php
+        $at_id=isset($_GET['at_id'])?$_GET['at_id']:0;
+        $top=isset($_GET['top'])?$_GET['top']:0;
+        ?>
 
     <div class="container clearfix">
         <div class="article-left l">
 
             <ul class="article-tab clearfix">
                 <li  class="<?=(!isset($_GET['at_id'])||$_GET['at_id']==0)?'tabactive':''?>" >
-                    <a data-id="0" id="type1" value="0" href="{{URL('article')}}">全部</a>
+                    <a data-id="0" id="type1" value="0" href="{{url("article?at_id=0")}}">全部</a>
                 </li>
                 <?php foreach($at_type as $k=>$v){?>
                 <li  class="<?=(isset($_GET['at_id'])&&$_GET['at_id']==$v['at_id'])?'tabactive':''?>">
@@ -50,8 +41,8 @@
             </ul>
             <div class="article-tool-bar clearfix">
                 <div class="tool-left l">
-                    <a href="{{url("article?new=0")}}" class="sort-item active">最新</a>
-                    <a href="{{url("article?top=1")}}" class="sort-item ">热门</a>
+                    <a href="{{url("article?at_id=$at_id")}}" class="sort-item <?=$top==0?"active":""?>">最新</a>
+                    <a href="{{url("article?at_id=$at_id&top=1")}}" class="sort-item <?=$top==1?"active":""?>">热门</a>
                 </div>
             </div>
             <div id="lie">

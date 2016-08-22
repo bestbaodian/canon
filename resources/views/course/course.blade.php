@@ -26,7 +26,7 @@
             <div class="course-nav-box">
                 <div class="course-nav-hd">
                     <span>全部课程</span>
-                    <a href="/about/recruit" class="for-teacher hide-text" title="应聘讲师" target="_blank">应聘讲师</a>
+                    <a href="#" class="for-teacher hide-text" title="应聘讲师" target="_blank">应聘讲师</a>
                 </div>
                 <div class="course-nav-row clearfix">
                     <?php
@@ -42,9 +42,7 @@
                             <li class="course-nav-item <?=($vv==0)?'on':''?>" class="type" id="type">
                                <a href="{{url('shiti?v=0&a=0&l=0')}}" class="leixing" value="0"> 全部</a>
                             </li>
-
                             <?php foreach($arr as $k=>$v){?>
-
                             <li class="course-nav-item <?=($vv==$v['c_id'])?'on':'';?>"  class="type" id="type">
                                <a href="{{url("shiti?v=$v[c_id]&a=0&l=0")}}" class="leixing" value="<?php echo $v['c_id']?>">
                                <?php echo $v['c_name']?></a>

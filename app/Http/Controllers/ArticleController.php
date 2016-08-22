@@ -26,19 +26,21 @@ class ArticleController extends Controller
         $articlemodel=new Article();
 
         //接受用户get请求数据
-        $at_id=Request::input('at_id');
-        $new_id=Request::input('new');
+        $data=Request::input();
         //查询ar_type表
         $at_type=$articlemodel->getar_type();
-        if($at_id!=""){
-           $article=$articlemodel->select_article1($at_id,$new_id);
-            //print_r($article);
+        //类型 最新 最热
+        if($data){
+            //有类型 最新
+            $article=$articlemodel->select_article1($data);
+
         }else{
-           $article=$articlemodel->select_article();
+            //无类型  最新
+            $article=$articlemodel->select_article();
             //print_r($article);
         }
 
-
+        //print_r($article);die;
         /*
          * 推荐文章显示
          */
