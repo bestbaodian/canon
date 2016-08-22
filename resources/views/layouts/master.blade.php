@@ -14,7 +14,7 @@
                 <li><a href="{{url('article')}}"  target="_self">方法</a></li>
                 <li><a href="{{url('company')}}"  target="_self">简历</a></li>
 		        <li><a href="{{url('wenda')}}" target="_self">答疑</a></li>
-		        <li><a href="{{url('Ic')}}" target="_self">面试公司</a></li>
+		        <li><a href="http://tmjob.mbaodian.com/" target="_self">面试公司</a></li>
             </ul>
         </div>
         <div id="login-area">
@@ -74,11 +74,11 @@
                                     <span class="tit text-ellipsis">python进阶</span>
                                     <span class="media-name text-ellipsis">2-9 闭包</span>
                                     <i class="icon-clock"></i>
-                                     <a class="continue" href="/video/6059">继续</a>
+                                     <a class="continue" href="#">继续</a>
                                 </span>
                             </div>
                             <div class="card-sets clearfix">
-                                <a class="l mr30" target="_blank" href="{{url('wenda/save')}}">发问题</a>
+                                <a class="l mr30" target="_blank" href="{{url('save')}}">发问题</a>
                                 <a class="l" target="_blank" href="{{url('publish')}}">写文章</a>
                                 <a class="r" href="{{url('out')}}">退出</a>
                             </div>

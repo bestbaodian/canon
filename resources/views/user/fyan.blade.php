@@ -61,8 +61,13 @@ var is_choice = "";
                 @endif
             </li>
             <li >
-                <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
-                <span class='unbound'>未绑定</span>
+                @if($user[0]['user_email_status'] == 1)
+                    <a href="{{url("user/setbindemail")}}">邮箱验证</a>
+                    <span class='unbound'>已绑定</span>
+                @else
+                    <a href="{{url('user/setverifyemail')}}">邮箱验证</a>
+                    <span class='unbound'>未绑定</span>
+                @endif
             </li>
             <li >
                 <a href="{{url('/user/setresetpwd')}}">修改密码</a>
@@ -77,8 +82,6 @@ var is_choice = "";
     <div class="setting-right-wrap wrap-boxes settings" >
 
 <div class="pwd-reset-wrap setting-resetpwd">
-    <form action="yanzheng" method="post">
-
         <div class="wlfg-wrap">
             <label for="" class="label-name">手机号</label>
             <div class="rlf-group">
@@ -104,7 +107,6 @@ var is_choice = "";
                 <input type="text" value="<?php echo substr($user[0]['user_phone'],0,3).'*****'.substr($user[0]['user_phone'],8,11)?>" disabled class="rlf-input rlf-input-pwd rlf-field-error">
                 @endif
         </div>
-    </form>
 </div>
 
 

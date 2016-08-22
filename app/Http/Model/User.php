@@ -15,7 +15,18 @@ class User extends Model
     public function setprofile($user)
     {
         //$sql ="select user_name,user_job,user_aboutme,user_sex,user_filedir from users where user_name = '$user'";
-        $data    =DB::table('users')->select('user_name','user_job','user_aboutme','user_sex','user_filedir','user_phone_status','user_phone')->where("user_name",$user)->get();
+        $data    =DB::table('users')
+            ->select(
+                'user_name',
+                'user_job',
+                'user_aboutme',
+                'user_sex',
+                'user_filedir',
+                'user_phone_status',
+                'user_phone',
+                'user_email',
+                'user_email_status'
+            )->where("user_name",$user)->get();
         //$data = DB::select($sql);
         if($data){
             return $data;
@@ -168,4 +179,12 @@ class User extends Model
         }
     }
 
+    public function sub_code($email)
+    {
+        $user_id = Session::get('uid');
+        $arr=DB::table('users')
+            ->where('user_id', $user_id)
+            ->update(['user_email' => $email,'user_email_status'=>1]);
+        return $arr;
+    }
 }

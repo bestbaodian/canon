@@ -45,28 +45,23 @@
       </div>
       <!--.nav end-->
       <!--推荐位-->
-                  <ul class="recommend">
-                
-              </ul><!--recommend end-->
-                  <!--左侧列表内容-->
+        <ul class="recommend">
+        </ul><!--recommend end-->
+        <!--左侧列表内容-->
       <div >
 
 <?php foreach($pro as $k=>$v){?>
-
-
-
 <div class="ques-answer">
     <div class="tag-img">
-                                            <a href="#" target="_blank">
-                <img src="picture/563afeb5000149c000900090.jpg" title="28"/>
-            </a>
-                                                            </div><!--.tag-img end-->
-        <div class="from-tag">        来自
-
+        <a href="#" target="_blank">
+            <img src="{{$v['user_filedir']}}" title="28"/>
+        </a>
+    </div><!--.tag-img end-->
+    <div class="from-tag">        来自
                 <a href="/detail" id="timu"><?php echo $v['d_name']?></a>的<a href="" target="_top"><b><?php echo $v['user_name']?></b></a>
             </div><!--.from-tag end-->
         <div class="ques-con">
-        <a href="detail?id=<?php echo $v['t_id']?>" class="ques-con-content" target="_blank" title="#include&amp;lt;stdio.h&amp;gt;#include&amp;lt;string.h&amp;gt;int main(){struct student{long nu;char name[10];int age;};struct student stu_i;struct student*p;p=&amp;amp;stu_i;stu_1.nu =201601;stu_1.age =12;strcpy(stu_1.name ,&quot;xiong&quot;);stu_2.nu =201602;stu_2.age =15;strcpy(stu_2.name ,&quot..."><?php echo $v['t_title'];?></a>
+        <a href="detail?id=<?php echo $v['t_id']?>" class="ques-con-content" target="_self" title="#include&amp;lt;stdio.h&amp;gt;#include&amp;lt;string.h&amp;gt;int main(){struct student{long nu;char name[10];int age;};struct student stu_i;struct student*p;p=&amp;amp;stu_i;stu_1.nu =201601;stu_1.age =12;strcpy(stu_1.name ,&quot;xiong&quot;);stu_2.nu =201602;stu_2.age =15;strcpy(stu_2.name ,&quot..."><?php echo $v['t_title'];?></a>
 
     </div>
         <div class="answer-con first" data-answer-id="156328" id="answer-con">
@@ -76,12 +71,12 @@
             <?php echo $v['t_content'];?>
         </div>
         <div class="ctrl-bar clearfix">
-            <span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">
-            <em class='bb' id="<?php echo $v['t_id'] ?>">赞同</em>
-            </span>
-            <span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">
-            <em class='aa' >评论</em>
-            </span>
+            <!--{{--<span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">--}}
+            {{--<em class='bb' id="<?php echo $v['t_id'] ?>"></em>--}}
+            {{--</span>--}}
+            {{--<span class="agree-with " data-ques-id="312708" data-answer-id="156328" data-hasop="">--}}
+            {{--<em class='aa' ></em>--}}
+            {{--</span>--}}-->
             <div class="share-box clearfix">
                 
                 <div class="share-box-con">
@@ -291,37 +286,9 @@
     </a>
     <a class="elevator-top" href="javascript:;" style="display:none" id="backTop"></a>
 </div>
-
-
-<!--script-->
-<script src="js/ssologin.js"></script>
-<script type="text/javascript" src="js/sea.js"></script>
-<script type="text/javascript" src="js/sea_config.js"></script>
-
-
-
-
-
-
 <div style="display: none">
-<script type="text/javascript">
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff0cfcccd7b1393990c78efdeebff3968' type='text/javascript'%3E%3C/script%3E"));
-(function (d) {
-window.bd_cpro_rtid="rHT4P1c";
-var s = d.createElement("script");s.type = "text/javascript";s.async = true;s.src = location.protocol + "//cpro.baidu.com/cpro/ui/rt.js";
-var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
-})(document);
-</script>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    bp.src = '//push.zhanzhang.baidu.com/push.js';
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
 
-</script>
+
 
 <script type="text/javascript" src='../js/jquery-1.9.1.js'></script>
 <script type="text/javascript">
@@ -348,127 +315,3 @@ var s0 = d.getElementsByTagName("script")[0];s0.parentNode.insertBefore(s, s0);
 </body>
 @endsection
 </html>
-<script>
-var emojiconfig = {
-    tieba: {
-        name: "贴吧表情",
-        path: "img/tieba/",
-        maxNum: 50,
-        file: ".jpg",
-        placeholder: ":{alias}:",
-        alias: {
-            1: "hehe",
-            2: "haha",
-            3: "tushe",
-            4: "a",
-            5: "ku",
-            6: "lu",
-            7: "kaixin",
-            8: "han",
-            9: "lei",
-            10: "heixian",
-            11: "bishi",
-            12: "bugaoxing",
-            13: "zhenbang",
-            14: "qian",
-            15: "yiwen",
-            16: "yinxian",
-            17: "tu",
-            18: "yi",
-            19: "weiqu",
-            20: "huaxin",
-            21: "hu",
-            22: "xiaonian",
-            23: "neng",
-            24: "taikaixin",
-            25: "huaji",
-            26: "mianqiang",
-            27: "kuanghan",
-            28: "guai",
-            29: "shuijiao",
-            30: "jinku",
-            31: "shengqi",
-            32: "jinya",
-            33: "pen",
-            34: "aixin",
-            35: "xinsui",
-            36: "meigui",
-            37: "liwu",
-            38: "caihong",
-            39: "xxyl",
-            40: "taiyang",
-            41: "qianbi",
-            42: "dnegpao",
-            43: "chabei",
-            44: "dangao",
-            45: "yinyue",
-            46: "haha2",
-            47: "shenli",
-            48: "damuzhi",
-            49: "ruo",
-            50: "OK"
-        },
-        title: {
-            1: "呵呵",
-            2: "哈哈",
-            3: "吐舌",
-            4: "啊",
-            5: "酷",
-            6: "怒",
-            7: "开心",
-            8: "汗",
-            9: "泪",
-            10: "黑线",
-            11: "鄙视",
-            12: "不高兴",
-            13: "真棒",
-            14: "钱",
-            15: "疑问",
-            16: "阴脸",
-            17: "吐",
-            18: "咦",
-            19: "委屈",
-            20: "花心",
-            21: "呼~",
-            22: "笑脸",
-            23: "冷",
-            24: "太开心",
-            25: "滑稽",
-            26: "勉强",
-            27: "狂汗",
-            28: "乖",
-            29: "睡觉",
-            30: "惊哭",
-            31: "生气",
-            32: "惊讶",
-            33: "喷",
-            34: "爱心",
-            35: "心碎",
-            36: "玫瑰",
-            37: "礼物",
-            38: "彩虹",
-            39: "星星月亮",
-            40: "太阳",
-            41: "钱币",
-            42: "灯泡",
-            43: "茶杯",
-            44: "蛋糕",
-            45: "音乐",
-            46: "haha",
-            47: "胜利",
-            48: "大拇指",
-            49: "弱",
-            50: "OK"
-        }
-      },
-    AcFun:{
-    	name : "AcFun表情",
-    	path : "img/AcFun/",
-    	maxNum : 54,
-    	file : ".png"
-    }
-  };
-$('.Main').myEmoji({emojiconfig : emojiconfig});
-$('.Main3').myEmoji();
-$('.Main2').myEmoji();
-</script> 

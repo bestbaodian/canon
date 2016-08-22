@@ -46,9 +46,13 @@
           @endif
       </li>
       <li >
-        <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
-                    <span class='unbound'>未绑定</span>
-              </li>
+          @if($user[0]['user_email_status'] == 1)
+              <a href="{{url("user/setbindemail")}}">邮箱验证</a>
+              <span class='unbound'>已绑定</span>
+          @else
+              <a href="{{url('user/setverifyemail')}}">邮箱验证</a>
+              <span class='unbound'>未绑定</span>
+        @endif
       <li >
         <a href="{{url('/user/setresetpwd')}}">修改密码</a>
       </li>

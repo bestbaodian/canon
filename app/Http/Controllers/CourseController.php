@@ -24,7 +24,6 @@ class CourseController extends Controller
         return view('course/course',['arr'=>$pro['arr'],'zhuan'=>$pro['zhuan'],'shi'=>$pro['shi'],'lei'=>$pro['lei'],'vv',$pro['vv'],'a'=>$pro['a'],'l'=>$pro['l']]);
     }
     /*
-     * 用户详情页面  制作人:: 张峻玮
      * 2016-8-17 14:34
      */
     public function xiang(Request $request){
@@ -49,7 +48,6 @@ class CourseController extends Controller
     }
     /*
      * 页面评论选星功能
-     * 制作人 :: 时庆庆
      * 时间 :: 2016-08-18
      */
     public function pinglun_shiti(Request $request){

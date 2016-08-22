@@ -10,7 +10,6 @@
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 <meta http-equiv="Cache-Control" content="no-transform " />
 <meta name="keywords" content="面试宝典网，面试宝典官网，MOOC，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
-<meta name="description" content="慕课网（IMOOC）是学习编程最简单的免费平台。慕课网提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
 <link rel="stylesheet" href="/css/base.css" type="text/css" />
 
  
@@ -51,8 +50,13 @@
                 @endif
             </li>
             <li >
-                <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
-                <span class='unbound'>未绑定</span>
+                @if($user[0]['user_email_status'] == 1)
+                    <a href="{{url("user/setbindemail")}}">邮箱验证</a>
+                    <span class='unbound'>已绑定</span>
+                @else
+                    <a href="{{url('user/setverifyemail')}}">邮箱验证</a>
+                    <span class='unbound'>未绑定</span>
+                @endif
             </li>
             <li >
                 <a href="{{url('/user/setresetpwd')}}">修改密码</a>
@@ -74,14 +78,9 @@
         <div class="verifybox verifyboxt">
             <a class="binding" href="/user/setbindemail">立即绑定</a>
         </div>
-        
-    <p>可用邮箱加密码登录慕课网</p>
+    <p>可用邮箱加密码登录面试宝典</p>
     <p>可用邮箱找回密码</p>
-    
-        
 </div>
-
-
     </div>
   </div>
   
@@ -105,11 +104,7 @@
 
 
 <!--script-->
-<script src="/js/ssologin.js"></script>
-<script type="text/javascript" src="/js/sea.js"></script>
-<script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
 
- 
 
 
 <div style="display: none">

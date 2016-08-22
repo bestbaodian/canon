@@ -50,9 +50,8 @@
             </ul>
             <div class="article-tool-bar clearfix">
                 <div class="tool-left l">
-
-                    <a href="#" class="sort-item active">最新</a>
-                    <a href="#" class="sort-item ">热门</a>
+                    <a href="{{url("article?new=0")}}" class="sort-item active">最新</a>
+                    <a href="{{url("article?top=1")}}" class="sort-item ">热门</a>
                 </div>
             </div>
             <div id="lie">
@@ -64,7 +63,7 @@
                     <h3 class="item-title">
                         <a href="{{URL('fangfa?id=')}}{{$v['a_id']}}" target="_self" class="title-detail">{{$v['a_title']}}</a>
                     </h3>
-                    <p class="item-bd">{{substr($v['a_con'],0,100)}}...<p>
+                    <p class="item-bd"><?php echo mb_substr($v['a_con'],0,100);?>...<p>
                     <div class="item-btm clearfix">
                         <ul class="l left-info">
                             <li class="hd-pic">
@@ -122,7 +121,7 @@
                                 <h3 class="remon-title">
                                     <a href="{{URL("fangfa?id=$v[a_id]")}}" class="title-detail">{{$v["a_title"]}}</a>
                                 </h3>
-                                <p class="remon-bd">{{$v["a_con"]}}</p>
+                                <p class="remon-bd"><?php echo mb_substr($v['a_con'],0,100);?></p>
                                 <div class="arti-info clearfix">
                                     <ul>
                                         <li class="hd-pic">

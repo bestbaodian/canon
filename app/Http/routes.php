@@ -63,6 +63,15 @@ Route::get('user/bang', 'UserController@bang');
 //手机号绑定验证码验证
 Route::post('user/yanzheng', 'UserController@yanzheng');
 
+//显示验证邮箱页面
+Route::get('user/setbindemail','UserController@bangemail');
+
+//发送邮箱方法
+Route::post('user/send_email','UserController@send_email');
+//验证* 验证码是否正确
+Route::post('user/check_code','UserController@check_code');
+//提交验证
+Route::post('user/sub_code','UserController@sub_code');
 /*
  * 方法模块
  * */
