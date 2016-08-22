@@ -1,6 +1,7 @@
 @section('sidebar')
 <meta name="_token" content="{{ csrf_token() }}"/>
 <link rel="stylesheet" type="text/css" href="../static/css/ui2.css?2013032917">
+<script src="/js/jquery-1.9.1.min.js"></script>
 <div id="header">
     <div class="page-container" id="nav">
         <a href="/" target="_self"><img src="/images/login.png" style="float: left; padding-top:6px;"><a href="index" target="_self" class="hide-text"></a>

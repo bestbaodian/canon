@@ -55,6 +55,15 @@ Route::get('sms/notices', 'SmsController@notices');
 Route::get('friend/friendlist', 'FriendController@friendlist');
 //用户签到
 Route::get("qiandao","UserController@qiandao");
+/*
+ * 用户收藏
+ */
+//我的收藏
+Route::get('user/my_house', 'UserController@my_house');
+//我的收藏->收藏的文章
+Route::get('user/my_house_article', 'UserController@my_house_article');
+//我的评价
+Route::get('user/my_ping', 'UserController@my_ping');
 
 //加载手机验证页面
 Route::get('user/setphonestep', 'UserController@setphonestep');

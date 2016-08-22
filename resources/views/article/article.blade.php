@@ -11,19 +11,6 @@
     <meta http-equiv="Cache-Control" content="no-transform " />
     <meta name="Keywords" content="" />
     <meta name="Description" content="面试宝典为IT专业技术人员提供最新的文章信息,包括PHP,JAVA,C语言,MySql,DB2等相关文章,更多IT技术资讯、原创内容、开源代码尽在慕课社区" />
-
-    <script type="text/javascript">
-
-
-        var OP_CONFIG={"module":"article","page":"index"};
-        var isLogin = 0;
-        var is_choice = "";
-        var seajsTimestamp="v=201603251711";
-
-    </script>
-
-
-
     <link rel="stylesheet" href="css/3dd38c5eb19043548362b1f191b56a92.css" type="text/css" />
 </head>
 <body >
