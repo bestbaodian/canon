@@ -26,7 +26,7 @@
             <div class="course-nav-box">
                 <div class="course-nav-hd">
                     <span>全部课程</span>
-                    <a href="/about/recruit" class="for-teacher hide-text" title="应聘讲师" target="_blank">应聘讲师</a>
+                    <a href="#" class="for-teacher hide-text" title="应聘讲师" target="_blank">应聘讲师</a>
                 </div>
                 <div class="course-nav-row clearfix">
                     <?php
