@@ -194,6 +194,7 @@ class Article extends Model
     {
         $arr = DB::table("article")
             ->join("ar_type", "article.a_type", "=", "ar_type.at_id")
+            ->join('users','article.a_adduser','=','users.user_id')
             ->where("article.a_id", $id)
             ->get();
         $lei2 = explode(',', $arr[0]['a_lei']);
