@@ -124,7 +124,7 @@ var isLogin=1
             <!-- 收藏&举报 -->
             <div class="r-box r">
                                                                     <span id="js-follow" data-id="7997" class="dc-follow l">
-                        <span>收藏</span>
+                        <span><a href="{{url('collect?a_id')}}={{$a_id}}">收藏</a></span>
                     </span>
                                                             </div>
             <!-- 收藏&举报end -->
@@ -173,7 +173,7 @@ var isLogin=1
                     <div class="feed-author l">
                         <a href=""><img width="40" alt="{{$val['user_name']}}" src="{{$val['user_filedir']}}"></a>
                         <a target="_blank" href="#" class="nick">{{$val['user_name']}}</a>
-                        <span class="com-floor r">1F</span>
+                        <span class="com-floor r">{{$key+1}}F</span>
                     </div>
                     <div class="feed-list-content">
                         <p></p>

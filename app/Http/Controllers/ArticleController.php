@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 //use Illuminate\Http\Request;
 use Request;
@@ -88,6 +89,34 @@ class ArticleController extends Controller
             echo "<script>alert('提交失败');location.href='publish';</script>";
         }
     }
+
+    /*
+     * 收藏文章功能
+     */
+    public function collect_article(){
+        $article_id = Request::input('a_id');
+        $user_id=Session::get("uid");
+        //实例化model层
+        $articlemodel=new Article();
+        //查询是否有收藏
+        $is_collect=$articlemodel->sel_collect($article_id,$user_id);
+        if($is_collect){
+            echo "<script>alert('您已收藏此题');history.go(-1)</script>";
+        }else{
+            $add_collect=$articlemodel->add_collects($user_id,$article_id);
+            if($add_collect){
+               echo "<script>alert('收藏成功');history.go(-1);</script>";
+
+            }else{
+                echo "<script>alert('收藏失败');history.go(-1);</script>";
+            }
+        }
+
+
+    }
+
+
+
    /*
     * 对应文章点赞功能
     * */
@@ -183,7 +212,7 @@ class ArticleController extends Controller
         //print_r($arr);die;
 
         //查出该篇文章的作者一共有多少文章和总浏览量
-        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot]);
+        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id]);
     }
     /*
      * 显示对应文章相关内容

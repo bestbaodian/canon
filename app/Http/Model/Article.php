@@ -293,6 +293,26 @@ class Article extends Model
 
         return $data;
     }
+    /*
+     * 收藏文章
+     *是否有收藏
+     * 添加数据库
+     */
+    public function sel_collect($article_id,$user_id){
+        $is_collect = DB::table('house_article')
+            ->where('article_id', $article_id)
+            ->where('user_id', $user_id)
+            ->first();
+        return $is_collect;
+    }
+    public function add_collects($user_id,$article_id){
+        $adds=DB::table('house_article')->insert(
+            [
+                'user_id' => $user_id,
+                'article_id' => $article_id
+            ]);
+        return $adds;
+    }
 
     /*
      * aping users联查 制作人::李慧敏
