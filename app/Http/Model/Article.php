@@ -205,6 +205,7 @@ class Article extends Model
         $sql = "select count(*),sum(brows) from article where a_adduser='$user_id'";
         $dats=DB::select($sql);
         $arr['yulan']=$dats;
+
         $arr['lei'] = $lei;
         return $arr;
     }
