@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 //use Illuminate\Http\Request;
 use Request;
@@ -88,42 +89,65 @@ class ArticleController extends Controller
             echo "<script>alert('提交失败');location.href='publish';</script>";
         }
     }
+
+    /*
+     * 收藏文章功能
+     */
+    public function collect_article(){
+        $article_id = Request::input('a_id');
+        $user_id=Session::get("uid");
+        //实例化model层
+        $articlemodel=new Article();
+        //查询是否有收藏
+        $is_collect=$articlemodel->sel_collect($article_id,$user_id);
+        if($is_collect){
+            $arr=array(
+                'msg'=>"has",
+                'error'=>'0'
+            );
+            return json_encode($arr);
+        }else{
+            $add_collect=$articlemodel->add_collects($user_id,$article_id);
+            if($add_collect){
+                $arr=array(
+                    'msg'=>"yes",
+                    'error'=>'0'
+                );
+                return json_encode($arr);
+            }else{
+                $arr=array(
+                    'msg'=>"no",
+                    'error'=>'0'
+                );
+                return json_encode($arr);
+            }
+        }
+
+
+    }
+
+
+
    /*
     * 对应文章点赞功能
     * */
     public function zan(){
-        $a_id=Request::input('ids');
-        if(empty(Session::get('username')))
-        {
-            echo 1;
+        $article_id=Request::input('a_id');
+        $u_id=Session::get("uid");
+        //查询数据库是否点过赞
+        $articlemodel=new Article();
+        $zan_data=$articlemodel->get_zandata($u_id,$article_id);
+        //若存在数据  提示已点赞
+        if($zan_data){
+            $arr=array(
+                'msg'=>'has',
+                'error'=>'1'
+            );
+            return json_encode($arr);
         }else{
-            $username=Session::get('username');
-        }
-        $model=new article();
-        $brr=$model->zan($username);
-        $u_id=$brr['user_id'];
-        $arr=$model->article_zan($a_id,$u_id);
-       if($arr)
-        {
-            $arr=$model->article($a_id);
-            //提示您已经点赞
-            if($arr){
-                $article_zan=array(
-                    "msg"=>'1',
-                    "error"=>'0'
-                );
-                return json_encode($article_zan);
-            }
-        }
-        else
-        {
-            $zan=$model->article($a_id);
-            $nu=$zan['a_num'];
-            $a_num=$nu+=1;
-            $aa=$model->insert_article($a_num,$a_id);
-            $a2=$model->article_zan2($u_id,$a_id);
-            $zan=$model->article($a_id);
-            return json_encode($a2);
+            //点赞 添加数据库
+            $add=$articlemodel->add_zandata($u_id,$article_id);
+            return json_encode($add);
         }
     }
 
@@ -158,7 +182,8 @@ class ArticleController extends Controller
 
 
         $model=new article();
-
+        $u_id=Session::get('uid');
+        $is_zan=$model->get_zandata($u_id,$id);
         //触发点击详情这个事件  浏览量就+1
         $model->add_articlenum($id);
         //查询这篇文章的所有评论
@@ -172,6 +197,8 @@ class ArticleController extends Controller
         $aping=$model->join_users();
         //查ping_zan表里有没有用户点赞的信息
         $u_id=Session::get("uid");
+        //判断用户有没有收藏该篇文章
+        $is_collect=$model->sel_collect($id,$u_id);
 
         //查看该条文章有多少评论
         //$ping_num=$model->get_pingnum($id);,'ping_num'=>$ping_num
@@ -183,7 +210,7 @@ class ArticleController extends Controller
         //print_r($arr);die;
 
         //查出该篇文章的作者一共有多少文章和总浏览量
-        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot]);
+        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id,'is_collect'=>$is_collect,'is_zan'=>$is_zan]);
     }
     /*
      * 显示对应文章相关内容

@@ -88,6 +88,8 @@ Route::post('user/sub_code','UserController@sub_code');
 Route::post('zanping','ArticleController@zp');
 //文章瀑布流
 Route::post('a_ping', 'ArticleController@a_ping');
+//文章收藏
+Route::post('collect', 'ArticleController@collect_article');
 /*
  * 猿问开始
  */
@@ -109,6 +111,18 @@ Route::post('hui', 'WendaController@hui');
 Route::get('zid', 'WendaController@zid');
 
 Route::get("agree","WendaController@agree");
+
+//答题 最新问题
+Route::get('bestnew', 'WendaController@bestnew');
+
+//答题 等待回答
+Route::get('waitreply', 'WendaController@waitreply');
+
+//收藏问题
+Route::post('delhouse_wenda',"WendaController@Focus");
+
+Route::post('g_direction',"WendaController@g_direction");
+
 /*
  * 猿问结束
  */

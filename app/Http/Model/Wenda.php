@@ -11,20 +11,222 @@ use Illuminate\Database\Eloquent\Model;
  */
 
 class Wenda extends Model{
-    //分页
-    public function get_t_tw(){
-        $pro=DB::table('t_tw')
-            ->join('direction', function ($join) {
-                $join->on('direction.d_id', '=', 't_tw.d_id');
-            })
-            ->join('users', function ($join) {
-                $join->on('users.user_id', '=', 't_tw.user_id');
-            })
-            ->simplePaginate(5);
-//        $users = DB::table('t_tw')->distinct()->get();
-//        $data['pro']=$pro;
-//        $data['users']=$users;
+    //答疑主页  推荐 最新 待会答
+    public function recommend($is_look){
+        if(!empty($is_look)){
+            //关注的话查看试题
+            if(Session::get('uid')) {
+                $uid = Session::get('uid');
+                $guan = DB::table('house_direction')
+                    ->where('user_id',$uid)
+                    ->get();
+                if($guan==array('')){
+                    $arr=array();
+//                 echo "<script>alert('没有关注分类，即将展示所有的'),window.history.go(-1)</script>";die;
+                }else{
+                    $arr=array();
+                    foreach($guan as $v){
+                        $arr[]=$v['d_id'];
+                    }
+                }
+            }else{
+                $arr=array();
+                echo "<script>alert('请先登录'),location.href='wenda'</script>";die;
+            }
+        }
+        if(isset($arr) && $arr!=array('')){
+            $pro=DB::table('t_tw')
+                ->select(DB::raw('*,count(comments.com_id) as num ,t_tw.t_id'))
+                ->join('direction', function ($join) {
+                    $join->on('direction.d_id', '=', 't_tw.d_id');
+                })
+                ->leftjoin('users', function ($join) {
+                    $join->on('users.user_id', '=', 't_tw.user_id');
+                })
+                ->leftjoin('comments',function($join){
+                    $join->on('comments.t_id', '=', 't_tw.t_id');
+                })
+                ->groupby('t_tw.t_id')
+                ->orderBy('num','desc')
+                ->whereIn('t_tw.d_id',$arr)
+                ->Paginate(5);
+            return $pro;
+        }else{
+            $pro=DB::table('t_tw')
+                ->select(DB::raw('*,count(comments.com_id) as num ,t_tw.t_id'))
+                ->join('direction', function ($join) {
+                    $join->on('direction.d_id', '=', 't_tw.d_id');
+                })
+                ->leftjoin('users', function ($join) {
+                    $join->on('users.user_id', '=', 't_tw.user_id');
+                })
+                ->leftjoin('comments',function($join){
+                    $join->on('comments.t_id', '=', 't_tw.t_id');
+                })
+                ->groupby('t_tw.t_id')
+                ->orderBy('num','desc')
+                ->Paginate(5);
+            return $pro;
+        }
+    }
+
+    public function newest($is_look){
+            //关注的话查看试题
+        if(!empty($is_look)){
+                //关注的话查看试题
+            if(Session::get('uid')) {
+                $uid = Session::get('uid');
+                $guan = DB::table('house_direction')
+                    ->where('user_id',$uid)
+                    ->get();
+                if($guan==array('')){
+                    $arr=array();
+                }else{
+                    $arr=array();
+                        foreach($guan as $v){
+                            $arr[]=$v['d_id'];
+                        }
+                    }}else{
+                $arr=array();
+                echo "<script>alert('请先登录'),location.href='wenda'</script>";die;
+            }
+        }
+        /*查看显示关注与否*/
+        if(isset($arr) && $arr!=array()) {
+            $pro = DB::table('t_tw')
+                ->join('direction', function ($join) {
+                    $join->on('direction.d_id', '=', 't_tw.d_id');
+                })
+                ->join('users', function ($join) {
+                    $join->on('users.user_id', '=', 't_tw.user_id');
+                })
+                ->whereIn('t_tw.d_id',$arr)
+                ->orderBy('t_tw.add_time', 'desc')
+                ->Paginate(5);
+            return $pro;
+        }else{
+            $pro = DB::table('t_tw')
+                ->join('direction', function ($join) {
+                    $join->on('direction.d_id', '=', 't_tw.d_id');
+                })
+                ->join('users', function ($join) {
+                    $join->on('users.user_id', '=', 't_tw.user_id');
+                })
+                ->orderBy('t_tw.add_time', 'desc')
+                ->Paginate(5);
+            return $pro;
+        }
+    }
+
+    //等待回答
+    public function wait_reply($is_look){
+        //关注的话查看试题
+        if(!empty($is_look)){
+            //关注的话查看试题
+            if(Session::get('uid')) {
+                $uid = Session::get('uid');
+                $guan = DB::table('house_direction')
+                    ->where('user_id',$uid)
+                    ->get();
+                if($guan==array('')){
+                    $arr=array();
+                }else{
+                    $arr=array();
+                    foreach($guan as $v){
+                        $arr[]=$v['d_id'];
+                    }
+                }}else{
+                $arr=array();
+                echo "<script>alert('请先登录'),location.href='wenda'</script>";die;
+            }
+        }
+        if(isset($arr) && $arr!=array()){
+            $pro = DB::table('t_tw')
+                ->select('*', DB::raw("count(comments.com_id) as num"), 't_tw.t_id')
+                ->leftjoin('direction', function ($join) {
+                    $join->on('direction.d_id', '=', 't_tw.d_id');
+                })
+                ->leftjoin('users', function ($join) {
+                    $join->on('users.user_id', '=', 't_tw.user_id');
+                })
+                ->leftjoin('comments', function ($join) {
+                    $join->on('comments.t_id', '=', 't_tw.t_id');
+                })
+                ->whereIn('t_tw.d_id',$arr)
+                ->groupby('t_tw.t_id')
+                ->havingRaw('count(comments.com_id)=0')
+                ->Paginate(5);
+            return $pro;
+        }else{
+            $pro = DB::table('t_tw')
+                ->select('*', DB::raw("count(comments.com_id) as num"),'t_tw.t_id')
+                ->leftjoin('direction', function ($join) {
+                    $join->on('direction.d_id', '=', 't_tw.d_id');
+                })
+                ->leftjoin('users', function ($join) {
+                    $join->on('users.user_id', '=', 't_tw.user_id');
+                })
+                ->leftjoin('comments', function ($join) {
+                    $join->on('comments.t_id', '=', 't_tw.t_id');
+                })
+                ->groupby('t_tw.t_id')
+                ->havingRaw('count(comments.com_id)=0')
+                ->Paginate(5);
+            return $pro;
+        }
+    }
+
+    //推荐分类展示
+    public function Sort(){
+        $pro = DB::table("t_tw")
+            ->orderBy("t_id","desc")
+            ->limit(5)
+            ->get();
         return $pro;
+    }
+
+    public function Focus($data){
+        $uid = Session::get('uid');
+        //$arr = DB::insert("insert into house_wenda(user_id,tid) values('$uid','$data')");
+        $datas = DB::table('house_wenda')
+            ->where("user_id",$uid)
+            ->where("tid",$data)
+            ->get();
+        if($datas){
+            $arr = array(
+                "msg"=>"no",
+                "error"=>1
+            );
+            return $arr;
+        }else{
+            $arr = DB::table("house_wenda")
+                ->insert([
+                    'user_id'=>$uid,
+                    'tid'=>$data
+                ]);
+            if($arr){
+                $arr = array(
+                    "msg"=>"ok",
+                    "error"=>0
+                );
+                return $arr;
+            }else{
+                $arr = array(
+                    "msg"=>"no",
+                    "error"=>1
+                );
+                return $arr;
+            }
+        }
+    }
+
+    //一周雷锋榜
+    public function weekday()
+    {
+        $honor = DB::select("select user_name,user_filedir,count(comments_replay.user_id) from
+  comments_replay join users on comments_replay.user_id = users.user_id group by
+   comments_replay.user_id order by count(comments_replay.user_id) desc limit 10");
+        return $honor;
     }
     public function sels(){
         //$users = DB::table('t_tw')->distinct()->get();
@@ -89,10 +291,50 @@ class Wenda extends Model{
             }
             $arr['user']=DB::table('users')->select('user_name')->where("user_id",$u_id)->first();
         }
+
+        $d_id = $arr[0]['d_id'];
+        //查询相关问题
+        $xiangguan = DB::table('t_tw')
+            ->where("d_id",$d_id)
+            ->orderBy('add_time','desc')
+            ->limit(5)->get();
+        //查询相关分类
+        $type = DB::table('direction')->get();
+        $ti = DB::table('t_tw')
+            ->join("direction",'t_tw.d_id','=','direction.d_id')
+            ->groupBy('t_tw.d_id')
+            ->orderBy('t_tw.add_time')
+            ->limit(5)
+            ->get();
+
+        if(Session::get("username")){
+            $fei_num = count($type);
+            $fenlei = DB::table("house_direction")->where(['user_id' => $u_id,])->get();
+            foreach($fenlei as $v){
+                $fen[]=$v['d_id'];
+            }
+            if(isset($fen)){
+                foreach($ti as $k=>$v){
+                    if(in_array($v['d_id'],$fen)){
+                        $ti[$k]['is_guan']='1';
+                    }else{
+                        $ti[$k]['is_guan']='0';
+                    }
+                }
+            }else{
+                foreach($ti as $k=>$v){
+                    $ti[$k]['is_guan']='0';
+                }
+            }
+        }else{
+            $fei_num = count($type);
+            $fenlei = DB::table("house_direction")->get();
+        }
         $data['arr']=$arr;
         $data['arr1']=$arr1;
         $data['arr_user']=$arr_user;
-
+        $data['xingguan']=$xiangguan;
+        $data['ti']=$ti;
         return $data;
 
     }
@@ -128,6 +370,14 @@ class Wenda extends Model{
             }
         }
 
+    }
+
+    //查询是否有收藏
+    public function is_house($id)
+    {
+        $u_id=Session::get('uid');
+        $data = DB::table("house_wenda")->where(['user_id' => $u_id, 'tid' => $id])->get();
+        return $data;
     }
 
 }

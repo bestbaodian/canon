@@ -12,25 +12,6 @@
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 <meta http-equiv="Cache-Control" content="no-transform " />
 <meta name="Description" content=""/>
-<script type="text/javascript">
-var OP_CONFIG={"module":"article","page":"details","userInfo":{"uid":"3071208","nickname":"\u51e4\u9896","head":"http:\/\/img.mukewang.com\/images\/unknow-80.png","usertype":"1","roleid":0}};
-var isLogin = 1;
-var is_choice = "";
-var seajsTimestamp="v=201604211612";
-</script>
-<script>
-var pageInfo = {
-    id: "7997"
-}
-var user = {
-    uid : "3071208",
-    img : "http://img.mukewang.com/images/unknow-160.png",
-    nickname : "凤颖"
-}
-var authorUid = {
-    uid : '2788726'
-}
-</script>
 <link rel="stylesheet" href="css/common-less.css" type="text/css" />
 <link rel="stylesheet" href="css/detail-less.css?v=1463035000" type="text/css" />
 </head>
@@ -38,11 +19,6 @@ var authorUid = {
 @extends('layouts.master')
 @section('sidebar')
     @parent
-
-
-<script>
-var isLogin=1
-</script>
 <div class="opus-wrap clearfix">
 
 <div class="detail-left l">
@@ -84,10 +60,18 @@ var isLogin=1
                         <div class="praise-box l">
                 <span id="js-praise" data-id="7997" class="dc-praise l">
                     <i class="sns-thumb-up l"></i>
-                    <span class="praise l">推荐</span>
+                    <span class="praise l" id="clickzan">
+                        <?php
+                            if($is_zan){
+                                echo "已赞";
+                            }else{
+                                echo "点赞";
+                            }
+                        ?>
+                        </span>
                 </span>
                 <var class="cutoff l">|</var>
-                <span class="praise-num">7</span>
+                <span class="praise-num"><?php echo $arr['a_num'];?></span>
             </div>  
                         <!-- 推荐end -->
 
@@ -111,7 +95,6 @@ var isLogin=1
                     <a title="分享到腾讯微博" class="bshare-qqmb"></a>
                     <a title="分享到网易微博" class="bshare-neteasemb"></a>
                     <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a>
-                    <span class="BSHARE_COUNT bshare-share-count">0</span>
                     </div>
                     <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
 
@@ -123,26 +106,22 @@ var isLogin=1
             <!-- 分享end -->
             <!-- 收藏&举报 -->
             <div class="r-box r">
-                                                                    <span id="js-follow" data-id="7997" class="dc-follow l">
-                        <span>收藏</span>
+                <span id="js-follow" data-id="7997" class="dc-follow l">
+                        <span class="collect" id="{{$a_id}}">
+                            <?php
+                                if($is_collect){
+                                    echo "已收藏";
+                                }else{
+                                    echo "收藏";
+                                }
+                            ?>
+                            </span>
                     </span>
-                                                            </div>
+            </div>
             <!-- 收藏&举报end -->
 
         </div>
     </div>
-    <!-- 文章详情end -->
-  
-    <!-- 相关阅读 -->
-{{--<div class="react-article">--}}
-        {{--<h2>相关阅读</h2><ul><li><a title="前端开发的七宗罪" href="/article/1277"><h3>前端开发的七宗罪</h3></a>                                    <p>前端开发在最近几年逐渐走红，越来越多的开发者加入前端开发队伍。但前端在大学中没有课程体系，而且知识也在不断更新着。大家对它的认识也各不相同。博主有过技术经理，项目经理，面试官，前端开发的经历，参与过较...</p></li><li><a title="【慕星人独白】在一个急躁的心理状态下，怎样正常的生活" href="/article/4485"><h3>【慕星人独白】在一个急躁的心理状态下，怎样正常的生活</h3></a></li><li><a title="【特别推荐】一枚应届生对近来前端界流派之争的一点思考" href="/article/4533"><h3>【特别推荐】一枚应届生对近来前端界流派之争的一点思考</h3></a></li><li><a title="Node.js 给前端带来了什么？" href="/article/7443"><h3>Node.js 给前端带来了什么？</h3></a></li><li><a title="2016 年后 Web开发趋势是什么" href="/article/7913"><h3>2016 年后 Web开发趋势是什么</h3></a></li></ul>--}}
-    {{--</div>--}}
-    <!-- 相关阅读end -->
-
-
-
-
-
  <div class="detail-feedback-wrap" style="">
         <!-- 评论框 -->
     <div>
@@ -173,7 +152,7 @@ var isLogin=1
                     <div class="feed-author l">
                         <a href=""><img width="40" alt="{{$val['user_name']}}" src="{{$val['user_filedir']}}"></a>
                         <a target="_blank" href="#" class="nick">{{$val['user_name']}}</a>
-                        <span class="com-floor r">1F</span>
+                        <span class="com-floor r">{{$key+1}}F</span>
                     </div>
                     <div class="feed-list-content">
                         <p></p>
@@ -346,6 +325,7 @@ var isLogin=1
                       /*if(obj['error']!=1){
                           location.href("fangfa?id="+a_id);
                       }*/
+
                       if(obj['msg']==0){
                          // $("#znum_"+ap_id).html("obj['num']");
                           $("#z_"+ap_id).html("已赞");
@@ -386,7 +366,64 @@ var isLogin=1
                  });
              }
          }
+         $(function(){
+             $(".collect").click(function(){
+                 var a_id=$(this).attr('id');
+                 $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                     },
+                     url:"{{url('collect')}}",
+                     type:"post",
+                     datatype:"json"
+                 });
+                 $.ajax({
+                     data:{
+                         a_id:a_id
+                     },success:function(data){
+                         var obj=eval("("+data+")");
+                         if(obj['msg']=='has'){
+                             alert("您已收藏");
+                         }else if(obj['msg']=='yes'){
+                             alert('收藏成功');
+                             $(".collect").html("已收藏");
+                         }else{
+                             alert("收藏失败");
+                         }
+                     }
+                 })
+             })
+                //为 文章点赞
+             $("#clickzan").click(function(){
+                 var a_id=$(".collect").attr('id');
+                 $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                     },
+                     url:"{{url('zan')}}",
+                     type:"post",
+                     datatype:"json"
+                 });
+                 $.ajax({
+                     data:{
+                         a_id:a_id
+                     },success:function(data){
+                         //alert(data);
+                         var obj=eval("("+data+")");
+                         if(obj['msg']=='queryok'){
+                             alert('点赞成功');
+                             location.reload();
+                         }else{
+                             alert('您已点赞');
+                         }
+
+                     }
+                 })
+             })
+
+         })
       </script>
+
 <div style="display: none">
 </div>
 </body>

@@ -36,6 +36,7 @@
 
 <div class="pwd-reset-wrap setting-resetpwd">
     {{--<form id="resetpwdform" method="post">--}}
+    <input type="hidden" name="url" value="<?php echo url("/")?>"/>
         <div class="wlfg-wrap">
             <label for="" class="label-name">当前密码</label>
             <div class="rlf-group">

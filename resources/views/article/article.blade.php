@@ -73,7 +73,7 @@
                             <div class="favorite l" id="zan" value="{{$v['a_id']}}">
                                 <img src="images/zan.jpg"  class="zan" width="15" height="20">
 
-                                <em id="{{$v['a_id']}}" class="zans">点赞
+                                <em id="{{$v['a_id']}}" >点赞
                                     {{$v['a_num']}}
                                 </em>
                                 <input type="hidden" id="user" value="<?php echo Session::get('username');?>">
@@ -90,7 +90,7 @@
 <?php } ?>
 
         </div>
-            <ul id="fenye"><li>{{ $article->links()}}</li></ul>
+            <ul id="fenye"><li>{{ $article->appends(['at_id'=>$at_id])->links()}}</li></ul>
         </div>
         <div class="article-right r">
             <!-- 写文章 -->
@@ -187,57 +187,7 @@
 <div style="display: none">
     <script src="js/jquery-1.9.1.min.js"></script>
     <script>
-  //点赞
-  //鼠标移上显示小手
-  $('.zans').mousemove(function()
-  {
-    $(this).css('cursor','pointer');
-  })
 
-//点赞事件
- $(document).on('click',".zans",function(){
-    var user1=$('#user').val();
-    //判断用户是否登录
-    if(user1=="")
-    {
-        alert("请先登录");
-        location.href="{{URL('index')}}";
-    }
-    else
-    {
-        var ids=$(this).attr('id');
-    //alert(ids);die;
-  $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            },
-            url:"{{URL('zan')}}",
-            type:"GET"
-        });
-    $.ajax({
-       data: "ids="+ids,
-       success: function(data){
-        //alert(msg);
-           var obj=eval("("+data+")");
-           if(obj['msg']==1){
-               alert("您已经点过赞了哦");
-           }else{
-               alert('点赞成功');
-               location.href="{{URL('article')}}";
-           }
-           /* if(msg==1)
-            {
-                alert("您已经点过赞了哦");
-            }
-            else
-            {
-               alert('点赞成功');
-               location.href="{{URL('article')}}";
-            }*/
-        }
-      });
-    }
- })
 
 
         $(document).on("click","#type",function(){
