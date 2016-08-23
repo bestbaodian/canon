@@ -4,6 +4,7 @@ use DB;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Session;
+use Illuminate\Pagination\LengthAwarePaginator;
 /*
 *简历模块
 */
@@ -21,11 +22,16 @@ class Company extends Model{
 		return $arr;
 	}
     //查询简历表
-	public function gather()
+	public function gather($seachs)
 	{
-		$exam = DB::table('gather')->simplePaginate(9);
+		$exam = DB::table('gather')->where('g_name', 'like', '%$seachs%')->paginate(9);
 		return $exam;
 	}
+    public function gather1()
+    {
+        $exam = DB::table('gather')->paginate(9);
+        return $exam;
+    }
 	//查看试题
 	public function college_exam($id)
 	{
@@ -38,15 +44,7 @@ class Company extends Model{
                 ->where('g_id', $id)
                 ->update(['g_click' => $g_click]);
 		 }
-		//$id=session::get('id');
-		//return $id;die;
-//		$count=DB::table('exam')->where('company_id',"$id")->count();
-//		if($count==0){
-//		 echo "<script>alert('暂无试题');location.href='company'</script>";
-//				}else{
-//		$data=DB::table('exam')->where('company_id',"$id")->paginate(1);
-		return $data;
-				     //}
-	}
+        return $data;
+    }
 } 
 ?>

@@ -108,10 +108,6 @@
     </script>
 
 
-
-
-
-
     <script type="text/javascript">
         seajs.use('nowcoder/1.2.456/javascripts/site/common/index');
         seajs.use('nowcoder/1.2.456/javascripts/site/common/nav');

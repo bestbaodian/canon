@@ -56,6 +56,10 @@
 <div class="menu-box">
 <ul class="menu clearfix">
 <li class="selected"><a href="javascript:void(0);">简历模板</a></li>
+    {{--<span>--}}
+       {{--<input type="text" name="seachs" id="seach"/>--}}
+       {{--<a href="">搜索</a>--}}
+    {{--</span>--}}
 </ul>
 </div>
 <div class="module-body" id="exam">
@@ -89,7 +93,7 @@
 @endforeach
 </ul>
 </div>
-
+    <?=$exam->render()?>
 </div>
 </div>
 </div>
@@ -135,11 +139,6 @@
 		})
 
 </script>
-
-
-
-
-
 
 <script type="text/javascript">
 seajs.use('nowcoder/1.2.456/javascripts/site/common/index');
