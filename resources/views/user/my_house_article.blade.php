@@ -48,7 +48,7 @@
                               <p>　　<?php echo mb_substr($v['a_con'],0,100);?></p>
                           </h5>
                       </span>
-                  <p style="float: right;"><a  style="color: blue;"href="{{"fangfa?id=$v[a_id]"}}">点击查看详情</a></p>
+                  <p style="float: right;"><a  style="color: blue;"href="{{url("fangfa?id=$v[a_id]")}}">点击查看详情</a></p>
                   <br><br>
               @endforeach
           </div>
