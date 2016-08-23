@@ -89,7 +89,7 @@ Route::post('zanping','ArticleController@zp');
 //文章瀑布流
 Route::post('a_ping', 'ArticleController@a_ping');
 //文章收藏
-Route::get('collect', 'ArticleController@collect_article');
+Route::post('collect', 'ArticleController@collect_article');
 /*
  * 猿问开始
  */

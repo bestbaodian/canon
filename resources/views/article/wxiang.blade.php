@@ -123,26 +123,22 @@ var isLogin=1
             <!-- 分享end -->
             <!-- 收藏&举报 -->
             <div class="r-box r">
-                                                                    <span id="js-follow" data-id="7997" class="dc-follow l">
-                        <span><a href="{{url('collect?a_id')}}={{$a_id}}">收藏</a></span>
+                <span id="js-follow" data-id="7997" class="dc-follow l">
+                        <span class="collect" id="{{$a_id}}">
+                            <?php
+                                if($is_collect){
+                                    echo "已收藏";
+                                }else{
+                                    echo "收藏";
+                                }
+                            ?>
+                            </span>
                     </span>
-                                                            </div>
+            </div>
             <!-- 收藏&举报end -->
 
         </div>
     </div>
-    <!-- 文章详情end -->
-  
-    <!-- 相关阅读 -->
-{{--<div class="react-article">--}}
-        {{--<h2>相关阅读</h2><ul><li><a title="前端开发的七宗罪" href="/article/1277"><h3>前端开发的七宗罪</h3></a>                                    <p>前端开发在最近几年逐渐走红，越来越多的开发者加入前端开发队伍。但前端在大学中没有课程体系，而且知识也在不断更新着。大家对它的认识也各不相同。博主有过技术经理，项目经理，面试官，前端开发的经历，参与过较...</p></li><li><a title="【慕星人独白】在一个急躁的心理状态下，怎样正常的生活" href="/article/4485"><h3>【慕星人独白】在一个急躁的心理状态下，怎样正常的生活</h3></a></li><li><a title="【特别推荐】一枚应届生对近来前端界流派之争的一点思考" href="/article/4533"><h3>【特别推荐】一枚应届生对近来前端界流派之争的一点思考</h3></a></li><li><a title="Node.js 给前端带来了什么？" href="/article/7443"><h3>Node.js 给前端带来了什么？</h3></a></li><li><a title="2016 年后 Web开发趋势是什么" href="/article/7913"><h3>2016 年后 Web开发趋势是什么</h3></a></li></ul>--}}
-    {{--</div>--}}
-    <!-- 相关阅读end -->
-
-
-
-
-
  <div class="detail-feedback-wrap" style="">
         <!-- 评论框 -->
     <div>
@@ -342,7 +338,7 @@ var isLogin=1
                   data:{
                       ap_id:ap_id
                   },success:function(data){
-                      var obj=eval("("+data+")");
+                      return json_encode($arr);
                       /*if(obj['error']!=1){
                           location.href("fangfa?id="+a_id);
                       }*/
@@ -386,6 +382,35 @@ var isLogin=1
                  });
              }
          }
+         $(function(){
+             $(".collect").click(function(){
+                 var a_id=$(this).attr('id');
+                 $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                     },
+                     url:"{{url('collect')}}",
+                     type:"post",
+                     datatype:"json"
+                 });
+                 $.ajax({
+                     data:{
+                         a_id:a_id
+                     },success:function(data){
+                         var obj=eval("("+data+")");
+                         if(obj['msg']=='has'){
+                             alert("您已收藏");
+                         }else if(obj['msg']=='yes'){
+                             alert('收藏成功');
+                             $(".collect").html("已收藏");
+                         }else{
+                             alert("收藏失败");
+                         }
+                     }
+                 })
+             })
+         })
+
       </script>
 <div style="display: none">
 </div>

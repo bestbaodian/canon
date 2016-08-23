@@ -101,14 +101,25 @@ class ArticleController extends Controller
         //查询是否有收藏
         $is_collect=$articlemodel->sel_collect($article_id,$user_id);
         if($is_collect){
-            echo "<script>alert('您已收藏此题');history.go(-1)</script>";
+            $arr=array(
+                'msg'=>"has",
+                'error'=>'0'
+            );
+            return json_encode($arr);
         }else{
             $add_collect=$articlemodel->add_collects($user_id,$article_id);
             if($add_collect){
-               echo "<script>alert('收藏成功');history.go(-1);</script>";
-
+                $arr=array(
+                    'msg'=>"yes",
+                    'error'=>'0'
+                );
+                return json_encode($arr);
             }else{
-                echo "<script>alert('收藏失败');history.go(-1);</script>";
+                $arr=array(
+                    'msg'=>"no",
+                    'error'=>'0'
+                );
+                return json_encode($arr);
             }
         }
 
@@ -201,6 +212,8 @@ class ArticleController extends Controller
         $aping=$model->join_users();
         //查ping_zan表里有没有用户点赞的信息
         $u_id=Session::get("uid");
+        //判断用户有没有收藏该篇文章
+        $is_collect=$model->sel_collect($id,$u_id);
 
         //查看该条文章有多少评论
         //$ping_num=$model->get_pingnum($id);,'ping_num'=>$ping_num
@@ -212,7 +225,7 @@ class ArticleController extends Controller
         //print_r($arr);die;
 
         //查出该篇文章的作者一共有多少文章和总浏览量
-        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id]);
+        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id,'is_collect'=>$is_collect]);
     }
     /*
      * 显示对应文章相关内容
