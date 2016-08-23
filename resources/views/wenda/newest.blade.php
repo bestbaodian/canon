@@ -21,7 +21,7 @@
 @section('sidebar')
 @parent
 
-<div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
+<!--<div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
     <div class="search-area min" data-search="top-banner">
         <input class="search-input" data-suggest-trigger="suggest-trigger" placeholder="请输入想搜索的内容..." type="text" autocomplete="off">
         <input type='hidden' class='btn_search' data-search-btn="search-btn" />
@@ -29,7 +29,7 @@
         </ul>
     </div>
             <div class='showhide-search' data-show='no'><i class='icon-search'></i></div>
-</div>
+</div>-->
 <div id="main">
 
 

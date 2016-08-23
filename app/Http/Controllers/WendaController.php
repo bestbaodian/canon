@@ -19,7 +19,9 @@ class WendaController extends Controller
 
         // //答疑主页  推荐 最新 待会答
         $wait_reply = $mwenda->recommend($is_look);
-        
+
+        //显示推荐分类
+
         //  一周雷锋榜
         $weekday = $mwenda->weekday();
         return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,]);
@@ -77,9 +79,11 @@ class WendaController extends Controller
             exit('0');
          } 
     }
+
     /*
      *  答疑详情页展示功能 / 点赞+评论+回复
      */
+
     public function detail(Request $request){
         //接受用户选择的数据
         $id = $request->get("id");
@@ -112,6 +116,9 @@ class WendaController extends Controller
             echo "评论失败";
         }
     }
+
+
+
 
     /*
      *  点赞功能  2016 -08 -17 10:13
