@@ -132,38 +132,22 @@ class ArticleController extends Controller
     * 对应文章点赞功能
     * */
     public function zan(){
-        $a_id=Request::input('ids');
-        if(empty(Session::get('username')))
-        {
-            echo 1;
+        $article_id=Request::input('a_id');
+        $u_id=Session::get("uid");
+        //查询数据库是否点过赞
+        $articlemodel=new Article();
+        $zan_data=$articlemodel->get_zandata($u_id,$article_id);
+        //若存在数据  提示已点赞
+        if($zan_data){
+            $arr=array(
+                'msg'=>'has',
+                'error'=>'1'
+            );
+            return json_encode($arr);
         }else{
-            $username=Session::get('username');
-        }
-        $model=new article();
-        $brr=$model->zan($username);
-        $u_id=$brr['user_id'];
-        $arr=$model->article_zan($a_id,$u_id);
-       if($arr)
-        {
-            $arr=$model->article($a_id);
-            //提示您已经点赞
-            if($arr){
-                $article_zan=array(
-                    "msg"=>'1',
-                    "error"=>'0'
-                );
-                return json_encode($article_zan);
-            }
-        }
-        else
-        {
-            $zan=$model->article($a_id);
-            $nu=$zan['a_num'];
-            $a_num=$nu+=1;
-            $aa=$model->insert_article($a_num,$a_id);
-            $a2=$model->article_zan2($u_id,$a_id);
-            $zan=$model->article($a_id);
-            return json_encode($a2);
+            //点赞 添加数据库
+            $add=$articlemodel->add_zandata($u_id,$article_id);
+            return json_encode($add);
         }
     }
 
@@ -198,7 +182,8 @@ class ArticleController extends Controller
 
 
         $model=new article();
-
+        $u_id=Session::get('uid');
+        $is_zan=$model->get_zandata($u_id,$id);
         //触发点击详情这个事件  浏览量就+1
         $model->add_articlenum($id);
         //查询这篇文章的所有评论
@@ -225,7 +210,7 @@ class ArticleController extends Controller
         //print_r($arr);die;
 
         //查出该篇文章的作者一共有多少文章和总浏览量
-        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id,'is_collect'=>$is_collect]);
+        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id,'is_collect'=>$is_collect,'is_zan'=>$is_zan]);
     }
     /*
      * 显示对应文章相关内容

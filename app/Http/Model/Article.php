@@ -118,14 +118,6 @@ class Article extends Model
         return $u_id;
     }
 
-    /*
-     * article_zan
-     */
-    public function get_article_zan($val)
-    {
-        $arr = DB::table('article_zan')->where(["u_id" => 0, "article_id" => $val['a_id']])->first();
-        return $arr;
-    }
 
     /*
      * 得到文章类型(所有)
@@ -165,7 +157,32 @@ class Article extends Model
         $aping = DB::table('aping')->join("users", "aping.u_id", "=", "users.user_id")->join("article", "aping.a_id", "=", "article.a_id")->orderBy("aping.ap_id", "desc")->limit(3)->get();
         return $aping;
     }
-
+    /*
+     * 点赞成功  添加数据
+     */
+    public function add_zandata($u_id,$article_id){
+        $add_zdata=DB::table('article_zan')->insert(
+            [
+                'u_id' => $u_id,
+                'article_id' => $article_id
+            ]);
+        if($add_zdata){
+           //修改点赞数量
+            $up_zannum = DB::select("update article set a_num = a_num+1 where a_id = $article_id");
+                $arr=array(
+                    'msg'=>'queryok',
+                    'error'=>0
+                );
+                return $arr;
+        }else{
+            $arr=array(
+                //已经添加过了
+                'msg'=>'already has',
+                'error'=>1
+            );
+            return $arr;
+        }
+    }
     /*
      * 文章详情页显示文章作者
      */
@@ -187,10 +204,11 @@ class Article extends Model
     /*
      * 文章点赞功能查询
      */
-    public function article_zan($a_id, $u_id)
-    {
-        $arr = DB::table('article_zan')->where("u_id", $u_id)->where("article_id", $a_id)->get();
-        return $arr;
+    public function get_zandata($u_id,$article_id){
+        $zan_data = DB::table('article_zan')
+            ->where(['u_id'=>$u_id,'article_id'=>$article_id])
+            ->first();
+        return $zan_data;
     }
 
     /*
@@ -209,12 +227,13 @@ class Article extends Model
     {
         $aa = DB::insert("update article set a_num=$a_num where a_id=$a_id");
         return $aa;
+
     }
 
     /*
      * 没点过赞的人点赞成功
      */
-    public function article_zan2($u_id, $a_id)
+    /*public function article_zan2($u_id, $a_id)
     {
         $a = DB::insert("insert into article_zan(u_id,article_id) values('$u_id','$a_id')");
         $arr = array(
@@ -222,7 +241,7 @@ class Article extends Model
             'error' => '0'
         );
         return $arr;
-    }
+    }*/
 
     /*
      *用户评论 制作人::李慧敏
