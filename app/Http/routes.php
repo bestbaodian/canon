@@ -111,6 +111,14 @@ Route::post('hui', 'WendaController@hui');
 Route::get('zid', 'WendaController@zid');
 
 Route::get("agree","WendaController@agree");
+
+//答题 最新问题
+Route::get('bestnew', 'WendaController@bestnew');
+
+//答题 等待回答
+Route::get('waitreply', 'WendaController@waitreply');
+
+
 /*
  * 猿问结束
  */

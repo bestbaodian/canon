@@ -21,6 +21,15 @@
 @section('sidebar')
 @parent
 
+<!--<div class='search-warp clearfix' style='min-width: 32px; height: 60px;'>
+    <div class="search-area min" data-search="top-banner">
+        <input class="search-input" data-suggest-trigger="suggest-trigger" placeholder="请输入想搜索的内容..." type="text" autocomplete="off">
+        <input type='hidden' class='btn_search' data-search-btn="search-btn" />
+        <ul class="search-area-result" data-suggest-result="suggest-result">
+        </ul>
+    </div>
+            <div class='showhide-search' data-show='no'><i class='icon-search'></i></div>
+</div>-->
 <div id="main">
 
 
@@ -37,8 +46,8 @@
         if($is_look){
         ?>
         <div class="nav">
-            <a href="{{url("wenda?is_look=1")}}" class="active">推荐</a>
-            <a href="{{url("bestnew?is_look=1")}}" >最新</a>
+            <a href="{{url("wenda?is_look=1")}}" >推荐</a>
+            <a href="{{url("bestnew?is_look=1")}}" class="active">最新</a>
             <a href="{{url("waitreply?is_look=1")}}">等待回答</a>
             <div class="switch-box">
                 <div class="switch js-switch on">
@@ -52,8 +61,8 @@
         </div>
         <?php }else{?>
         <div class="nav">
-            <a href="{{url("wenda")}}" class="active" >推荐</a>
-            <a href="{{url("bestnew")}}"  >最新</a>
+            <a href="{{url("wenda")}}"  >推荐</a>
+            <a href="{{url("bestnew")}}" class="active" >最新</a>
             <a href="{{url("waitreply")}}" >等待回答</a>
             <div class="switch-box">
                 <div class="switch js-switch">
@@ -89,7 +98,7 @@
             <?php echo mb_substr($v['t_content'],0,50)."…………" ;?>
         </div>
         <div class="ctrl-bar clearfix">
-            共<?php echo $v['num']; ?>条回答
+            发布时间：<?php echo $v['add_time'] ?>
         </div><!--.ctrl-bar end-->
     </div><!--.answer-con end-->
 
@@ -115,6 +124,7 @@
     <?php
     $is_look = isset($_GET['is_look'])?$_GET['is_look']:"";
     if($is_look){?>
+
     <?=$pro->appends(['is_look' => '1'])->links();?>
 
     <?php }else{?>
@@ -163,24 +173,82 @@
 <div class="leifeng-sort">
     <h3 class="title">一周回答雷锋榜</h3>
     <ul>
-        @foreach($honor as $key => $v)
-            <li>
-                <div class="ranking first"><?= $key+1;?></div>
-                <div class="user-pic">
-                    <a target="_blank" href="#">
-                        <img src="{{$v['user_filedir'] or "images/unknow-40.png"}}" alt="用户头像">
-                    </a>
-                </div>
-                <div class="user-name">
-                    <a target="_blank" href="#"><?= $v['user_name'];?></a>
-                </div><!--.user-name end-->
-                <div class="user-info clearfix">
-                    <span class="role">gg</span>
-                    <span class="answer-num"><?= $v['count(comments_replay.user_id)'];?>回答</span>
-                </div><!--.user-info end-->
-            </li>
-        @endforeach
-    </ul>
+                <li>
+            <div class="ranking first">1</div>
+            <div class="user-pic">
+                <a target="_blank" href="/u/1088132/bbs">
+                    <img src="picture/5485bdcf00015df201000100-100-100.jpg" title="Caballarii"/>
+                </a>
+            </div><!--.user-pic end-->
+            <div class="user-name">
+                <a target="_blank" href="/u/1088132/bbs">Caballarii</a>
+            </div><!--.user-name end-->
+            <div class="user-info clearfix">
+                <span class="role">JAVA开发工程师</span>
+                <span class="answer-num">35回答</span>
+            </div><!--.user-info end-->
+        </li>
+                <li>
+            <div class="ranking second">2</div>
+            <div class="user-pic">
+                <a target="_blank" href="/u/1206175/bbs">
+                    <img src="picture/54c1f7be00019ad801000100-100-100.jpg" title="流口水流"/>
+                </a>
+            </div><!--.user-pic end-->
+            <div class="user-name">
+                <a target="_blank" href="/u/1206175/bbs">流口水流</a>
+            </div><!--.user-name end-->
+            <div class="user-info clearfix">
+                <span class="role">Web前端工程师</span>
+                <span class="answer-num">34回答</span>
+            </div><!--.user-info end-->
+        </li>
+                <li>
+            <div class="ranking third">3</div>
+            <div class="user-pic">
+                <a target="_blank" href="/u/2553777/bbs">
+                    <img src="picture/53fbd87f0001e4c006000338-240-135.jpg" title="display_none"/>
+                </a>
+            </div><!--.user-pic end-->
+            <div class="user-name">
+                <a target="_blank" href="/u/2553777/bbs">display_none</a>
+            </div><!--.user-name end-->
+            <div class="user-info clearfix">
+                <span class="role">Web前端工程师</span>
+                <span class="answer-num">31回答</span>
+            </div><!--.user-info end-->
+        </li>
+                <li>
+            <div class="ranking ">4</div>
+            <div class="user-pic">
+                <a target="_blank" href="/u/114554/bbs">
+                    <img src="picture/56f4fca500018f4101000100-100-100.jpg" title="李晓健"/>
+                </a>
+            </div><!--.user-pic end-->
+            <div class="user-name">
+                <a target="_blank" href="/u/114554/bbs">李晓健</a>
+            </div><!--.user-name end-->
+            <div class="user-info clearfix">
+                <span class="role">Web前端工程师</span>
+                <span class="answer-num">29回答</span>
+            </div><!--.user-info end-->
+        </li>
+                <li>
+            <div class="ranking ">5</div>
+            <div class="user-pic">
+                <a target="_blank" href="/u/1008219/bbs">
+                    <img src="picture/569639de0001ab3713000867-100-100.jpg" title="晚安sp"/>
+                </a>
+            </div><!--.user-pic end-->
+            <div class="user-name">
+                <a target="_blank" href="/u/1008219/bbs">晚安sp</a>
+            </div><!--.user-name end-->
+            <div class="user-info clearfix">
+                <span class="role">PHP开发工程师</span>
+                <span class="answer-num">28回答</span>
+            </div><!--.user-info end-->
+        </li>
+            </ul>
 </div><!--.leifeng-sort end-->
     </div>
   </div>
