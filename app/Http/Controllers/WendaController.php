@@ -17,14 +17,14 @@ class WendaController extends Controller
         $mwenda=new Wenda();
         $is_look=$request->get('is_look');
 
-        // //答疑主页  推荐 最新 待会答
+        // //答疑主页  推荐
         $wait_reply = $mwenda->recommend($is_look);
-
-        //显示推荐分类
-
+        //推荐分类
+        $Sort = $mwenda->Sort();
         //  一周雷锋榜
+
         $weekday = $mwenda->weekday();
-        return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,]);
+        return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,'sort'=>$Sort]);
      }
     
     //问题最新内容
@@ -32,21 +32,31 @@ class WendaController extends Controller
         $mwenda=new Wenda();
         $is_look=$request->get('is_look');
 
+        //最新
         $newest = $mwenda->newest($is_look);
 
+        //推荐分类
+        $Sort = $mwenda->Sort();
+
+        //  一周雷锋榜
         $weekday = $mwenda->weekday();
 
-        return view('wenda/newest',['pro'=>$newest,'honor' => $weekday,]);
+        return view('wenda/newest',['pro'=>$newest,'honor' => $weekday,'sort'=>$Sort]);
     }
 
     public function waitreply(Request $request){
         $mwenda=new Wenda();
         $is_look=$request->get('is_look');
 
+        //待会答
         $waitreply = $mwenda->wait_reply($is_look);
 
+        //推荐分类
+        $Sort = $mwenda->Sort();
+
+        //  一周雷锋榜
         $weekday = $mwenda->weekday();
-        return view('wenda/wait_reply',['pro'=>$waitreply,'honor' => $weekday,]);
+        return view('wenda/wait_reply',['pro'=>$waitreply,'honor' => $weekday,'sort'=>$Sort]);
     }
     public function save(){
         //实例化问答model层
@@ -85,11 +95,14 @@ class WendaController extends Controller
      */
 
     public function detail(Request $request){
+        header("content-type:text/html;charset=utf8");
         //接受用户选择的数据
         $id = $request->get("id");
         $wenda = new Wenda();
         $data = $wenda->detail($id);
-        return view('wenda/detail',['arr'=>$data['arr'],'arr_com'=>$data['arr1'],'arr_user'=>$data['arr_user']]);
+        $is_house = $wenda->is_house($id);
+//        print_r($data);die;
+        return view('wenda/detail',['arr'=>$data['arr'],'arr_com'=>$data['arr1'],'arr_user'=>$data['arr_user'],'xingguan'=>$data['xingguan'],'ti'=>$data['ti'],'house'=>$is_house]);
 
     }
     public function hui(Request $request){
@@ -99,7 +112,7 @@ class WendaController extends Controller
             echo "<script>alert('请先登录');location.href='wenda';</script>";
         }else{
             $sql=DB::table('users')->select('user_id')->where("user_name","$username")->first();
-//            print_r($sql);die;
+//            $pro_r($sql);die;
             $user_id=$sql['user_id'];
         }
         $con=$request['account'];
@@ -136,7 +149,17 @@ class WendaController extends Controller
 
     }
 
+    //答疑加入关注
+    public function Focus(Request $request)
+    {
+        $data = $request->input("tid");
 
+        $wenda = new Wenda();
+
+        $focus = $wenda->Focus($data);
+
+        return json_encode($focus);
+    }
 
 
 
@@ -146,9 +169,13 @@ class WendaController extends Controller
     /*
     显示有什么关注的类
     */
-    public function follow(){
-        $content = DB::table('direction')->get();
-        //return view('wenda/wenda',['content'=>$content]);
+    public function g_direction(Request $request){
+        $d_id = $request->input('d_id');
+        //$user_name = Session::get('username');
+        $u_id=Session::get('uid');
+        $arr = DB::insert("insert into house_direction(user_id,d_id) values('$u_id','$d_id')");
+        $msg = DB::table("house_direction")->where("user_id","$u_id")->get();
+        return json_encode($msg);
     }
    
 }

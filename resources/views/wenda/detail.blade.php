@@ -36,7 +36,7 @@
                                 <div>
                                     <a href="#" target="_blank">{{--href地址回答者的个人中心--}}
                                         {{--回答者头像--}}
-                                        <img src="/<?php if(Session::get('user_filedir')){ echo Session::get('user_filedir'); }else{ echo "images/unknow-160.png"; };?>"class="imgs" alt="用户头像" >
+                                        <img src="/<?php if($arr_user['user_filedir']){ echo $arr_user['user_filedir']; }else{ echo "images/unknow-160.png"; };?>"class="imgs" alt="用户头像" >
                                     </a>
                                 </div><br/>
                                 <h1 class="js-qa-wenda-title detail-wenda-title l" style="color:black;margin-left: 15px;"><?php echo $arr['0']['t_title'];?></h1>
@@ -50,31 +50,12 @@
                         <div class="qa-header detail-user-tips">
 
                             <div class="qa-header-right r">
-                                <!-- credit -->
-                                <!---分享即送积分-->
-                                <!--<div class="share-rl-tips share-posi js-share-statue">
-                                    <span>分享即可 +</span><strong>1积分</strong>
-                                    <span class="rule-arrow"></span>
-                                </div>-->
-                                <!-- share -->
-                                <div class="small-share l wd-share">
-                                    <ul class="share-wrap">
-                                        <li class="weichat-posi js-top-share">
-                                            <!--<div class="bdsharebuttonbox weichat-style bdshare-button-style0-16" data-tag="share_1" data-quesid="325735">
-                                                <a href="#" class="bds_weixin icon-nav icon-share-weichat" data-cmd="weixin" title="分享到微信"></a>
-                                                {{--<a href="#" class="bds_qzone icon-nav icon-share-qq" data-cmd="qzone" title="分享到QQ空间"></a>--}}
-                                                <script src="http://qzonestyle.gtimg.cn/qzone/app/qzlike/qzopensl.js#jsdate=20111201" charset="utf-8"></script>
-                                                <a href="#" class="bds_tsina icon-nav icon-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-                                            </div>-->
-                                        </li>
-                                    </ul>
-                                </div>
-                                <em class="split l"></em>
-                                <!-- follow -->
-                                <a href="javascript:void(0)" data-id="325735" title="关注" class="l wenda-add-collection js-collection-btn">
-                                    <i class="icon-heart"></i>
-                                    <span class="detail-hearts js-detail-follow">0</span>
-                                </a>
+                                <em class="split l"> </em>
+                                    @if(empty($house))
+                                        <h4 id="s1" style="float: right"><a href="javascript:void(0)"><span  id="house" style="color: red">加入收藏<img src="/images/collection.jpg" style="width: 20px;height:20px;"></span></a></h4>
+                                    @else
+                                        <h4 id="s1" style="float: right"><a href="javascript:void(0)"><span  id="house" style="color: #0000ff">已收藏<img src="/images/cancel.jpg" style="width: 20px;height:20px;"></span></a></h4>
+                                    @endif
                             </div>
                             <!-- 个人信息 -->
                             <div class="detail-user">
@@ -94,7 +75,6 @@
                         <h3 class="answer-add-tip">添加回答</h3>
                         <a href="#login-modal" id="" data-category="UserAccount" data-action="login" data-toggle="modal" > <button id="answer-frame" class="answer-btn"></button></a>
                     </div>
-
                     <div id="avator-wrap" class="detail-ci-avator answer-hidden">
                     </div>
                     <div id="js-reply-wrap" class="answer-hidden">
@@ -234,21 +214,11 @@
                         <h2 class="panel-title">相关问题</h2>
                     </div>
                     <div class="panel-body clearfix">
-                        <div class="mkhotlist padtop">
-                            <a class="relwenda" href="/wenda/detail/325765" target="_blank">jquery里 有时候用 &#039; &#039; 有时候用“ ”，请问有没有区别</a><i class="answer-num">2 回答</i>
-                        </div>
-                        <div class="mkhotlist ">
-                            <a class="relwenda" href="/wenda/detail/325737" target="_blank">前端工程师在北京、上海和深圳广州，哪里发展的更好？</a><i class="answer-num">7 回答</i>
-                        </div>
-                        <div class="mkhotlist ">
-                            <a class="relwenda" href="/wenda/detail/325732" target="_blank">网页开发工具我是一个htnl的初学者</a><i class="answer-num">2 回答</i>
-                        </div>
-                        <div class="mkhotlist ">
-                            <a class="relwenda" href="/wenda/detail/325717" target="_blank">【学的很混乱】c++，python，html，ccs，js……编程语言学多之后，你们觉得混乱吗？</a><i class="answer-num">5 回答</i>
-                        </div>
-                        <div class="mkhotlist bordbottom">
-                            <a class="relwenda" href="/wenda/detail/325709" target="_blank">jquery每行输完不用打 ； 吗</a><i class="answer-num">2 回答</i>
-                        </div>
+                        @foreach($xingguan as $v)
+                            <div class="mkhotlist padtop">
+                                <a class="relwenda" href="{{url("detail?id=$v[t_id]")}}" target="_blank"><?= $v['t_title']?></a><i class="answer-num">2 回答</i>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <!-- 广告 -->
@@ -259,54 +229,34 @@
                         <h3>相关分类</h3>
                     </div><!--title end-->
                     <ul class="cls-list">
-                        <li>
-                            <div class="class-info">
-                                <div class="class-icon">
-                                    <a href="/wenda/5" target="_blank">
-                                        分类头像位置
-                                        {{--<img src="http://img.mukewang.com/563affe40001680c00900090.jpg" alt="Html/CSS"/>--}}
-                                    </a>
-                                </div><!--.class-icon end-->
-                                <h4>
-                                    <a href="/wenda/5" target="_blank">Html/CSS</a>
-                                </h4>
-                                <p class="follow-person">51065人关注</p>
-                                <a href="javascript:void(0)" data-tag-id="5" class="follow ">关注</a>
-
-                            </div><!--.class-info end-->
-                            <div class="desc">
-                                <a class="desc-link" href="/wenda/detail/325737" taget="_blank">前端工程师在北京、上海和深圳广州，哪里发展的更好？</a>
-                                <i class="answer-num">7 回答</i>
-                            </div>
-                            <div class="desc">
-                                <a class="desc-link" href="/wenda/detail/325648" taget="_blank">编网页时，单标签例如&lt;br&gt;&lt;br/&gt;哪个写...</a>
-                                <i class="answer-num">19 回答</i>
-                            </div>
-                        </li><!--li end-->
-                        <li>
-                            <div class="class-info">
-                                <div class="class-icon">
-                                    <a href="/wenda/15" target="_blank">
-                                        我就是我不一样的开机按键公开了大事记kl
-                                        {{--<img src="http://img.mukewang.com/563aff530001428b00900090.jpg" alt="JQuery"/>--}}
-                                    </a>
-                                </div><!--.class-icon end-->
-                                <h4>
-                                    <a href="/wenda/15" target="_blank">JQuery</a>
-                                </h4>
-                                <p class="follow-person">18638人关注</p>
-                                <a href="javascript:void(0)" data-tag-id="15" class="follow ">关注</a>
-
-                            </div><!--.class-info end-->
-                            <div class="desc">
-                                <a class="desc-link" href="/wenda/detail/325765" taget="_blank">jquery里 有时候用 &#039; &#039; 有时候用“ ”...</a>
-                                <i class="answer-num">2 回答</i>
-                            </div>
-                            <div class="desc">
-                                <a class="desc-link" href="/wenda/detail/325767" taget="_blank">请问jquery中的remove与empty有什么不同</a>
-                                <i class="answer-num">1 回答</i>
-                            </div>
-                        </li><!--li end-->
+                        @foreach($ti as $key => $v)
+                            <li>
+                                <div class="class-info">
+                                    <div class="class-icon">
+                                        <a href="/wenda/5" target="_blank">
+                                            分类头像位置
+                                        </a>
+                                    </div><!--.class-icon end-->
+                                    <h4>
+                                        <a href="#" target="_blank"><?= $v['d_name']?></a>
+                                    </h4>
+                                    <p class="follow-person">51065人关注</p>
+                                    <?php  if(Session::get("username")){ ?>
+                                        @if($v['is_guan'] == 0)
+                                            <span id="direction_<?= $v['d_id']?>"><a href="javascript:void(0)" data-tag-id="5" class="follow"  onclick="g_direction(<?= $v['d_id']?>)" id="g_direction_<?= $v['d_id']?>">关注</a></span>
+                                        @else
+                                            <a href="javascript:void(0)" data-tag-id="5" class="follow" id="g_direction">已关注</a>
+                                        @endif
+                                        <?php }else{ ?>
+                                    <span><a href="#login-modal" id="" data-category="UserAccount" data-action="login" data-toggle="modal" class="follow">关注</a></span>
+                                    {{--<span><a href="javascript:void(0)" data-tag-id="5"  onclick="is_house()"></a></span>--}}
+                                    <?php } ?>
+                                </div><!--.class-info end-->
+                                <div class="desc">
+                                    <i class="answer-num">7 回答</i>
+                                </div>
+                            </li><!--li end-->
+                        @endforeach
                     </ul><!--.cls-list end-->
                 </div><!--.recommend-class end-->
 
@@ -331,14 +281,6 @@
     </a>
     <a class="elevator-top" href="javascript:;" style="display:none" id="backTop"></a>
 </div>
-
-  <div class="wd-scroll">
-    <a href="#add-answer" class="answ">回答</a>
-    <a href="http://www.imooc.com/wenda/save" class="ques">提问</a>
-    <a href="javascript:void(0)" class="to-top" title="返回顶部"><i class="icon-up2"></i></a>
-    <a href="http://www.imooc.com/user/feedback" class="feedback" title="意见反馈"><i class="icon-feedback"></i></a>
-  </div>
-
 <!--script-->
     <div style="display: none">
         {{--百度编辑器--}}
@@ -348,127 +290,160 @@
             var ue = UE.getEditor('editor');
         </script>
         <?php  if(Session::get('username')){ ?>
-        <script>
-            $('#answer-frame').click(function(){
-                /*修改回答的样式，隐藏起来*/
-                $('#add-answer').css('display','none')
+<script>
+    $('#answer-frame').click(function(){
+        /*修改回答的样式，隐藏起来*/
+        $('#add-answer').css('display','none')
 //            $('#avator-wrap').toggleClass('detail-ci-avator')
-                //把编辑器显示出来
-                $('#avator-wrap').removeClass('detail-ci-avator answer-hidden').addClass('detail-ci-avator')
-                $('#js-reply-wrap').removeClass('answer-hidden')
+        //把编辑器显示出来
+        $('#avator-wrap').removeClass('detail-ci-avator answer-hidden').addClass('detail-ci-avator')
+        $('#js-reply-wrap').removeClass('answer-hidden')
 
-            })
-        </script>
-        <script>
-            jQuery(document).ready(function($) {
-                $('.agree').click(function(){
-                    /*获取同意按钮*/
-                    var ag=$(this)
-                    /*获取反对按钮*/
-                    var disag=$(this).parent().siblings('.agree-with').children();
-                    /*同意按钮的值*/
-                    var zan=$(this).html();
-                    /*获取点回答id*/
-                    var com_id=$(this).attr('b');
-                    /*获取数量位置*/
-                    var replay=ag.parent().siblings('.reply').children('.num');
-                    if(zan=='赞同'){
-                        $.ajax({
-                            url:'agree',
-                            type:'GET',
-                            data:{status:1,com_id:com_id},
-                            success:function(msg) {
-                                if (msg == 2) {
-                                    /*初始状态不为0*/
-                                    disag.html('反对');
-                                    disag.parent().css('background', '');
+    })
+</script>
+<script>
+jQuery(document).ready(function($) {
+$('.agree').click(function(){
+    /*获取同意按钮*/
+    var ag=$(this)
+    /*获取反对按钮*/
+    var disag=$(this).parent().siblings('.agree-with').children();
+    /*同意按钮的值*/
+    var zan=$(this).html();
+    /*获取点回答id*/
+    var com_id=$(this).attr('b');
+    /*获取数量位置*/
+    var replay=ag.parent().siblings('.reply').children('.num');
+    if(zan=='赞同'){
+    $.ajax({
+        url:'agree',
+        type:'GET',
+        data:{status:1,com_id:com_id},
+        success:function(msg) {
+            if (msg == 2) {
+                /*初始状态不为0*/
+                disag.html('反对');
+                disag.parent().css('background', '');
 
-                                    ag.parent().css('background', '#EDF1F2');
-                                    ag.html('取消赞同')
-                                } else {
-                                    if(msg==4){
-                                        var re = replay.html()*1+1*1;
-                                        replay.html(re)
-                                        ag.parent().css('background', '#EDF1F2');
-                                        ag.html('取消赞同')
-                                    }
-                                }
-                            }})
+                ag.parent().css('background', '#EDF1F2');
+                ag.html('取消赞同')
+            } else {
+                if(msg==4){
+                    var re = replay.html()*1+1*1;
+                    replay.html(re)
+                    ag.parent().css('background', '#EDF1F2');
+                    ag.html('取消赞同')
+                }
+            }
+        }})
+    }else{
+        $.ajax({
+            url:'agree',
+            type:'GET',
+            data:{status:0,com_id:com_id},
+            success:function(msg){
+                if(msg==5){
+                    var re = replay.html()-1;
+                    replay.html(re)
+                    ag.parent().css('background','');
+                    ag.html('赞同')
+                }
+            }
+        })
+    }
 
-
-                    }else{
-                        $.ajax({
-                            url:'agree',
-                            type:'GET',
-                            data:{status:0,com_id:com_id},
-                            success:function(msg){
-                                if(msg==5){
-                                    var re = replay.html()-1;
-                                    replay.html(re)
-                                    ag.parent().css('background','');
-                                    ag.html('赞同')
-                                }
-                            }
-                        })
+})
+$('.disagree').click(function(){
+    /*获取同意按钮*/
+    var ag=$(this)
+    /*获取反对按钮*/
+    var disag=$(this).parent().siblings('.agree-with').children();
+    /*同意按钮的值*/
+    var zan=$(this).html();
+    /*获取点回答id*/
+    var com_id=$(this).attr('b');
+    /*获取数量位置*/
+    var replay=ag.parent().siblings('.reply').children('.num');
+    if(zan=='反对'){
+        $.ajax({
+            url:'agree',
+            type:'GET',
+            data:{status:2,com_id:com_id},
+            success:function(msg){
+                if (msg == 2) {
+                    /*初始状态不为0*/
+                    disag.html('赞同');
+                    disag.parent().css('background', '');
+                    ag.parent().css('background', '#EDF1F2');
+                    ag.html('取消反对')
+                } else {
+                    if(msg==4){
+                        var re = replay.html()*1+1*1;
+                        replay.html(re)
+                        ag.parent().css('background', '#EDF1F2');
+                        ag.html('取消反对')
                     }
-
-                })
-                $('.disagree').click(function(){
-                    /*获取同意按钮*/
-                    var ag=$(this)
-                    /*获取反对按钮*/
-                    var disag=$(this).parent().siblings('.agree-with').children();
-                    /*同意按钮的值*/
-                    var zan=$(this).html();
-                    /*获取点回答id*/
-                    var com_id=$(this).attr('b');
-                    /*获取数量位置*/
-                    var replay=ag.parent().siblings('.reply').children('.num');
-                    if(zan=='反对'){
-                        $.ajax({
-                            url:'agree',
-                            type:'GET',
-                            data:{status:2,com_id:com_id},
-                            success:function(msg){
-                                if (msg == 2) {
-                                    /*初始状态不为0*/
-                                    disag.html('赞同');
-                                    disag.parent().css('background', '');
-                                    ag.parent().css('background', '#EDF1F2');
-                                    ag.html('取消反对')
-                                } else {
-                                    if(msg==4){
-                                        var re = replay.html()*1+1*1;
-                                        replay.html(re)
-                                        ag.parent().css('background', '#EDF1F2');
-                                        ag.html('取消反对')
-                                    }
-                                }
-                            }})
-                    }else{
-                        $.ajax({
-                            url:'agree',
-                            type:'GET',
-                            data:{status:0,com_id:com_id},
-                            success:function(msg){
-                                if(msg==5){
-                                    var re = replay.html()-1;
-                                    replay.html(re)
-                                    ag.parent().css('background','');
-                                    ag.html('反对')
-                                }
-                            }
-                        })
+                }
+            }})
+    }else{
+        $.ajax({
+            url:'agree',
+            type:'GET',
+            data:{status:0,com_id:com_id},
+            success:function(msg){
+                if(msg==5){
+                    var re = replay.html()-1;
+                    replay.html(re)
+                    ag.parent().css('background','');
+                    ag.html('反对')
                     }
-
-                })
+                }
             })
-        </script>
+        }
+    })
+})
+</script>
         <?php } ?>
     </div>
 </body>
 </html>
-
-
-
 @endsection
+<script>
+    $(function(){
+        $("#house").click(function(){
+            var tid = $("#tid").val();
+            $.ajax({
+                type: "POST",
+                url: "delhouse_wenda",
+                data: "tid="+tid,
+                success: function(msg){
+                    var obj = eval("("+msg+")");
+                    if(obj['msg'] == "ok"){
+                        tr = '';
+                        tr += '<h4 id="s1" style="float: right"><a href="javascript:void(0)"><span  id="house" style="color: #0000ff">已收藏<img src="/images/cancel.jpg" style="width: 20px;height:20px;"></span></a></h4>';
+                        $("#house").remove();
+                        $("#s1").html(tr);
+                    }else{
+                        alert('已收藏')
+                    }
+                }
+            });
+        })
+    })
+    function g_direction(d_id){
+        $.ajax({
+            type: "POST",
+            url: "g_direction",
+            data: "d_id="+d_id,
+            dataType: "json",
+            success: function(msg){
+                var tr = '';
+                for(var i=0;i<=msg.length;i++){
+                    tr += '<a href="javascript:void(0)" data-tag-id="5" class="follow" id="g_direction">已关注</a>';
+                }
+                $("#g_direction_"+d_id).remove();
+                $("#direction_"+d_id).html(tr);
+            }
+        });
+    }
+</script>

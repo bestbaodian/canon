@@ -141,7 +141,6 @@ class Article extends Model
         $destinationPath = 'storage/uploads/';
         $extension = $file->getClientOriginalExtension();
         $fileName = str_random(10) . '.' . $extension;
-        //print_r($fileName);die;
         if ($file->move($destinationPath, $fileName)) {
             $a_logo = $destinationPath . $fileName;
             $res = DB::insert("insert into article(a_title,a_type,a_con,a_addtime,a_logo,a_lei,a_adduser) values('$a_title','$a_type','$a_con','$a_addtime','$a_logo','$a_lei','$a_adduser')");
@@ -307,8 +306,6 @@ class Article extends Model
                 $data[$key]['huifu']=$por;
             }
         }
-
-
 
         return $data;
     }

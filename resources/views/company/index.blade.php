@@ -33,95 +33,67 @@
 <body style="background:#fff;">
 <input type="hidden"  id="college">
 <div class="nk-main test-center-page clearfix" style=" margin-top:50px;">
-<div class="test-center-bar">
-<ul class="test-center-menu">
-<li>
-<div class="tcm-mod">
-<div class="tcm-arrow"></div>
-<h4 class="tcm-hd">职业方向</h4>
-<div class="tcm-bd">
-<a class="zzz" data-id="互联网工程" href="#">互联网工程</a>
-<a class="zzz" data-id="web前端" href="#">web前端</a>
-</div>
-</div>
-<div class="mod-sub-wrap">
-<div class="tcm-sub-mod">
-<h4 class="tcm-hd">职业方向</h4>
-<div class="tcm-bd">
-@foreach($re as $key=>$value)
-<a class="zzz" data-id="{{$value['d_name']}}" href="#">{{$value['d_name']}}</a>
-@endforeach
-</div>
-</div>
-</div>
-</li>
-<li>
-<div class="tcm-mod">
-<div class="tcm-arrow"></div>
-<h4 class="tcm-hd">公司</h4>
-<div class="tcm-bd">
-<a href="#" class="xxx"
-data-id="134">阿里巴巴</a>
-<a href="#" class="xxx" data-id="腾讯">腾讯</a>
-<a href="#" class="xxx" data-id="百度">百度</a>
-</div>
-</div>
-<div class="mod-sub-wrap">
-<div class="tcm-sub-mod">
-<h4 class="tcm-hd">公司</h4>
-<div class="tcm-bd">
-@foreach($arr as $key=>$value)
-<a class="xxx" data-id="{{$value['company_name']}}" href="#">{{$value['company_name']}}</a>
+    <div class="test-center-bar">
+        <ul class="test-center-menu">
 
-@endforeach
-</div>
-</div>
-</div>
-</li>
-</ul>
-<div class="module-box">
-<a href="#" class="btn btn-primary btn-block">2016春招备考计划</a>
-</div>
-</div>
+            <li>
+                <div class="tcm-mod">
+                    <div class="tcm-arrow"></div>
+                    <h4 class="tcm-hd">简历</h4>
+                    <div class="tcm-bd">
+                        <a href="{{url('company')}}" class="xxx" data-id="134">简历范文</a>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+
+    </div>
 <div class="nk-content">
 
 
 <div class="module-box">
 <div class="menu-box">
 <ul class="menu clearfix">
-<li class="selected"><a href="javascript:void(0);">最新</a></li>
+<li class="selected"><a href="javascript:void(0);">简历模板</a></li>
+    {{--<span>--}}
+       {{--<input type="text" name="seachs" id="seach"/>--}}
+       {{--<a href="">搜索</a>--}}
+    {{--</span>--}}
 </ul>
 </div>
 <div class="module-body" id="exam">
 <ul class="content-item-box clearfix">
 @foreach($exam as $key=>$value)
 <li>
-<a href="{{URL('college_exam?id=')}}<?php echo $value['s_id'];?>">
+<a href="{{URL('college_exam?id=')}}<?php echo $value['g_id'];?>">
 <div class="content-item-brief">
-<h1>{{$value['s_logo']}}</h1>
+<h1>{{$value['g_name']}}</h1>
 <div class="web-logoimg">
-<img src="http://123.56.249.121/android/web/{{$value['s_img']}}" style="width:50px; height:50px;" />
+<img src="{{$value['g_dir']}}" style="width:50px; height:50px;" />
 </div>
-<div class="exam-foot">已有{{$value['click']}}人参加</div>
+    <?php
+    if($value['g_click']==0){
+    ?>
+    <div class="exam-foot">还没有人观看</div>
+    <?php
+    }else{
+    ?>
+<div class="exam-foot">已有{{$value['g_click']}}人观看</div>
+    <?php
+    }
+    ?>
 <dl class="exam-info">
 <dd><span class="link-green"></span></dd>
 <dd class="exam-btn"><span class="btn  btn-block btn-primary" >查看详情</span></dd>
 </dl>
-</div>                                               
-</a> 
+</div>
+</a>
 </li>
 @endforeach
 </ul>
 </div>
-<div class="pagination">
-     <style>
-                        .pager li{
-                            float:left;
-                            margin-left:200px;
-                        }
-                    </style>
-<?php echo $exam->render(); ?>
-</div>
+    <?=$exam->render()?>
 </div>
 </div>
 </div>
@@ -167,11 +139,6 @@ data-id="134">阿里巴巴</a>
 		})
 
 </script>
-
-
-
-
-
 
 <script type="text/javascript">
 seajs.use('nowcoder/1.2.456/javascripts/site/common/index');

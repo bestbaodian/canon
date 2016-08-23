@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>
-        公司试题
+        公司试题------面试宝典
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
@@ -16,66 +17,109 @@
     <link rel="stylesheet" href="css/d79d81e9ab144c28aae8b073106e6881.css" type="text/css" />
     <link rel="stylesheet" href="css/nowcoder-ui.css">
 </head>
+<style>
+    .xxx{
+        padding-left:10px;
+    }
+    .zzz{
+        padding-left:10px;
+    }
+
+</style>
 @extends('layouts.master')
 @section('sidebar')
     @parent
 
-<body>
-	   <div style="width:72%; height:80%; background:#fff; border:1px solid #ccc; margin-left:15%; margin-top:10px; margin-bottom:5px;">
-	   	
+    <body style="background:#fff;">
+    <input type="hidden"  id="college">
+    <div class="nk-main test-center-page clearfix" style=" margin-top:50px;">
+        <div class="test-center-bar">
+            <ul class="test-center-menu">
+
+                <li>
+                    <div class="tcm-mod">
+                        <div class="tcm-arrow"></div>
+                        <h4 class="tcm-hd">简历</h4>
+                        <div class="tcm-bd">
+                            <a href="{{url('company')}}" class="xxx" data-id="134">简历范文</a>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+
+        </div>
+        <div class="nk-content">
 
 
+            <div class="module-box">
+                <div class="menu-box">
+                    <ul class="menu clearfix">
+                        <li class="selected"><a href="javascript:void(0);">简历</a></li>
+                    </ul>
+                </div>
+                <div class="module-body" id="exam">
+                    <center>
+                        <h4>{{$arr['g_name']}}</h4>
+                        <img src="{{$arr['g_dir']}}"  /><br/>
+                        <input type="submit" style="width: 400px;height: 50px;font-weight: bold;font-size: 20px;color: #FF0000;font-family: 微软雅黑;" value="【立即下载】点击本按钮直接下载简历" onclick="window.open('http://jianli.yjbys.com/{{$arr['g_down']}}')">                    </center>
+                </div>
+                <div class="pagination">
+                    <style>
+                        .pager li{
+                            float:left;
+                            margin-left:200px;
+                        }
+                    </style>
 
-		<div style="width:975px; height:465px; margin-top:20px;">
-		@foreach($arr as $key=>$value)
-		<div style="width:975px; height:55px; border-bottom:1px solid #ccc;"><img src="images/wenhao.png" style="float:left;">
-		<span style=" font-size:26px; display:block; float:left; margin-top:5px;">
-			<?php if($value['status']==1){
-				echo "单选题";
-			}else if($value['status']==0){
-				echo "简答题";
-			}
-			?>
-		</span></div>
-		<?php if($value['status']==1){ ?>
-			<div style=" width:975px; height:300px; ">
-				<span style=" display:block; font-size:18px; margin-left:15px; margin-top:20px;">{{$value['e_name']}}</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['a']}}</span>
-				</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['b']}}</span>
-				</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['c']}}</span>
-				</span>
-				<span style=" display:block; border:1px solid #ccc; width:919px; height:47px; margin-left:25px; margin-top:20px;">
-					<input type="radio" name="rad" value="a" style="display:block; margin-left:10px;margin-top:17px; float:left;"><span style="display:block; float:left; margin-top:15px; margin-left:10px;">{{$value['d']}}</span>
-				</span>
-			</div>
-			<?php }else if($value['status']==0){ ?>
-			<div style=" width:975px; height:300px; ">
-				<span style=" display:block; font-size:18px; margin-left:15px; margin-top:20px;">{{$value['e_name']}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-				<textarea name="" id="" cols="30" rows="10" style="margin-left:15px; width:902px; height:210px;"></textarea>
 
-			</div>
-			<?php }?>
-			@endforeach
-			<img src="images/next.png" alt="<<<<<>>>>>>" id="img" style=" margin-top:10px; margin-left:5px;">
-			{{$arr->render()}}
-		</div>
-	   </div>
-	   <div id="sel_hide" style="margin-left:15%; margin-top:10px; width:72%; background:#fff; border:1px solid #ccc; margin-bottom:10px;"><h3>&nbsp;&nbsp;&nbsp;正确答案为:</h3><span style="font-size:15px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$value['e_an']}}</span></div>	   	
-	   <script src="js/jquery-1.8.3.min.js"></script>
-	   <script>
-	   $(function(){
-	   	$("#sel_hide").hide();
-	   })
-	   $(document).on("click","#img",function(){
-	   	$("#sel_hide").show();
-	   })
-	   </script>
-</body>
-    @endsection
+    <div class="ad-window-sm js-global-tips" style="display:none;">
+        <a href="javascript:void(0);" class="ad-close">X</a>
+        <div class="ad-live-active"></div>
+        <a class="link-green js-global-tips-href" target="_blank" href="">点击查看>></a>
+    </div>
+
+    </div>
+    <script src="js/sea_1.js" type="text/javascript"></script>
+    <script src="js/base.js"></script>
+    <script src="js/jquery-1.8.3.min.js"></script>
+
+    <script>
+        $(document).on("click",".zzz",function(){
+            var name = $(this).attr("data-id");
+            $("#college").attr('value',name);
+            $.get("college",{name:name},function(data){
+                $("#exam").html(data);
+            })
+        })
+        $(document).on("click",".xxx",function(){
+            var name_z = $("#college").val();
+            var name_x = $(this).attr("data-id");
+            $.get("college_x",{name_z:name_z,name_x:name_x},function(data){
+                $("#exam").html(data);
+            })
+        })
+
+    </script>
+
+
+    <script type="text/javascript">
+        seajs.use('nowcoder/1.2.456/javascripts/site/common/index');
+        seajs.use('nowcoder/1.2.456/javascripts/site/common/nav');
+    </script>
+    <span id='cnzz_stat_icon_1253353781' style="display:none;"></span>
+    <script type="text/javascript">
+        window.parameter = {
+            mutiTagIds: ''
+        };
+        seajs.use('nowcoder/1.2.456/javascripts/site/contest/paperList');
+    </script>
+    </body>
+@endsection
 </html>
+

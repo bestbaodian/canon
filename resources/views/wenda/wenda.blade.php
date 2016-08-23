@@ -76,10 +76,10 @@
         </a>
     </div><!--.tag-img end-->
     <div class="from-tag">        来自
-                <a href="/detail" id="timu"><?php echo $v['d_name']?></a>的<a href="" target="_top"><b>{{$v['user_name'] or "无名大侠"}}</b></a>
+                <a href="{{url("detail?id=$v[t_id]")}}" id="timu"><?php echo $v['d_name']?></a>的　<b>{{$v['user_name'] or "无名大侠"}}</b>
             </div><!--.from-tag end-->
         <div class="ques-con">
-        <a href="detail?id=<?php echo $v['t_id']?>" class="ques-con-content" target="_self" title="#include&amp;lt;stdio.h&amp;gt;#include&amp;lt;string.h&amp;gt;int main(){struct student{long nu;char name[10];int age;};struct student stu_i;struct student*p;p=&amp;amp;stu_i;stu_1.nu =201601;stu_1.age =12;strcpy(stu_1.name ,&quot;xiong&quot;);stu_2.nu =201602;stu_2.age =15;strcpy(stu_2.name ,&quot..."><?php echo $v['t_title'];?></a>
+        <a href="{{url("detail?id=$v[t_id]")}}" class="ques-con-content" target="_self" title="#include&amp;lt;stdio.h&amp;gt;#include&amp;lt;string.h&amp;gt;int main(){struct student{long nu;char name[10];int age;};struct student stu_i;struct student*p;p=&amp;amp;stu_i;stu_1.nu =201601;stu_1.age =12;strcpy(stu_1.name ,&quot;xiong&quot;);stu_2.nu =201602;stu_2.age =15;strcpy(stu_2.name ,&quot..."><?php echo $v['t_title'];?></a>
 
     </div>
         <div class="answer-con first" data-answer-id="156328" id="answer-con">
@@ -135,26 +135,26 @@
         <span class="all-cls">全部分类</span>
     </div><!--title end-->
     <ul class="cls-list">
-                <li>
-            
+        @foreach($sort as $k=>$v)
+        <li>
             <div class="class-info">
                 <div class="class-icon">
-                    <a href="/wenda/20" target="_blank">
-                        <img src="picture/563aff130001c76f00900090.jpg" alt="Linux"/>
+                    <a href="{{url("detail?id=$v[t_id]")}}" target="_blank">
+                        <img src="{{$v['aa'] or "images/unknow-40.png"}}" alt="Linux"/>
                     </a>
                 </div><!--.class-icon end-->
-                <h4><a href="/wenda/20" target="_blank">Linux</a></h4>
+                <h4><a href="{{url("detail?id=$v[t_id]")}}" target="_blank"><?= mb_strcut($v['t_title'],0,20)?></a></h4>
                 <p class="follow-person">12162人关注</p>
-                                <a href="guanzhu" data-tag-id="20" class="follow">关注</a>
+                                <a href="javascript:void(0)" data-tag-id="20" class="follow">关注</a>
                             </div><!--.class-info end-->
-            <div class="desc">Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于P...</div>
-        </li><!--li end-->
-            </ul><!--.cls-list end-->
+            <div class="desc"></div>
+        </li>
+            @endforeach<!--li end-->
+    </ul><!--.cls-list end-->
 </div><!--.recommend-class end-->
 
 <div class="advertisement">
         <a href="#" data-ast="yuanwenindexright_1_189" target="_blank">
-        <img src="picture/569cb54900010baf02800100.jpg" alt="年度问答牛人团"/>
     </a>
     </div><!--.advertisement end-->
 <div class="hot-ques">
