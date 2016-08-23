@@ -321,10 +321,11 @@
                   data:{
                       ap_id:ap_id
                   },success:function(data){
-                      return json_encode($arr);
+                      var obj=eval("("+data+")");
                       /*if(obj['error']!=1){
                           location.href("fangfa?id="+a_id);
                       }*/
+
                       if(obj['msg']==0){
                          // $("#znum_"+ap_id).html("obj['num']");
                           $("#z_"+ap_id).html("已赞");
