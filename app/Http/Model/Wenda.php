@@ -176,7 +176,49 @@ class Wenda extends Model{
         }
     }
 
+    //推荐分类展示
+    public function Sort(){
+        $pro = DB::table("t_tw")
+            ->orderBy("t_id","desc")
+            ->limit(5)
+            ->get();
+        return $pro;
+    }
 
+    public function Focus($data){
+        $uid = Session::get('uid');
+        //$arr = DB::insert("insert into house_wenda(user_id,tid) values('$uid','$data')");
+        $datas = DB::table('house_wenda')
+            ->where("user_id",$uid)
+            ->where("tid",$data)
+            ->get();
+        if($datas){
+            $arr = array(
+                "msg"=>"no",
+                "error"=>1
+            );
+            return $arr;
+        }else{
+            $arr = DB::table("house_wenda")
+                ->insert([
+                    'user_id'=>$uid,
+                    'tid'=>$data
+                ]);
+            if($arr){
+                $arr = array(
+                    "msg"=>"ok",
+                    "error"=>0
+                );
+                return $arr;
+            }else{
+                $arr = array(
+                    "msg"=>"no",
+                    "error"=>1
+                );
+                return $arr;
+            }
+        }
+    }
 
     //一周雷锋榜
     public function weekday()
@@ -249,10 +291,50 @@ class Wenda extends Model{
             }
             $arr['user']=DB::table('users')->select('user_name')->where("user_id",$u_id)->first();
         }
+
+        $d_id = $arr[0]['d_id'];
+        //查询相关问题
+        $xiangguan = DB::table('t_tw')
+            ->where("d_id",$d_id)
+            ->orderBy('add_time','desc')
+            ->limit(5)->get();
+        //查询相关分类
+        $type = DB::table('direction')->get();
+        $ti = DB::table('t_tw')
+            ->join("direction",'t_tw.d_id','=','direction.d_id')
+            ->groupBy('t_tw.d_id')
+            ->orderBy('t_tw.add_time')
+            ->limit(5)
+            ->get();
+
+        if(Session::get("username")){
+            $fei_num = count($type);
+            $fenlei = DB::table("house_direction")->where(['user_id' => $u_id,])->get();
+            foreach($fenlei as $v){
+                $fen[]=$v['d_id'];
+            }
+            if(isset($fen)){
+                foreach($ti as $k=>$v){
+                    if(in_array($v['d_id'],$fen)){
+                        $ti[$k]['is_guan']='1';
+                    }else{
+                        $ti[$k]['is_guan']='0';
+                    }
+                }
+            }else{
+                foreach($ti as $k=>$v){
+                    $ti[$k]['is_guan']='0';
+                }
+            }
+        }else{
+            $fei_num = count($type);
+            $fenlei = DB::table("house_direction")->get();
+        }
         $data['arr']=$arr;
         $data['arr1']=$arr1;
         $data['arr_user']=$arr_user;
-
+        $data['xingguan']=$xiangguan;
+        $data['ti']=$ti;
         return $data;
 
     }
@@ -288,6 +370,14 @@ class Wenda extends Model{
             }
         }
 
+    }
+
+    //查询是否有收藏
+    public function is_house($id)
+    {
+        $u_id=Session::get('uid');
+        $data = DB::table("house_wenda")->where(['user_id' => $u_id, 'tid' => $id])->get();
+        return $data;
     }
 
 }

@@ -118,6 +118,10 @@ Route::get('bestnew', 'WendaController@bestnew');
 //答题 等待回答
 Route::get('waitreply', 'WendaController@waitreply');
 
+//收藏问题
+Route::post('delhouse_wenda',"WendaController@Focus");
+
+Route::post('g_direction',"WendaController@g_direction");
 
 /*
  * 猿问结束
