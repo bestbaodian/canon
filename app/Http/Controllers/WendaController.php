@@ -12,13 +12,40 @@ use Session;
  */
 class WendaController extends Controller
 {
-    public function wenda(){
+    //答疑展示页面
+    public function wenda(Request $request){
         $mwenda=new Wenda();
-        $pro=$mwenda->get_t_tw();
-        return view('wenda/wenda',['pro'=>$pro]);
+        $is_look=$request->get('is_look');
+
+        // //答疑主页  推荐 最新 待会答
+        $wait_reply = $mwenda->recommend($is_look);
+        
+        //  一周雷锋榜
+        $weekday = $mwenda->weekday();
+        return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,]);
      }
+    
+    //问题最新内容
+    public function bestnew(Request $request){
+        $mwenda=new Wenda();
+        $is_look=$request->get('is_look');
 
+        $newest = $mwenda->newest($is_look);
 
+        $weekday = $mwenda->weekday();
+
+        return view('wenda/newest',['pro'=>$newest,'honor' => $weekday,]);
+    }
+
+    public function waitreply(Request $request){
+        $mwenda=new Wenda();
+        $is_look=$request->get('is_look');
+
+        $waitreply = $mwenda->wait_reply($is_look);
+
+        $weekday = $mwenda->weekday();
+        return view('wenda/wait_reply',['pro'=>$waitreply,'honor' => $weekday,]);
+    }
     public function save(){
         //实例化问答model层
         $mwenda=new Wenda();
@@ -32,7 +59,6 @@ class WendaController extends Controller
          //显示各个学院
         return view('wenda/save',['pro'=>$pro]);
         }
-        
     }
 //提交提问功能
     public function tiwen(Request $request){
@@ -44,7 +70,7 @@ class WendaController extends Controller
         //var_dump($t_content);die;
         $u_id=Session::get("uid");
         //echo $u_id;die;
-        $arr1=DB::insert("INSERT INTO t_tw(t_title,t_content,user_id,d_id) values('$t_title','$t_content','$u_id','$pro')");
+        $arr1=DB::insert("INSERT INTO t_tw(t_title,t_content,user_id,d_id,add_time) values('$t_title','$t_content','$u_id','$pro',now())");
          if($arr1){
             exit('1');
          }else{

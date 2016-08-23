@@ -75,8 +75,7 @@
             </div>
         </div>
         <?php }?>
-      <div >
-
+      <div>
 <?php foreach($pro as $k=>$v){?>
 <div class="ques-answer">
     <div class="tag-img">

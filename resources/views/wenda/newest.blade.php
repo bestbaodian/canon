@@ -46,8 +46,8 @@
         if($is_look){
         ?>
         <div class="nav">
-            <a href="{{url("wenda?is_look=1")}}" class="active">推荐</a>
-            <a href="{{url("bestnew?is_look=1")}}" >最新</a>
+            <a href="{{url("wenda?is_look=1")}}" >推荐</a>
+            <a href="{{url("bestnew?is_look=1")}}" class="active">最新</a>
             <a href="{{url("waitreply?is_look=1")}}">等待回答</a>
             <div class="switch-box">
                 <div class="switch js-switch on">
@@ -61,8 +61,8 @@
         </div>
         <?php }else{?>
         <div class="nav">
-            <a href="{{url("wenda")}}" class="active" >推荐</a>
-            <a href="{{url("bestnew")}}"  >最新</a>
+            <a href="{{url("wenda")}}"  >推荐</a>
+            <a href="{{url("bestnew")}}" class="active" >最新</a>
             <a href="{{url("waitreply")}}" >等待回答</a>
             <div class="switch-box">
                 <div class="switch js-switch">
@@ -98,7 +98,7 @@
             <?php echo mb_substr($v['t_content'],0,50)."…………" ;?>
         </div>
         <div class="ctrl-bar clearfix">
-            共<?php echo $v['num']; ?>条回答
+            发布时间：<?php echo $v['add_time'] ?>
         </div><!--.ctrl-bar end-->
     </div><!--.answer-con end-->
 
