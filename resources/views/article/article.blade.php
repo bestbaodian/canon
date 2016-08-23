@@ -90,7 +90,7 @@
 <?php } ?>
 
         </div>
-            <ul id="fenye"><li>{{ $article->appends(['at_id'=>$at_id])->links()}}</li></ul>
+            <ul id="fenye"><li>{{ $article->appends(['at_id'=>$at_id,'top'=>$top])->render()}}</li></ul>
         </div>
         <div class="article-right r">
             <!-- 写文章 -->
