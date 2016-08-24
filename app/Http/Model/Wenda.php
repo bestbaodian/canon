@@ -178,7 +178,6 @@ class Wenda extends Model{
 
     //推荐分类展示
     public function Sort(){
-
         $pro = DB::table("direction")
             ->select("*",DB::raw("count(house_direction.user_id) as G"))
             ->join("house_direction",'direction.d_id','=','house_direction.d_id')
@@ -227,9 +226,12 @@ class Wenda extends Model{
     //一周雷锋榜
     public function weekday()
     {
-        $honor = DB::select("select user_name,user_filedir,count(comments_replay.user_id) from
-  comments_replay join users on comments_replay.user_id = users.user_id group by
-   comments_replay.user_id order by count(comments_replay.user_id) desc limit 10");
+        $honor = DB::select("
+            select user_name,user_filedir,count(comments_replay.user_id) as C,users.user_id,num  from
+            comments_replay join users on comments_replay.user_id = users.user_id
+            LEFT JOIN (SELECT *,COUNT(*) num from house_direction GROUP BY user_id ) b on b.user_id=users.user_id
+            group by comments_replay.user_id order by count(comments_replay.user_id) desc limit 10
+            ");
         return $honor;
     }
     public function sels(){

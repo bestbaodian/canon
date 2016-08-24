@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0021)http://www.lagou.com/ -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></script>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="renderer" content="webkit">
 <meta property="qc:admins" content="23635710066417756375">
@@ -29,10 +29,6 @@
 @extends('layouts.master')
 @section('sidebar')
     @parent
-
-
-
-    
     <!-- 公共html -->
     <!-- 页面公用结构、velocity变量 --><input type="hidden" value="" name="userid" id="userid">
 <input type="hidden" id="serverTime" value="1460098202966">
@@ -49,18 +45,8 @@
     <!--
     @require "common/widgets/header_c/modules/emailvalid/main.less"
 -->
-
-
     <div id="lg_header">
-
-       
-
     <!-- 全部 -->
-
-
-
-    
-
     </div><!--end #header-->
 
 
@@ -221,96 +207,12 @@
 
 
 <script type="text/javascript" src="js/vendor_d53d12d.js"></script>
-<script type="text/javascript">/*resourcemap*/
-require.config({paths:{
-  "common/components/template-helper/main": "http://pstatic.lagou.com/www/static/common/components/template-helper/main_4b1b867",
-  "common/widgets/common/msgPopup": "http://pstatic.lagou.com/www/static/common/widgets/common/msgPopup_3bbfd4a"
-}});</script>
 <script type="text/javascript" src="js/main.html_aio_4787e07.js"></script>
 <script type="text/javascript" src="js/widgets_5256a4e.js"></script><script src="js/h.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/userinfo_7f282e9.js"></script>
 <script type="text/javascript" src="js/layout_a28dd79.js"></script>
 <script type="text/javascript" src="js/main.html_aio_2_d83ecb3.js"></script>
-<script type="text/javascript">
-    window.global = window.global || {};
-    global.userCtx = '';
-
-
-    window.global = window.global || {};
-    global.isLogin = false;
-    global.isFirst = true;
-    global.subSite = '北京';
-    global.subSites = '全国,上海,杭州,广州,深圳,成都'.split(',');
-
-
-    require(['common/widgets/header_c/modules/emailvalid/main']);
-
-
-    require(['common/widgets/passport/passport'], function() {
-
-    
-        /* 设置自动登录监听器 */
-        PASSPORT.on('autologin:succ', function() {
-            PASSPORT.util.tinfo('autologin:succ');
-            window.location.reload();
-        });
-        PASSPORT.on('autologin:fail', function() {
-            PASSPORT.util.tinfo('autologin:fail');
-        });
-        // 触发自动登录
-        PASSPORT.auto();
-
-        /* 设置弹窗登录监听器 */
-        PASSPORT.on('popuplogin:succ', function() {
-            PASSPORT.util.tinfo('popuplogin:succ');
-            window.location.reload();
-        });
-        PASSPORT.on('popuplogin:fail', function() {
-            PASSPORT.util.tinfo('popuplogin:fail');
-        });
-        // 触发弹窗登录
-        //PASSPORT.popup();
-        jQuery('.passport_login_pop').each(function(){
-            jQuery(this).click(function(){
-                PASSPORT.popup();
-            });
-        });
-
-    
-    });
-
-
-    require(['common/widgets/footer_c/modules/feedback/feedback']);
-
-
-    require(['common/widgets/footer_c/layout/main']);
-
-    jQuery.ajax({
-        url: 'http://wpa.b.qq.com/cgi/wpa.php',
-        dataType: 'script',
-        cache: true
-    }).done(function() {
-        BizQQWPA.addCustom({aty: '0', a: '0', nameAccount: 800056379, selector: 'onlineService'});
-    });
-
-
-    require(['common/widgets/login_toolbar/main'])
-
-
-        //业务主模块入口
-        require(['index/page/index/main']);
-    </script>
 <script src="js/jquery-1.8.3.min.js"></script>
-<script>
-    $(document).on("click",".posi",function(){
-        var p_name=$(this).attr('val');
-        $.get("position",{p_name:p_name},function(data){
-            $("#position").html(data);
-        })
-    })
-
-
-</script>
 
     <ul class="ui-autocomplete ui-front ui-menu ui-widget ui-widget-content ui-corner-all" id="ui-id-1" tabindex="0" style="display: none; left: 538.5px;"></ul>
 <script type="text/javascript" src="js/ipinyou_2be9977.js"></script>

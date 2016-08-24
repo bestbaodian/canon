@@ -11,7 +11,7 @@
 <meta http-equiv="Cache-Control" content="no-transform " />
 <meta name="Keywords" content="" />
 <meta name="Description" content="猿问是由面试宝典为广大IT爱好者提供的专业问答交流平台,这里大牛云集,用户可根据自身需求,提出相关问题,也可为有问题同学进行解答,互帮互助,分享知识！" />
-<link rel="stylesheet" href="../css/myemojiPl.css">	
+
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
 <link rel="stylesheet" href="css/c0e7cb6dbd3c47c9bcf65581ec74e79d.css" type="text/css" />
 </head>
@@ -175,8 +175,8 @@
                     <a target="_blank" href="#"><?= $v['user_name'];?></a>
                 </div><!--.user-name end-->
                 <div class="user-info clearfix">
-                    <span class="role">gg</span>
-                    <span class="answer-num"><?= $v['count(comments_replay.user_id)'];?>回答</span>
+                    <span class="role">{{$v["num"]}}人关注</span>
+                    <span class="answer-num"><?= $v['C'];?>回答</span>
                 </div><!--.user-info end-->
             </li>
         @endforeach
