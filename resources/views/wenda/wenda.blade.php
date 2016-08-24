@@ -175,7 +175,7 @@
                     <a target="_blank" href="#"><?= $v['user_name'];?></a>
                 </div><!--.user-name end-->
                 <div class="user-info clearfix">
-                    <span class="role">{{$v["num"]}}人关注</span>
+                    <span class="role">{{$v["num"] or "0"}}人关注</span>
                     <span class="answer-num"><?= $v['C'];?>回答</span>
                 </div><!--.user-info end-->
             </li>
