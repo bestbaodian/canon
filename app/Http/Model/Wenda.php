@@ -178,8 +178,12 @@ class Wenda extends Model{
 
     //推荐分类展示
     public function Sort(){
-        $pro = DB::table("t_tw")
-            ->orderBy("t_id","desc")
+
+        $pro = DB::table("direction")
+            ->select("*",DB::raw("count(house_direction.user_id) as G"))
+            ->join("house_direction",'direction.d_id','=','house_direction.d_id')
+            ->groupBy("direction.d_name")
+            ->orderBy("G","desc")
             ->limit(5)
             ->get();
         return $pro;
@@ -265,7 +269,6 @@ class Wenda extends Model{
             ->where('comments.t_id',$id)
             ->where('status','!=','0')
             ->get();
-
         //处理数据
         foreach($arr1 as $k=>$v){
             foreach($arr2 as $ke=>$val){
@@ -275,7 +278,7 @@ class Wenda extends Model{
             }
             $arr1[$k]['is_agree']='';
         }
-
+        //return $arr1;
         //判断用户session是否有值
         if(Session::get('uid')){
             $u_id=Session::get('uid');
@@ -293,20 +296,27 @@ class Wenda extends Model{
         }
 
         $d_id = $arr[0]['d_id'];
-        //查询相关问题
-        $xiangguan = DB::table('t_tw')
-            ->where("d_id",$d_id)
-            ->orderBy('add_time','desc')
-            ->limit(5)->get();
+        $t_id = $arr[0]['t_id'];
+        //查询相关问题 回答数
+        $xiangguan = DB::select(
+            "select t_tw.t_id,t_tw.t_title,count(comments.user_id) as S from t_tw
+            join comments on comments.t_id = t_tw.t_id
+            where t_tw.d_id = $d_id and t_tw.t_id!=$t_id
+            GROUP BY comments.user_id
+            order by count(comments.user_id) desc limit 10"
+        );
         //查询相关分类
         $type = DB::table('direction')->get();
         $ti = DB::table('t_tw')
+            ->select("*",DB::raw("count(comments.user_id) as C"),DB::raw("count(house_direction.user_id) as G"))
             ->join("direction",'t_tw.d_id','=','direction.d_id')
+            ->join("comments","t_tw.t_id","=","comments.t_id")
+            ->join("house_direction","house_direction.d_id","=","t_tw.d_id")
+            ->where("t_tw.t_id","!=",$t_id)
             ->groupBy('t_tw.d_id')
             ->orderBy('t_tw.add_time')
             ->limit(5)
             ->get();
-
         if(Session::get("username")){
             $fei_num = count($type);
             $fenlei = DB::table("house_direction")->where(['user_id' => $u_id,])->get();
@@ -326,9 +336,6 @@ class Wenda extends Model{
                     $ti[$k]['is_guan']='0';
                 }
             }
-        }else{
-            $fei_num = count($type);
-            $fenlei = DB::table("house_direction")->get();
         }
         $data['arr']=$arr;
         $data['arr1']=$arr1;

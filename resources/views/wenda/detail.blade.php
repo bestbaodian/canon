@@ -215,9 +215,15 @@
                     </div>
                     <div class="panel-body clearfix">
                         @foreach($xingguan as $v)
+                            @if($v)
                             <div class="mkhotlist padtop">
-                                <a class="relwenda" href="{{url("detail?id=$v[t_id]")}}" target="_blank"><?= $v['t_title']?></a><i class="answer-num">2 回答</i>
+                                <a class="relwenda" href="{{url("detail?id=$v[t_id]")}}" target="_blank"><?php echo mb_substr($v['t_title'],0,10);?></a><i class="answer-num">{{$v['S']}}回答</i>
                             </div>
+                            @else
+                                <div class="mkhotlist padtop">
+                                    <p>暂无相关问题</p>
+                                </div>
+                                @endif
                         @endforeach
                     </div>
                 </div>
@@ -240,7 +246,7 @@
                                     <h4>
                                         <a href="#" target="_blank"><?= $v['d_name']?></a>
                                     </h4>
-                                    <p class="follow-person">51065人关注</p>
+                                    <p class="follow-person">{{$v["G"]}}人关注</p>
                                     <?php  if(Session::get("username")){ ?>
                                         @if($v['is_guan'] == 0)
                                             <span id="direction_<?= $v['d_id']?>"><a href="javascript:void(0)" data-tag-id="5" class="follow"  onclick="g_direction(<?= $v['d_id']?>)" id="g_direction_<?= $v['d_id']?>">关注</a></span>
@@ -253,7 +259,7 @@
                                     <?php } ?>
                                 </div><!--.class-info end-->
                                 <div class="desc">
-                                    <i class="answer-num">7 回答</i>
+                                    <i class="answer-num">{{$v['C']}}回答</i>
                                 </div>
                             </li><!--li end-->
                         @endforeach
