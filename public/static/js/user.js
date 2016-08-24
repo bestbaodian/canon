@@ -80,7 +80,7 @@ $(function(){
     $("#confirm").blur(function(){
         var newpass = $("input[name=newpass]").val();
         var confirm = $("input[name=confirm]").val();
-        if(confirm!=newpass && confirm==""){
+        if(confirm!=newpass && confirm!=""){
             $("#ch_pwd2").html("<font color='red'>×</font>");
         }else{
             $("#ch_pwd2").html("<font color='green'>√</font>");

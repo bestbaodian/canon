@@ -48,6 +48,7 @@ var is_choice = "";
     <div class="setting-right-wrap wrap-boxes settings" >
 
 <div class="pwd-reset-wrap setting-resetpwd">
+    <form action="{{url("user/yanzheng")}}" method="post">
         <div class="wlfg-wrap">
             <label for="" class="label-name">手机号</label>
             <div class="rlf-group">
@@ -73,6 +74,7 @@ var is_choice = "";
                 <input type="text" value="<?php echo substr($user[0]['user_phone'],0,3).'*****'.substr($user[0]['user_phone'],8,11)?>" disabled class="rlf-input rlf-input-pwd rlf-field-error">
                 @endif
         </div>
+    </form>
 </div>
 
 
@@ -112,7 +114,7 @@ var is_choice = "";
   function fun1(){
       var phone=$('#phone').val();
       $.get('bang',{phone:phone},function(msg){
-        //alert(msg);
+          $("#huo").removeAttr('id');
       });
   }
     

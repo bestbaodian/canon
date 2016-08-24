@@ -184,7 +184,34 @@ class Course extends Model{
         $re=DB::table('follow')->where('c_id',$c_id)->delete();
         return $re;
     }
-
+    /*
+     * 显示试题综合评价
+     */
+    public function synthesize($c_id)
+    {
+        $pro = DB::table("college_questions")
+            ->select('e_ping.e_score',DB::raw("count(e_ping.u_id) as K"))
+            ->join("e_ping","college_questions.c_id","=","e_ping.e_id")
+            ->where("college_questions.c_id",$c_id)
+            ->groupBy("e_ping.u_id")
+            ->get();
+        $a = 0;
+        foreach($pro as $k=>$v)
+        {
+            $a += $v['e_score'];
+        }
+        $b = 0;
+        foreach($pro as $k=>$v)
+        {
+            $b+=$v["K"];
+        }
+        $data['a'] = ($a/2)*2;
+        $data['b'] = $b;
+        return $data;
+    }
+    /*
+     * 用户评论
+     */
     public function pinglun_shiti($request)
     {
         $con = $request->input("con");

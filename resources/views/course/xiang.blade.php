@@ -262,21 +262,37 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         <div class="evaluation-list">
             <h3>试题评价</h3>
             <div class="evaluation-info clearfix">
-                <p class="satisfaction">满意度评分：<em>9.9</em></p>
+                <p class="satisfaction">满意度评分：<em>{{$synthesize['a']}}</em></p>
                 <div class="star-box">
-                    <img src="images/xing.jpg" width="20" height="20">
-                    <img src="images/xing.jpg" width="20" height="20">
-                    <img src="images/xing.jpg" width="20" height="20">
-                    <img src="images/xing.jpg" width="20" height="20">
-                    <img src="images/xing.jpg" width="20" height="20">
+                    @if($synthesize['a']<=2)
+                        <img src="images/xing.jpg" width="20" height="20">
+                        @elseif($synthesize['a']<=4)
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        @elseif($synthesize['a']<=6)
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        @elseif($synthesize['a']<=8)
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        @elseif($synthesize['a']<=10)
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                    @endif
                 </div><!--star-box end-->
-                <p>内容实用：9.9</p>
-                <p>通俗易懂：9.6</p>
-                <p>逻辑清晰：9.4</p>
-                <p class="person_num"><em>1337</em>位同学参与评价</p>
+                {{--<p>内容实用：9.9</p>--}}
+                {{--<p>通俗易懂：9.6</p>--}}
+                {{--<p>逻辑清晰：9.4</p>--}}
+                <p class="person_num"><em>{{$synthesize["b"]}}</em>位同学参与评价</p>
             </div><!--evaluation-info end-->
             <div class="evaluation">
-                <?php if(Session::get('id')){ ?>
+                <?php if(Session::get('id')==""){ ?>
                 <?php foreach($ping as $k=>$v){?>
                 <div class="evaluation-con" id="list">
                     <div class="content-box">

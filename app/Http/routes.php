@@ -121,7 +121,7 @@ Route::get('waitreply', 'WendaController@waitreply');
 //收藏问题
 Route::post('delhouse_wenda',"WendaController@Focus");
 
-Route::post('g_direction',"WendaController@g_direction");
+Route::post('g_direction',"WendaControllerF@g_direction");
 
 /*
  * 猿问结束

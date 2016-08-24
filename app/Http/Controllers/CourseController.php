@@ -41,10 +41,13 @@ class CourseController extends Controller
         }else{
             $ping = "";
         }
-       //查询
+        //试题综合评价
+        $synthesize = $course->synthesize($c_id);
+        //查询
+//        print_r($synthesize);die;
         $follow=$course->sel_follow($c_id,$u_id);
         //print_r($follow);die;
-        return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min'],'follow'=>$follow,'ping'=>$ping]);
+        return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min'],'follow'=>$follow,'ping'=>$ping,'synthesize'=>$synthesize]);
     }
     /*
      * 页面评论选星功能
