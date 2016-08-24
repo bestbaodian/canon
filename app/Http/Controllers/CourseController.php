@@ -39,14 +39,13 @@ class CourseController extends Controller
         if($u_id){
             $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where e_ping.e_id=$c_id order by e_ping.e_addtime desc");
         }else{
-            $ping = "";
+            $ping = array();
         }
         //试题综合评价
         $synthesize = $course->synthesize($c_id);
         //查询
-//        print_r($synthesize);die;
         $follow=$course->sel_follow($c_id,$u_id);
-        //print_r($follow);die;
+//        print_r($ping);die;
         return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min'],'follow'=>$follow,'ping'=>$ping,'synthesize'=>$synthesize]);
     }
     /*

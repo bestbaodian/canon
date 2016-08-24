@@ -238,7 +238,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                 <p class="person_num"><em>{{$synthesize["b"]}}</em>位同学参与评价</p>
             </div><!--evaluation-info end-->
             <div class="evaluation">
-                <?php if(Session::get('id')!=""){ ?>
+                <?php if($ping!=""){ ?>
                 <?php foreach($ping as $k=>$v){?>
                 <div class="evaluation-con" id="list">
                     <div class="content-box">
