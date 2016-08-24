@@ -139,12 +139,12 @@
         <li>
             <div class="class-info">
                 <div class="class-icon">
-                    <a href="{{url("detail?id=$v[t_id]")}}" target="_blank">
+                    <a href="javascript:void(0)" target="_blank">
                         <img src="{{$v['aa'] or "images/unknow-40.png"}}" alt="Linux"/>
                     </a>
                 </div><!--.class-icon end-->
-                <h4><a href="{{url("detail?id=$v[t_id]")}}" target="_blank"><?= mb_strcut($v['t_title'],0,20)?></a></h4>
-                <p class="follow-person">12162人关注</p>
+                <h4><a href="javascript:void(0)" target="_blank"><?= $v['d_name']?></a></h4>
+                <p class="follow-person">{{$v["G"]}}人关注</p>
                                 <a href="javascript:void(0)" data-tag-id="20" class="follow">关注</a>
                             </div><!--.class-info end-->
             <div class="desc"></div>

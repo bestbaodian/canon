@@ -22,7 +22,6 @@ class WendaController extends Controller
         //推荐分类
         $Sort = $mwenda->Sort();
         //  一周雷锋榜
-
         $weekday = $mwenda->weekday();
         return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,'sort'=>$Sort]);
      }
@@ -101,7 +100,7 @@ class WendaController extends Controller
         $wenda = new Wenda();
         $data = $wenda->detail($id);
         $is_house = $wenda->is_house($id);
-//        print_r($data);die;
+        //print_r($data);die;
         return view('wenda/detail',['arr'=>$data['arr'],'arr_com'=>$data['arr1'],'arr_user'=>$data['arr_user'],'xingguan'=>$data['xingguan'],'ti'=>$data['ti'],'house'=>$is_house]);
 
     }
