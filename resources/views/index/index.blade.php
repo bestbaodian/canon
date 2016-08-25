@@ -194,7 +194,7 @@
             <li>
                 <a  href="{{url("detail?id=$val[t_id]")}}">
                     <div class="icourse-img">
-                        <img class="scrollLoading" src="{{$val['user_filedir'] or "images/unknow-40.png" }}" alt="">
+                        <img class="scrollLoading" src="{{$val['user_filedir'] or "images/unknow-160.png" }}" alt="">
                     </div>
                     <div class="icourse-intro clearfix">
                         <p>答案:<?php echo strip_tags($val['t_content']);?></p>
