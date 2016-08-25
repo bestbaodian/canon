@@ -19,8 +19,10 @@ class WendaController extends Controller
 
         // //答疑主页  推荐
         $wait_reply = $mwenda->recommend($is_look);
-        //推荐分类
+        //推荐分类 //推荐分类关注
         $Sort = $mwenda->Sort();
+
+        header("content-type:text/html;charset=utf8");
         //  一周雷锋榜
         $weekday = $mwenda->weekday();
         return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,'sort'=>$Sort]);
@@ -166,7 +168,7 @@ class WendaController extends Controller
         return view('wenda/guanzhu');
     }
     /*
-    显示有什么关注的类
+    答疑详情页关注分类
     */
     public function g_direction(Request $request){
         $d_id = $request->input('d_id');
@@ -176,5 +178,16 @@ class WendaController extends Controller
         $msg = DB::table("house_direction")->where("user_id","$u_id")->get();
         return json_encode($msg);
     }
-   
+
+    /*
+     * 答疑分类关注
+     */
+    public function house_direction(Request $request)
+    {
+        $d_id = $request->input('d_id');
+        $u_id=Session::get('uid');
+        $arr = DB::insert("insert into house_direction(user_id,d_id) values('$u_id','$d_id')");
+        $msg = DB::table("house_direction")->where("user_id","$u_id")->get();
+        return json_encode($msg);
+    }
 }

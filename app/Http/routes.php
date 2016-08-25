@@ -120,8 +120,10 @@ Route::get('waitreply', 'WendaController@waitreply');
 
 //收藏问题
 Route::post('delhouse_wenda',"WendaController@Focus");
-
+//问题收藏
 Route::post('g_direction',"WendaController@g_direction");
+//答疑分类关注
+Route::post('house_direction',"WendaController@house_direction");
 
 /*
  * 猿问结束

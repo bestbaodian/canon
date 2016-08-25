@@ -176,18 +176,41 @@ class Wenda extends Model{
         }
     }
 
-    //推荐分类展示
+    //推荐分类展示     //推荐分类展示显示是否关注
     public function Sort(){
         $pro = DB::table("direction")
-            ->select("*",DB::raw("count(house_direction.user_id) as G"))
+            ->select("*",DB::raw("count(house_direction.user_id) as G"),
+                    DB::raw("GROUP_CONCAT(house_direction.d_id) W"))
             ->join("house_direction",'direction.d_id','=','house_direction.d_id')
             ->groupBy("direction.d_name")
             ->orderBy("G","desc")
             ->limit(5)
             ->get();
+        $uid  = Session::get("uid");
+        $data = DB::table("house_direction")
+            ->where("user_id",$uid)
+            ->get();
+        foreach($data as $k=>$v){
+            $da[]=$v['d_id'];
+        }
+
+        if(isset($da)){
+            foreach($pro as $k=>$v){
+                $se = explode(',',$v['W']);
+                $pro[$k]['W'] = array_unique($se);
+                if(in_array($v['W'],$da)){
+                    $pro[$k]['is_guan']='1';
+                }else{
+                    $pro[$k]['is_guan']='0';
+                }
+            }
+        }else{
+            foreach($pro as $k=>$v){
+                $pro[$k]['is_guan']=0;
+            }
+        }
         return $pro;
     }
-
     public function Focus($data){
         $uid = Session::get('uid');
         //$arr = DB::insert("insert into house_wenda(user_id,tid) values('$uid','$data')");
@@ -388,6 +411,7 @@ class Wenda extends Model{
         $data = DB::table("house_wenda")->where(['user_id' => $u_id, 'tid' => $id])->get();
         return $data;
     }
+
 
 }
 

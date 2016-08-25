@@ -439,7 +439,7 @@ $('.disagree').click(function(){
     function g_direction(d_id){
         $.ajax({
             type: "POST",
-            url: "g_direction",
+            url: "house_direction",
             data: "d_id="+d_id,
             dataType: "json",
             success: function(msg){

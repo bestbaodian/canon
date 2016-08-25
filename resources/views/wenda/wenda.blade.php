@@ -145,7 +145,18 @@
                 </div><!--.class-icon end-->
                 <h4><a href="javascript:void(0)" target="_blank"><?= $v['d_name']?></a></h4>
                 <p class="follow-person">{{$v["G"]}}人关注</p>
-                                <a href="javascript:void(0)" data-tag-id="20" class="follow">关注</a>
+                <?php  if(Session::get("username")){ ?>
+                @if($v['is_guan'] == 0)
+                    <span id="direction_<?= $v['d_id']?>"><a href="javascript:void(0)" data-tag-id="5" class="follow"  onclick="g_direction(<?= $v['d_id']?>)" id="g_direction_<?= $v['d_id']?>">关注</a></span>
+                @else
+                    <a href="javascript:void(0)" data-tag-id="5" class="follow" id="g_direction">已关注</a>
+                @endif
+                <?php }else{ ?>
+                <span><a href="#login-modal" id="" data-category="UserAccount" data-action="login" data-toggle="modal" class="follow">关注</a></span>
+                {{--<span><a href="javascript:void(0)" data-tag-id="5"  onclick="is_house()"></a></span>--}}
+                <?php } ?>
+
+                        {{--<a href="javascript:void(0)" data-tag-id="20" class="follow">关注</a>--}}
                             </div><!--.class-info end-->
             <div class="desc"></div>
         </li>
@@ -229,6 +240,24 @@
             location.href='{{url("wenda")}}'
         }
     }))
+</script>
+<script>
+    function g_direction(d_id){
+        $.ajax({
+            type: "POST",
+            url: "house_direction",
+            data: "d_id="+d_id,
+            dataType: "json",
+            success: function(msg){
+                var tr = '';
+                for(var i=0;i<=msg.length;i++){
+                    tr += '<a href="javascript:void(0)" data-tag-id="5" class="follow" id="g_direction">已关注</a>';
+                }
+                $("#g_direction_"+d_id).remove();
+                $("#direction_"+d_id).html(tr);
+            }
+        });
+    }
 </script>
 </div>
 </body>
