@@ -22,10 +22,18 @@ class IndexController extends Controller
 
         //方法文章显示
         $article = $index->article();
+
         //方法类型显示
         $lei     = $index->lei();
-        //print_r($article);die;
-        return view('index/index',['shi'=>$shi,'pro'=>$pro,'article'=>$article,'lei'=>$lei]);
+
+        //简历展示
+        $proe = $index->proe();
+
+        //主页答疑模块展示
+
+        $questions =$index->questions();
+//        print_r($questions);die;
+        return view('index/index',['shi'=>$shi,'pro'=>$pro,'article'=>$article,'lei'=>$lei,'gather'=>$proe,'questions'=>$questions]);
     }
 
     public function layouts(){

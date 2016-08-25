@@ -42,6 +42,9 @@ class Index extends Model
             ->get();
         return $arr;
     }
+    /*
+     * 方法类型
+     */
     public function lei(){
         $art = $this->article();
 
@@ -55,5 +58,25 @@ class Index extends Model
         }
 
         return $see;
+    }
+    //主页简历模块展示 展示最新的8条信息
+    public function proe()
+    {
+        $data = DB::table("gather")
+        ->orderBy('g_id',"desc")
+        ->limit(8)
+        ->get();
+        return $data;
+    }
+    //主页 答疑模块内容展示
+    public function questions()
+    {
+        $dor = DB::table("t_tw")
+            ->join("users","t_tw.user_id","=","users.user_id")
+            ->join("direction","t_tw.d_id","=","direction.d_id")
+            ->orderBy("t_id","desc")
+            ->limit(8)
+            ->get();
+        return $dor;
     }
 }

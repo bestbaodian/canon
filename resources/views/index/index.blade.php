@@ -158,11 +158,59 @@
 <!--方法结束 -->
 
 <!--简历开始 -->
-
+<div class="icourse">
+    <div class="incourse-wrap idx-width">
+        <h2 class="icourse-title">简历</h2>
+        <ul class="icourse-course clearfix">
+            <?php foreach($gather as $key=>$val){?>
+            <li>
+                <a  href="{{url("college_exam?id=$val[g_id]")}}">
+                    <div class="icourse-img">
+                        <img class="scrollLoading" src="{{url("$val[g_dir]")}}" alt="">
+                    </div>
+                    <div class="icourse-intro clearfix">
+                        <p>名称:{{$val['g_name']}}</p>
+                        <span class="l "><?php echo $val['g_name']?></span>
+                    </div>
+                    <div class="icourse-tips clearfix">
+                        <h2>{{$val['g_name']}}</h2>
+                        <span class="l "></span>
+                        <span class="r">{{$val['g_click']}}浏览</span>
+                    </div>
+                </a>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
 <!--简历介绍-->
 
 <!--答疑开始 -->
-
+<div class="icourse">
+    <div class="incourse-wrap idx-width">
+        <h2 class="icourse-title">答疑</h2>
+        <ul class="icourse-course clearfix">
+            <?php foreach($questions as $key=>$val){?>
+            <li>
+                <a  href="{{url("detail?id=$val[t_id]")}}">
+                    <div class="icourse-img">
+                        <img class="scrollLoading" src="{{$val['user_filedir'] or "images/unknow-40.png" }}" alt="">
+                    </div>
+                    <div class="icourse-intro clearfix">
+                        <p>答案:<?php echo strip_tags($val['t_content']);?></p>
+                        <span class="l "></span>
+                    </div>
+                    <div class="icourse-tips clearfix">
+                        <h2>问题:<?php echo substr($val['t_title'],0,15)?></h2>
+                        <span class="l ">{{$val['d_name']}}</span>
+                        <span class="r">提问时间：{{$val['add_time']}}</span>
+                    </div>
+                </a>
+            </li>
+            <?php } ?>
+        </ul>
+    </div>
+</div>
 {{--<!--答疑介绍-->--}}
 
 
