@@ -130,27 +130,28 @@
       <!--.my-follow-class登录后可见-->
 
 <div class="recommend-class">
-    <div class="title clearfix">
-        <h3>推荐分类</h3>
-        <span class="all-cls">全部分类</span>
-    </div><!--title end-->
-    <ul class="cls-list">
-                <li>
-            
-            <div class="class-info">
-                <div class="class-icon">
-                    <a href="/wenda/20" target="_blank">
-                        <img src="picture/563aff130001c76f00900090.jpg" alt="Linux"/>
-                    </a>
-                </div><!--.class-icon end-->
-                <h4><a href="/wenda/20" target="_blank">Linux</a></h4>
-                <p class="follow-person">12162人关注</p>
-                                <a href="guanzhu" data-tag-id="20" class="follow">关注</a>
-                            </div><!--.class-info end-->
-            <div class="desc">Linux是一套免费使用和自由传播的类Unix操作系统，是一个基于P...</div>
-        </li><!--li end-->
+            <div class="title clearfix">
+                <h3>推荐分类</h3>
+                <span class="all-cls">全部分类</span>
+            </div><!--title end-->
+            <ul class="cls-list">
+                @foreach($sort as $k=>$v)
+                    <li>
+                        <div class="class-info">
+                            <div class="class-icon">
+                                <a href="javascript:void(0)" target="_blank">
+                                    <img src="{{$v['aa'] or "images/unknow-40.png"}}" alt="Linux"/>
+                                </a>
+                            </div><!--.class-icon end-->
+                            <h4><a href="javascript:void(0)" target="_blank"><?= $v['d_name']?></a></h4>
+                            <p class="follow-person">{{$v["G"]}}人关注</p>
+                            <a href="javascript:void(0)" data-tag-id="20" class="follow">关注</a>
+                        </div><!--.class-info end-->
+                        <div class="desc"></div>
+                    </li>
+                    @endforeach<!--li end-->
             </ul><!--.cls-list end-->
-</div><!--.recommend-class end-->
+        </div><!--.recommend-class end-->
 
 <div class="advertisement">
         <a href="#" data-ast="yuanwenindexright_1_189" target="_blank">
@@ -161,85 +162,27 @@
     
 </div><!--.hot-ques end-->
 <div class="leifeng-sort">
-    <h3 class="title">一周回答雷锋榜</h3>
-    <ul>
-                <li>
-            <div class="ranking first">1</div>
-            <div class="user-pic">
-                <a target="_blank" href="/u/1088132/bbs">
-                    <img src="picture/5485bdcf00015df201000100-100-100.jpg" title="Caballarii"/>
-                </a>
-            </div><!--.user-pic end-->
-            <div class="user-name">
-                <a target="_blank" href="/u/1088132/bbs">Caballarii</a>
-            </div><!--.user-name end-->
-            <div class="user-info clearfix">
-                <span class="role">JAVA开发工程师</span>
-                <span class="answer-num">35回答</span>
-            </div><!--.user-info end-->
-        </li>
-                <li>
-            <div class="ranking second">2</div>
-            <div class="user-pic">
-                <a target="_blank" href="/u/1206175/bbs">
-                    <img src="picture/54c1f7be00019ad801000100-100-100.jpg" title="流口水流"/>
-                </a>
-            </div><!--.user-pic end-->
-            <div class="user-name">
-                <a target="_blank" href="/u/1206175/bbs">流口水流</a>
-            </div><!--.user-name end-->
-            <div class="user-info clearfix">
-                <span class="role">Web前端工程师</span>
-                <span class="answer-num">34回答</span>
-            </div><!--.user-info end-->
-        </li>
-                <li>
-            <div class="ranking third">3</div>
-            <div class="user-pic">
-                <a target="_blank" href="/u/2553777/bbs">
-                    <img src="picture/53fbd87f0001e4c006000338-240-135.jpg" title="display_none"/>
-                </a>
-            </div><!--.user-pic end-->
-            <div class="user-name">
-                <a target="_blank" href="/u/2553777/bbs">display_none</a>
-            </div><!--.user-name end-->
-            <div class="user-info clearfix">
-                <span class="role">Web前端工程师</span>
-                <span class="answer-num">31回答</span>
-            </div><!--.user-info end-->
-        </li>
-                <li>
-            <div class="ranking ">4</div>
-            <div class="user-pic">
-                <a target="_blank" href="/u/114554/bbs">
-                    <img src="picture/56f4fca500018f4101000100-100-100.jpg" title="李晓健"/>
-                </a>
-            </div><!--.user-pic end-->
-            <div class="user-name">
-                <a target="_blank" href="/u/114554/bbs">李晓健</a>
-            </div><!--.user-name end-->
-            <div class="user-info clearfix">
-                <span class="role">Web前端工程师</span>
-                <span class="answer-num">29回答</span>
-            </div><!--.user-info end-->
-        </li>
-                <li>
-            <div class="ranking ">5</div>
-            <div class="user-pic">
-                <a target="_blank" href="/u/1008219/bbs">
-                    <img src="picture/569639de0001ab3713000867-100-100.jpg" title="晚安sp"/>
-                </a>
-            </div><!--.user-pic end-->
-            <div class="user-name">
-                <a target="_blank" href="/u/1008219/bbs">晚安sp</a>
-            </div><!--.user-name end-->
-            <div class="user-info clearfix">
-                <span class="role">PHP开发工程师</span>
-                <span class="answer-num">28回答</span>
-            </div><!--.user-info end-->
-        </li>
+            <h3 class="title">一周回答雷锋榜</h3>
+            <ul>
+                @foreach($honor as $key => $v)
+                    <li>
+                        <div class="ranking first"><?= $key+1;?></div>
+                        <div class="user-pic">
+                            <a target="_blank" href="#">
+                                <img src="{{$v['user_filedir'] or "images/unknow-40.png"}}" alt="用户头像">
+                            </a>
+                        </div>
+                        <div class="user-name">
+                            <a target="_blank" href="#"><?= $v['user_name'];?></a>
+                        </div><!--.user-name end-->
+                        <div class="user-info clearfix">
+                            <span class="role">{{$v["num"] or "0"}}人关注</span>
+                            <span class="answer-num"><?= $v['C'];?>回答</span>
+                        </div><!--.user-info end-->
+                    </li>
+                @endforeach
             </ul>
-</div><!--.leifeng-sort end-->
+        </div><!--.leifeng-sort end-->
     </div>
   </div>
 </div>
