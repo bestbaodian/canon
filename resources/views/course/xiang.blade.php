@@ -226,7 +226,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                 <li class="chapter clearfix ">
                   <i class="chapter-icon"></i>
                     <div class="chapter-bd l">
-                     {{-- <h5 class="name">第1章 Java初体验</h5>--}}<p class="desc"><?php echo $arr['c_answer']?></p>
+                     {{-- <h5 class="name">第1章 Java初体验</h5>--}}<p class="desc"><?php echo htmlspecialchars($arr['c_answer']);?></p>
                     </div>
                 </li>
             </ul>
