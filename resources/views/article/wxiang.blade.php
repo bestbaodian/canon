@@ -204,7 +204,7 @@
         <div class="aside-author">
         <div class="p clearfix" style="margin-left: 10px;">
             <a href="#" class="l" title="{{$arr['user_name']}}" target="_blank">
-                <img  src="{{$arr['user_filedir']}}">
+                <img  width="170"  height="170" src="{{$arr['user_filedir'] or "images/unknow-160.png"}}">
             </a>
         </div>
             <a class="nick" href="#" title="{{$arr['user_name']}}" target="_blank">{{$arr['user_name']}}</a>
