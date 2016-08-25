@@ -45,7 +45,7 @@ class CourseController extends Controller
         $synthesize = $course->synthesize($c_id);
         //查询
         $follow=$course->sel_follow($c_id,$u_id);
-//        print_r($ping);die;
+//        print_r($synthesize);die;
         return view('course/xiang',['arr'=>$data['arr'],'ping'=>$data['ping'],'max'=>$data['max'],'min'=>$data['min'],'follow'=>$follow,'ping'=>$ping,'synthesize'=>$synthesize]);
     }
     /*

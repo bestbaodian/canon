@@ -7,7 +7,7 @@ return [
     'from' => ['address' => '18310257791@163.com', 'name' => '18310257791'],
     'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
     'username' => "18310257791@163.com",
-    'password' => "wang1113",
+    'password' => "www1113",
     'sendmail' => '/usr/sbin/sendmail -bs',
 ];
 return [

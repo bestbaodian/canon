@@ -206,7 +206,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
             <p>9.4</p>
         </div>
     </div><!--condition-box end-->
-            <p class="person-num noLogin"><a href="javascript:;" target="_blank">{{$synthesize["b"]}}人评价</a></p>
+            <p class="person-num noLogin"><a href="javascript:;" target="_blank">{{$synthesize["b"] or '0'}}人评价</a></p>
     </div><!--score-info end-->    </div><!--info-bar-box end-->
   </div>
   <div class="content-wrap">
@@ -297,7 +297,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                 {{--<p>内容实用：9.9</p>--}}
                 {{--<p>通俗易懂：9.6</p>--}}
                 {{--<p>逻辑清晰：9.4</p>--}}
-                <p class="person_num"><em>{{$synthesize["b"]}}</em>位同学参与评价</p>
+                <p class="person_num"><em>{{$synthesize["b"] or "0"}}</em>位同学参与评价</p>
             </div><!--evaluation-info end-->
             <div class="evaluation">
                 <?php if($ping!=""){ ?>
@@ -501,6 +501,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                        alert('评论成功');
                        $("#pinglun").hide();
                        $('.evaluation').html(msg);
+                       location.reload()
                    }
                });
            }

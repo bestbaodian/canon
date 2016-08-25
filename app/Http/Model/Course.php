@@ -196,17 +196,25 @@ class Course extends Model{
             ->groupBy("e_ping.u_id")
             ->get();
         $a = 0;
+        $num = 0;
         foreach($pro as $k=>$v)
         {
             $a += $v['e_score'];
+            $num+=1;
         }
         $b = 0;
         foreach($pro as $k=>$v)
         {
             $b+=$v["K"];
         }
-        $data['a'] = ($a/2)*2;
-        $data['b'] = $b;
+        if($a!=0){
+
+            $data['a'] = ($a/$num)*2;
+            $data['b'] = $b;
+        }else{
+            $data['a'] = 0;
+            $data['b'] = 0;
+        }
         return $data;
     }
     /*

@@ -70,7 +70,7 @@
 <div class="content-item-brief">
 <h1>{{$value['g_name']}}</h1>
 <div class="web-logoimg">
-<img src="{{$value['g_dir']}}" style="width:50px; height:50px;" />
+    <img src="{{$value['g_dir']}}" style="width:160px; height:150px;" />
 </div>
     <?php
     if($value['g_click']==0){
@@ -84,7 +84,7 @@
     }
     ?>
 <dl class="exam-info">
-<dd><span class="link-green"></span></dd>
+<dd><span class="link-green"><img  src="{{$value['g_dir']}}" style="width:160px; height:150px;margin-left:-40px;" /></span></dd>
 <dd class="exam-btn"><span class="btn  btn-block btn-primary" >查看详情</span></dd>
 </dl>
 </div>
@@ -118,8 +118,7 @@
 </div>
 
 </div>
-<script src="js/sea_1.js" type="text/javascript"></script>
-<script src="js/base.js"></script>
+
 <script src="js/jquery-1.8.3.min.js"></script>
 
 <script>

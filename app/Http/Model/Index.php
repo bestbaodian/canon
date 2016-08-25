@@ -39,6 +39,7 @@ class Index extends Model
             ->join('ar_type','article.a_type','=','ar_type.at_id')
             ->where('article.a_state','!=','0')
             ->orderby('article.brows','DESC')
+            ->limit(8)
             ->get();
         return $arr;
     }
@@ -54,6 +55,7 @@ class Index extends Model
             $see[]  = DB::table('a_lei')
                 ->select('al_id','al_name')
                 ->whereIn('al_id',$lei)
+                ->limit(8)
                 ->get();
         }
 
