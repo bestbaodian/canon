@@ -37,9 +37,9 @@
         if($is_look){
         ?>
         <div class="nav">
-            <a href="{{url("wenda?is_look=1")}}" class="active">推荐</a>
+            <a href="{{url("wenda?is_look=1")}}" >推荐</a>
             <a href="{{url("bestnew?is_look=1")}}" >最新</a>
-            <a href="{{url("waitreply?is_look=1")}}">等待回答</a>
+            <a href="{{url("waitreply?is_look=1")}}" class="active">等待回答</a>
             <div class="switch-box">
                 <div class="switch js-switch on">
                     <div class="fill">
@@ -52,9 +52,9 @@
         </div>
         <?php }else{?>
         <div class="nav">
-            <a href="{{url("wenda")}}" class="active" >推荐</a>
+            <a href="{{url("wenda")}}" >推荐</a>
             <a href="{{url("bestnew")}}"  >最新</a>
-            <a href="{{url("waitreply")}}" >等待回答</a>
+            <a href="{{url("waitreply")}}" class="active" >等待回答</a>
             <div class="switch-box">
                 <div class="switch js-switch">
                     <div class="fill">
