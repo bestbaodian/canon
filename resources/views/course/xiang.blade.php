@@ -26,6 +26,60 @@
         #star p{position:absolute;top:20px;width:159px;height:60px;display:none;background:url(images/icon.gif ) no-repeat;padding:7px 10px 0;}
         #star p em{color:#f60;display:block;font-style:normal;}
     </style>
+    <script type="text/javascript">
+        window.onload = function ()
+        {
+            var oStar = document.getElementById("star");
+            var aLi = oStar.getElementsByTagName("li");
+            var oUl = oStar.getElementsByTagName("ul")[0];
+            var oSpan = oStar.getElementsByTagName("span")[1];
+            var oP = oStar.getElementsByTagName("p")[0];
+            var i = iScore = iStar = 0;
+            var aMsg = [
+                "很不满意|差得太离谱，面试根本不问这个问题",
+                "不满意|内容不实用，去了公司用不到，不满意",
+                "一般|内容一般，逻辑描述不清晰",
+                "满意|逻辑挺好，内容晦涩了点，还是挺满意的",
+                "非常满意|各方面都非常好，非常满意"
+            ]
+            for (i = 1; i <= aLi.length; i++)
+            {
+                aLi[i - 1].index = i;
+                //鼠标移过显示分数
+                aLi[i - 1].onmouseover = function ()
+                {
+                    fnPoint(this.index);
+                    //浮动层显示
+                    oP.style.display = "block";
+                    //计算浮动层位置
+                    oP.style.left = oUl.offsetLeft + this.index * this.offsetWidth - 104 + "px";
+                    //匹配浮动层文字内容
+                    oP.innerHTML = "<em><b>" + this.index + "</b> 分 " + aMsg[this.index - 1].match(/(.+)\|/)[1] + "</em>" + aMsg[this.index - 1].match(/\|(.+)/)[1]
+                };
+                //鼠标离开后恢复上次评分
+                aLi[i - 1].onmouseout = function ()
+                {
+                    fnPoint();
+                    //关闭浮动层
+                    oP.style.display = "none"
+                };
+                //点击后进行评分处理
+                aLi[i - 1].onclick = function ()
+                {
+                    iStar = this.index;
+                    oP.style.display = "none";
+                    oSpan.innerHTML = "<strong>" + (this.index) + " 分</strong> (" + aMsg[this.index - 1].match(/\|(.+)/)[1] + ")"
+                }
+            }
+            //评分处理
+            function fnPoint(iArg)
+            {
+                //分数赋值
+                iScore = iArg || iStar;
+                for (i = 0; i < aLi.length; i++) aLi[i].className = i < iScore ? "on" : "";
+            }
+        };
+    </script>
 <body>
 
 @extends('layouts.master')
@@ -107,24 +161,35 @@ $l=isset($_GET['l'])?$_GET['l']:0;
 <div class="course-info-main clearfix w">
   <div class="info-bar clearfix">
     <div class="info-bar-box">
-      
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                                                                        
-                    <a href="#" class="btn-red start-study-btn r">开始学习</a>
+                    <a href="#" class="btn-red start-study-btn r"></a>
             <div class="score-info">
     <div class="satisfaction-degree-info">
         <h3>满意度评分</h3>
-        <h4>9.9</h4>
+        <h4>{{$synthesize['a']}}</h4>
         <div class="star-box">
-            <img src="images/xing.jpg" width="20" height="20">
-            <img src="images/xing.jpg" width="20" height="20">
-            <img src="images/xing.jpg" width="20" height="20">
-            <img src="images/xing.jpg" width="20" height="20">
-            <img src="images/xing.jpg" width="20" height="20">
+            @if($synthesize['a']==0)
+                暂无评价
+            @elseif($synthesize<=2)
+                <img src="images/xing.jpg" width="20" height="20">
+            @elseif($synthesize['a']<=4)
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+            @elseif($synthesize['a']<=6)
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+            @elseif($synthesize['a']<=8)
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+            @elseif($synthesize['a']<=10)
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+                <img src="images/xing.jpg" width="20" height="20">
+            @endif
         </div>
     </div><!--satisfaction-degree-info end-->
         <div class="condition-box">
@@ -141,7 +206,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
             <p>9.4</p>
         </div>
     </div><!--condition-box end-->
-            <p class="person-num noLogin"><a href="javascript:;" target="_blank">1337人评价</a></p>
+            <p class="person-num noLogin"><a href="javascript:;" target="_blank">{{$synthesize["b"]}}人评价</a></p>
     </div><!--score-info end-->    </div><!--info-bar-box end-->
   </div>
   <div class="content-wrap">
@@ -185,11 +250,6 @@ $l=isset($_GET['l'])?$_GET['l']:0;
         <div style="float: right"><a href="javascript:void(0)"  id="ping" onclick="pingjia(<?php echo $user_name;?>)">立即评价</a></div>
         <?php  }
         ?>
-
-
-        <!--
-            评论功能 制作人:: 时庆庆
-        -->
         <div id="pinglun">
             <div id="star" style="float:left;">
                 <span>点击打分:</span>
@@ -203,28 +263,30 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                 <span id="score"></span>
                 <p></p>
             </div>
-            <textarea rows="5" cols="100" id="con" placeholder="请输入评论:" style="background:#ffffff"></textarea>
+            <textarea rows="5" cols="95" id="con" placeholder="请输入评论:" style="background:#ffffff"></textarea>
             <a href="javascript:void(0)" id="subs">提交评论</a></div>
         <div class="evaluation-list">
             <h3>试题评价</h3>
             <div class="evaluation-info clearfix">
                 <p class="satisfaction">满意度评分：<em>{{$synthesize['a']}}</em></p>
                 <div class="star-box">
-                    @if($synthesize['a']<=2)
+                    @if($synthesize['a']==0)
+                        暂无评价
+                    @elseif($synthesize<=2)
                         <img src="images/xing.jpg" width="20" height="20">
-                        @elseif($synthesize['a']<=4)
-                        <img src="images/xing.jpg" width="20" height="20">
-                        <img src="images/xing.jpg" width="20" height="20">
-                        @elseif($synthesize['a']<=6)
-                        <img src="images/xing.jpg" width="20" height="20">
+                    @elseif($synthesize['a']<=4)
                         <img src="images/xing.jpg" width="20" height="20">
                         <img src="images/xing.jpg" width="20" height="20">
-                        @elseif($synthesize['a']<=8)
+                    @elseif($synthesize['a']<=6)
                         <img src="images/xing.jpg" width="20" height="20">
                         <img src="images/xing.jpg" width="20" height="20">
                         <img src="images/xing.jpg" width="20" height="20">
+                    @elseif($synthesize['a']<=8)
                         <img src="images/xing.jpg" width="20" height="20">
-                        @elseif($synthesize['a']<=10)
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                        <img src="images/xing.jpg" width="20" height="20">
+                    @elseif($synthesize['a']<=10)
                         <img src="images/xing.jpg" width="20" height="20">
                         <img src="images/xing.jpg" width="20" height="20">
                         <img src="images/xing.jpg" width="20" height="20">
@@ -280,115 +342,116 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                     else{
 
                     }?>
-                    <!--evaluation-con end--
-            </div><!--evaluation end-->
-            <!--evaluation end-->
+        </div>
         </div>
             {{--<div class="more-evaluation"><a href="#" target="_blank">查看更多评价</a></div>--}}
-          </div><!--content end-->
-    <div class="aside r">
-      <div class="bd">
+          </div>
+      <!--
+    {{--<div class="aside r">--}}
+      {{--<div class="bd">--}}
 
-      <div class="box mb40">
-      <h4>讲师提示</h4>
-            <div class="teacher-info">
-        <a href="http://www.imooc.com/u/112258/courses?sort=publish" target="_blank">
-          <img src="picture/535f03950001915501400140-80-80.jpg" height="80" width="80">
-        </a>
-        <span class="tit">
-          <a href="http://www.imooc.com/u/112258/courses?sort=publish" target="_blank">laurenyang</a><i class="icon-imooc"></i>
-        </span>
-        <span class="job">JAVA开发工程师</span>
-      </div>
-                  <div class="course-info-tip">
-                <dl class="first">
-          <dt>课程须知</dt>
-          <dd class="autowrap">此部分为Java入门课程，适合零基础的小伙伴们，赶紧开始学习吧。</dd>
-        </dl>
-                        <dl>
-          <dt>老师告诉你能学到什么？</dt>
-          <dd class="autowrap">1、会配置Java开发环境，并使用工具进行程序开发
-2、掌握Java中基本语法的使用
+      {{--<div class="box mb40">--}}
+      {{--<h4>讲师提示</h4>--}}
+            {{--<div class="teacher-info">--}}
+        {{--<a href="http://www.imooc.com/u/112258/courses?sort=publish" target="_blank">--}}
+          {{--<img src="picture/535f03950001915501400140-80-80.jpg" height="80" width="80">--}}
+        {{--</a>--}}
+        {{--<span class="tit">--}}
+          {{--<a href="http://www.imooc.com/u/112258/courses?sort=publish" target="_blank">laurenyang</a><i class="icon-imooc"></i>--}}
+        {{--</span>--}}
+        {{--<span class="job">JAVA开发工程师</span>--}}
+      {{--</div>--}}
+                  {{--<div class="course-info-tip">--}}
+                {{--<dl class="first">--}}
+          {{--<dt>课程须知</dt>--}}
+          {{--<dd class="autowrap">此部分为Java入门课程，适合零基础的小伙伴们，赶紧开始学习吧。</dd>--}}
+        {{--</dl>--}}
+                        {{--<dl>--}}
+          {{--<dt>老师告诉你能学到什么？</dt>--}}
+          {{--<dd class="autowrap">1、会配置Java开发环境，并使用工具进行程序开发--}}
+{{--2、掌握Java中基本语法的使用--}}
 
-</dd>
-        </dl>
-              </div>
-        </div>
-  
-          
-<div class="cp-other-learned  js-comp-tabs">
-  <div class="cp-header clearfix">
-    <h2 class="cp-tit l">该课的同学还学过</h2>
-    <ul class="cp-tabs r">
+{{--</dd>--}}
+        {{--</dl>--}}
+              {{--</div>--}}
+        {{--</div>--}}
+  {{----}}
+          {{----}}
+{{--<div class="cp-other-learned  js-comp-tabs">--}}
+  {{--<div class="cp-header clearfix">--}}
+    {{--<h2 class="cp-tit l">该课的同学还学过</h2>--}}
+    {{--<ul class="cp-tabs r">--}}
 
-            <li class="l">
-        <a href="javascript:;" class="on js-comp-tab-item" data-pannel="course">课程</a>
-      </li>
-      <li class="l end"><a href="javascript:;" class="js-comp-tab-item" data-pannel="plan">计划</a></li>
-          </ul>
-  </div>
-  <div class="cp-body">
-    <div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="course" style="display: block">
-    <!-- img 200 x 112 -->
-      <ul class="other-list">
-                <li class="curr">
-          <a href="http://www.imooc.com/view/124?src=sug" target="_blank">
-            <img src="picture/53b65f70000148d306000338-240-135.jpg" alt="Java入门第二季">
-            <span class="name autowrap">Java入门第二季</span>
-          </a>
-        </li>
-                <li>
-          <a href="http://www.imooc.com/view/110?src=sug" target="_blank">
-            <img src="picture/537587c60001def606000338-240-135.jpg" alt="Java入门第三季">
-            <span class="name autowrap">Java入门第三季</span>
-          </a>
-        </li>
-                <li>
-          <a href="http://www.imooc.com/view/9?src=sug" target="_blank">
-            <img src="picture/529dc3380001379906000338-240-135.jpg" alt="HTML+CSS基础课程">
-            <span class="name autowrap">HTML+CSS基础课程</span>
-          </a>
-        </li>
-                <li>
-          <a href="http://www.imooc.com/view/96?src=sug" target="_blank">
-            <img src="picture/53bf89100001684e06000338-240-135.jpg" alt="Android攻城狮的第一门课（入门篇）">
-            <span class="name autowrap">Android攻城狮的第一门课（入门篇）</span>
-          </a>
-        </li>
-                <li>
-          <a href="http://www.imooc.com/view/36?src=sug" target="_blank">
-            <img src="picture/53e1d0470001ad1e06000338-240-135.jpg" alt="JavaScript入门篇">
-            <span class="name autowrap">JavaScript入门篇</span>
-          </a>
-        </li>
-              </ul>
-    </div>
-        <div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="plan">
-      <ul class="other-list">
-                <li class="curr">
-          <a href="http://www.imooc.com/course/programdetail/pid/29?src=sug" target="_blank">
-            <img src="picture/55aef90d0001f2a502400180-240-135.jpg" alt="高德开发者必由之路——Android SDK篇">
-            <span class="name autowrap">高德开发者必由之路——Android SDK篇</span>
-          </a>
-        </li>
-                <li>
-          <a href="http://www.imooc.com/course/programdetail/pid/31?src=sug" target="_blank">
-            <img src="picture/56551e6700018b0c09600720-240-135.jpg" alt="Java工程师">
-            <span class="name autowrap">Java工程师</span>
-          </a>
-        </li>
-                <li>
-          <a href="http://www.imooc.com/course/programdetail/pid/33?src=sug" target="_blank">
-            <img src="picture/56551e450001afcd09600720-240-135.jpg" alt="Android工程师">
-            <span class="name autowrap">Android工程师</span>
-          </a>
-        </li>
-              </ul>
-    </div>
-      </div>
-</div>
+            {{--<li class="l">--}}
+        {{--<a href="javascript:;" class="on js-comp-tab-item" data-pannel="course">课程</a>--}}
+      {{--</li>--}}
+      {{--<li class="l end"><a href="javascript:;" class="js-comp-tab-item" data-pannel="plan">计划</a></li>--}}
+          {{--</ul>--}}
+  {{--</div>--}}
+  {{--<div class="cp-body">--}}
+    {{--<div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="course" style="display: block">--}}
+    {{--<!-- img 200 x 112 -->--}}
+      {{--<ul class="other-list">--}}
+                {{--<li class="curr">--}}
+          {{--<a href="http://www.imooc.com/view/124?src=sug" target="_blank">--}}
+            {{--<img src="picture/53b65f70000148d306000338-240-135.jpg" alt="Java入门第二季">--}}
+            {{--<span class="name autowrap">Java入门第二季</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+                {{--<li>--}}
+          {{--<a href="http://www.imooc.com/view/110?src=sug" target="_blank">--}}
+            {{--<img src="picture/537587c60001def606000338-240-135.jpg" alt="Java入门第三季">--}}
+            {{--<span class="name autowrap">Java入门第三季</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+                {{--<li>--}}
+          {{--<a href="http://www.imooc.com/view/9?src=sug" target="_blank">--}}
+            {{--<img src="picture/529dc3380001379906000338-240-135.jpg" alt="HTML+CSS基础课程">--}}
+            {{--<span class="name autowrap">HTML+CSS基础课程</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+                {{--<li>--}}
+          {{--<a href="http://www.imooc.com/view/96?src=sug" target="_blank">--}}
+            {{--<img src="picture/53bf89100001684e06000338-240-135.jpg" alt="Android攻城狮的第一门课（入门篇）">--}}
+            {{--<span class="name autowrap">Android攻城狮的第一门课（入门篇）</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+                {{--<li>--}}
+          {{--<a href="http://www.imooc.com/view/36?src=sug" target="_blank">--}}
+            {{--<img src="picture/53e1d0470001ad1e06000338-240-135.jpg" alt="JavaScript入门篇">--}}
+            {{--<span class="name autowrap">JavaScript入门篇</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+              {{--</ul>--}}
+    {{--</div>--}}
+        {{--<div class="cp-tab-pannel js-comp-tab-pannel" data-pannel="plan">--}}
+      {{--<ul class="other-list">--}}
+                {{--<li class="curr">--}}
+          {{--<a href="http://www.imooc.com/course/programdetail/pid/29?src=sug" target="_blank">--}}
+            {{--<img src="picture/55aef90d0001f2a502400180-240-135.jpg" alt="高德开发者必由之路——Android SDK篇">--}}
+            {{--<span class="name autowrap">高德开发者必由之路——Android SDK篇</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+                {{--<li>--}}
+          {{--<a href="http://www.imooc.com/course/programdetail/pid/31?src=sug" target="_blank">--}}
+            {{--<img src="picture/56551e6700018b0c09600720-240-135.jpg" alt="Java工程师">--}}
+            {{--<span class="name autowrap">Java工程师</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+                {{--<li>--}}
+          {{--<a href="http://www.imooc.com/course/programdetail/pid/33?src=sug" target="_blank">--}}
+            {{--<img src="picture/56551e450001afcd09600720-240-135.jpg" alt="Android工程师">--}}
+            {{--<span class="name autowrap">Android工程师</span>--}}
+          {{--</a>--}}
+        {{--</li>--}}
+              {{--</ul>--}}
+    {{--</div>--}}
+      {{--</div>--}}
+{{--</div>--}}
 
-</div>    </div>
+{{--</div>    </div>--}}
+-->
+      <!--右侧内容-->
   </div>
   <div class="clear"></div>
 
