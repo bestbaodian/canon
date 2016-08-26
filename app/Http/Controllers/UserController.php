@@ -469,4 +469,78 @@ class UserController extends Controller
             }
         }
     }
+    /*
+     * 面试资料
+     */
+    public function interview(Request $request){
+        //获取用户session信息
+        $username = Session::get("username");
+        $User  =new  User();
+        $user  =$User->setprofile($username);
+        //获取用户面试信息
+        $arr=$User->sel_one();
+        return view('user/interview',['user'=>$user,'arr'=>$arr]);
+    }
+    public function addview(Request $request){
+        //获取用户session信息
+        $data=$request->all();
+        $username = Session::get("username");
+        $User  =new User();
+        $user  =$User->setprofile($username);
+        if(isset($data['id'])){
+            $arr=$User->upd_one($data['id']);
+            return view('user/addview',['user'=>$user,'arr'=>$arr]);
+        }
+        return view('user/addview',['user'=>$user]);
+    }
+    public function setview(Request $request){
+        //获取用户session信息
+        $data = $request->all();
+        $User  =new  User();
+        $user  =$User->add_inter($data);
+        return view('user/interview',['user'=>$user]);
+    }
+    public function del_one(Request $request){
+        $ic_id = $request->all();
+        $User  =new  User();
+        $user  =$User->del_one($ic_id['ic_id']);
+        if($user==1){
+            $username = Session::get("username");
+            $User  =new  User();
+            $user  =$User->setprofile($username);
+            //获取用户面试信息
+            $arr=$User->sel_one();
+            return view('user/interview',['user'=>$user,'arr'=>$arr]);
+        }else{
+            echo 2;
+        }
+    }
+
+    public function attestation(){
+        $username = Session::get("username");
+        $User  =new User();
+        $user  =$User->attestation($username);
+        $college=$User->sel_college();
+        if(isset($user['cid'])&&!empty($user['cid'])){
+            $class=$User->sel_class($user['cid']);
+        }else{
+            $class=[];
+        }
+        return view('user/attestation',['user'=>$user,'college'=>$college,'class'=>$class]);
+    }
+    public function setclass(Request $request){
+        $id=$request->input('college');
+        $User  =new User();
+        $college=$User->sel_class($id);
+        if(!empty($college)){
+            echo json_encode($college);
+        }else{
+            echo 1;
+        }
+    }
+    public function setmsg(Request $request){
+        $data = $request->all();
+        $User  =new  User();
+        $User->sel_msg($data);
+    }
 }

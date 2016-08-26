@@ -215,4 +215,102 @@ class User extends Model
             ->get();
         return $article;
     }
+    //面试资料添加
+    public function add_inter($data){
+        $u_id=Session::get('uid');
+        $company=$data['company'];
+        $time=$data['time'];
+        $ic_id=isset($data['ic_id'])?$data['ic_id']:'';
+        if($ic_id==''){
+            $arr=DB::insert("insert into ic(u_id,company,`time`) values('$u_id','$company','$time')");
+            if($arr){
+                echo 1;die;
+            }else{
+                echo 2;die;
+            }
+        }
+        else{
+            $arr=DB::table('ic')
+                ->where('ic_id', $ic_id)
+                ->update(['company' => $company,'time'=>$time]);
+            if($arr){
+                echo 3;die;
+            }else{
+                echo 2;die;
+            }
+        }
+    }
+    //查询个人面试信息
+    public function sel_one(){
+        $u_id=Session::get('uid');
+        $arr  =DB::table('ic')->select('*')->where('u_id',$u_id)->orderBy('time','desc')->get();
+        return $arr;
+    }
+    //编辑个人面试信息
+    public function upd_one($id){
+        $arr  =DB::table('ic')->select('*')->where('ic_id',$id)->first();
+        return $arr;
+    }
+    //删除面试资料
+    public function del_one($ic_id){
+        $arr  =DB::table('ic')->where('ic_id',$ic_id)->delete();
+        if($arr){
+            return 1;
+        }else{
+            return 2;
+        }
+    }
+    /*
+     * 实名认证
+     */
+    public function attestation($user)
+    {
+        //$sql ="select user_name,user_job,user_aboutme,user_sex,user_filedir from users where user_name = '$user'";
+        $data=DB::table('users')
+            ->leftjoin('userinfo','users.user_id','=','userinfo.u_id')
+            ->leftjoin('class','class.c_id','=','userinfo.u_class')
+            ->select('user_phone_status','userinfo.us_id','userinfo.u_name','userinfo.u_class','class.cid','class.c_class')
+            ->where("user_name",$user)
+            ->first();
+        if($data){
+            return $data;
+        }else{
+            return $data=[];
+        }
+    }
+    /*
+     *学院班级
+     */
+    public function sel_college(){
+        $regin  =DB::table('college')->select('*')->get();
+        return $regin;
+    }
+    public function sel_class($id){
+        $regin  =DB::table('class')->select('*')->where('cid',$id)->get();
+        return $regin;
+    }
+    public function sel_msg($data){
+        $u_id=Session::get('uid');
+        $u_name=$data['u_name'];
+        $c_id=$data['c_id'];
+        $us_id=isset($data['us_id'])?$data['us_id']:'';
+        if($us_id==''){
+            $arr=DB::insert("insert into userinfo(u_id,u_name,u_class) values('$u_id','$u_name','$c_id')");
+            if($arr){
+                echo 1;die;
+            }else{
+                echo 2;die;
+            }
+        }
+        else{
+            $arr=DB::table('userinfo')
+                ->where('us_id', $us_id)
+                ->update(['u_name' => $u_name,'u_class'=>$c_id]);
+            if($arr){
+                echo 1;die;
+            }else{
+                echo 2;die;
+            }
+        }
+    }
 }

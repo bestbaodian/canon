@@ -25,7 +25,11 @@ Route::post('name_deng', 'LoginController@name_deng');
 Route::post('email_deng','LoginController@email_deng');
 //第三方登陆--qq登陆
 Route::get('qq_login', 'LoginController@qq_login');
-Route::get('Ic',"IcController@Ic");
+//面试资料
+Route::get('Ic',"IcController@index");
+
+Route::post('mid',"IcController@mid");
+
 //个人中心
 Route::get('user/setprofile', 'UserController@setprofile');
 Route::get('user/setavator', 'UserController@setavator');
@@ -33,7 +37,14 @@ Route::get('user/setphone', 'UserController@setphone');
 Route::get('user/setverifyemail', 'UserController@setverifyemail');
 Route::get('user/setresetpwd', 'UserController@setresetpwd');
 Route::get('user/setbindsns', 'UserController@setbindsns');
-
+//面试资料部分
+Route::get('user/interview', 'UserController@interview');
+Route::get('user/addview', 'UserController@addview');
+Route::post('user/setview', 'UserController@setview');
+Route::post('user/del_one', 'UserController@del_one');
+Route::get('user/attestation', 'UserController@attestation');
+Route::post('user/class', 'UserController@setclass');
+Route::post('user/msg', 'UserController@setmsg');
 
 //头像上传
 Route::post('postpic', 'UserController@postpic');

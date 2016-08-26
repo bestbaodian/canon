@@ -16,6 +16,7 @@
                 <li><a href="{{url('company')}}"  target="_self">简历</a></li>
 		        <li><a href="{{url('wenda')}}" target="_self">答疑</a></li>
 		        <li><a href="http://tmjob.mbaodian.com/" target="_self">面试公司</a></li>
+		        <li><a href="{{url('Ic')}}" target="_self">面试资料</a></li>
             </ul>
         </div>
         <div id="login-area">
@@ -110,7 +111,7 @@
 </div>
 
 
-<div id="footer" >
+<div id="footer" style="clear: both;" >
     <div class="waper">
         <div class="footerwaper clearfix">
             <div class="followus r">

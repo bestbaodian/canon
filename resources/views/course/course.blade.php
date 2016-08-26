@@ -12,8 +12,8 @@
     <meta property="wb:webmaster" content="c4f857219bfae3cb" />
     <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <meta http-equiv="Cache-Control" content="no-transform " />
-    <meta name="Keywords" content="" />
-    <meta name="Description" content="慕课网精品课程，为您提供专业的IT实战开发课程，包含前端开发、后端开发、移动端开发、数据处理、图像处理等各方面IT技能，课程全面、制作精良、讲解通俗易懂。"/>
+    <meta name="Keywords" content="面试试题，面试经验，面试方法，面试问题，面试宝典网" />
+    <meta name="Description" content="互联网工程，物联网工程，web前端，苹果方向，网络方向，网络方向，信息方向，室内设计，建筑系方向，工程造价方向，web架构方向，UI设计方向，游戏方向，云应用，云服务"/>
     <link rel="stylesheet" href="css/d79d81e9ab144c28aae8b073106e6881.css" type="text/css" />
 </head>
 <body  id="List_courseId">
