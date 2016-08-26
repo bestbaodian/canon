@@ -109,7 +109,7 @@
     </div>
 
 </body>
-@include("layouts.zz")
+
 @endsection
 <script src="js/jquery.js"></script>
 <script src="js/jquery.datetimepicker.js"></script>
