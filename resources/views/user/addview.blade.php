@@ -72,43 +72,7 @@
 
         <div class="settings-cont clearfix">
 
-            <div class="setting-left l">
-                <ul class="wrap-boxes">
-                    <li class="active">
-                        <a href="{{url("/user/setprofile")}}">个人资料</a>
-                    </li>
-                    <li >
-                        <a href="{{url('/user/setavator')}}">头像设置</a>
-                    </li>
-
-                    <li >
-                        @if($user[0]['user_phone_status'] == 1)
-                            <a href="{{url("/user/setphonestep")}}">手机设置</a>
-                            <span class='unbound'>已绑定</span>
-                        @else
-                            <a href="{{url('/user/setphone')}}">手机设置</a>
-                            <span class='unbound'>未绑定</span>
-                        @endif
-                    </li>
-                    <li >
-                        <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
-                        <span class='unbound'>未绑定</span>
-                    </li>
-                    <li >
-                        <a href="{{url('/user/setresetpwd')}}">修改密码</a>
-                    </li>
-                    <li >
-
-                        <a no-pjajx href="/user/setbindsns">我的收藏</a>
-                    </li>
-                    <li>
-                        <a href="{{url("/user/interview")}}" class="onactive">面试资料</a>
-                    </li>
-                    <li>
-                        <a href="{{url("/user/attestation")}}">实名认证</a>
-                    </li>
-                </ul>
-            </div>
+            @include('layouts.menu')
             <div class="setting-right">
                 <div class="setting-right-wrap wrap-boxes settings" >
                     <h4 style="margin-top: 30px;color:#226666">

@@ -269,9 +269,9 @@ class User extends Model
         $data=DB::table('users')
             ->leftjoin('userinfo','users.user_id','=','userinfo.u_id')
             ->leftjoin('class','class.c_id','=','userinfo.u_class')
-            ->select('user_phone_status','userinfo.us_id','userinfo.u_name','userinfo.u_class','class.cid','class.c_class')
+            ->select('user_phone_status','userinfo.us_id','userinfo.u_name','userinfo.u_class','class.cid','class.c_class',"user_email_status")
             ->where("user_name",$user)
-            ->first();
+            ->get();
         if($data){
             return $data;
         }else{

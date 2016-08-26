@@ -32,6 +32,12 @@
 
             <a no-pjajx href="{{url("user/my_house")}}">我的收藏</a>
         </li>
+        <li>
+            <a href="{{url("/user/interview")}}">面试资料</a>
+        </li>
+        <li>
+            <a href="{{url("/user/attestation")}}">实名认证</a>
+        </li>
     </ul>
 </div>
 <script>

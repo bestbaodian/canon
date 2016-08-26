@@ -81,43 +81,7 @@
 
         <div class="settings-cont clearfix">
 
-            <div class="setting-left l">
-                <ul class="wrap-boxes">
-                    <li>
-                        <a href="{{url("/user/setprofile")}}">个人资料</a>
-                    </li>
-                    <li >
-                        <a href="{{url('/user/setavator')}}">头像设置</a>
-                    </li>
-
-                    <li >
-                        @if($user['user_phone_status'] == 1)
-                            <a href="{{url("/user/setphonestep")}}">手机设置</a>
-                            <span class='unbound'>已绑定</span>
-                        @else
-                            <a href="{{url('/user/setphone')}}">手机设置</a>
-                            <span class='unbound'>未绑定</span>
-                        @endif
-                    </li>
-                    <li >
-                        <a href="{{url('/user/setverifyemail')}}">邮箱验证</a>
-                        <span class='unbound'>未绑定</span>
-                    </li>
-                    <li >
-                        <a href="{{url('/user/setresetpwd')}}">修改密码</a>
-                    </li>
-                    <li >
-
-                        <a no-pjajx href="/user/setbindsns">我的收藏</a>
-                    </li>
-                    <li>
-                        <a href="{{url("/user/interview")}}" class="onactive">面试资料</a>
-                    </li>
-                    <li class="active">
-                        <a href="{{url("/user/attestation")}}">实名认证</a>
-                    </li>
-                </ul>
-            </div>
+            @include('layouts.menu')
             <div class="setting-right">
                 <div class="setting-right-wrap wrap-boxes settings" >
                     <h4 style="margin-top: 30px;color:#226666">
@@ -128,7 +92,7 @@
                         <div class="wlfg-wrap clearfix">
                             <label class="label-name" for="company" style="cursor: pointer">真实姓名</label>
                             <div class="rlf-group">
-                                <input type="text" id="company"  autocomplete="off"  data-validate="nick"  class="input rlf-input rlf-input-nick" value="@if(isset($user)){{$user['u_name']}}@endif" placeholder=""/>
+                                <input type="text" id="company"  autocomplete="off"  data-validate="nick"  class="input rlf-input rlf-input-nick" value="@if(isset($user)){{$user[0]['u_name']}}@endif" placeholder=""/>
                                 <p class="rlf-tip-wrap"></p>
                             </div>
                         </div>
@@ -140,7 +104,7 @@
                                     <option  value="0">--选择学院--</option>
                                     @foreach($college as $key=>$val)
                                         <?php
-                                        if($val['c_id']==$user['cid']){?>
+                                        if($val['c_id']==$user[0]['cid']){?>
                                         <option selected="selected" value="{{ $val['c_id']  }}">{{ $val['c_name'] }}</option>
                                         <?php }else{?>
                                         <option  value="{{ $val['c_id'] }}">{{ $val['c_name'] }}</option>
@@ -150,7 +114,7 @@
                                 <select class='input' id="city-select1" hidefocus="true" >
                                     @if($class)
                                         @foreach($class as $v)
-                                            <option value="{{$v['c_id']}}" @if($user['u_class']==$v['c_id'])selected="selected" @endif>{{$v['c_class']}}</option>
+                                            <option value="{{$v['c_id']}}" @if($user[0]['u_class']==$v['c_id'])selected="selected" @endif>{{$v['c_class']}}</option>
                                         @endforeach
                                     @else
                                         <option value="0">--选择班级--</option>
@@ -163,7 +127,7 @@
                         <div class="wlfg-wrap clearfix">
                             <label class="label-name" for=""></label>
                             <div class="rlf-group">
-                                <span id="profile-submit" tid="@if(!empty($user['us_id'])){{$user['us_id']}}@else 0 @endif"  hidefocus="true"  aria-role="button" class="rlf-btn-green btn-block profile-btn">保存</span>
+                                <span id="profile-submit" tid="@if(!empty($user[0]['us_id'])){{$user[0]['us_id']}}@else 0 @endif"  hidefocus="true"  aria-role="button" class="rlf-btn-green btn-block profile-btn">保存</span>
                             </div>
                         </div>
                     </div>
