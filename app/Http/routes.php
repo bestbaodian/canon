@@ -186,3 +186,10 @@ Route::get('company', 'CompanyController@index');
 Route::get('college','CompanyController@college');
 Route::get('college_x','CompanyController@college_x');
 Route::get('college_exam','CompanyController@college_exam');
+
+
+//抛出403页面
+Route::bind('user', function()
+{
+    return view("errors.503");
+});

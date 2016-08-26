@@ -521,11 +521,12 @@ class UserController extends Controller
         $User  =new User();
         $user  =$User->attestation($username);
         $college=$User->sel_college();
-        if(isset($user['cid'])&&!empty($user['cid'])){
-            $class=$User->sel_class($user['cid']);
+        if(isset($user[0]['cid'])&&!empty($user[0]['cid'])){
+            $class=$User->sel_class($user[0]['cid']);
         }else{
             $class=[];
         }
+//        print_r($class);die;
         return view('user/attestation',['user'=>$user,'college'=>$college,'class'=>$class]);
     }
     public function setclass(Request $request){

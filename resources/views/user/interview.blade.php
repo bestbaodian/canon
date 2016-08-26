@@ -41,7 +41,7 @@
                         </tr>
                         @foreach($arr as $v)
                             <tr height="40px">
-                                <td>{{$v['company']}}</td>
+                                <td>　{{$v['company']}}</td>
                                 <td style="text-align: center">{{$v['time']}}</td>
                                 <td style="text-align: center"><a href="{{url("/user/addview?id=".$v['ic_id'])}}">编辑</a> | <a class="del_one" uid="{{$v['ic_id']}}" href="javascript:void(0)">删除</a></td>
                             </tr>

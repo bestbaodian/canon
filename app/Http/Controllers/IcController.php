@@ -26,6 +26,7 @@ class IcController extends Controller{
             echo "<script>alert('请先实名认证个人信息');location.href='/user/attestation'</script>";
         }
         $User=new User();
+        header("content-type:text/html;charset=utf8");
         $arr=$User->sel_one();
         $ic=DB::table('ic')
             ->leftjoin('userinfo','ic.u_id','=','userinfo.u_id')
