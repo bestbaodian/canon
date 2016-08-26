@@ -2,7 +2,7 @@
 <html><head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>面试宝典网</title>
+    <title>首页_面试宝典网</title>
     <meta property="wb:webmaster" content="a1bbe2238ec72e87" /><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
@@ -10,7 +10,8 @@
     <link rel = "Shortcut Icon" href=http://www.mbaodian.com/favicon.ico>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" href="css/a.css" type="text/css">
-    <meta name="Keywords" content="面试，面试宝典，面试技巧，面试经验，面试简历，简历下载，面试试题">
+    <meta name="keywords" content="面试宝典网，面试宝典官网，mbaodian，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
+    <meta name="description" content="面试宝典是学习编程最简单的免费平台。面试宝典提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
     <script src="../js/push.js"></script>
     <script src="../js/jquery.js" async="" charset="utf-8"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
