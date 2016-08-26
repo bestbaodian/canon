@@ -249,8 +249,8 @@ class UserController extends Controller
         Session::put('email_rand',rand(10000,99999));
         $name = '面试宝典-绑定邮箱';
         $flag = Mail::send('user.send_email',['name'=>$name],function ($message){
-            //$to = Session::get('email');
-            $to = "2691246603@qq.com";
+            $to = Session::get('email');
+            //$to = "2691246603@qq.com";
             $message ->to($to)->subject('面试宝典-绑定邮箱');
         });
         if($flag){
