@@ -81,7 +81,7 @@
                 if(data==2){
                     alert('删除失败');
                 }else{
-                    $('#body').html(data);
+                    location.reload()
                 }
             })
         })
