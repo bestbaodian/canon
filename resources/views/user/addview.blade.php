@@ -64,7 +64,7 @@
         })
     </script>
 </head>
-<body >
+<body>
 @extends('layouts.master')
 @section('sidebar')
     @parent
@@ -114,6 +114,7 @@
         </div>
 
     </div>
+
 @endsection
 <div id="J_GotoTop" class="elevator">
     <a class="elevator-weixin" href="javascript:;">
@@ -131,4 +132,5 @@
 <div style="display: none">
 </div>
 </body>
+
 </html>

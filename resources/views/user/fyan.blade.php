@@ -107,8 +107,12 @@ var is_choice = "";
 
 <div style="display: none">
 </div>
+
 </body>
+
+
 </html>
+
 <script type="text/javascript">
 
   function fun1(){

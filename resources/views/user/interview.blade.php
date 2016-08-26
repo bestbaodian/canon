@@ -71,6 +71,7 @@
 </div>
 </body>
 </html>
+
 <script type="text/javascript">
     $(function(){
         $('.del_one').click(function(){
