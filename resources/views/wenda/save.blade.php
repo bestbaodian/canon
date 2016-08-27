@@ -9,8 +9,8 @@
 <meta property="wb:webmaster" content="c4f857219bfae3cb">
 <meta http-equiv="Access-Control-Allow-Origin" content="*">
 <meta http-equiv="Cache-Control" content="no-transform ">
-<meta name="Keywords" content="">
-<meta name="Description" content="">
+    <meta name="keywords" content="面试宝典网，面试宝典官网，mbaodian，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
+    <meta name="description" content="面试宝典是学习编程最简单的免费平台。面试宝典提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
     <link rel="stylesheet" href="../css/ahx.css" type="text/css">
     <script src="../js/jquery.js" async="" charset="utf-8"></script>
     <script src="../js/string.js" async="" charset="utf-8"></script>

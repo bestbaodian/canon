@@ -10,8 +10,8 @@ php技术问答,php技术社区-慕课网猿问</title>
 <meta property="wb:webmaster" content="c4f857219bfae3cb" />
 <meta http-equiv="Access-Control-Allow-Origin" content="*" />
 <meta http-equiv="Cache-Control" content="no-transform " />
-<meta name="Keywords" content="" />
-<meta name="Description" content="慕课网猿问,专业的php技术社区,为用户提供一个可靠的php技术问答平台,PHP语言在WEB开发方面有着非常广泛的应用，除此之外，PHP4，PHP5中，面向对象有了很大的改进，还可以用来开发大型商业程序" />
+    <meta name="keywords" content="面试宝典网，面试宝典官网，mbaodian，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
+    <meta name="description" content="面试宝典是学习编程最简单的免费平台。面试宝典提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
 
 <meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
 
