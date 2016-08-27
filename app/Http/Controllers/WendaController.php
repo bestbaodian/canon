@@ -22,10 +22,12 @@ class WendaController extends Controller
         //推荐分类 //推荐分类关注
         $Sort = $mwenda->Sort();
 
-        header("content-type:text/html;charset=utf8");
+        //全部分类
+        $all = $mwenda->Allsort();
+
         //  一周雷锋榜
         $weekday = $mwenda->weekday();
-        return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,'sort'=>$Sort]);
+        return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,'sort'=>$Sort,'all'=>$all]);
      }
     
     //问题最新内容

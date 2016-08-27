@@ -1,93 +1,4 @@
-define(function(require, exports, module){
-    var verifyCode = require('../common/verify-code.js');
-    require('/static/lib/layer/1.6.0/layer.min.js');
-    require('/static/lib/layer/1.6.0/skin/layer.css');
-
-
-    function renderMoreBtn( num ){
-        //渲染更多回复按钮
-        return ['<div class="more-reply">点击展开后面<span>',num,'</span>条回复</div>'].join('');
-    }
-
-    function renderReply( quesUid , data ){
-        //渲染回复
-        //结构
-        /*
-         <li>
-         <div class="user-pic">
-         <a href="?" target="_blank">
-         <img src="/static/img/appbg.jpg" alt="?"/>
-         </a>
-         </div><!--.user end-->
-         <div class="user-info clearfix">
-         <em>提问者</em>
-         <a class="from-user" href="?">张三</a>
-         <span>回复</span>
-         <a class="to-user" href="?">李四</a>
-         <span class="time">14小时前</span>
-         </div>
-         <div class="reply-content">显示本次终端运行路线，或者其他命令可以做我送来的数据，在地图上显示本次终端运行路线，或者其他命令可以做我需要在安卓终端上做个软件。</div>
-         <div class="reply-btn">回复</div>
-         </li>
-         */
-        //{#url_wenda_otherques#}?uid={$reply.uid}
-        function isQuizzer( uid ){
-            //判断是否是提问者
-            if( quesUid==uid ){
-                return '<em>提问者</em> ';
-            }else{
-                return '';
-            }
-        }
-        function hasToUser( data ){
-            //判断是否有touser
-            if( data.to_username=='' ){
-                return '';
-            }else{
-                return [
-                    ' <span>回复</span> ',
-                    isQuizzer( data.to_uid ),
-                    '<a class="to-user" href="/u/',data.to_uid,'/bbs">',data.to_username,'</a>'
-                ].join('');
-            }
-        }
-
-        var str =""
-        if(OP_CONFIG.userInfo && OP_CONFIG.userInfo.usertype==3){
-            str='<a href="javascript:void(0)"  data-type="3" data-id="'+data.id+'" class="reply-del js-del">删除</a>'
-        }
-        var arr =[
-            '<li>',
-            '<div class="user-pic">',
-            '<a href="/u/',data.from_uid,'/bbs" target="_blank">',
-            '<img src="',data.from_pic,'" alt="',data.from_username,'"/>',
-            '</a>',
-            '</div>',
-            '<div class="user-info clearfix">',
-            isQuizzer( data.from_uid),
-            '<a class="from-user" href="/u/',data.from_uid,'/bbs">',data.from_username,'</a>',
-            hasToUser( data ),
-            '<span class="time">',data.create_time,'</span>',
-            '</div>',
-            '<div class="reply-content">',data.description,'</div>',
-            str,
-            '<div class="reply-btn" data-uid="',data.from_uid,'" data-username="',data.from_username,'">回复</div>',
-            '</li>'
-        ];
-        return arr.join('');
-    }
-
-    function renderReplyList( quesUid , data ){
-        var arr = [];
-        for( var i = 0 , len = data.length ; i < len ; i++ ){
-            arr.push( renderReply( quesUid , data[i] ) );
-        }
-        return arr.join('');
-    }
-
-
-
-
+$(function(){
     $(function(){
         //新增问答右上角分享悬停效果，产品要求缩小触发范围，因此需要js处理
         $('.share-box .show-btn')
@@ -836,12 +747,6 @@ define(function(require, exports, module){
                 .on('click' , '.follow-immediately' , function(){
                     openTagPop('followtag')
                 });
-        }
-        if( is_choice ){
-            if(is_choice==1){
-                openTagPop('allclass');
-            }
-
         }
 
         //推荐分类

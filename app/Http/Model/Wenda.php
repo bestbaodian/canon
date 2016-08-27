@@ -411,7 +411,11 @@ class Wenda extends Model{
         $data = DB::table("house_wenda")->where(['user_id' => $u_id, 'tid' => $id])->get();
         return $data;
     }
-
+    //全部分类
+    public function Allsort(){
+        $pro = DB::table("direction")->get();
+        return $pro;
+    }
 
 }
 

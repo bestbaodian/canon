@@ -199,13 +199,15 @@
   <div class="tag-pop" id="tag-pop">
     <div class="shade"></div>
     <div class="tag-main">
-        <h3><span>关注我喜欢或专注的猿问分类</span> <i class="icon-close2 js-close"></i></h3>
+        <h3><span>关注我喜欢或专注的答疑分类</span> <i class="icon-close2 js-close"></i></h3>
         <ul class="tag-list clearfix">
-                        <li data-tag-id="12" >
-                <img src="picture/563aff7e0001c8c700900090.jpg" alt=""/>
-                <span>Android</span>
-            </li>
-                    </ul>
+            <?php foreach($all as $k=>$v){?>
+                <li data-tag-id="12" >
+                    <img src="picture/563aff7e0001c8c700900090.jpg" alt=""/>
+                    <span><a href="">{{$v['d_name']}}</a></span>
+                </li>
+            <?php }?>
+        </ul>
         <div class="save-btn">保存</div>
     </div><!--.tag-main end-->
 </div><!--.tag-pop end-->
@@ -230,6 +232,7 @@
 
 
 <script type="text/javascript" src='../js/jquery-1.9.1.js'></script>
+    <script src="images/js/wendalist.js"></script>
 <script type="text/javascript">
     $.ready($('.switch').click(function(){
         if($(this).attr('class')=="switch js-switch"){
