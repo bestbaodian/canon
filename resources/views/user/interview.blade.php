@@ -36,12 +36,14 @@
                     <table border="1" width="100%">
                         <tr height="40px">
                             <th style="text-align: center"><b>面试公司</b></th>
+                            <th style="text-align: center"><b>面试地址</b></th>
                             <th style="text-align: center"><b>面试时间</b></th>
                             <th style="text-align: center"><b>操作</b></th>
                         </tr>
                         @foreach($arr as $v)
                             <tr height="40px">
                                 <td>　{{$v['company']}}</td>
+                                <td style="text-align: left">　　{{$v['company_address']}}</td>
                                 <td style="text-align: center">{{$v['time']}}</td>
                                 <td style="text-align: center"><a href="{{url("/user/addview?id=".$v['ic_id'])}}">编辑</a> | <a class="del_one" uid="{{$v['ic_id']}}" href="javascript:void(0)">删除</a></td>
                             </tr>

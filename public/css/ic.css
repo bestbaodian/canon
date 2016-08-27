@@ -37,7 +37,6 @@ body{
     margin-left: 13%;
     margin-top: 70px;
     display:none;
-    width: 80%;
     clear: both;
     table-layout:fixed;
     empty-cells:show;
@@ -47,7 +46,7 @@ body{
 }
 #mid table td{
     height:30px;
-    width: 25%;
+
     /*text-overflow:ellipsis;
     white-space:nowrap*/
 }

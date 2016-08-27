@@ -72,7 +72,7 @@
                             <div class="cd-timeline-content">
                                 <h5>{{$v['u_name']}}：</h5>
                                 <p>{{$v['company']}}</p>
-                                <span style="float: right">--{{$v['c_name']}}{{$v['c_class']}}班</span>
+                                <span style="float: right">地址--{{$v['company_address']}}</span>
                                 <span class="cd-date">　{{$v['times']}}　</span>
                             </div> <!-- cd-timeline-content -->
                         </div> <!-- cd-timeline-block -->
@@ -81,16 +81,16 @@
                 <table>
                     <tr>
                         <th>姓名</th>
-                        <th>班级</th>
+                        <th>地址</th>
                         <th>面试公司</th>
                         <th>面试时间</th>
                     </tr>
                     @foreach($ic as $v)
                         <tr>
-                            <td>{{$v['u_name']}}</td>
-                            <td>{{$v['c_name']}}{{$v['c_class']}}班</td>
-                            <td>{{$v['company']}}</td>
-                            <td>{{$v['times']}}</td>
+                            <td style="width: 100px;">{{$v['u_name']}}</td>
+                            <td style="width: 260px;">{{$v['company_address']}}</td>
+                            <td style="width: 200px;">{{$v['company']}}</td>
+                            <td style="width: 250px;">{{$v['times']}}</td>
                         </tr>
                     @endforeach
                 </table>

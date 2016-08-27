@@ -30,10 +30,8 @@ class IcController extends Controller{
         $arr=$User->sel_one();
         $ic=DB::table('ic')
             ->leftjoin('userinfo','ic.u_id','=','userinfo.u_id')
-            ->leftjoin('class','class.c_id','=','userinfo.u_class')
-            ->leftjoin('college','class.cid','=','college.c_id')
             ->where(DB::raw("date_format(time,'%Y-%m-%d')"),date('Y-m-d'))
-            ->select('userinfo.u_name','class.c_class','college.c_name',DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
+            ->select('userinfo.u_name',"ic.company_address",DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
             ->orderBy('times')
             ->get();
 //        print_r($ic);die;
@@ -49,10 +47,8 @@ class IcController extends Controller{
         if($date&&$mouth&&$year){
             $ic=DB::table('ic')
                 ->leftjoin('userinfo','ic.u_id','=','userinfo.u_id')
-                ->leftjoin('class','class.c_id','=','userinfo.u_class')
-                ->leftjoin('college','class.cid','=','college.c_id')
                 ->where(DB::raw("date_format(time,'%Y-%m-%d')"),$year.'-'.str_pad($mouth,2,0,STR_PAD_LEFT).'-'.$date)
-                ->select('userinfo.u_name','class.c_class','college.c_name',DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
+                ->select('userinfo.u_name',"ic.company_address",DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
                 ->orderBy('times')
                 ->get();
             if($ic){
@@ -80,17 +76,17 @@ a;
                     <div class="cd-timeline-content">
                         <h5>{$v['u_name']}：</h5>
                         <p>{$v['company']}</p>
-                        <span style="float: right">--{$v['c_name']}{$v['c_class']}班</span>
+                        <span style="float: right">地址--{$v['company_address']}</span>
                         <span class="cd-date">　{$v['times']}　</span>
                     </div> <!-- cd-timeline-content -->
                 </div>
 a;
                     $str2.=<<<a
                     <tr>
-                        <td>{$v['u_name']}</td>
-                        <td>{$v['c_name']}{$v['c_class']}班</td>
-                        <td>{$v['company']}</td>
-                        <td>{$v['times']}</td>
+                        <td style="width: 100px;">{$v['u_name']}</td>
+                        <td style="width: 260px;">地址--{$v['company_address']}</td>
+                        <td style="width: 200px;">{$v['company']}</td>
+                        <td style="width: 250px;">{$v['times']}</td>
                     </tr>
 a;
 

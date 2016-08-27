@@ -24,42 +24,26 @@
     </script>
     <script>
         $1(function(){
-            $1('#province-select1').change(function(){
-                var college=$(this).val();
-                var url="{{"/user/class"}}";
-                var str='<option  value="0">--选择班级--</option>';
-                if(college!=0){
-                    $.post(url,{college:college},function(data){
-                        if(data!=1){
-                            var res=eval('('+data+')');
-                            for(var i in res){
-                                str+='<option  value="'+res[i]['c_id']+'">'+res[i]['c_class']+'</option>';
-                            }
-                        }
-                        $('#city-select1').html(str);
-                    })
-                }else{
-                    $('#city-select1').html(str);
-                }
-            });
-
             $1('#profile-submit').click(function(){
                 var u_name=$('#company').val();
-                var c_id=$('#city-select1').val();
+                var id_card=$('#id_card').val();
                 var us_id=$(this).attr('tid');
-                if(u_name==''){
+                var zw = /^[\u4e00-\u9fa5]{2,4}$/;
+                if(zw.test(u_name) === false){
                     alert('请输入真实姓名');
                     return false;
                 }
-                if(c_id==0){
-                    alert('请选择班级');
-                    return false;
+                var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if(reg.test(id_card) === false)
+                {
+                    alert("身份证输入不合法");
+                    return  false;
                 }
                 if(us_id==0){
-                    var arr={u_name:u_name,c_id:c_id}
+                    var arr={u_name:u_name,id_card:id_card}
                 }
                 else{
-                    arr={u_name:u_name,c_id:c_id,us_id:us_id};
+                    arr={u_name:u_name,id_card:id_card,us_id:us_id};
                 }
                 var url="{{url("/user/msg")}}";
                 $1.post(url,arr,function(data){
@@ -98,28 +82,9 @@
                         </div>
 
                         <div class="wlfg-wrap clearfix">
-                            <label class="label-name" for="datetimepicker" style="cursor: pointer">班&nbsp;&nbsp;&nbsp;&nbsp;级&nbsp;&nbsp;</label>
-                            <div class="rlf-group profile-address">
-                                <select id="province-select1" class='input' hidefocus="true">
-                                    <option  value="0">--选择学院--</option>
-                                    @foreach($college as $key=>$val)
-                                        <?php
-                                        if($val['c_id']==$user[0]['cid']){?>
-                                        <option selected="selected" value="{{ $val['c_id']  }}">{{ $val['c_name'] }}</option>
-                                        <?php }else{?>
-                                        <option  value="{{ $val['c_id'] }}">{{ $val['c_name'] }}</option>
-                                        <?php }?>
-                                    @endforeach
-                                </select>
-                                <select class='input' id="city-select1" hidefocus="true" >
-                                    @if($class)
-                                        @foreach($class as $v)
-                                            <option value="{{$v['c_id']}}" @if($user[0]['u_class']==$v['c_id'])selected="selected" @endif>{{$v['c_class']}}</option>
-                                        @endforeach
-                                    @else
-                                        <option value="0">--选择班级--</option>
-                                    @endif
-                                </select>
+                            <label class="label-name" for="id_card" style="cursor: pointer">身份证号</label>
+                            <div class="rlf-group">
+                                <input type="text" id="id_card"  autocomplete="off"  data-validate="nick"  class="input rlf-input rlf-input-nick" value="@if(isset($user))<?php echo str_replace(substr($user[0]['u_idcard'],3,12),"************",$user[0]["u_idcard"]);?>@endif" placeholder=""/>
                                 <p class="rlf-tip-wrap"></p>
                             </div>
                         </div>

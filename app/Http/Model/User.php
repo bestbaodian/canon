@@ -220,9 +220,10 @@ class User extends Model
         $u_id=Session::get('uid');
         $company=$data['company'];
         $time=$data['time'];
+        $address=$data['company_address'];
         $ic_id=isset($data['ic_id'])?$data['ic_id']:'';
         if($ic_id==''){
-            $arr=DB::insert("insert into ic(u_id,company,`time`) values('$u_id','$company','$time')");
+            $arr=DB::insert("insert into ic(u_id,company,`time`,company_address) values('$u_id','$company','$time','$address')");
             if($arr){
                 echo 1;die;
             }else{
@@ -268,8 +269,7 @@ class User extends Model
         //$sql ="select user_name,user_job,user_aboutme,user_sex,user_filedir from users where user_name = '$user'";
         $data=DB::table('users')
             ->leftjoin('userinfo','users.user_id','=','userinfo.u_id')
-            ->leftjoin('class','class.c_id','=','userinfo.u_class')
-            ->select('user_phone_status','userinfo.us_id','userinfo.u_name','userinfo.u_class','class.cid','class.c_class',"user_email_status")
+            ->select('user_phone_status','userinfo.us_id','userinfo.u_name',"user_email_status","u_idcard")
             ->where("user_name",$user)
             ->get();
         if($data){
@@ -292,10 +292,10 @@ class User extends Model
     public function sel_msg($data){
         $u_id=Session::get('uid');
         $u_name=$data['u_name'];
-        $c_id=$data['c_id'];
+        $idcard=$data['id_card'];
         $us_id=isset($data['us_id'])?$data['us_id']:'';
         if($us_id==''){
-            $arr=DB::insert("insert into userinfo(u_id,u_name,u_class) values('$u_id','$u_name','$c_id')");
+            $arr=DB::insert("insert into userinfo(u_id,u_name,u_idcard) values('$u_id','$u_name','$idcard')");
             if($arr){
                 echo 1;die;
             }else{
@@ -305,7 +305,7 @@ class User extends Model
         else{
             $arr=DB::table('userinfo')
                 ->where('us_id', $us_id)
-                ->update(['u_name' => $u_name,'u_class'=>$c_id]);
+                ->update(['u_name' => $u_name,'u_idcard'=>$idcard]);
             if($arr){
                 echo 1;die;
             }else{

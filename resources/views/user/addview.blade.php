@@ -31,6 +31,7 @@
             $1('#profile-submit').click(function(){
                 var company=$('#company').val();
                 var time=$('#datetimepicker').val();
+                var address = $("#company_address").val()
                 var myDate = Date.parse(new Date());
                 var tid=$(this).attr('tid');
                 if(company==''){
@@ -44,11 +45,15 @@
                     alert('面试时间不能小于当前时间');
                     return false;
                 }
+                if(address==''){
+                    alert('请选择面试地址');
+                    return false;
+                }
                 var url="{{url("/user/setview")}}";
                 if(tid==0){
-                    var arr={company:company,time:time};
+                    var arr={company:company,time:time,company_address:address};
                 }else{
-                    arr={company:company,time:time,ic_id:tid}
+                    arr={company:company,time:time,ic_id:tid,company_address:address}
                 }
                 $1.post(url,arr,function(data){
                     if(data==1){
@@ -94,12 +99,21 @@
                         </div>
 
                         <div class="wlfg-wrap clearfix">
+                            <label class="label-name" for="company" style="cursor: pointer">公司地址</label>
+                            <div class="rlf-group">
+                                <input type="text" id="company_address"  autocomplete="off"  data-validate="nick"  class="input rlf-input rlf-input-nick" value="@if(isset($arr)){{$arr['company_address']}}@endif" placeholder=""/>
+                                <p class="rlf-tip-wrap"></p>
+                            </div>
+                        </div>
+
+                        <div class="wlfg-wrap clearfix">
                             <label class="label-name" for="datetimepicker" style="cursor: pointer">面试时间</label>
                             <div class="rlf-group">
                                 <input type="text" class="input rlf-input rlf-input-nick" value="@if(isset($arr)){{$arr['time']}}@endif" id="datetimepicker"/>
                                 <p class="rlf-tip-wrap"></p>
                             </div>
                         </div>
+
 
                         <div class="wlfg-wrap clearfix">
                             <label class="label-name" for=""></label>
