@@ -36,11 +36,10 @@ class CourseController extends Controller
         $data=$course->xiang($request);
 
         $u_id=Session::get('uid');
-        if($u_id){
-            $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where e_ping.e_id=$c_id order by e_ping.e_addtime desc");
-        }else{
-            $ping = array();
-        }
+
+        //试题全部评价
+        $ping=DB::select("select * from users inner join e_ping on users.user_id=e_ping.u_id where e_ping.e_id=$c_id order by e_ping.e_addtime desc");
+
         //试题综合评价
         $synthesize = $course->synthesize($c_id);
         //查询
