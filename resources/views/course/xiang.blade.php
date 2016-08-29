@@ -193,21 +193,10 @@ $l=isset($_GET['l'])?$_GET['l']:0;
             @endif
         </div>
     </div><!--satisfaction-degree-info end-->
-        <div class="condition-box">
-        <div class="condition">
-            <h3>内容实用</h3>
-            <p>9.9</p>
-        </div>
-        <div class="condition">
-            <h3>通俗易懂</h3>
-            <p>9.6</p>
-        </div>
-        <div class="condition">
-            <h3>逻辑清晰</h3>
-            <p>9.4</p>
-        </div>
+     <div class="condition-box">
+
     </div><!--condition-box end-->
-            <p class="person-num noLogin"><a href="javascript:;" target="_blank">{{$synthesize["b"] or '0'}}人评价</a></p>
+            <p class="person-num noLogin"><a href="javascript:;">{{$synthesize["b"] or '0'}}人评价</a></p>
     </div><!--score-info end-->    </div><!--info-bar-box end-->
   </div>
   <div class="content-wrap">
@@ -295,7 +284,7 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                         <img src="images/xing.jpg" width="20" height="20">
                     @endif
                 </div><!--star-box end-->
-                {{--<p>内容实用：9.9</p>--}}
+                {{--<p>_blank：9.9</p>--}}
                 {{--<p>通俗易懂：9.6</p>--}}
                 {{--<p>逻辑清晰：9.4</p>--}}
                 <p class="person_num"><em>{{$synthesize["b"] or "0"}}</em>位同学参与评价</p>

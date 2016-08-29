@@ -58,7 +58,7 @@ class Article extends Model
                     ->leftJoin('ar_type', 'article.a_type', '=', 'ar_type.at_id')
                     ->select('users.user_name', 'a_id', 'a_title', 'at_type', 'a_con', 'a_addtime', 'a_num', 'brows', 'a_pingnum')
                     ->where("a_state", 1)
-                    ->orderBy('a_id', 'desc')
+                    ->orderBy('brows', 'desc')
                     ->paginate(3);
                 return $article;
             }
