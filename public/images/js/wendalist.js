@@ -689,21 +689,21 @@ $(function(){
                     }
                 }
             })
-            .on( 'click' , 'li' , function(){
-                var type = $('#tag-pop').attr('data-type');
-                if( type=="followtag" ){
-                    if($(this).hasClass('active')){
-                        $(this).removeClass('active');
-                    }else{
-                        $(this).addClass('active');
-                    }
-                }else{
-                    //var tag = $.trim($(this).find('span').text());
-                    var tagId = $(this).attr('data-tag-id');
-                    window.open("/wenda/"+tagId);
-                }
-
-            })
+            //.on( 'click' , 'li' , function(){
+            //    var type = $('#tag-pop').attr('data-type');
+            //    if( type=="followtag" ){
+            //        if($(this).hasClass('active')){
+            //            $(this).removeClass('active');
+            //        }else{
+            //            $(this).addClass('active');
+            //        }
+            //    }else{
+            //        //var tag = $.trim($(this).find('span').text());
+            //        var tagId = $(this).attr('data-tag-id');
+            //        window.open("/wenda/"+tagId);
+            //    }
+            //
+            //})
             .on( 'click' , '.save-btn' , function(){
                 var $root = $(this).siblings('.tag-list');
                 var ids = [];

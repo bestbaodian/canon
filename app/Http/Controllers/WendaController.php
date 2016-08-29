@@ -16,15 +16,15 @@ class WendaController extends Controller
     public function wenda(Request $request){
         $mwenda=new Wenda();
         $is_look=$request->get('is_look');
-
+        $id = $request->get("id");
         // //答疑主页  推荐
-        $wait_reply = $mwenda->recommend($is_look);
+        $wait_reply = $mwenda->recommend($is_look,$id);
         //推荐分类 //推荐分类关注
         $Sort = $mwenda->Sort();
 
         //全部分类
         $all = $mwenda->Allsort();
-
+//        print_r($all);die;
         //  一周雷锋榜
         $weekday = $mwenda->weekday();
         return view('wenda/wenda',['pro'=>$wait_reply,'honor' => $weekday,'sort'=>$Sort,'all'=>$all]);
@@ -34,32 +34,37 @@ class WendaController extends Controller
     public function bestnew(Request $request){
         $mwenda=new Wenda();
         $is_look=$request->get('is_look');
-
+        $id = $request->get("id");
         //最新
-        $newest = $mwenda->newest($is_look);
-
+        $newest = $mwenda->newest($is_look,$id);
         //推荐分类
         $Sort = $mwenda->Sort();
+
+        //全部分类
+        $all = $mwenda->Allsort();
 
         //  一周雷锋榜
         $weekday = $mwenda->weekday();
 
-        return view('wenda/newest',['pro'=>$newest,'honor' => $weekday,'sort'=>$Sort]);
+        return view('wenda/newest',['pro'=>$newest,'honor' => $weekday,'sort'=>$Sort,'all'=>$all]);
     }
 
     public function waitreply(Request $request){
         $mwenda=new Wenda();
         $is_look=$request->get('is_look');
-
+        $id = $request->get("id");
         //待会答
-        $waitreply = $mwenda->wait_reply($is_look);
+        $waitreply = $mwenda->wait_reply($is_look,$id);
 
         //推荐分类
         $Sort = $mwenda->Sort();
 
+        //全部分类
+        $all = $mwenda->Allsort();
+
         //  一周雷锋榜
         $weekday = $mwenda->weekday();
-        return view('wenda/wait_reply',['pro'=>$waitreply,'honor' => $weekday,'sort'=>$Sort]);
+        return view('wenda/wait_reply',['pro'=>$waitreply,'honor' => $weekday,'sort'=>$Sort,'all'=>$all]);
     }
     public function save(){
         //实例化问答model层

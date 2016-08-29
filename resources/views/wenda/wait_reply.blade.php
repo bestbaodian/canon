@@ -113,14 +113,17 @@
 
     <?php
     $is_look = isset($_GET['is_look'])?$_GET['is_look']:"";
+    $id = isset($_GET['id'])?$_GET['id']:"0";
     if($is_look){?>
 
     <?=$pro->appends(['is_look' => '1'])->links();?>
 
     <?php }else{?>
-
-    <?=$pro->links();?>
-
+        <?php if($id){?>
+        <?=$pro->appends(['id' =>$id])->links();?>
+        <?php }else{?>
+        <?=$pro->links();?>
+        <?php }?>
     <?php } ?>
       </div>
     </div>
@@ -201,13 +204,34 @@
   <div class="tag-pop" id="tag-pop">
     <div class="shade"></div>
     <div class="tag-main">
-        <h3><span>关注我喜欢或专注的猿问分类</span> <i class="icon-close2 js-close"></i></h3>
+        <h3><span>关注我喜欢或专注的答疑分类</span> <i class="icon-close2 js-close"></i></h3>
         <ul class="tag-list clearfix">
-                        <li data-tag-id="12" >
-                <img src="picture/563aff7e0001c8c700900090.jpg" alt=""/>
-                <span>Android</span>
+            <?php foreach($all as $k=>$v){?>
+            <li>
+                <img src="<?php
+                if($v['c_college']=="软工学院"){
+                    echo "/images/logo/软工.jpg";
+                }elseif($v['c_college']=="移动通信学院"){
+                    echo "/images/logo/移动.jpg";
+                }else if($v['c_college']=="云计算学院"){
+                    echo  "/images/logo/云计算.jpg";
+                }elseif($v['c_college']=="高翻学院"){
+                    echo  "/images/logo/高翻.jpg";
+                }elseif($v['c_college']=="国际经贸学院"){
+                    echo  "/images/logo/经贸.jpg";
+                }elseif($v['c_college']=="建筑学院"){
+                    echo  "/images/logo/建筑.jpg";
+                }elseif($v['c_college']=="游戏学院"){
+                    echo  "/images/logo/游戏.jpg";
+                }elseif($v['c_college']=="网工学院"){
+                    echo  "/images/logo/网工.jpg";
+                }elseif($v['c_college']=="传媒学院"){
+                    echo  "/images/logo/传媒.jpg";
+                }?>" alt=""/>
+                <span><a href="{{url("waitreply?id=$v[d_id]")}}">{{$v['d_name']}}</a></span>
             </li>
-                    </ul>
+            <?php }?>
+        </ul>
         <div class="save-btn">保存</div>
     </div><!--.tag-main end-->
 </div><!--.tag-pop end-->
@@ -232,6 +256,7 @@
 
 
 <script type="text/javascript" src='../js/jquery-1.9.1.js'></script>
+    <script src="images/js/wendalist.js"></script>
 <script type="text/javascript">
     $.ready($('.switch').click(function(){
         if($(this).attr('class')=="switch js-switch"){

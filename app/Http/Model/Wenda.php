@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wenda extends Model{
     //答疑主页  推荐 最新 待会答
-    public function recommend($is_look){
+    public function recommend($is_look,$id){
         if(!empty($is_look)){
             //关注的话查看试题
             if(Session::get('uid')) {
@@ -32,6 +32,26 @@ class Wenda extends Model{
             }else{
                 $arr=array();
                 echo "<script>alert('请先登录'),location.href='wenda'</script>";die;
+            }
+        }
+        if(!empty($id)){
+            if($id!="0"){
+                $pro=DB::table('t_tw')
+                    ->select(DB::raw('*,count(comments.com_id) as num ,t_tw.t_id'))
+                    ->join('direction', function ($join) {
+                        $join->on('direction.d_id', '=', 't_tw.d_id');
+                    })
+                    ->leftjoin('users', function ($join) {
+                        $join->on('users.user_id', '=', 't_tw.user_id');
+                    })
+                    ->leftjoin('comments',function($join){
+                        $join->on('comments.t_id', '=', 't_tw.t_id');
+                    })
+                    ->where("direction.d_id",$id)
+                    ->groupby('t_tw.t_id')
+                    ->orderBy('num','desc')
+                    ->Paginate(5);
+                return $pro;
             }
         }
         if(isset($arr) && $arr!=array('')){
@@ -70,7 +90,7 @@ class Wenda extends Model{
         }
     }
 
-    public function newest($is_look){
+    public function newest($is_look,$id){
             //关注的话查看试题
         if(!empty($is_look)){
                 //关注的话查看试题
@@ -89,6 +109,21 @@ class Wenda extends Model{
                     }}else{
                 $arr=array();
                 echo "<script>alert('请先登录'),location.href='wenda'</script>";die;
+            }
+        }
+        if(!empty($id)){
+            if($id!="0") {
+                $pro = DB::table('t_tw')
+                    ->join('direction', function ($join) {
+                        $join->on('direction.d_id', '=', 't_tw.d_id');
+                    })
+                    ->join('users', function ($join) {
+                        $join->on('users.user_id', '=', 't_tw.user_id');
+                    })
+                    ->where("direction.d_id", $id)
+                    ->orderBy('t_tw.add_time', 'desc')
+                    ->Paginate(5);
+                return $pro;
             }
         }
         /*查看显示关注与否*/
@@ -119,7 +154,7 @@ class Wenda extends Model{
     }
 
     //等待回答
-    public function wait_reply($is_look){
+    public function wait_reply($is_look,$id){
         //关注的话查看试题
         if(!empty($is_look)){
             //关注的话查看试题
@@ -138,6 +173,26 @@ class Wenda extends Model{
                 }}else{
                 $arr=array();
                 echo "<script>alert('请先登录'),location.href='wenda'</script>";die;
+            }
+        }
+        if(!empty($id)){
+            if($id!="0"){
+                $pro = DB::table('t_tw')
+                    ->select('*', DB::raw("count(comments.com_id) as num"),'t_tw.t_id')
+                    ->leftjoin('direction', function ($join) {
+                        $join->on('direction.d_id', '=', 't_tw.d_id');
+                    })
+                    ->leftjoin('users', function ($join) {
+                        $join->on('users.user_id', '=', 't_tw.user_id');
+                    })
+                    ->leftjoin('comments', function ($join) {
+                        $join->on('comments.t_id', '=', 't_tw.t_id');
+                    })
+                    ->where("direction.d_id",$id)
+                    ->groupby('t_tw.t_id')
+                    ->havingRaw('count(comments.com_id)=0')
+                    ->Paginate(5);
+                return $pro;
             }
         }
         if(isset($arr) && $arr!=array()){
@@ -413,7 +468,10 @@ class Wenda extends Model{
     }
     //全部分类
     public function Allsort(){
-        $pro = DB::table("direction")->get();
+        $pro = DB::table("direction")
+            ->join("college","college.c_id","=","direction.college_id")
+            ->select("d_id","d_name","college.c_name as c_college")
+            ->get();
         return $pro;
     }
 
