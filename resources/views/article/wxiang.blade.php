@@ -45,7 +45,7 @@
 
         <div class="detail-content ">
             <input type="hidden" id="a_id" value="<?php echo $arr['a_id'];?>"/>
-            <p><?php echo $arr['a_con']?></p>
+            <p><?php echo htmlspecialchars($arr['a_con']);?></p>
         </div>
                 <!-- 标签 -->
                 <div class="cat-box clearfix">
@@ -276,7 +276,7 @@
 <script type="text/javascript" src="/js/sea.js"></script>
 <script type="text/javascript" src="/js/sea_config.js?v=201604211612"></script>
 
-
+<a href="#login-modal" id="" data-category="UserAccount" data-action="login" data-toggle="modal" class="opp">
 <!--script-->
 <script src="/js/jquery-1.9.1.min.js"></script>
       <script>
@@ -388,6 +388,9 @@
                          }else if(obj['msg']=='yes'){
                              alert('收藏成功');
                              $(".collect").html("已收藏");
+                         }else if(obj['msg']=='not login') {
+                             alert("请先登录")
+                             $(".opp").click()
                          }else{
                              alert("收藏失败");
                          }
@@ -414,10 +417,12 @@
                          if(obj['msg']=='queryok'){
                              alert('点赞成功');
                              location.reload();
+                         }else if(obj['msg']=='not login'){
+                             alert("请先登录")
+                             $(".opp").click()
                          }else{
                              alert('您已点赞');
                          }
-
                      }
                  })
              })

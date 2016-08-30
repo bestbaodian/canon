@@ -94,8 +94,15 @@ class ArticleController extends Controller
      * 收藏文章功能
      */
     public function collect_article(){
-        $article_id = Request::input('a_id');
         $user_id=Session::get("uid");
+        if($user_id==""){
+            $se = array(
+                'msg'=>"not login",
+                'error'=>'1'
+            );
+            return json_encode($se);
+        }
+        $article_id = Request::input('a_id');
         //实例化model层
         $articlemodel=new Article();
         //查询是否有收藏
@@ -134,6 +141,13 @@ class ArticleController extends Controller
     public function zan(){
         $article_id=Request::input('a_id');
         $u_id=Session::get("uid");
+        if($u_id==""){
+            $se = array(
+                'msg'=>"not login",
+                'error'=>'1'
+            );
+            return json_encode($se);
+        }
         //查询数据库是否点过赞
         $articlemodel=new Article();
         $zan_data=$articlemodel->get_zandata($u_id,$article_id);
@@ -170,14 +184,6 @@ class ArticleController extends Controller
      */
 
     public function wxiang(){
-        header("content-type:text/html;charset=utf8");
-        if(empty(Session::get('username'))){
-            //$username=0;
-            //article
-            echo "<script>alert('请先登录');location.href='article'</script>";
-        }else{
-            $username=Session::get('usernname');
-        }
         $id=Request::input('id');
 
 
@@ -210,7 +216,7 @@ class ArticleController extends Controller
         //print_r($arr);die;
 
         //查出该篇文章的作者一共有多少文章和总浏览量
-        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'username'=>$username,'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id,'is_collect'=>$is_collect,'is_zan'=>$is_zan]);
+        return view('article/wxiang',['arr'=>$arr[0],'sum_yulan'=>$arr['yulan'],'typer'=>$arr['lei'],'aping'=>$aping,'ping_data'=>$ping_data,'pinghui','hot'=>$hot,'a_id'=>$id,'is_collect'=>$is_collect,'is_zan'=>$is_zan]);
     }
     /*
      * 显示对应文章相关内容
