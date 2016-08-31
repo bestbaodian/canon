@@ -144,6 +144,8 @@ Route::post('house_direction',"WendaController@house_direction");
  * 试题开始
  */
 //试题首页
+Route::get("ad","JiekController@ad");
+
 Route::get('shiti', 'CourseController@course');
 //试题搜索
 Route::post('sou', 'CourseController@sou');

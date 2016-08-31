@@ -17,6 +17,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="stylesheet" type="text/css" href="../static/css/ui2.css?2013032917">
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
+    <style>
+    .icourse-img img{
+        width:100%;
+    }
+    </style>
     </head>
 <body id="index">
 @extends('layouts.master')
