@@ -144,7 +144,6 @@ Route::post('house_direction',"WendaController@house_direction");
  * 试题开始
  */
 //试题首页
-Route::get("ad","JiekController@ad");
 
 Route::get('shiti', 'CourseController@course');
 //试题搜索
@@ -190,8 +189,3 @@ Route::get('college_x','CompanyController@college_x');
 Route::get('college_exam','CompanyController@college_exam');
 
 
-//抛出403页面
-Route::bind('user', function()
-{
-    return view("errors.503");
-});

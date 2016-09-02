@@ -221,9 +221,10 @@ class User extends Model
         $company=$data['company'];
         $time=$data['time'];
         $address=$data['company_address'];
+        $describe=$data['describe'];
         $ic_id=isset($data['ic_id'])?$data['ic_id']:'';
         if($ic_id==''){
-            $arr=DB::insert("insert into ic(u_id,company,`time`,company_address) values('$u_id','$company','$time','$address')");
+            $arr=DB::insert("insert into ic(u_id,company,`time`,company_address,`describe`) values('$u_id','$company','$time','$address','$describe')");
             if($arr){
                 echo 1;die;
             }else{
