@@ -53,9 +53,14 @@ class CourseController extends Controller
      */
     public function pinglun_shiti(Request $request){
         //echo $u_id;die;
+        $u_id = Session::get('uid');
+        if(empty($u_id)){
+            $a=array('msg'=>'10000');
+            return json_encode($a);
+        }
         $Cou = new Course();
         $arr = $Cou ->pinglun_shiti($request);
-        return view('course.pinglun')->with('ping',$arr);
+        return json_encode($arr);
     }
     /*
      * 试题关注 马天天

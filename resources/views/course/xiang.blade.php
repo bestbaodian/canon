@@ -488,10 +488,15 @@ $l=isset($_GET['l'])?$_GET['l']:0;
                    url: "pinglun_shiti",
                    data: "con="+con+"&c_id="+c_id+"&score="+score,
                    success: function(msg){
-                       alert('评论成功');
-                       $("#pinglun").hide();
-                       $('.evaluation').html(msg);
-                       location.reload()
+                       var obj=eval("("+msg+")");
+                       if(obj['msg']==10000){
+                           alert('请先登录')
+                           location.reload()
+                       }else{
+                           alert('评论成功');
+                           $("#pinglun").hide();
+                           location.reload()
+                       }
                    }
                });
            }

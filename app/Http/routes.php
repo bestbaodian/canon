@@ -14,6 +14,15 @@
 Route::get('/',"IndexController@index");
 Route::get('index',"IndexController@index");
 Route::get('main',"IndexController@layouts");
+//面试资料
+Route::get('shiti', 'CourseController@course');
+Route::get('zhaopin', 'ProgramController@program');
+Route::get('fangfa', 'ArticleController@article');
+Route::get('jianli', 'CompanyController@index');
+Route::get('wenda', 'WendaController@wenda');
+Route::get('jingli',"IcController@index");
+
+
 
 Route::get('login', 'LoginController@login');
 Route::get('out', 'LoginController@out');
@@ -25,8 +34,7 @@ Route::post('name_deng', 'LoginController@name_deng');
 Route::post('email_deng','LoginController@email_deng');
 //第三方登陆--qq登陆
 Route::get('qq_login', 'LoginController@qq_login');
-//面试资料
-Route::get('Ic',"IcController@index");
+
 
 Route::post('mid',"IcController@mid");
 
@@ -105,7 +113,7 @@ Route::post('collect', 'ArticleController@collect_article');
  * 猿问开始
  */
 //猿问首页
-Route::get('wenda', 'WendaController@wenda');
+
 //我要提问
 Route::get('save', 'WendaController@save');
 //提交提问
@@ -161,16 +169,16 @@ Route::post('pinglun_shiti','CourseController@pinglun_shiti');//试题评论
  */
 
 //文章
-Route::get('article', 'ArticleController@article');
+
 Route::get('publish', 'ArticleController@publish');
 Route::post('add', 'ArticleController@add');
 Route::any('zan', 'ArticleController@zan');
 Route::post('type', 'ArticleController@type');
-Route::get('fangfa', 'ArticleController@wxiang');
+Route::get('jiqiao', 'ArticleController@wxiang');
 Route::post('wping', 'ArticleController@wping');
 Route::post('types', 'ArticleController@types');
 //招聘
-Route::get('program', 'ProgramController@program');
+
 Route::get('etc', 'ProgramController@etc');
 Route::get('noetc', 'ProgramController@noetc');
 Route::get('all', 'ProgramController@all');
@@ -183,9 +191,9 @@ Route::get('register','LoginController@register');
 //登陆
 Route::post('login', 'CommonController@login');
 //公司试题
-Route::get('company', 'CompanyController@index');
+
 Route::get('college','CompanyController@college');
 Route::get('college_x','CompanyController@college_x');
-Route::get('college_exam','CompanyController@college_exam');
+Route::get('jianlimoban','CompanyController@college_exam');
 
 

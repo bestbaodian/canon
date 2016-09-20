@@ -2,19 +2,20 @@
 <html><head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>首页_面试宝典网</title>
-    <meta property="wb:webmaster" content="a1bbe2238ec72e87" /><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <title>面试宝典网-2016年最专业的面试网_面试试题_面试方法_面试简历_面试答疑</title>
+    <meta name="baidu-site-verification" content="Rh38XrydHX" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta http-equiv="Cache-Control" content="no-transform ">
     <link rel = "Shortcut Icon" href=http://www.mbaodian.com/favicon.ico>
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" href="css/a.css" type="text/css">
-    <meta name="keywords" content="面试宝典网，面试宝典官网，mbaodian，移动开发，IT技能培训，免费编程视频，php开发教程，web前端开发，在线编程学习，html5视频教程，css教程，ios开发培训，安卓开发教程" />
-    <meta name="description" content="面试宝典是学习编程最简单的免费平台。面试宝典提供了丰富的移动端开发、php开发、web前端、html5教程以及css3视频教程等课程资源。它富有交互性及趣味性，并且你可以和朋友一起编程。" />
+    <meta name="keywords" content="面试宝典网，面试宝典官网，mbaodian，面试,面试自我介绍,面试技巧和注意事项,面试问题及答案" />
+    <meta name="description" content="面试宝典收集发布各种各行业面试试题、面试自我介绍、面试技巧和注意事项、面试经验、自我介绍范文、经典面试例子、面试问题及答案，供广大面试或即将要面试的朋友参考借鉴，从中得到启发，顺利通过面试！" />
     <script src="../js/push.js"></script>
     <script src="../js/jquery.js" async="" charset="utf-8"></script>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="stylesheet" type="text/css" href="../static/css/ui2.css?2013032917">
     <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->  <!---->
     <style>
@@ -54,7 +55,7 @@
 <!--试题开始-->
 <div class="icourse">
     <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">试题</h2>
+        <h2 class="icourse-title">面试试题</h2>
         <ul class="icourse-course clearfix">
             <?php foreach($shi as $k=>$v){?>
             <li>
@@ -101,7 +102,7 @@
 <!--招聘开始 -->
 <div class="icourse">
     <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">招聘</h2>
+        <h2 class="icourse-title">面试招聘</h2>
         <ul class="icourse-course clearfix">
             <?php foreach($pro as $k=>$v){?>
             <li>
@@ -129,11 +130,11 @@
 <!--方法开始 -->
 <div class="icourse">
     <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">方法</h2>
+        <h2 class="icourse-title">面试方法</h2>
         <ul class="icourse-course clearfix">
             <?php foreach($article as $key=>$val){?>
             <li>
-                <a  href="{{url("fangfa?id=$val[a_id]")}}">
+                <a  href="{{url("jiqiao?id=$val[a_id]")}}">
                     <div class="icourse-img">
                         <img class="scrollLoading" src="{{url("$val[a_logo]")}}" alt="">
                     </div>
@@ -166,11 +167,11 @@
 <!--简历开始 -->
 <div class="icourse">
     <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">简历</h2>
+        <h2 class="icourse-title">面试简历</h2>
         <ul class="icourse-course clearfix">
             <?php foreach($gather as $key=>$val){?>
             <li>
-                <a  href="{{url("college_exam?id=$val[g_id]")}}">
+                <a  href="{{url("jianlimoban?id=$val[g_id]")}}">
                     <div class="icourse-img">
                         <img class="scrollLoading" src="{{url("$val[g_dir]")}}" alt="">
                     </div>
@@ -194,7 +195,7 @@
 <!--答疑开始 -->
 <div class="icourse">
     <div class="incourse-wrap idx-width">
-        <h2 class="icourse-title">答疑</h2>
+        <h2 class="icourse-title">面试答疑</h2>
         <ul class="icourse-course clearfix">
             <?php foreach($questions as $key=>$val){?>
             <li>

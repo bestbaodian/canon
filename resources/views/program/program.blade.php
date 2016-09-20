@@ -44,7 +44,7 @@
 
     <!--验证注册邮箱-->
     <!--
-    @require "common/widgets/header_c/modules/emailvalid/main.less"
+
 -->
     <div id="lg_header">
     <!-- 全部 -->
@@ -53,102 +53,70 @@
 
     <!-- 页面主体START -->
     <div class="container clearfix" id="container" style="min-height: 844px; margin-top:20px; margin-left:150px;">
-
-        <div id="sidebar" class="sidebar" style=" border-bottom:5px solid green;">
+        <div id="sidebar" class="sidebar">
     <div class="mainNavs">
-        @foreach($all as $key=>$value)                                                                                        
-                <div class="menu_box">
-            <div class="menu_main job_hopping">
-                <h2 style=" margin-bottom:10px;">
-                    {{$value['p_name']}}
-                                        <!-- 跳槽月 -->
-                                        <span></span>
-                </h2>    
-                @foreach($value['two'] as $ke=>$va)
-             <a href="#" data-lg-tj-id="4A00" data-lg-tj-no="0001" data-lg-tj-cid="idnull" style=" font-size:14px; padding-left:3px; line-height:20px;" val="{{$va['three'][0]['p_name']}}" class="posi">{{$va['three'][0]['p_name']}}</a>
-             @endforeach                                                    
-              </div>
-                
-                    <div class="menu_sub dn">
-                    @foreach($value['two'] as $k=>$v)
-                                <dl>
-                                        <dt>                                                          
-                        <a href="#" data-lg-tj-id="4H00" data-lg-tj-no="0001" data-lg-tj-cid="idnull" class="posi" val="{{$v['p_name']}}">{{$v['p_name']}}</a>
-                    </dt>
-                    <dd>       
-                    @foreach($v['three'] as $z=>$x)                                                          
-       <a href="#" data-lg-tj-id="4O00" data-lg-tj-no="0122" data-lg-tj-cid="idnull" class="posi" val="{{$x['p_name']}}">{{$x['p_name']}}</a>
-                    @endforeach
-                                            </dd>
-                </dl>
-                    @endforeach    
-                            </div>
-                
-        </div>
-        @endforeach
  </div> 
 </div>
-
-
-
-
-
-
-
-
-        <div class="content">
-            <ul class="job_tab">
+<div class="content">
+    <span style="margin-left:200px;">
+        <input type="text" name="search" style="border-color:#00ae86;display: inline-block;height: 18px;line-height: 18px;margin-right: 30px;padding: 13px 15px;width: 300px;"; />
+        <input type="button" style="background-color: #00b38a;border-radius: 3px;color: #fff;padding: 15px 55px;" value="搜索" id="search"/>
+    </span>
+    <ul class="job_tab">
         <li class="current" data-lg-tj-id="4X00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">热门职位</li>
-        <li data-lg-tj-id="gD00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">最新职位</li>
-</ul>
+        <li  data-lg-tj-id="gD00" data-lg-tj-no="idnull" data-lg-tj-cid="idnull">最新职位</li>
+    </ul>
 <div id="hotList" class="clearfix">
     
     <div class="hot_posHotPosition position_list init_joblist" id="position">
         <ul class="clearfix">
         @foreach($data as $q=>$w)
             <li class="position_list_item" data-jobid="1621796" data-positionid="1621796" data-salary="25k-40k" data-company="51Talk 无忧英语" data-positionname="运营总监" data-companyid="119153">
-
-
-            
-
                 <div class="pli_top">
                     <div class="fl pli_top_l">
                         <div class="position_name">
                             <!--  -->
-            <h2 class="fl" style=" font-size:20px;"><a href="etc_sel?id={{$w['r_id']}}" target="_blank" class="position_link fl wordCut" data-index="0" data-lg-tj-id="4m00" data-lg-tj-no="0001" data-lg-tj-cid="1621796">{{$w['position_name']}}<span>[北京][{{$w['c_region']}}]</span></a></h2>
+            <h2 class="fl" style=" font-size:20px;">
+                <a href="etc_sel?id={{$w['id']}}" target="_blank" class="position_link fl wordCut" data-index="0" data-lg-tj-id="4m00" data-lg-tj-no="0001" data-lg-tj-cid="1621796">
+                    {{$w['postion']}}
+                    <span>[<?php echo htmlspecialchars($w['zwjs']);?>]</span>
+                </a>
+            </h2>
                             <!-- 此处需要和后台确认 -->
-                            <span class="fl">{{$w['release_date']}}</span>
+                            <span class="fl">
+                                {{$w['times']}}
+                            </span>
                         </div>
                         <div>
-                            <span class="salary fl">{{$w['money']}}</span>
-                            <span><!-- <i class="experience"></i>&nbsp;  -->{{$w['experience']}}</span> / <span>{{$w['education']}}</span>
+                            <span class="salary fl">{{$w['times']}}</span>
+                            <span><!-- <i class="experience"></i>&nbsp;  --></span>
                         </div>
                     </div>
                     <div class="fr pli_top_r">
                         <div class="company_name wordCut">
-                    <span style=" font-size:16px;"><font color="black">{{$w['company_name']}}</font></span>
+                            <span style=" font-size:16px;"><font color="black"><?php echo $w['claim'];?></font></span>
+                            <span>{{$w['company_logo']}}</span>
                         </div>
                         <div class="industry wordCut">
-                            <span> {{$w['main_business']}}</span> / <span>{{$w['nature']}}</span>
+                            <span>{{$w['moneys']}} {{$w['angels']}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="pli_btm">
                     <div class="pli_btm_l fl wordCut">
-                        “{{$w['welfare']}}”
+
                     </div>
                     <div class="pli_btm_r fl">
-                          <span>{{$w['r_number']}}</span>
-                          <span>{{$w['r_type']}}</span>                                    
-                                                                        </div>
+                          <span>
+
+                          </span>
+                          <span>
+
+                          </span>
+                    </div>
                 </div>
-
-            
-
-
-
             </li>
-                @endforeach       
+            @endforeach
                                     </ul>
         {{$data->render()}}
     </div>
@@ -166,7 +134,7 @@
    
 <!-- feedback -->
 <!--
-    @require "common/widgets/footer_c/modules/feedback/feedback.less"
+
 -->
 
 <!--我要反馈按钮-->

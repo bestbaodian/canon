@@ -31,7 +31,7 @@ class IcController extends Controller{
         $ic=DB::table('ic')
             ->leftjoin('userinfo','ic.u_id','=','userinfo.u_id')
             ->where(DB::raw("date_format(time,'%Y-%m-%d')"),date('Y-m-d'))
-            ->select('userinfo.u_name',"ic.company_address",DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
+            ->select('userinfo.u_name','ic.company_address',DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
             ->orderBy('times')
             ->get();
 //        print_r($ic);die;
@@ -48,7 +48,7 @@ class IcController extends Controller{
             $ic=DB::table('ic')
                 ->leftjoin('userinfo','ic.u_id','=','userinfo.u_id')
                 ->where(DB::raw("date_format(time,'%Y-%m-%d')"),$year.'-'.str_pad($mouth,2,0,STR_PAD_LEFT).'-'.$date)
-                ->select('userinfo.u_name',"ic.company_address",DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
+                ->select('userinfo.u_name','ic.company_address',DB::raw("date_format(ic.time,'%Y-%m-%d %H:%i') as times"),'ic.company')
                 ->orderBy('times')
                 ->get();
             if($ic){

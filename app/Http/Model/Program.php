@@ -28,7 +28,7 @@ class program extends Model
    }
    public function recruit1()
    {
-	 $brr=DB::table('recruit')->orderBy('r_id','desc')->paginate(10);
+	 $brr=DB::table('curls')->orderBy('id','desc')->paginate(10);
      return $brr;
    }
 }

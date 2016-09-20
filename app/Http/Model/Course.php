@@ -237,10 +237,11 @@ class Course extends Model{
                 'e_score' => $score
             )
         );
-        $arr = DB::table('e_ping')
-            ->join('users','u_id','=','users.user_id')
-            ->where('e_id',$c_id)
-            ->orderby('e_addtime','desc')->get();
+        if($pinglun_shiti){
+            $arr=array(
+                "msg"=>9999,
+            );
+        }
         return $arr;
     }
 

@@ -11,11 +11,11 @@
             </a>
             <ul class="nav-item l">
                 <li><a href="{{url('shiti')}}"  target="_self">试题</a></li>
-                <li><a href="{{url('program')}}"  target="_self">招聘</a></li>
-                <li><a href="{{url('article')}}"  target="_self">方法</a></li>
-                <li><a href="{{url('company')}}"  target="_self">简历</a></li>
-		        <li><a href="{{url('wenda')}}" target="_self">答疑</a></li>
-		        <li><a href="{{url('Ic')}}" target="_self">面试资料</a></li>
+                <li><a href="{{url('zhaopin')}}"  target="_self">招聘</a></li>
+                <li><a href="{{url('fangfa')}}"  target="_self">方法</a></li>
+                <li><a href="{{url('jianli')}}"  target="_self">简历</a></li>
+		<li><a href="{{url('wenda')}}" target="_self">答疑</a></li>
+		<li><a href="{{url('jingli')}}" target="_self">经历</a></li>
             </ul>
         </div>
         <div id="login-area">

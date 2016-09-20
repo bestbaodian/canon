@@ -6,7 +6,7 @@
  */
 namespace App\Http\Controllers;
 use DB;
-use App\Http\Model\program;
+use App\Http\Model\Program;
 use App\Http\Model\Index;
 class ProgramController extends Controller
 {
@@ -14,9 +14,10 @@ class ProgramController extends Controller
 	 *招聘信息显示
 	 */
     public function program(){
-        $model=new program();
+        $model=new Program();
         $all = $model->program();
         $data = $model->recruit1();
+//        print_r($data);
         return view('program/program',['all'=>$all,'data'=>$data]);
     }
    /*
